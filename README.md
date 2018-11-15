@@ -1,11 +1,9 @@
 # Calculator
 
 
-##Dependencies
+## Dependencies
 
-- docutils==0.14
-- numpy==1.15.4
-- statistics==1.0.3.5
+- See requirements.txt
 
 ## Installation
 1. Create Virtual Environment. e.g. python3 -m venv ./venv
