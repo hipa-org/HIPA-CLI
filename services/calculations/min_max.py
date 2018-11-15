@@ -34,17 +34,31 @@ def cal_one_per_minute(over_under, frame_count):
     temp_minute = 0.065
     frame_minutes = []
     frame_minutes_length = []
-    for frame in range(frame_count + 1):
+    indexe = 0
+    print(frame_count)
+    for frame in range(frame_count):
         if float(temp_minute) < float(1.0):
+            print(temp_minute)
             frame_minute.append(frame)
+
             temp_minute = temp_minute + 0.065
+            print('Index: {0} mit tempMinute {1}'.format(indexe, temp_minute))
         else:
+            print('Else')
             frame_minutes.append(frame_minute)
             temp_minute = temp_minute + 0.065 - 1
             frame_minute = [frame]
 
+        indexe += 1
     else:
+        frame_minutes.append(frame_minute)
+        temp_minute = temp_minute + 0.065 - 1
+        frame_minute = []
         if temp_minute != 0.065:
+            x = temp_minute / 0.065
+            for count in reversed(range(int(x))):
+                frame_minute.append(frame_count - count)
+
             frame_minutes.append(frame_minute)
 
     for minute in frame_minutes:
@@ -54,6 +68,7 @@ def cal_one_per_minute(over_under, frame_count):
 
     for cells in over_under:
         ones_per_minute_cell = []
+        ones_per_minute_cell.append(cells[0])
         ones_per_minute = []
         minute_index = 0
         index = 0
@@ -68,16 +83,26 @@ def cal_one_per_minute(over_under, frame_count):
                 minute_index += 1
             index += 1
         else:
-            if len(ones_per_minute) != 0:
-                print('Ones per Minute was != 0')
-                count = count_cell_ones_per_minute(ones_per_minute, minute_index)
-                print('Count {0}'.format(count))
-                ones_per_minute_cell.append(count)
+            # print('Reached index {0}'.format(index))
+            count = count_cell_ones_per_minute(ones_per_minute, minute_index)
+            ones_per_minute_cell.append(count)
+            ones_per_minute = []
+            minute_index += 1
+            amount_of_frames_missing = frame_minutes_length[len(frame_minutes_length) - 1]
+            # print('Frames missing {0}'.format(amount_of_frames_missing))
+            # print('1400: {0}'.format(cells[1400]))
+            for cell in cells[len(cells) - amount_of_frames_missing:]:
+                ones_per_minute.append(cell)
+            count = count_cell_ones_per_minute(ones_per_minute, minute_index)
+            ones_per_minute_cell.append(count)
+
             ones_per_minute_complete.append(ones_per_minute_cell)
 
     else:
+        '''print(frame_minutes_length)
+        print(len(frame_minutes_length))
         print(ones_per_minute_complete[len(ones_per_minute_complete) - 1])
-        print(len(ones_per_minute_complete[len(ones_per_minute_complete) - 1]))
+        print(len(ones_per_minute_complete[len(ones_per_minute_complete) - 1])) '''
         return ones_per_minute_complete
 
 

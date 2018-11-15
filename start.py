@@ -6,7 +6,7 @@ from random import randint
 import argparse
 import services
 from pyfiglet import Figlet
-
+import numpy as np
 
 class Cell:
 
@@ -90,5 +90,8 @@ print('Calculating Over and Under Limit done')
 
 ones_per_minute = services.calculations.min_max.cal_one_per_minute(over_under, data_count[1])
 print('Calculating Ones per Minutes done')
+
+
+services.files.write_files.write_file(ones_per_minute)
 
 # services.plot.plot.test_plotting(ones_per_minute)
