@@ -35,112 +35,55 @@ def cal_one_per_minute(over_under, frame_count):
     frame_minutes = []
     frame_minutes_length = []
     for frame in range(frame_count + 1):
-        print(frame)
         if float(temp_minute) < float(1.0):
             frame_minute.append(frame)
             temp_minute = temp_minute + 0.065
-            print('Aktuelle: {0}'.format(temp_minute))
         else:
             frame_minutes.append(frame_minute)
-            print('Old {0}'.format(temp_minute))
             temp_minute = temp_minute + 0.065 - 1
-            print('Tempminute {0}'.format(temp_minute))
-            print('Added new Minute')
             frame_minute = [frame]
 
     else:
         if temp_minute != 0.065:
-            x = temp_minute / 0.065
-            print('Ich bin x: {0}'.format(int(x)))
-            print(temp_minute)
             frame_minutes.append(frame_minute)
 
     for minute in frame_minutes:
         frame_minutes_length.append(len(minute))
 
     ones_per_minute_complete = []
-    print(frame_minutes)
 
-    minute_index = 0
-    for over_under_data in over_under:
+    for cells in over_under:
         ones_per_minute_cell = []
         ones_per_minute = []
-        for cell in over_under_data[1:]:
+        minute_index = 0
+        index = 0
+        for cell in cells[1:]:
             if len(ones_per_minute) < frame_minutes_length[minute_index]:
                 ones_per_minute.append(cell)
             else:
-                count = count_cell_ones_per_minute(ones_per_minute)
-                print(count)
+                count = count_cell_ones_per_minute(ones_per_minute, minute_index)
                 ones_per_minute_cell.append(count)
                 ones_per_minute = []
                 ones_per_minute.append(cell)
-
-        else:
-            print('Cell  done')
-            ones_per_minute_complete.append(ones_per_minute_cell)
-    else:
-        print('all Cells done')
-        print(ones_per_minute_complete)
-        print(len(ones_per_minute_complete))
-
-
-'''    for over_under_data in over_under:
-        count = 0
-        ones_per_minute_cell = []
-        cell_index = 0
-        for cell in over_under_data[1:]:
-            if cell_index <= frame_minutes_length[minute_index]:
-                print(cell_index)
-                print(frame_minutes_length[minute_index])
-                print('Cell {0}'.format(cell))
-                if cell == 1:
-                    count += 1
-                    cell_index += 1
-                else:
-                    cell_index += 1
-            else:
-                print('added new Count {0}'.format(count))
-                ones_per_minute_cell.append(count)
-                cell_index = 0
-                count = 0
                 minute_index += 1
+            index += 1
         else:
-            print('Added new Minute')'''
+            if len(ones_per_minute) != 0:
+                print('Ones per Minute was != 0')
+                count = count_cell_ones_per_minute(ones_per_minute, minute_index)
+                print('Count {0}'.format(count))
+                ones_per_minute_cell.append(count)
+            ones_per_minute_complete.append(ones_per_minute_cell)
 
-''' else:
-     print(over_under_data[1:])
-     print(ones_per_minute[0])
-     print(len(ones_per_minute[0]))
-'''
-
-'''stop = 15
-ones_per_minute_complete_cells = []
-for over_under_set in over_under:
-    one_count = 0
-    itr_index = 0
-    frame_number = 0
-    minute = 0
-    ones_per_minute_cell_set = []
-    for over_under_data in over_under_set[1:]:
-        if frame_number == stop:
-            print('Cell {0} has in Minute {1} this amount of ones: {2} '.format(over_under_set[0], minute, one_count))
-            ones_per_minute_cell_set.append(one_count)
-            one_count = 0
-            frame_number = 0
-            minute += 1
-        if int(over_under_data) == 1:
-            one_count += 1
-            itr_index += 1
-        frame_number += 1
     else:
-        ones_per_minute_complete_cells.append(ones_per_minute_cell_set)
+        print(ones_per_minute_complete[len(ones_per_minute_complete) - 1])
+        print(len(ones_per_minute_complete[len(ones_per_minute_complete) - 1]))
+        return ones_per_minute_complete
 
-return ones_per_minute_complete_cells '''
 
-
-def count_cell_ones_per_minute(cell_data_for_minute):
+def count_cell_ones_per_minute(cell_data_for_minute, minute):
     count = 0
-    print(cell_data_for_minute)
+    print('Collected Cell Data {0} for Minute {1}'.format(cell_data_for_minute, minute))
     for cell_data in cell_data_for_minute:
         if cell_data == 1:
             count += 1
