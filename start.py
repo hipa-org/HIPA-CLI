@@ -4,7 +4,7 @@ from pyfiglet import Figlet
 import inquirer
 from enum import Enum
 import actions
-import config
+import services
 
 
 class Actions(Enum):
@@ -23,18 +23,22 @@ def start():
     ap.add_argument("-C", "--calculate", required=False,
                     action='store_true',
                     help='Direct call of calculation')
+    ap.add_argument("-d", "--debug", required=False,
+                    help="Starts the program in Debug Mode")
 
     args = vars(ap.parse_args())
     handle_args(args)
+    services.config.config.check_config()
     start_up_actions()
 
 
 def handle_args(arguments):
-
+    #print(services.config.config.configs['SETTINGS'])
     if arguments['verbose']:
-        config.config.verbose_mode = True
+        services.config.config.configs['settings']['verbose'] = 1
     else:
-        config.config.verbose_mode = False
+        services.config.verbose_mode = False
+
 
     if arguments['calculate']:
         actions.calculate_data.calculate_data()

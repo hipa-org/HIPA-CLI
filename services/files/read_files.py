@@ -1,11 +1,17 @@
+
+
 class PlotValue:
     def __init__(self, id, number):
         self.id = id
         self.number = number
 
 
-def read_plot_values_file():
-    plot_values = open("sampleData/plot_values.txt", "r").read().splitlines()
+def read_plot_values_file(file_name):
+    if services.config.debug_mode:
+        plot_values = open("sampleData/plot_values.txt", "r").read().splitlines()
+    else:
+        plot_values = open('Input/{0}.txt'.format(file_name), "r").read().splitlines()
+
     plot_value_array = []
     split_plot_value_array = []
 
@@ -18,8 +24,11 @@ def read_plot_values_file():
     return plot_value_array
 
 
-def read_time_traces_file():
-    time_traces_file_data = open("sampleData/time_traces.txt", "r")
+def read_time_traces_file(file_name):
+    if services.config.debug_mode:
+        time_traces_file_data = open("sampleData/time_traces.txt", "r")
+    else:
+        time_traces_file_data = open('Input/{0}.txt'.format(file_name), "r")
     rows = (row.strip().split() for row in time_traces_file_data)
     time_traces = zip(*(row for row in rows if row))
     time_traces_file_data.close()

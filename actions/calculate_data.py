@@ -1,8 +1,7 @@
 import services
-import itertools
 from classes import Cell
 import inquirer
-import config
+from services import config
 
 cell_data = []
 
@@ -13,17 +12,24 @@ Main Calculation Function
 
 def calculate_data():
     questions = [
-        inquirer.Text('time_frame', message="Time Frame"),
+        inquirer.Text('file_name', message="What's the input file name"),
+        # inquirer.Text('time_frame', message="Time Frame",
+        #             validate=lambda _, x: re.match('\+?\d[\d ]+\d', x), ),
+
         # inquirer.Text('input_path', message="Input Path. Change only i you want to change the Dir"),
         # inquirer.Text('output_path', message="Output Path.  Change only i you want to change the Dir")
     ]
     answers = inquirer.prompt(questions)
 
     print(answers)
+    file_name = answers['file_name']
+    print(file_name)
+    if file_name == '':
+        file_name = services.config.default_file_name
 
     stimulation_time_frame = int(answers['time_frame'])
 
-    time_traces = services.files.read_files.read_time_traces_file()
+    time_traces = services.files.read_files.read_time_traces_file(file_name)
     time_frames = create_time_frame_array(time_traces)
     data_count = calculate_provided_data(time_frames)
     baseline_mean_calculation(time_frames, stimulation_time_frame)
@@ -77,7 +83,7 @@ def baseline_mean_calculation(time_frames, stimulation_time_frame):
     for time_frame in time_frames:
         cal_baseline_mean = services.calculations.mean_calculation.calculate_norm_mean(stimulation_time_frame,
                                                                                        time_frame)
-        if config.config.verbose_mode:
+        if services.config.verbose_mode:
             print(
                 'Baseline Mean Calculation of Cell {0} finished: -> Baseline Mean {1}'.format(time_frame[0],
                                                                                               cal_baseline_mean))

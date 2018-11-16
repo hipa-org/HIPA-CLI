@@ -1,5 +1,7 @@
 # Calculator
 
+Calculation only works with .txt files with a specific format provided by program?
+
 
 ## Dependencies
 
@@ -19,3 +21,5 @@
 1. python start.py
 2. Choose your preferred Actions
 3. Follow the Action steps
+
+

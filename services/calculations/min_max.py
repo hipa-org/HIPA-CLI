@@ -1,5 +1,4 @@
 import numpy as np
-import config
 
 
 def calculate_maximum(time_frame):
@@ -101,7 +100,7 @@ def calculate_high_stimulus_per_minute(over_under_limit_data, frame_count):
 
 def count_cell_ones_per_minute(cell_data_for_minute, minute):
     count = 0
-    if config.config.verbose_mode:
+    if services.config.verbose_mode:
         print('Collected Cell Data {0} for Minute {1}'.format(cell_data_for_minute, minute))
     for cell_data in cell_data_for_minute:
         if cell_data == 1:
