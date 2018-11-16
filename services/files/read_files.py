@@ -1,3 +1,4 @@
+import services
 
 
 class PlotValue:
@@ -7,7 +8,7 @@ class PlotValue:
 
 
 def read_plot_values_file(file_name):
-    if services.config.debug_mode:
+    if services.config.config.Config.DEBUG:
         plot_values = open("sampleData/plot_values.txt", "r").read().splitlines()
     else:
         plot_values = open('Input/{0}.txt'.format(file_name), "r").read().splitlines()
@@ -25,7 +26,7 @@ def read_plot_values_file(file_name):
 
 
 def read_time_traces_file(file_name):
-    if services.config.debug_mode:
+    if services.config.config.Config.DEBUG:
         time_traces_file_data = open("sampleData/time_traces.txt", "r")
     else:
         time_traces_file_data = open('Input/{0}.txt'.format(file_name), "r")

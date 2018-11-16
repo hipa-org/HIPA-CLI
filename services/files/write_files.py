@@ -1,41 +1,35 @@
 import os.path
 from enum import Enum
 import numpy as np
+from services.logger.log import LogLevel, write_message
+from services.config.config import Config
+import datetime
 
 
 class Paths(Enum):
+
+    def __str__(self):
+        return str(self.value)
+
     SAMPLE_DIR = 'sampleData/'
     INPUT_DIR = 'Input/'
     OUTPUT_DIR = 'Output/'
-    OUTPUT_FILE_NAME = 'Results.txt'
-    OUTPUT_PATH = 'Output/Results.txt'
-    LOG_PATH = 'Logs/Log.txt'
+    LOG_PATH = 'Log/Log.txt'
 
 
 def write_results_file(cells):
-    file_exists = os.path.exists(Paths.OUTPUT_PATH.value)
-
-    if file_exists:
-        os.remove(Paths.OUTPUT_PATH.value)
-
+    now = datetime.datetime.now()
+    output_path = '{0}{1}{2}'.format(str(Paths.OUTPUT_DIR), str(Config.DEFAULT_OUTPUT_FILE_NAME), '.txt')
     temp_array = []
     for cell in cells:
         cell.high_stimulus_per_minute.insert(0, cell.name)
         temp_array.append(cell.high_stimulus_per_minute)
 
-    fh = open(Paths.OUTPUT_PATH.value, "w")
-
     data = np.array(temp_array)
     data = data.T
-    # here you transpose your data, so to have it in two columns
-
-    np.savetxt(Paths.OUTPUT_PATH.value, data, fmt='%s', delimiter='\t')
-    fh.close()
-
-    print('Created File %s' % Paths.OUTPUT_PATH.value)
-
-
-def write_log(message):
-    file = open(Paths.LOG_PATH.value, "a")
-    file.write(message)
-    file.close()
+    print(now.strftime("%Y-%m-%d %H-%M-%S"))
+    np.savetxt(
+        '{0}{1}-{2}{3}'.format(Paths.OUTPUT_DIR, Config.DEFAULT_OUTPUT_FILE_NAME, now.strftime("%Y-%m-%d %H-%M-%S"),
+                               '.txt'), data, fmt='%s', delimiter='\t')
+    write_message('Created File in {0}{1}{2}'.format(Paths.OUTPUT_DIR, Config.DEFAULT_OUTPUT_FILE_NAME, '.txt'),
+                  LogLevel.Info)

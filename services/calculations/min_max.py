@@ -1,4 +1,6 @@
 import numpy as np
+from services.logger.log import write_message, LogLevel
+from services.config.config import Config
 
 
 def calculate_maximum(time_frame):
@@ -91,17 +93,12 @@ def calculate_high_stimulus_per_minute(over_under_limit_data, frame_count):
             ones_per_minute_complete.append(ones_per_minute_cell)
 
     else:
-        '''print(frame_minutes_length)
-        print(len(frame_minutes_length))
-        print(ones_per_minute_complete[len(ones_per_minute_complete) - 1])
-        print(len(ones_per_minute_complete[len(ones_per_minute_complete) - 1])) '''
         return ones_per_minute_complete
 
 
 def count_cell_ones_per_minute(cell_data_for_minute, minute):
     count = 0
-    if services.config.verbose_mode:
-        print('Collected Cell Data {0} for Minute {1}'.format(cell_data_for_minute, minute))
+    write_message('Collected Cell Data {0} for Minute {1}'.format(cell_data_for_minute, minute), LogLevel.Verbose)
     for cell_data in cell_data_for_minute:
         if cell_data == 1:
             count += 1
