@@ -6,3 +6,4 @@ dist/
 build/
 Output/*.txt
 Input/*.txt
+__pycache__/
