@@ -1,97 +1,64 @@
-import re
-
-import itertools
 import sys
-from random import randint
 import argparse
-import services
 from pyfiglet import Figlet
-import numpy as np
-
-class Cell:
-
-    def __init__(self, cell_id, baseline_mean, all_mean, maximum, sixty_percent):
-        self.cell_id = cell_id
-        self.baseline_mean = baseline_mean
-        self.mean = all_mean
-        self.maximum = maximum
-        self.sixty_percent = sixty_percent
+import inquirer
+from enum import Enum
+import actions
+import config
 
 
-ap = argparse.ArgumentParser()
-ap.add_argument("-T", "--time", required=True,
-                help="the timeFrame")
-args = vars(ap.parse_args())
-stimulation_time_frame = int(args["time"])
-
-# f = Figlet(font='slant')
-# print f.renderText('Calculator')
+class Actions(Enum):
+    CALCULATE_DATA = 'Calculate Data'
+    INPUT_DIR = 'Input/'
+    OUTPUT_DIR = 'Output/'
+    OUTPUT_FILE_NAME = 'Results.txt'
+    OUTPUT_PATH = 'Output/Results.txt'
 
 
-CellData = []
-time_frames = []
-time_traces = services.files.read_files.read_time_traces_file()
-cell1, cell2 = itertools.tee(CellData, 2)
+def start():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("-V", "--verbose", required=False,
+                    action='store_true',
+                    help="Activate verbose Output")
+    ap.add_argument("-C", "--calculate", required=False,
+                    action='store_true',
+                    help='Direct call of calculation')
 
-for time_frame in time_traces:
-    time_frame_array = []
-    for time_frame_data in time_frame:
-        time_frame_array.append(time_frame_data)
+    args = vars(ap.parse_args())
+    handle_args(args)
+    start_up_actions()
+
+
+def handle_args(arguments):
+
+    if arguments['verbose']:
+        config.config.verbose_mode = True
     else:
-        time_frames.append(time_frame_array)
+        config.config.verbose_mode = False
 
-time_frames1, time_frames2, time_frames3 = itertools.tee(time_frames, 3)
-
-data_count = services.calculations.detectDataSizes.detect_row_and_column_count(time_frames)
-minutes = services.calculations.detectDataSizes.calculate_minutes(data_count[1])
-
-print('Detected {0} Columns including Avg and Err'.format(data_count[0]))
-print('Detected {0} Rows excluding the Header Row'.format(data_count[1]))
-print('Detected {0} Minutes '.format(minutes))
-for time_frame in time_frames2:
-    cal_baseline_mean = services.calculations.mean_calculation.calculate_norm_mean(stimulation_time_frame, time_frame)
-    print(
-        'Baseline Mean Calculation of Cell {0} finished: -> Baseline Mean {1}'.format(time_frame[0], cal_baseline_mean))
-    CellData.append(Cell(time_frame[0], cal_baseline_mean, 0, 0, 0))
-
-print('Baseline Mean Calculation done')
-
-normalised_cells = services.calculations.normalisation.normalise_columns(CellData, time_frames3)
-print('Cell Normalization done')
-
-normalised_cells1, normalised_cells2, normalised_cells3 = itertools.tee(
-    normalised_cells, 3)
-
-index = 0
-for normalised_cell in normalised_cells1:
-    mean = services.calculations.mean_calculation.calculate_mean(normalised_cell[1:])
-    CellData[index].mean = mean
-    index += 1
-
-print('Mean Calculation done')
-
-index = 0
-for normalised_cell in normalised_cells2:
-    cell_max = services.calculations.min_max.calculate_maximum(normalised_cell[1:])
-    CellData[index].maximum = cell_max
-    index += 1
-
-print('Maximum Detection done')
-
-index = 0
-for cell in cell1:
-    sixty_percent_of_maximum = services.calculations.min_max.calculate_sixty_percent_of_maximum(cell.maximum)
-    CellData[index].sixty_percent = sixty_percent_of_maximum
-    index += 1
-print('Calculating Limit Value done')
-
-over_under = services.calculations.min_max.calculate_over_and_under(normalised_cells3, CellData)
-print('Calculating Over and Under Limit done')
-
-ones_per_minute = services.calculations.min_max.cal_one_per_minute(over_under, data_count[1])
-print('Calculating Ones per Minutes done')
+    if arguments['calculate']:
+        actions.calculate_data.calculate_data()
+        sys.exit(21)
 
 
-services.files.write_files.write_file(ones_per_minute)
+def start_up_actions():
+    questions = [
+        inquirer.List('action',
+                      message="Choose Action?",
+                      choices=[Actions.CALCULATE_DATA.value, 'Exit'],
+                      ),
+    ]
+    answers = inquirer.prompt(questions)
 
-# services.plot.plot.test_plotting(ones_per_minute)
+    answer = answers['action']
+    if answer == Actions.CALCULATE_DATA.value:
+        actions.calculate_data.calculate_data()
+
+    elif answer == 'Exit':
+        sys.exit(21)
+
+
+f = Figlet(font='slant')
+print(f.renderText('Data Calculator'))
+
+start()
