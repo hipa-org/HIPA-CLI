@@ -1,4 +1,4 @@
-# Calculator
+# High Intensity Peak Analysis
 
 Calculation only works with .txt files with a specific format provided by program?
 
@@ -9,10 +9,12 @@ Calculation only works with .txt files with a specific format provided by progra
 
 
 ## Installation
-1. Create Virtual Environment. e.g. python3 -m venv ./venv
-2. Activate Environment. e.g source venv/bin/activate
-3. pip install -r requirements.txt
-4. Done
+- Install Python 3.x
+- Download Repo
+- Create Virtual Environment. e.g. python3 -m venv ./venv
+- Activate Environment. e.g source venv/bin/activate
+- pip install -r requirements.txt
+- Done
 
 
 

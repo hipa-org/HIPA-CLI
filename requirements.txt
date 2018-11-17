@@ -1,6 +1,8 @@
 altgraph==0.16.1
+args==0.1.0
 arrow==0.12.1
 blessings==1.7
+clint==0.5.1
 cycler==0.10.0
 dateparser==0.7.0
 docutils==0.14
@@ -9,10 +11,12 @@ inquirer==2.5.1
 kiwisolver==1.0.1
 macholib==1.11
 matplotlib==3.0.2
+moment==0.8.2
 numpy==1.15.4
 pandas==0.23.4
 pefile==2018.8.8
 pyfiglet==0.7.6
+PyInstaller==3.4
 pyparsing==2.3.0
 python-dateutil==2.7.5
 pytz==2018.7
