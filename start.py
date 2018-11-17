@@ -8,6 +8,7 @@ from services.config.config import Config, read_conf, reset_config
 import os
 from services.logger.log import write_message, LogLevel
 from services.filemanagement.write_files import write_results_file
+from services.filemanagement.create_files import create_needed_files
 
 class Actions(Enum):
     HIGH_INTENSITY_PEAK_ANALYSIS = 'High Intensity Peak Analysis'
@@ -34,6 +35,7 @@ def start():
                     help="Restores the default config.ini")
 
     args = vars(ap.parse_args())
+    create_needed_files()
     handle_args(args)
     success = read_conf()
     if success is not True:
@@ -43,7 +45,6 @@ def start():
 
 
 def handle_args(arguments):
-
     if arguments['verbose']:
         Config.VERBOSE = 1
 
