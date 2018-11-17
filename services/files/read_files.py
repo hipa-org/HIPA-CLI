@@ -1,4 +1,6 @@
 import services
+from services.logger.log import write_message, LogLevel
+import sys
 
 
 class PlotValue:
@@ -26,10 +28,26 @@ def read_plot_values_file(file_name):
 
 
 def read_time_traces_file(file_name):
+    time_traces_file_data = any
     if services.config.config.Config.DEBUG:
-        time_traces_file_data = open("sampleData/time_traces.txt", "r")
+        try:
+            time_traces_file_data = open("sampleData/time_traces.txt", "r")
+        except ValueError as ex:
+            write_message('Could not locate File sampleData/time_traces.txt', LogLevel.Error)
+            write_message('More Information in Log', LogLevel.Error)
+            write_message(ex, LogLevel.Verbose)
+            input()
+            sys.exit(21)
     else:
-        time_traces_file_data = open('Input/{0}.txt'.format(file_name), "r")
+        try:
+            time_traces_file_data = open('Input/{0}.txt'.format(file_name), "r")
+        except ValueError as ex:
+            write_message('Could not locate File sampleData/time_traces.txt', LogLevel.Error)
+            write_message('More Information in Log', LogLevel.Error)
+            write_message(ex, LogLevel.Verbose)
+            input()
+            sys.exit(21)
+
     rows = (row.strip().split() for row in time_traces_file_data)
     time_traces = zip(*(row for row in rows if row))
     time_traces_file_data.close()

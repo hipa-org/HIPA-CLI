@@ -19,7 +19,6 @@ class Paths(Enum):
 
 def write_results_file(cells):
     now = datetime.datetime.now()
-    output_path = '{0}{1}{2}'.format(str(Paths.OUTPUT_DIR), str(Config.DEFAULT_OUTPUT_FILE_NAME), '.txt')
     temp_array = []
     for cell in cells:
         cell.high_stimulus_per_minute.insert(0, cell.name)
@@ -27,7 +26,6 @@ def write_results_file(cells):
 
     data = np.array(temp_array)
     data = data.T
-    print(now.strftime("%Y-%m-%d %H-%M-%S"))
     np.savetxt(
         '{0}{1}-{2}{3}'.format(Paths.OUTPUT_DIR, Config.DEFAULT_OUTPUT_FILE_NAME, now.strftime("%Y-%m-%d %H-%M-%S"),
                                '.txt'), data, fmt='%s', delimiter='\t')

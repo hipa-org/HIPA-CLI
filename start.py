@@ -10,7 +10,7 @@ from services.config.config import Config
 
 
 class Actions(Enum):
-    CALCULATE_DATA = 'Calculate Data'
+    HIGH_INTENSITY_PEAK_ANALYSIS = 'High Intensity Peak Analysis'
 
 
 class DebugActions(Enum):
@@ -39,12 +39,12 @@ def handle_args(arguments):
         services.config.config.Config.VERBOSE = 1
 
     if arguments['calculate']:
-        actions.calculate_data.calculate_data()
+        actions.calculate_data.calculate_action()
         sys.exit(21)
 
     if arguments['debug']:
         services.config.config.Config.DEBUG = 1
-        write_message('IMPORT NOTICE: DEBUG MODE IS ACTIVE!', LogLevel.Info)
+        write_message('IMPORTANT NOTICE: DEBUG MODE IS ACTIVE!', LogLevel.Info)
 
     write_message('Arguments {0}'.format(arguments), LogLevel.Verbose)
 
@@ -54,22 +54,22 @@ def start_up_actions():
         questions = [
             inquirer.List('action',
                           message="Choose Action?",
-                          choices=[Actions.CALCULATE_DATA.value, DebugActions.FILESYSTEM_TEST.value, 'Exit'],
+                          choices=[Actions.HIGH_INTENSITY_PEAK_ANALYSIS.value, DebugActions.FILESYSTEM_TEST.value, 'Exit'],
                           ),
         ]
     else:
         questions = [
             inquirer.List('action',
                           message="Choose Action?",
-                          choices=[Actions.CALCULATE_DATA.value, 'Exit'],
+                          choices=[Actions.HIGH_INTENSITY_PEAK_ANALYSIS.value, 'Exit'],
                           ),
         ]
 
     answers = inquirer.prompt(questions)
 
     answer = answers['action']
-    if answer == Actions.CALCULATE_DATA.value:
-        actions.calculate_data.calculate_data()
+    if answer == Actions.HIGH_INTENSITY_PEAK_ANALYSIS.value:
+        actions.calculate_data.calculate_action()
 
     elif answer == DebugActions.FILESYSTEM_TEST.value:
         services.files.write_files.write_results_file([])
@@ -81,6 +81,6 @@ def start_up_actions():
 
 
 f = Figlet(font='slant')
-print(f.renderText('Data Calculator'))
+print(f.renderText('Intensity Analyzer'))
 
 start()

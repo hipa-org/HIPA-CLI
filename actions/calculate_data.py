@@ -3,17 +3,25 @@ from classes import Cell
 import inquirer
 import datetime
 from services.logger.log import LogLevel, write_message
-
+from services.config.config import Config
+import os
+from clint.textui import puts, colored, indent
 cell_data = []
+from pyfiglet import Figlet
 
 '''
 Main Calculation Function
 '''
 
 
-def calculate_data():
+def calculate_action():
+    clear = lambda: os.system('cls' if os.name == 'nt' else 'clear')
+    clear()
+
+    f = Figlet(font='slant')
+    print(f.renderText('High Intensity Peak Analysis'))
     questions = [
-        inquirer.Text('file_name', message="What's the input file name"),
+        inquirer.Text('file_name', message="Filename"),
         inquirer.Text('time_frame', message="Time Frame"),
 
         # inquirer.Text('input_path', message="Input Path. Change only i you want to change the Dir"),
@@ -21,13 +29,26 @@ def calculate_data():
     ]
     answers = inquirer.prompt(questions)
 
+    stimulation_time_frame = 0
     file_name = answers['file_name']
     if file_name == '':
-        file_name = services.config.config.Config.DEFAULT_FILE_NAME
+        write_message('No Filename given. Using default: {0}'.format(Config.DEFAULT_INPUT_FILE_NAME), LogLevel.Warn)
+        file_name = Config.DEFAULT_INPUT_FILE_NAME
 
+    try:
+        stimulation_time_frame = int(answers['time_frame'])
+    except ValueError as ex:
+        write_message(ex, LogLevel.Warn)
+        write_message('Value could not converted to a valid Integer Value', LogLevel.Warn)
+        input("Press Enter to continue...")
+        calculate_action()
+
+    calculate_data(file_name, stimulation_time_frame)
+
+
+def calculate_data(file_name, stimulation_time_frame):
     start_time = datetime.datetime.now()
 
-    stimulation_time_frame = int(answers['time_frame'])
     write_message('Input Filename: {0}'.format(file_name), LogLevel.Verbose)
     time_traces = services.files.read_files.read_time_traces_file(file_name)
     time_frames = create_time_frame_array(time_traces)
@@ -46,7 +67,7 @@ def calculate_data():
 
 
 '''
-Create a Time Frame Array from the data read by the give File
+Create a Time Frame Array from the data read by the given File
 '''
 
 
