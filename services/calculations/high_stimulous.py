@@ -58,8 +58,6 @@ def collect_all_high_stimulus(over_under_limit_data, frame_minutes_length):
         high_stimulus_per_minute = []
         minute_index = 0
         index = 0
-        print('TEst {0}'.format(len(over_under_limit_data)))
-        print('Cells {0}'.format(len(cells)))
         for cell in cells[1:]:
             if len(high_stimulus_per_minute) < frame_minutes_length[minute_index]:
                 high_stimulus_per_minute.append(cell)

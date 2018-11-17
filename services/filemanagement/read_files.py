@@ -40,9 +40,9 @@ def read_time_traces_file(file_name):
             sys.exit(21)
     else:
         try:
-            time_traces_file_data = open('{0}{1}'.format(Config.DEFAULT_WORKING_DIRECTORY, file_name), "r")
+            time_traces_file_data = open('{0}{1}'.format(Config.WORKING_DIRECTORY, file_name), "r")
         except FileNotFoundError as ex:
-            write_message('Could not locate File {0}{1}'.format(Config.DEFAULT_WORKING_DIRECTORY, file_name),
+            write_message('Could not locate File {0}{1}'.format(Config.WORKING_DIRECTORY, file_name),
                           LogLevel.Error)
             write_message('More Information in Log', LogLevel.Error)
             write_message(ex, LogLevel.Verbose)

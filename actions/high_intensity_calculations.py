@@ -23,30 +23,36 @@ def start_high_intensity_calculations():
     f = Figlet(font='slant')
     print(f.renderText('High Intensity Peak Analysis'))
 
-    questions = [
+    working_dir = ask_working_dir()
+    files_to_process = ask_files_to_process(working_dir)
+    if len(files_to_process) == 0:
+        write_message('No Files selected.. Aborting', LogLevel.Info)
+        return True
+
+    write_message(files_to_process, LogLevel.Debug)
+    stimulation_time_frames = ask_stimulus_time_frame(files_to_process)
+    write_message(stimulation_time_frames, LogLevel.Debug)
+
+    for file in stimulation_time_frames:
+        global cell_data
+        cell_data = []
+        print()
+        write_message('Processing file {0}'.format(file['file_name']), LogLevel.Info)
+        execute_high_intensity_calculation(file['file_name'], file['stimulation_time_frame'])
+    return True
+
+
+def ask_working_dir():
+    working_dir_question = [
         inquirer.Text('working_dir', message="Working Dir (Leave blank for config default"),
-        inquirer.Text('time_frame', message="Time Frame"),
     ]
-    answers = inquirer.prompt(questions)
+    working_dir_answer = inquirer.prompt(working_dir_question)
 
-    stimulation_time_frame = 0
-
-    global cell_data
-    cell_data = []
-    try:
-        stimulation_time_frame = int(answers['time_frame'])
-    except ValueError as ex:
-        write_message(ex, LogLevel.Warn)
-        write_message('Value could not converted to a valid Integer Value', LogLevel.Warn)
-        input("Press Enter to continue...")
-        start_high_intensity_calculations()
-        return
-
-    working_dir = answers['working_dir']
+    working_dir = working_dir_answer['working_dir']
     if working_dir == '':
-        write_message('No Working Directory given. Using default: {0}'.format(Config.DEFAULT_WORKING_DIRECTORY),
+        write_message('No Working Directory given. Using default: {0}'.format(Config.WORKING_DIRECTORY),
                       LogLevel.Warn)
-        working_dir = Config.DEFAULT_WORKING_DIRECTORY
+        working_dir = Config.WORKING_DIRECTORY
     else:
         char_index = 0
         for char in working_dir:
@@ -55,27 +61,54 @@ def start_high_intensity_calculations():
                     line = re.sub('[ ]', '', working_dir)
                     working_dir = '{0}{1}'.format(line, '/')
             char_index += 1
+        write_message('Using Directory: {0}'.format(working_dir), LogLevel.Info)
 
-    write_message('Using Directory: {0}'.format(working_dir), LogLevel.Info)
+    return working_dir
 
+
+def ask_files_to_process(working_dir):
     all_files = os.listdir(working_dir)
     temp_files = []
     for file in all_files:
-        if Config.DEFAULT_INPUT_FILE_NAME in file:
-            temp_files.append(file)
+        if Config.INPUT_FILE_NAME in file:
+            if Config.OUTPUT_FILE_NAME not in file:
+                temp_files.append(file)
 
     files = [
-        inquirer.List('file_name',
-                      message="Choose Input File",
-                      choices=temp_files,
-                      )
+        inquirer.Checkbox('file_names',
+                          message="Choose files to calculate?",
+                          choices=temp_files,
+                          ),
     ]
+    chosen_files_answer = inquirer.prompt(files)
+    chosen_files = []
+    for file in chosen_files_answer['file_names']:
+        chosen_files.append(file)
 
-    chosen_file = inquirer.prompt(files)
-    file_name = chosen_file['file_name']
-    write_message('Stimulated Time Frame: {}'.format(stimulation_time_frame), LogLevel.Verbose)
-    execute_high_intensity_calculation(file_name, stimulation_time_frame)
-    return True
+    return chosen_files
+
+
+def ask_stimulus_time_frame(files_to_process):
+    stimulation_time_frames = []
+    for file in files_to_process:
+        stimulation_time_frame_question = [
+            inquirer.Text('stimulation_time_frame', message="Frame of stimulation for file {0}".format(file)),
+        ]
+        stimulation_time_frame_answer = inquirer.prompt(stimulation_time_frame_question)
+        try:
+            stimulation_time_frames.append({'file_name': file,
+                                            'stimulation_time_frame': int(
+                                                stimulation_time_frame_answer['stimulation_time_frame'])})
+            write_message('Stimulated Time Frame: {}'.format(stimulation_time_frame_answer['stimulation_time_frame']),
+                          LogLevel.Verbose)
+        except ValueError as ex:
+            write_message(ex, LogLevel.Warn)
+            write_message('Value could not converted to a valid Integer Value', LogLevel.Warn)
+            input("Press Enter to continue...")
+            start_high_intensity_calculations()
+            return
+
+    return stimulation_time_frames
 
 
 def execute_high_intensity_calculation(file_name, stimulation_time_frame):
@@ -92,7 +125,7 @@ def execute_high_intensity_calculation(file_name, stimulation_time_frame):
     calculate_limit()
     over_under_limit(normalised_cells)
     calculate_high_stimulus_per_minute(data_count[1])
-    write_results_file(cell_data)
+    write_results_file(cell_data, file_name)
 
     end_time = datetime.datetime.now()
     write_message('Calculation done in {0} seconds'.format(end_time - start_time), LogLevel.Verbose)

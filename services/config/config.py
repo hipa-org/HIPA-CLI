@@ -5,9 +5,9 @@ import configparser
 class Config:
     VERBOSE = 0
     DEBUG = 0
-    DEFAULT_WORKING_DIRECTORY = 'Data/'
-    DEFAULT_INPUT_FILE_NAME = 'time_traces'
-    DEFAULT_OUTPUT_FILE_NAME = 'Results'
+    WORKING_DIRECTORY = 'Data/'
+    INPUT_FILE_NAME = 'time_traces'
+    OUTPUT_FILE_NAME = 'Result'
     ERROR_LOG = 'error-log.txt'
     DEFAULT_LOG = 'default-log.txt'
     LOG_DIRECTORY = 'Logs/'
@@ -17,9 +17,9 @@ def read_conf():
     config = configparser.ConfigParser()
     config.read('config.ini')
     try:
-        Config.DEFAULT_OUTPUT_FILE_NAME = config['SETTINGS']['default_output_file_name']
-        Config.DEFAULT_INPUT_FILE_NAME = config['SETTINGS']['default_input_file_name']
-        Config.DEFAULT_WORKING_DIRECTORY = config['SETTINGS']['default_working_directory']
+        Config.OUTPUT_FILE_NAME = config['SETTINGS']['output_file_name']
+        Config.INPUT_FILE_NAME = config['SETTINGS']['input_file_name']
+        Config.WORKING_DIRECTORY = config['SETTINGS']['working_directory']
         Config.DEFAULT_LOG = config['LOGS']['default_log']
         Config.ERROR_LOG = config['LOGS']['error_log']
         Config.LOG_DIRECTORY = config['LOGS']['logs_path']
@@ -31,9 +31,9 @@ def read_conf():
 def reset_config():
     config = configparser.ConfigParser()
     config['SETTINGS'] = {
-        'default_input_file_name': 'time_traces',
-        'default_working_directory': 'Data/',
-        'default_output_file_name': 'Results'
+        'input_file_name': 'time_traces',
+        'working_directory': 'Data/',
+        'output_file_name': 'Result',
     }
     config['LOGS'] = {
         'logs_path': 'Logs/',

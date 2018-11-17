@@ -4,7 +4,7 @@ from services.config.config import Config
 import datetime
 
 
-def write_results_file(cells):
+def write_results_file(cells, filename):
     now = datetime.datetime.now()
     temp_array = []
     for cell in cells:
@@ -14,17 +14,12 @@ def write_results_file(cells):
     data = np.array(temp_array)
     data = data.T
     try:
+        filename = '{0} {1} {2}{3}'.format(Config.OUTPUT_FILE_NAME, filename,
+                                           now.strftime("%Y-%m-%d %H-%M-%S"), '.txt')
         np.savetxt(
-            '{0}{1}-{2}{3}'.format(Config.DEFAULT_WORKING_DIRECTORY, Config.DEFAULT_OUTPUT_FILE_NAME,
-                                   now.strftime("%Y-%m-%d %H-%M-%S"),
-                                   '.txt'), data, fmt='%s', delimiter='\t')
+            '{0}{1}'.format(Config.WORKING_DIRECTORY, filename), data, fmt='%s', delimiter='\t')
         write_message(
-            'Created File {0}-{1}{2} in {3}{4}{5}'.format(Config.DEFAULT_OUTPUT_FILE_NAME,
-                                                          now.strftime("%Y-%m-%d %H-%M-%S"),
-                                                          '.txt', Config.DEFAULT_WORKING_DIRECTORY,
-                                                          Config.DEFAULT_OUTPUT_FILE_NAME,
-                                                          '.txt'),
-            LogLevel.Info)
+            'Created File {0} in {1}'.format(filename, Config.WORKING_DIRECTORY), LogLevel.Info)
     except FileNotFoundError as ex:
         write_message('Error creating File!', LogLevel.Error)
         write_message(ex, LogLevel.Error)
