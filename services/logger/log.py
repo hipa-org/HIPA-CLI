@@ -5,6 +5,7 @@ import os
 import datetime
 from clint.textui import puts, colored, indent
 
+
 class LogLevel(Enum):
     Verbose = 0
     Info = 1
@@ -15,22 +16,40 @@ class LogLevel(Enum):
 
 def write_message(message, log_level):
     write_log(message)
-    if Config.VERBOSE == 1:
+    if Config.VERBOSE == 1 and Config.VERBOSE == 1:
         if log_level == LogLevel.Verbose:
             puts(colored.blue('Verbose: {0}'.format(message)))
-           # print('Verbose: {0}'.format(message))
         elif log_level == LogLevel.Info:
             puts(colored.green('Info: {0}'.format(message)))
-            #print('Info: {0}'.format(message))
         elif log_level == LogLevel.Debug:
             puts(colored.white('Debug: {0}'.format(message)))
-           # print('Debug: {0}'.format(message))
         elif log_level == LogLevel.Warn:
             puts(colored.yellow('Warn: {0}'.format(message)))
-           # print('Warn: {0}'.format(message))
         elif log_level == LogLevel.Error:
             puts(colored.red('Error: {0}'.format(message)))
-           # print('Error: {0}'.format(message))
+
+    elif Config.VERBOSE == 1:
+        if log_level == LogLevel.Verbose:
+            puts(colored.blue('Verbose: {0}'.format(message)))
+        elif log_level == LogLevel.Info:
+            puts(colored.green('Info: {0}'.format(message)))
+        elif log_level == LogLevel.Warn:
+            puts(colored.yellow('Warn: {0}'.format(message)))
+        elif log_level == LogLevel.Error:
+            puts(colored.red('Error: {0}'.format(message)))
+
+    elif Config.DEBUG == 1:
+        if log_level == LogLevel.Verbose:
+            puts(colored.blue('Verbose: {0}'.format(message)))
+        elif log_level == LogLevel.Info:
+            puts(colored.green('Info: {0}'.format(message)))
+        elif log_level == LogLevel.Debug:
+            puts(colored.white('Debug: {0}'.format(message)))
+        elif log_level == LogLevel.Warn:
+            puts(colored.yellow('Warn: {0}'.format(message)))
+        elif log_level == LogLevel.Error:
+            puts(colored.red('Error: {0}'.format(message)))
+
     else:
         if log_level == LogLevel.Info:
             puts(colored.green('Info: {0}'.format(message)))
@@ -43,7 +62,7 @@ def write_message(message, log_level):
 
 
 def write_log(message):
-    file_exists = os.path.exists("Log/log.txt")
+    file_exists = os.path.exists("Log/")
     now = datetime.datetime.now()
     if not file_exists:
         create_log_file()

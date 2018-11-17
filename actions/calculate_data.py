@@ -6,6 +6,7 @@ from services.logger.log import LogLevel, write_message
 from services.config.config import Config
 import os
 from clint.textui import puts, colored, indent
+
 cell_data = []
 from pyfiglet import Figlet
 
@@ -187,8 +188,8 @@ def calculate_high_stimulus_per_minute(row_count):
     for cell in cell_data:
         temp_over_under_limit.append(cell.over_under_limit)
 
-    high_stimulus_per_minute = services.calculations.min_max.calculate_high_stimulus_per_minute(temp_over_under_limit,
-                                                                                                row_count)
+    high_stimulus_per_minute = services.calculations.high_stimulous.calculate_high_stimulus_per_minute(
+        temp_over_under_limit, row_count)
     index = 0
     for high_stimulus_per_cell in high_stimulus_per_minute:
         # print(high_stimulus_per_cell)
