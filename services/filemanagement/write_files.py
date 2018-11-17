@@ -4,7 +4,7 @@ from services.config.config import Config
 import datetime
 
 
-def write_results_file(cells, filename):
+def write_high_stimulus_file(cells, filename):
     now = datetime.datetime.now()
     temp_array = []
     for cell in cells:
@@ -23,3 +23,10 @@ def write_results_file(cells, filename):
     except FileNotFoundError as ex:
         write_message('Error creating File!', LogLevel.Error)
         write_message(ex, LogLevel.Error)
+
+
+def write_normalized_data(normalized_cells, filename):
+    temp_array = []
+    for cell in normalized_cells:
+        cell.high_stimulus_per_minute.insert(0, cell.name)
+        temp_array.append(cell.high_stimulus_per_minute)

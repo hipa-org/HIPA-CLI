@@ -30,7 +30,11 @@ If the Tabstop is missing, the program will fail!
 2. Choose your preferred Actions
 3. Follow the Action steps
 
-
+*** 
+Important notice:  
+A path with multiple or a single blank is not recommended!
+High Intensity Peak Analysis will try to fix the path but this isn´t a 
+100% chance that it will work
 
 ## Command Line Arguments:
 
@@ -38,6 +42,7 @@ If the Tabstop is missing, the program will fail!
 - [-V / --verbose]: Verbose mode -> Verbose output of Calculations  
 - [-h / --highintense]: Skips the Mainmenu and jumps directly to the High Intensity Peak Analyzer Tool
 - [-r / --restore]: Restores the default config.ini
+
 
 
 

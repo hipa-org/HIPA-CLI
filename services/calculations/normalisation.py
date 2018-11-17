@@ -1,3 +1,6 @@
+'''
+Normalize each Datapoint in Cell
+'''
 def normalise_columns(cell_data, time_frames):
     normalized_time_frames = []
     index = 0

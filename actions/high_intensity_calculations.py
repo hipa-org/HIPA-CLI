@@ -4,7 +4,7 @@ import datetime
 from services.logger.log import write_message, LogLevel
 from services.config.config import Config
 from services.filemanagement.read_files import read_time_traces_file
-from services.filemanagement.write_files import write_results_file
+from services.filemanagement.write_files import write_high_stimulus_file
 from services.calculations import normalisation, mean_calculation, min_max, high_stimulous, detectDataSizes
 import os
 from pyfiglet import Figlet
@@ -67,7 +67,7 @@ def ask_working_dir():
 
 
 def ask_files_to_process(working_dir):
-    all_files = os.listdir(working_dir)
+    all_files = os.listdir(os.path.normpath(working_dir))
     temp_files = []
     for file in all_files:
         if Config.INPUT_FILE_NAME in file:
@@ -113,22 +113,30 @@ def ask_stimulus_time_frame(files_to_process):
 
 def execute_high_intensity_calculation(file_name, stimulation_time_frame):
     start_time = datetime.datetime.now()
-
-    write_message('Input Filename: {0}'.format(file_name), LogLevel.Verbose)
     time_traces = read_time_traces_file(file_name)
     time_frames = create_time_frame_array(time_traces)
     data_count = calculate_provided_data(time_frames)
     baseline_mean_calculation(time_frames, stimulation_time_frame)
-    normalised_cells = normalisation.normalise_columns(cell_data, time_frames)
-    calculate_mean(normalised_cells)
-    maximum_detection(normalised_cells)
+    normalized_cells = normalize_cells(cell_data, time_frames)
+    calculate_mean(normalized_cells)
+    maximum_detection(normalized_cells)
     calculate_limit()
-    over_under_limit(normalised_cells)
+    over_under_limit(normalized_cells)
     calculate_high_stimulus_per_minute(data_count[1])
-    write_results_file(cell_data, file_name)
-
+    write_high_stimulus_file(cell_data, file_name)
     end_time = datetime.datetime.now()
-    write_message('Calculation done in {0} seconds'.format(end_time - start_time), LogLevel.Verbose)
+    write_message('Calculation done in {0} seconds.'.format(end_time - start_time), LogLevel.Verbose)
+    write_message('{0} data points processed'.format(data_count[0]* data_count[1]), LogLevel.Verbose)
+
+
+def normalize_cells(cell_data_input, time_frames):
+    normalized_data_cells = normalisation.normalise_columns(cell_data_input, time_frames)
+    index = 0
+    for normalized_data in normalized_data_cells:
+        cell_data[index].normalized_data = normalized_data
+        index += 1
+
+    return normalized_data_cells
 
 
 '''
@@ -163,7 +171,7 @@ def calculate_provided_data(time_frames):
 
 
 '''
-KAYA SHOULD WROTE SOMETHING HERE
+Mean of Intensities before Stimulation
 '''
 
 
@@ -177,7 +185,7 @@ def baseline_mean_calculation(time_frames, stimulation_time_frame):
             'Baseline Mean Calculation of Cell {0} finished: -> Baseline Mean {1}'.format(time_frame[0],
                                                                                           cal_baseline_mean),
             LogLevel.Verbose)
-        cell_data.append(Cell.Cell(time_frame[0], cal_baseline_mean, 0, 0, 0, 0, 0))
+        cell_data.append(Cell.Cell(time_frame[0], cal_baseline_mean, 0, 0, 0, 0, 0, 0))
     write_message('Baseline Mean Calculation done', LogLevel.Info)
 
 

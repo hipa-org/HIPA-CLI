@@ -8,6 +8,5 @@ Output/*.txt
 Input/*.txt
 __pycache__/
 Log/
-start.spec
 Data/*.txt
 Logs/
