@@ -20,7 +20,6 @@ Main Calculation Function
 def start_high_intensity_calculations():
     clear = lambda: os.system('cls' if os.name == 'nt' else 'clear')
     clear()
-
     f = Figlet(font='slant')
     print(f.renderText('High Intensity Peak Analysis'))
 
@@ -32,6 +31,8 @@ def start_high_intensity_calculations():
 
     stimulation_time_frame = 0
 
+    global cell_data
+    cell_data = []
     try:
         stimulation_time_frame = int(answers['time_frame'])
     except ValueError as ex:
