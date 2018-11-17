@@ -5,10 +5,9 @@ import inquirer
 from enum import Enum
 from actions import high_intensity_calculations
 from services.config.config import Config, read_conf, reset_config
-import services
 import os
 from services.logger.log import write_message, LogLevel
-
+from services.filemanagement.write_files import write_results_file
 
 class Actions(Enum):
     HIGH_INTENSITY_PEAK_ANALYSIS = 'High Intensity Peak Analysis'
@@ -44,6 +43,7 @@ def start():
 
 
 def handle_args(arguments):
+
     if arguments['verbose']:
         Config.VERBOSE = 1
 
@@ -91,13 +91,14 @@ def start_up_actions():
     answer = answers['action']
     if answer == Actions.HIGH_INTENSITY_PEAK_ANALYSIS.value:
         high_intensity_calculations.start_high_intensity_calculations()
+        input('Press to continue...')
         start_up_actions()
 
     elif answer == Actions.CELL_SORTER.value:
         print('Not implemented yet')
         start_up_actions()
     elif answer == DebugActions.FILESYSTEM_TEST.value:
-        services.files.write_files.write_results_file([])
+        write_results_file([])
         start_up_actions()
     elif answer == 'Exit':
         sys.exit(21)

@@ -1,3 +1,4 @@
+
 from services.logger.log import write_message, LogLevel
 import sys
 from services.config.config import Config
@@ -10,7 +11,7 @@ class PlotValue:
 
 
 def read_plot_values_file(file_name):
-    if src.services.config.config.Config.DEBUG:
+    if Config.DEBUG:
         plot_values = open("sampleData/plot_values.txt", "r").read().splitlines()
     else:
         plot_values = open('Input/{0}.txt'.format(file_name), "r").read().splitlines()
@@ -28,7 +29,7 @@ def read_plot_values_file(file_name):
 
 
 def read_time_traces_file(file_name):
-    if src.services.config.config.Config.DEBUG:
+    if Config.DEBUG:
         try:
             time_traces_file_data = open("sampleData/time_traces.txt", "r")
         except FileNotFoundError as ex:

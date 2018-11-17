@@ -1,13 +1,11 @@
 from services.config.config import Config
 from enum import Enum
-from services.files.create_files import create_default_log_file, create_logs_dir, create_error_log_file
 import os
 import datetime
 from clint.textui import puts, colored
 
 
 class LogLevel(Enum):
-
     def __str__(self):
         return str(self.value)
 
@@ -80,8 +78,25 @@ def write_error_log(message):
     file_exists = os.path.exists(Config.LOG_DIRECTORY)
     now = datetime.datetime.now()
     if not file_exists:
+        print('HI')
         create_logs_dir()
         create_error_log_file()
     fh = open('{0}{1}'.format(Config.LOG_DIRECTORY, Config.ERROR_LOG), "a")
     fh.write('{0}: {1}\n'.format(str(now), message))
     fh.close()
+
+
+def create_logs_dir():
+    os.makedirs(Config.LOG_DIRECTORY)
+
+
+def create_default_log_file():
+    log_file = open('{0}{1}'.format(Config.LOG_DIRECTORY, Config.DEFAULT_LOG), "w")
+    log_file.write('Created Log\n')
+    log_file.close()
+
+
+def create_error_log_file():
+    log_file = open('{0}{1}'.format(Config.LOG_DIRECTORY, Config.ERROR_LOG), "w")
+    log_file.write('Created Log\n')
+    log_file.close()
