@@ -5,36 +5,45 @@ import datetime
 from services.logger.log import LogLevel, write_message
 from services.config.config import Config
 import os
-from clint.textui import puts, colored, indent
+from pyfiglet import Figlet
+import re
 
 cell_data = []
-from pyfiglet import Figlet
 
 '''
 Main Calculation Function
 '''
 
 
-def calculate_action():
+def start_high_intensity_calculations():
     clear = lambda: os.system('cls' if os.name == 'nt' else 'clear')
     clear()
 
     f = Figlet(font='slant')
     print(f.renderText('High Intensity Peak Analysis'))
-    questions = [
-        inquirer.Text('file_name', message="Filename"),
-        inquirer.Text('time_frame', message="Time Frame"),
 
-        # inquirer.Text('input_path', message="Input Path. Change only i you want to change the Dir"),
-        # inquirer.Text('output_path', message="Output Path.  Change only i you want to change the Dir")
+    questions = [
+        inquirer.Text('working_dir', message="Working Dir"),
+        inquirer.Text('time_frame', message="Time Frame"),
     ]
     answers = inquirer.prompt(questions)
 
     stimulation_time_frame = 0
-    file_name = answers['file_name']
-    if file_name == '':
-        write_message('No Filename given. Using default: {0}'.format(Config.DEFAULT_INPUT_FILE_NAME), LogLevel.Warn)
-        file_name = Config.DEFAULT_INPUT_FILE_NAME
+    working_dir = answers['working_dir']
+    if working_dir == '':
+        write_message('No Working Directory given. Using default: {0}'.format(Config.DEFAULT_WORKING_DIRECTORY),
+                      LogLevel.Warn)
+        working_dir = Config.DEFAULT_WORKING_DIRECTORY
+    else:
+        char_index = 0
+        for char in working_dir:
+            if char_index == len(working_dir) - 1:
+                if char is not '/':
+                    line = re.sub('[ ]', '', working_dir)
+                    working_dir = '{0}{1}'.format(line, '/')
+            char_index += 1
+
+    write_message('Using Directory: {0}'.format(working_dir), LogLevel.Info)
 
     try:
         stimulation_time_frame = int(answers['time_frame'])
@@ -42,12 +51,27 @@ def calculate_action():
         write_message(ex, LogLevel.Warn)
         write_message('Value could not converted to a valid Integer Value', LogLevel.Warn)
         input("Press Enter to continue...")
-        calculate_action()
+        start_high_intensity_calculations()
 
-    calculate_data(file_name, stimulation_time_frame)
+    all_files = os.listdir(working_dir)
+    temp_files = []
+    for file in all_files:
+        if Config.DEFAULT_INPUT_FILE_NAME in file:
+            temp_files.append(file)
+
+    files = [
+        inquirer.List('file_name',
+                      message="Choose Input File",
+                      choices=temp_files,
+                      )
+    ]
+
+    chosen_file = inquirer.prompt(files)
+    file_name = chosen_file['file_name']
+    execute_high_intensity_calculation(file_name, stimulation_time_frame)
 
 
-def calculate_data(file_name, stimulation_time_frame):
+def execute_high_intensity_calculation(file_name, stimulation_time_frame):
     start_time = datetime.datetime.now()
 
     write_message('Input Filename: {0}'.format(file_name), LogLevel.Verbose)

@@ -1,6 +1,7 @@
 import services
 from services.logger.log import write_message, LogLevel
 import sys
+from services.config.config import Config
 
 
 class PlotValue:
@@ -28,11 +29,10 @@ def read_plot_values_file(file_name):
 
 
 def read_time_traces_file(file_name):
-    time_traces_file_data = any
     if services.config.config.Config.DEBUG:
         try:
             time_traces_file_data = open("sampleData/time_traces.txt", "r")
-        except ValueError as ex:
+        except FileNotFoundError as ex:
             write_message('Could not locate File sampleData/time_traces.txt', LogLevel.Error)
             write_message('More Information in Log', LogLevel.Error)
             write_message(ex, LogLevel.Verbose)
@@ -40,9 +40,10 @@ def read_time_traces_file(file_name):
             sys.exit(21)
     else:
         try:
-            time_traces_file_data = open('Input/{0}.txt'.format(file_name), "r")
-        except ValueError as ex:
-            write_message('Could not locate File sampleData/time_traces.txt', LogLevel.Error)
+            time_traces_file_data = open('{0}{1}'.format(Config.DEFAULT_WORKING_DIRECTORY, file_name), "r")
+        except FileNotFoundError as ex:
+            write_message('Could not locate File {0}{1}'.format(Config.DEFAULT_WORKING_DIRECTORY, file_name),
+                          LogLevel.Error)
             write_message('More Information in Log', LogLevel.Error)
             write_message(ex, LogLevel.Verbose)
             input()

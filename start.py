@@ -6,11 +6,11 @@ from enum import Enum
 import actions
 import services
 from services.logger.log import LogLevel, write_message
-from services.config.config import Config
-
+from services.config.config import Config, read_conf
 
 class Actions(Enum):
     HIGH_INTENSITY_PEAK_ANALYSIS = 'High Intensity Peak Analysis'
+    CELL_SORTER = 'Cell Sorter'
 
 
 class DebugActions(Enum):
@@ -31,6 +31,9 @@ def start():
 
     args = vars(ap.parse_args())
     handle_args(args)
+    success = read_conf()
+    if success is not True:
+        write_message(success, LogLevel.Warn)
     start_up_actions()
 
 
@@ -39,7 +42,7 @@ def handle_args(arguments):
         services.config.config.Config.VERBOSE = 1
 
     if arguments['calculate']:
-        actions.calculate_data.calculate_action()
+        actions.high_intensity_calculations.start_high_intensity_calculations()
         sys.exit(21)
 
     if arguments['debug']:
@@ -54,14 +57,15 @@ def start_up_actions():
         questions = [
             inquirer.List('action',
                           message="Choose Action?",
-                          choices=[Actions.HIGH_INTENSITY_PEAK_ANALYSIS.value, DebugActions.FILESYSTEM_TEST.value, 'Exit'],
+                          choices=[Actions.HIGH_INTENSITY_PEAK_ANALYSIS.value, Actions.CELL_SORTER.value,
+                                   DebugActions.FILESYSTEM_TEST.value, 'Exit'],
                           ),
         ]
     else:
         questions = [
             inquirer.List('action',
                           message="Choose Action?",
-                          choices=[Actions.HIGH_INTENSITY_PEAK_ANALYSIS.value, 'Exit'],
+                          choices=[Actions.HIGH_INTENSITY_PEAK_ANALYSIS.value, Actions.CELL_SORTER.value, 'Exit'],
                           ),
         ]
 
@@ -69,8 +73,10 @@ def start_up_actions():
 
     answer = answers['action']
     if answer == Actions.HIGH_INTENSITY_PEAK_ANALYSIS.value:
-        actions.calculate_data.calculate_action()
+        actions.high_intensity_calculations.start_high_intensity_calculations()
 
+    elif answer == Actions.CELL_SORTER.value:
+        print('Not implemented yet')
     elif answer == DebugActions.FILESYSTEM_TEST.value:
         services.files.write_files.write_results_file([])
     elif answer == 'Exit':
