@@ -1,6 +1,4 @@
 import numpy as np
-from services.logger.log import write_message, LogLevel
-from services.config.config import Config
 
 
 def calculate_maximum(time_frame):

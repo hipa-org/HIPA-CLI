@@ -9,5 +9,5 @@ Input/*.txt
 __pycache__/
 Log/
 start.spec
-Data/
+Data/*.txt
 Logs/

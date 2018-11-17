@@ -1,6 +1,5 @@
-from enum import Enum
 import numpy as np
-from services.logger.log import LogLevel, write_message
+from services.logger.log import write_message, LogLevel
 from services.config.config import Config
 import datetime
 

@@ -3,7 +3,7 @@ from enum import Enum
 from services.files.create_files import create_default_log_file, create_logs_dir, create_error_log_file
 import os
 import datetime
-from clint.textui import puts, colored, indent
+from clint.textui import puts, colored
 
 
 class LogLevel(Enum):
@@ -55,7 +55,6 @@ def write_message(message, log_level):
             puts(colored.yellow('Warn: {0}'.format(message)))
         elif log_level == LogLevel.Error:
             puts(colored.red('Error: {0}'.format(message)))
-
 
     elif Config.DEBUG == 0 and Config.VERBOSE == 0:
         if log_level == LogLevel.Info:
