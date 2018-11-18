@@ -21,7 +21,7 @@ def write_message(message, log_level):
     else:
         write_default_log(message)
 
-    if Config.VERBOSE == 1 and Config.VERBOSE == 1:
+    if Config.VERBOSE == 1 and Config.DEBUG == 1:
         if log_level == LogLevel.Verbose:
             puts(colored.blue('Verbose: {0}'.format(message)))
         elif log_level == LogLevel.Info:
@@ -33,7 +33,7 @@ def write_message(message, log_level):
         elif log_level == LogLevel.Error:
             puts(colored.red('Error: {0}'.format(message)))
 
-    elif Config.VERBOSE == 1:
+    elif Config.VERBOSE == 1 and Config.DEBUG == 0:
         if log_level == LogLevel.Verbose:
             puts(colored.blue('Verbose: {0}'.format(message)))
         elif log_level == LogLevel.Info:
@@ -43,7 +43,7 @@ def write_message(message, log_level):
         elif log_level == LogLevel.Error:
             puts(colored.red('Error: {0}'.format(message)))
 
-    elif Config.DEBUG == 1:
+    elif Config.DEBUG == 1 and Config.VERBOSE == 0:
         if log_level == LogLevel.Info:
             puts(colored.green('Info: {0}'.format(message)))
         elif log_level == LogLevel.Debug:
