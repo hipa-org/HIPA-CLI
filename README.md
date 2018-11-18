@@ -1,6 +1,6 @@
 # High Intensity Peak Analysis
 
-#### Beta V 0.2
+### Beta V 0.2
 [![Build Status](https://travis-ci.org/Exitare/High-Intensity-Peak-Analysis.svg?branch=master)](https://travis-ci.org/AvariusProject/AvariusCore)
 
 Calculate high intensity Peaks from a given file and creates  
@@ -27,11 +27,6 @@ If the Tabstop is missing, the program will fail!
 
 
 
-## Usage
-
-1. python start.py [Arguments] e.g python start.py -D 
-2. Choose your preferred Actions
-3. Follow the Action steps
 
 *** 
 Important notice:  
@@ -51,12 +46,19 @@ python start.py -V -D. Programm will start in Debug and Verbose Mode
 
 
 
+
 ## Copyright:
   Exitare  
   [Github](https://github.com/Exitare)  
   [Website](https://exitare.de)
   
-  
-## Sample Usage
 
-    
+## Sample Usage
+- General: 
+    1. python start.py [Arguments] e.g python start.py -D 
+    2. Choose your preferred Actions
+    3. Follow the Action steps
+
+
+- Detailed Usage:  
+    1. TBD

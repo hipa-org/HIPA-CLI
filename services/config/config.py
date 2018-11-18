@@ -15,6 +15,10 @@ class Config:
 
 
 def read_conf():
+    """
+    Reads the config.ini File, and stores the values into the Config Class
+    :return:
+    """
     config = configparser.ConfigParser()
     config.read('config.ini')
     try:
@@ -31,6 +35,10 @@ def read_conf():
 
 
 def reset_config():
+    """
+    Resets the Config File. In fact the config.ini file will be rewritten in total.
+    :return:
+    """
     config = configparser.ConfigParser()
     config['SETTINGS'] = {
         'input_file_name': 'time_traces',

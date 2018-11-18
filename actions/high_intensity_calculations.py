@@ -20,14 +20,17 @@ class OutputOptions(Enum):
     Normalized_Data = 'Normalized Data'
 
 
+"""
+The Cell Data. All Cells are stored as Objects in here
+"""
 cell_data = []
-
-'''
-Main Calculation Function
-'''
 
 
 def start_high_intensity_calculations():
+    """
+    Main Calculation Function
+    :return:
+    """
     clear = lambda: os.system('cls' if os.name == 'nt' else 'clear')
     clear()
     f = Figlet(font='slant')
@@ -56,12 +59,11 @@ def start_high_intensity_calculations():
     return True
 
 
-'''
-Asks the User about the working dir
-'''
-
-
 def ask_working_dir():
+    """
+    Asks the User about the working dir
+    :return:
+    """
     working_dir_question = [
         inquirer.Text('working_dir', message="Working Dir (Leave blank for config default)"),
     ]
@@ -85,12 +87,11 @@ def ask_working_dir():
     return working_dir
 
 
-'''
-Asks which files should be processed
-'''
-
-
 def ask_file_output():
+    """
+    Asks which files should be processed
+    :return:
+    """
     output_options = [
         inquirer.Checkbox('output_options',
                           message="Which files do you want to create? (Select with space)",
@@ -105,12 +106,12 @@ def ask_file_output():
     return chosen_output
 
 
-'''
-Which Files should be processed
-'''
-
-
 def ask_files_to_process(working_dir):
+    """
+    Which Files should be processed
+    :param working_dir:
+    :return:
+    """
     all_files = os.listdir(os.path.normpath(working_dir))
     temp_files = []
     for file in all_files:
@@ -174,7 +175,7 @@ def execute_high_intensity_calculation(file_name, stimulation_time_frame, user_f
             write_normalized_data(cell_data, file_name)
 
     end_time = datetime.datetime.now()
-    test_plotting(cell_data)
+    # test_plotting(cell_data)
     write_message('Calculation done in {0} seconds.'.format(end_time - start_time), LogLevel.Verbose)
     write_message('{0} data points processed'.format(data_count[0] * data_count[1]), LogLevel.Verbose)
 
@@ -189,12 +190,12 @@ def normalize_cells(cell_data_input, time_frames):
     return normalized_data_cells
 
 
-'''
-Create a Time Frame Array from the data read by the given File
-'''
-
-
 def create_time_frame_array(time_traces):
+    """
+    Create a Time Frame Array from the data read by the given File(s)
+    :param time_traces:
+    :return:
+    """
     time_frames = []
     for time_frame in time_traces:
         time_frame_array = []
@@ -203,15 +204,22 @@ def create_time_frame_array(time_traces):
         else:
             time_frames.append(time_frame_array)
 
+    for cell in time_frames:
+        cell_data.append(Cell.Cell(cell[0], cell[1:], 0, 0, 0, 0, 0, 0, 0))
+
+    for cell in cell_data:
+        print(cell.name)
+        print(cell.time_frames)
+    input('wait')
     return time_frames
 
 
-'''
-Calculates some basic info for the user. 
-'''
-
-
 def calculate_provided_data(time_frames):
+    """
+    Calculates some basic info for the user.
+    :param time_frames:
+    :return:
+    """
     data_count = detectDataSizes.detect_row_and_column_count(time_frames)
     minutes = detectDataSizes.calculate_minutes(data_count[1])
     write_message('Detected {0} Columns including Avg and Err'.format(data_count[0]), LogLevel.Info)
@@ -220,12 +228,13 @@ def calculate_provided_data(time_frames):
     return data_count
 
 
-'''
-Mean of Intensities before Stimulation
-'''
-
-
 def baseline_mean_calculation(time_frames, stimulation_time_frame):
+    """
+    Mean of Intensities before Stimulation
+    :param time_frames:
+    :param stimulation_time_frame:
+    :return:
+    """
     write_message('Starting Baseline Mean Calculation....', LogLevel.Info)
     for time_frame in time_frames:
         cal_baseline_mean = mean_calculation.calculate_norm_mean(stimulation_time_frame,
@@ -235,16 +244,16 @@ def baseline_mean_calculation(time_frames, stimulation_time_frame):
             'Baseline Mean Calculation of Cell {0} finished: -> Baseline Mean {1}'.format(time_frame[0],
                                                                                           cal_baseline_mean),
             LogLevel.Verbose)
-        cell_data.append(Cell.Cell(time_frame[0], cal_baseline_mean, 0, 0, 0, 0, 0, 0))
+        cell_data.append(Cell.Cell(time_frame[0], cal_baseline_mean, 0, 0, 0, 0, 0, 0, 0))
     write_message('Baseline Mean Calculation done', LogLevel.Info)
 
 
-'''
-Calculate the mean. Normalised Cells will be provided
-'''
-
-
 def calculate_mean(normalised_cells):
+    """
+    Calculate the mean. Normalised Cells will be provided
+    :param normalised_cells:
+    :return:
+    """
     write_message('Starting Mean Calculation...', LogLevel.Info)
     index = 0
     for normalised_cell in normalised_cells:
@@ -254,12 +263,12 @@ def calculate_mean(normalised_cells):
     write_message('Mean Calculation done', LogLevel.Info)
 
 
-'''
-Calculate the Maximum from given Data Set. 
-'''
-
-
 def maximum_detection(normalised_cells):
+    """
+    Calculate the Maximum from given Data Set.
+    :param normalised_cells:
+    :return:
+    """
     write_message('Detecting Maximum ....', LogLevel.Info)
     index = 0
     for normalised_cell in normalised_cells:
@@ -269,12 +278,11 @@ def maximum_detection(normalised_cells):
     write_message('Maximum Detection done', LogLevel.Info)
 
 
-'''
-Calculate Limit for each Cell
-'''
-
-
 def calculate_limit():
+    """
+    Calculate Limit for each Cell
+    :return:
+    """
     write_message('Calculating Limit...', LogLevel.Info)
     index = 0
     for cell in cell_data:
@@ -284,12 +292,12 @@ def calculate_limit():
     write_message('Calculating Limit done', LogLevel.Info)
 
 
-'''
-Check if a data entry of a given cell is over or under the cells limit
-'''
-
-
 def over_under_limit(normalised_cells):
+    """
+    Check if a data entry of a given cell is over or under the cells limit
+    :param normalised_cells:
+    :return:
+    """
     write_message('Calculating Over and Under Limit...', LogLevel.Info)
     index = 0
     over_under_limit_raw_data = min_max.calculate_over_and_under(normalised_cells, cell_data)
@@ -299,12 +307,12 @@ def over_under_limit(normalised_cells):
     write_message('Calculating Over and Under Limit done', LogLevel.Info)
 
 
-'''
-Calculates high stimulus frames per cell 
-'''
-
-
 def calculate_high_stimulus_per_minute(row_count):
+    """
+    Calculates high stimulus frames per cell
+    :param row_count:
+    :return:
+    """
     write_message('Calculation High Stimulus per Minute per Cell...', LogLevel.Info)
     temp_over_under_limit = []
     for cell in cell_data:
