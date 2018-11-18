@@ -90,7 +90,7 @@ Asks which files should be processed
 def ask_file_output():
     output_options = [
         inquirer.Checkbox('output_options',
-                          message="What files do you want to create?",
+                          message="Which files do you want to create? (Select with space)",
                           choices=[OutputOptions.High_Stimulus.value, OutputOptions.Normalized_Data.value],
                           ),
     ]
@@ -101,7 +101,9 @@ def ask_file_output():
 
     return chosen_output
 
-
+'''
+Which Files should be processed
+'''
 def ask_files_to_process(working_dir):
     all_files = os.listdir(os.path.normpath(working_dir))
     temp_files = []

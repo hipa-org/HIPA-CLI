@@ -4,8 +4,6 @@
 venv/
 dist/
 build/
-Output/*.txt
-Input/*.txt
 __pycache__/
 Log/
 Data/*.txt

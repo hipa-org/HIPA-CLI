@@ -9,11 +9,13 @@ import os
 from services.logger.log import write_message, LogLevel
 from services.filemanagement.write_files import write_high_stimulus_file
 from services.filemanagement.create_files import create_needed_files
+import webbrowser
 
 
 class Actions(Enum):
     HIGH_INTENSITY_PEAK_ANALYSIS = 'High Intensity Peak Analysis'
     CELL_SORTER = 'Cell Sorter'
+    HELP = 'Help'
 
 
 class DebugActions(Enum):
@@ -77,14 +79,15 @@ def start_up_actions():
             inquirer.List('action',
                           message="Choose Action?",
                           choices=[Actions.HIGH_INTENSITY_PEAK_ANALYSIS.value, Actions.CELL_SORTER.value,
-                                   DebugActions.FILESYSTEM_TEST.value, 'Exit'],
+                                   DebugActions.FILESYSTEM_TEST.value, Actions.HELP.value, 'Exit'],
                           ),
         ]
     else:
         questions = [
             inquirer.List('action',
                           message="Choose Action?",
-                          choices=[Actions.HIGH_INTENSITY_PEAK_ANALYSIS.value, Actions.CELL_SORTER.value, 'Exit'],
+                          choices=[Actions.HIGH_INTENSITY_PEAK_ANALYSIS.value, Actions.CELL_SORTER.value,
+                                   Actions.HELP.value, 'Exit'],
                           ),
         ]
 
@@ -102,6 +105,10 @@ def start_up_actions():
     elif answer == DebugActions.FILESYSTEM_TEST.value:
         write_high_stimulus_file([], 'test')
         start_up_actions()
+
+    elif answer == Actions.HELP.value:
+        webbrowser.open_new_tab('https://github.com/Exitare/High-Intensity-Peak-Analysis')
+
     elif answer == 'Exit':
         sys.exit(21)
 

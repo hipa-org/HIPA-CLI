@@ -1,6 +1,7 @@
 # High Intensity Peak Analysis
 
 #### Beta
+[![Build Status](https://travis-ci.org/Exitare/High-Intensity-Peak-Analysis.svg?branch=master)](https://travis-ci.org/AvariusProject/AvariusCore)
 
 Calculate high intensity Peaks from a given file.  
 Tested with files provided by Fiji.  
@@ -41,7 +42,7 @@ High Intensity Peak Analysis will try to fix the path but this isn´t a
 
 - [-D / --debug]: Debug mode -> Logging lots of Data into Console(However, all Data is logged into the Logging Files)
 - [-V / --verbose]: Verbose mode -> Verbose output of Calculations  
-- [-h / --highintense]: Skips the Mainmenu and jumps directly to the High Intensity Peak Analyzer Tool
+- [-H / --highintense]: Skips the Mainmenu and jumps directly to the High Intensity Peak Analyzer Tool
 - [-r / --restore]: Restores the default config.ini
 
 
