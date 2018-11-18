@@ -4,11 +4,18 @@ import datetime
 from services.logger.log import write_message, LogLevel
 from services.config.config import Config
 from services.filemanagement.read_files import read_time_traces_file
-from services.filemanagement.write_files import write_high_stimulus_file
+from services.filemanagement.write_files import write_high_stimulus_file, write_normalized_data
 from services.calculations import normalisation, mean_calculation, min_max, high_stimulous, detectDataSizes
 import os
 from pyfiglet import Figlet
 import re
+from enum import Enum
+
+
+class OutputOptions(Enum):
+    High_Stimulus = 'High Stimulus'
+    Normalized_Data = 'Normalized Data'
+
 
 cell_data = []
 
@@ -22,6 +29,10 @@ def start_high_intensity_calculations():
     clear()
     f = Figlet(font='slant')
     print(f.renderText('High Intensity Peak Analysis'))
+
+    user_file_output_option = ask_file_output()
+    if len(user_file_output_option) == 0:
+        write_message('No Output selected. Calculations will be done, but no Output will be generated', LogLevel.Warn)
 
     working_dir = ask_working_dir()
     files_to_process = ask_files_to_process(working_dir)
@@ -38,13 +49,18 @@ def start_high_intensity_calculations():
         cell_data = []
         print()
         write_message('Processing file {0}'.format(file['file_name']), LogLevel.Info)
-        execute_high_intensity_calculation(file['file_name'], file['stimulation_time_frame'])
+        execute_high_intensity_calculation(file['file_name'], file['stimulation_time_frame'], user_file_output_option)
     return True
+
+
+'''
+Asks the User about the working dir
+'''
 
 
 def ask_working_dir():
     working_dir_question = [
-        inquirer.Text('working_dir', message="Working Dir (Leave blank for config default"),
+        inquirer.Text('working_dir', message="Working Dir (Leave blank for config default)"),
     ]
     working_dir_answer = inquirer.prompt(working_dir_question)
 
@@ -66,12 +82,32 @@ def ask_working_dir():
     return working_dir
 
 
+'''
+Asks which files should be processed
+'''
+
+
+def ask_file_output():
+    output_options = [
+        inquirer.Checkbox('output_options',
+                          message="What files do you want to create?",
+                          choices=[OutputOptions.High_Stimulus.value, OutputOptions.Normalized_Data.value],
+                          ),
+    ]
+    chosen_output_answer = inquirer.prompt(output_options)
+    chosen_output = []
+    for output in chosen_output_answer['output_options']:
+        chosen_output.append(output)
+
+    return chosen_output
+
+
 def ask_files_to_process(working_dir):
     all_files = os.listdir(os.path.normpath(working_dir))
     temp_files = []
     for file in all_files:
         if Config.INPUT_FILE_NAME in file:
-            if Config.OUTPUT_FILE_NAME not in file:
+            if Config.OUTPUT_FILE_NAME_HIGH_STIMULUS not in file and Config.OUTPUT_FILE_NAME_NORMALIZED_DATA not in file:
                 temp_files.append(file)
 
     files = [
@@ -111,7 +147,7 @@ def ask_stimulus_time_frame(files_to_process):
     return stimulation_time_frames
 
 
-def execute_high_intensity_calculation(file_name, stimulation_time_frame):
+def execute_high_intensity_calculation(file_name, stimulation_time_frame, user_file_output):
     start_time = datetime.datetime.now()
     time_traces = read_time_traces_file(file_name)
     time_frames = create_time_frame_array(time_traces)
@@ -123,17 +159,22 @@ def execute_high_intensity_calculation(file_name, stimulation_time_frame):
     calculate_limit()
     over_under_limit(normalized_cells)
     calculate_high_stimulus_per_minute(data_count[1])
-    write_high_stimulus_file(cell_data, file_name)
+    for output_option in user_file_output:
+        if output_option == OutputOptions.High_Stimulus.value:
+            write_high_stimulus_file(cell_data, file_name)
+        elif output_option == OutputOptions.Normalized_Data.value:
+            write_normalized_data(cell_data, file_name)
+
     end_time = datetime.datetime.now()
     write_message('Calculation done in {0} seconds.'.format(end_time - start_time), LogLevel.Verbose)
-    write_message('{0} data points processed'.format(data_count[0]* data_count[1]), LogLevel.Verbose)
+    write_message('{0} data points processed'.format(data_count[0] * data_count[1]), LogLevel.Verbose)
 
 
 def normalize_cells(cell_data_input, time_frames):
     normalized_data_cells = normalisation.normalise_columns(cell_data_input, time_frames)
     index = 0
     for normalized_data in normalized_data_cells:
-        cell_data[index].normalized_data = normalized_data
+        cell_data[index].normalized_data = normalized_data[1:]
         index += 1
 
     return normalized_data_cells

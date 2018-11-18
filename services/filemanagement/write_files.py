@@ -14,7 +14,7 @@ def write_high_stimulus_file(cells, filename):
     data = np.array(temp_array)
     data = data.T
     try:
-        filename = '{0} {1} {2}{3}'.format(Config.OUTPUT_FILE_NAME, filename,
+        filename = '{0} {1} {2}{3}'.format(Config.OUTPUT_FILE_NAME_HIGH_STIMULUS, filename,
                                            now.strftime("%Y-%m-%d %H-%M-%S"), '.txt')
         np.savetxt(
             '{0}{1}'.format(Config.WORKING_DIRECTORY, filename), data, fmt='%s', delimiter='\t')
@@ -25,8 +25,22 @@ def write_high_stimulus_file(cells, filename):
         write_message(ex, LogLevel.Error)
 
 
-def write_normalized_data(normalized_cells, filename):
+def write_normalized_data(cells, filename):
+    now = datetime.datetime.now()
     temp_array = []
-    for cell in normalized_cells:
-        cell.high_stimulus_per_minute.insert(0, cell.name)
-        temp_array.append(cell.high_stimulus_per_minute)
+    for cell in cells:
+        cell.normalized_data.insert(0, cell.name)
+        temp_array.append(cell.normalized_data)
+
+    data = np.array(temp_array)
+    data = data.T
+    try:
+        filename = '{0} {1} {2}{3}'.format(Config.OUTPUT_FILE_NAME_NORMALIZED_DATA, filename,
+                                           now.strftime("%Y-%m-%d %H-%M-%S"), '.txt')
+        np.savetxt(
+            '{0}{1}'.format(Config.WORKING_DIRECTORY, filename), data, fmt='%s', delimiter='\t')
+        write_message(
+            'Created File {0} in {1}'.format(filename, Config.WORKING_DIRECTORY), LogLevel.Info)
+    except FileNotFoundError as ex:
+        write_message('Error creating File!', LogLevel.Error)
+        write_message(ex, LogLevel.Error)

@@ -10,6 +10,7 @@ from services.logger.log import write_message, LogLevel
 from services.filemanagement.write_files import write_high_stimulus_file
 from services.filemanagement.create_files import create_needed_files
 
+
 class Actions(Enum):
     HIGH_INTENSITY_PEAK_ANALYSIS = 'High Intensity Peak Analysis'
     CELL_SORTER = 'Cell Sorter'
@@ -99,7 +100,7 @@ def start_up_actions():
         print('Not implemented yet')
         start_up_actions()
     elif answer == DebugActions.FILESYSTEM_TEST.value:
-        write_high_stimulus_file([])
+        write_high_stimulus_file([], 'test')
         start_up_actions()
     elif answer == 'Exit':
         sys.exit(21)

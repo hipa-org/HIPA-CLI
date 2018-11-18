@@ -7,7 +7,8 @@ class Config:
     DEBUG = 0
     WORKING_DIRECTORY = 'Data/'
     INPUT_FILE_NAME = 'time_traces'
-    OUTPUT_FILE_NAME = 'Result'
+    OUTPUT_FILE_NAME_HIGH_STIMULUS = 'High-Stimulus'
+    OUTPUT_FILE_NAME_NORMALIZED_DATA = 'Normalized-Data'
     ERROR_LOG = 'error-log.txt'
     DEFAULT_LOG = 'default-log.txt'
     LOG_DIRECTORY = 'Logs/'
@@ -17,7 +18,8 @@ def read_conf():
     config = configparser.ConfigParser()
     config.read('config.ini')
     try:
-        Config.OUTPUT_FILE_NAME = config['SETTINGS']['output_file_name']
+        Config.OUTPUT_FILE_NAME_HIGH_STIMULUS = config['SETTINGS']['output_file_name_high_stimulus']
+        Config.OUTPUT_FILE_NAME_NORMALIZED_DATA = config['SETTINGS']['output_file_name_normalized_data']
         Config.INPUT_FILE_NAME = config['SETTINGS']['input_file_name']
         Config.WORKING_DIRECTORY = config['SETTINGS']['working_directory']
         Config.DEFAULT_LOG = config['LOGS']['default_log']
@@ -33,7 +35,8 @@ def reset_config():
     config['SETTINGS'] = {
         'input_file_name': 'time_traces',
         'working_directory': 'Data/',
-        'output_file_name': 'Result',
+        'output_file_name_high_stimulus': 'High-Stimulus',
+        'output_file_name_normalized_data': 'Normalized-Data'
     }
     config['LOGS'] = {
         'logs_path': 'Logs/',
