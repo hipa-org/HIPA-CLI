@@ -107,7 +107,7 @@ def start_up_actions():
         start_up_actions()
 
     elif answer == Actions.HELP.value:
-        webbrowser.open_new_tab('https://github.com/Exitare/High-Intensity-Peak-Analysis')
+        webbrowser.open_new_tab('https://exitare.github.io/High-Intensity-Peak-Analysis/')
 
     elif answer == 'Exit':
         sys.exit(21)
