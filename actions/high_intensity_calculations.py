@@ -1,15 +1,18 @@
-from classes import Cell
-import inquirer
 import datetime
-from services.logger.log import write_message, LogLevel
+import os
+import re
+from enum import Enum
+
+import inquirer
+from pyfiglet import Figlet
+
+from classes import Cell
+from services.calculations import normalisation, mean_calculation, min_max, high_stimulous, detectDataSizes
 from services.config.config import Config
 from services.filemanagement.read_files import read_time_traces_file
 from services.filemanagement.write_files import write_high_stimulus_file, write_normalized_data
-from services.calculations import normalisation, mean_calculation, min_max, high_stimulous, detectDataSizes
-import os
-from pyfiglet import Figlet
-import re
-from enum import Enum
+from services.logger.log import write_message, LogLevel
+from services.plot.plot import test_plotting
 
 
 class OutputOptions(Enum):
@@ -101,9 +104,12 @@ def ask_file_output():
 
     return chosen_output
 
+
 '''
 Which Files should be processed
 '''
+
+
 def ask_files_to_process(working_dir):
     all_files = os.listdir(os.path.normpath(working_dir))
     temp_files = []
@@ -168,6 +174,7 @@ def execute_high_intensity_calculation(file_name, stimulation_time_frame, user_f
             write_normalized_data(cell_data, file_name)
 
     end_time = datetime.datetime.now()
+    test_plotting(cell_data)
     write_message('Calculation done in {0} seconds.'.format(end_time - start_time), LogLevel.Verbose)
     write_message('{0} data points processed'.format(data_count[0] * data_count[1]), LogLevel.Verbose)
 

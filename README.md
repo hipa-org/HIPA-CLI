@@ -1,11 +1,12 @@
 # High Intensity Peak Analysis
 
-#### Beta
+#### Beta V 0.2
 [![Build Status](https://travis-ci.org/Exitare/High-Intensity-Peak-Analysis.svg?branch=master)](https://travis-ci.org/AvariusProject/AvariusCore)
 
-Calculate high intensity Peaks from a given file.  
+Calculate high intensity Peaks from a given file and creates  
+different output files.  
 Tested with files provided by Fiji.  
-Sampledata is provided in sampleData Folder.  
+Sample Data is provided in sampleData Folder.  
 Your data might work if the txt is the structure as the files in sampleData.  
 Important: Each entry is divided by a Tabstop (\t)  
 If the Tabstop is missing, the program will fail!
@@ -45,7 +46,8 @@ High Intensity Peak Analysis will try to fix the path but this isn´t a
 - [-H / --highintense]: Skips the Mainmenu and jumps directly to the High Intensity Peak Analyzer Tool
 - [-r / --restore]: Restores the default config.ini
 
-
+You can combine several argument e.g 
+python start.py -V -D. Programm will start in Debug and Verbose Mode
 
 
 
@@ -55,5 +57,6 @@ High Intensity Peak Analysis will try to fix the path but this isn´t a
   [Website](https://exitare.de)
   
   
-## Contributors:
+## Sample Usage
+
     
