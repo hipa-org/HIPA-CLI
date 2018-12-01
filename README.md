@@ -1,7 +1,9 @@
 # High Intensity Peak Analysis
 
 #### Beta
-[![Build Status](https://travis-ci.org/Exitare/High-Intensity-Peak-Analysis.svg?branch=master)](https://travis-ci.org/AvariusProject/AvariusCore)
+<!--- [![Build Status](https://travis-ci.org/Exitare/High-Intensity-Peak-Analysis.svg?branch=master)](https://travis-ci.org/AvariusProject/AvariusCore) -->
+
+Only working for MacOS and Unix atm.
 
 Calculate high intensity Peaks from a given file.  
 Tested with files provided by Fiji.  
