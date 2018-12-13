@@ -18,7 +18,7 @@ If the Tabstop is missing, the program will fail!
 ## Installation
 - Install Python 3.x
 - Download Repo
-- sh run.sh
+- sh install.sh
 - Done
 
 
@@ -31,9 +31,15 @@ If the Tabstop is missing, the program will fail!
 
 ## Usage
 
-1. python start.py [Arguments] e.g python start.py -D 
-2. Choose your preferred Actions
-3. Follow the Action steps
+- sh run.sh
+
+
+---
+
+Optional:
+
+- python start.py [Arguments] e.g python start.py -D 
+
 
 *** 
 Important notice:  
