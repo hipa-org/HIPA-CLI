@@ -1,9 +1,6 @@
 # High Intensity Peak Analysis
 
 #### Beta
-<!--- [![Build Status](https://travis-ci.org/Exitare/High-Intensity-Peak-Analysis.svg?branch=master)](https://travis-ci.org/AvariusProject/AvariusCore) -->
-
-Only working for MacOS and Unix atm.
 
 Calculate high intensity Peaks from a given file.  
 Tested with files provided by Fiji.  
@@ -21,10 +18,14 @@ If the Tabstop is missing, the program will fail!
 ## Installation
 - Install Python 3.x
 - Download Repo
+- sh run.sh
+- Done
+
+
 - Optional: Create Virtual Environment. e.g. python3 -m venv ./venv
 - Optional: Activate Environment. e.g source venv/bin/activate
-- pip install -r requirements.txt
-- Done
+- Optional: pip install -r requirements.txt
+
 
 
 

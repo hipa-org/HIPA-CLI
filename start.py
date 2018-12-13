@@ -30,7 +30,7 @@ def start():
     ap.add_argument("-H", "--highintense", required=False,
                     action='store_true',
                     help='Direct call of calculation')
-    ap.add_argument("-d", "--debug", required=False,
+    ap.add_argument("-D", "--debug", required=False,
                     action='store_true',
                     help="Starts the program in Debug Mode")
     ap.add_argument("-r", "--restore", required=False,
