@@ -1,7 +1,6 @@
 import sys
 import argparse
 from pyfiglet import Figlet
-import inquirer
 from enum import Enum
 from actions import high_intensity_calculations
 from services.config.config import Config, read_conf, reset_config
@@ -10,7 +9,8 @@ from services.logger.log import write_message, LogLevel
 from services.filemanagement.write_files import write_high_stimulus_file
 from services.filemanagement.create_files import create_needed_files
 import webbrowser
-
+from consolemenu import *
+from consolemenu.items import *
 
 class Actions(Enum):
     HIGH_INTENSITY_PEAK_ANALYSIS = 'High Intensity Peak Analysis'
@@ -74,46 +74,41 @@ def start_up_actions():
     clear()
     f = Figlet(font='slant')
     print(f.renderText('Intensity Analyzer'))
+
+    print()
+    print('1. High Intensity Peak Analysis ')
+    print('2. Cell Sorter')
+    print('3. Help ')
+
     if Config.DEBUG == 1:
-        questions = [
-            inquirer.List('action',
-                          message="Choose Action?",
-                          choices=[Actions.HIGH_INTENSITY_PEAK_ANALYSIS.value, Actions.CELL_SORTER.value,
-                                   DebugActions.FILESYSTEM_TEST.value, Actions.HELP.value, 'Exit'],
-                          ),
-        ]
-    else:
-        questions = [
-            inquirer.List('action',
-                          message="Choose Action?",
-                          choices=[Actions.HIGH_INTENSITY_PEAK_ANALYSIS.value, Actions.CELL_SORTER.value,
-                                   Actions.HELP.value, 'Exit'],
-                          ),
-        ]
+        print('** Debug **')
+        print('F. File System Test')
+    question = input("Choose your action: (Type the action number)\n")
 
-    answers = inquirer.prompt(questions)
-
-    answer = answers['action']
-    if answer == Actions.HIGH_INTENSITY_PEAK_ANALYSIS.value:
-        high_intensity_calculations.start_high_intensity_calculations()
-        input('Press to continue...')
-        start_up_actions()
-
-    elif answer == Actions.CELL_SORTER.value:
-        print('Not implemented yet')
-        start_up_actions()
-    elif answer == DebugActions.FILESYSTEM_TEST.value:
-        write_high_stimulus_file([], 'test')
-        start_up_actions()
-
-    elif answer == Actions.HELP.value:
-        webbrowser.open_new_tab('https://exitare.github.io/High-Intensity-Peak-Analysis/')
-
-    elif answer == 'Exit':
-        sys.exit(21)
-
+    if question.isdigit():
+        if question == '1':
+            high_intensity_calculations.start_high_intensity_calculations()
+            input('Press to continue...')
+            start_up_actions()
+        elif question == '2':
+            print('Not implemented yet')
+            input('Press to continue...')
+            start_up_actions()
+        elif question == '3':
+            webbrowser.open_new_tab('https://exitare.github.io/High-Intensity-Peak-Analysis/')
+            start_up_actions()
+        else:
+            start_up_actions()
     else:
         start_up_actions()
 
 
-start()
+if __name__ == "__main__":
+    try:
+        start()
+    except KeyboardInterrupt:
+        print('\n')
+        try:
+            sys.exit(0)
+        except SystemExit:
+            os._exit(0)

@@ -1,5 +1,4 @@
 from classes import Cell
-import inquirer
 import datetime
 from services.logger.log import write_message, LogLevel
 from services.config.config import Config
@@ -18,7 +17,7 @@ class OutputOptions(Enum):
 
 
 cell_data = []
-
+files_to_process = []
 '''
 Main Calculation Function
 '''
@@ -27,19 +26,22 @@ Main Calculation Function
 def start_high_intensity_calculations():
     clear = lambda: os.system('cls' if os.name == 'nt' else 'clear')
     clear()
+    global files_to_process
+    files_to_process = []
     f = Figlet(font='slant')
     print(f.renderText('High Intensity Peak Analysis'))
 
     user_file_output_option = ask_file_output()
     if len(user_file_output_option) == 0:
         write_message('No Output selected. Calculations will be done, but no Output will be generated', LogLevel.Warn)
-
+    print('-------------')
     working_dir = ask_working_dir()
+    print('-------------')
     files_to_process = ask_files_to_process(working_dir)
     if len(files_to_process) == 0:
         write_message('No Files selected.. Aborting', LogLevel.Info)
         return True
-
+    print('-------------')
     write_message(files_to_process, LogLevel.Debug)
     stimulation_time_frames = ask_stimulus_time_frame(files_to_process)
     write_message(stimulation_time_frames, LogLevel.Debug)
@@ -59,12 +61,10 @@ Asks the User about the working dir
 
 
 def ask_working_dir():
-    working_dir_question = [
-        inquirer.Text('working_dir', message="Working Dir (Leave blank for config default)"),
-    ]
-    working_dir_answer = inquirer.prompt(working_dir_question)
-
-    working_dir = working_dir_answer['working_dir']
+    print('Specify the working dir. Leave blank for config default. ')
+    print('Custom dir example: sampleData/. This will use the sampleData folder.\n'
+          'Custom Dir can be located all over your local machine')
+    working_dir = input('Working Dir: ')
     if working_dir == '':
         write_message('No Working Directory given. Using default: {0}'.format(Config.WORKING_DIRECTORY),
                       LogLevel.Warn)
@@ -88,22 +88,27 @@ Asks which files should be processed
 
 
 def ask_file_output():
-    output_options = [
-        inquirer.Checkbox('output_options',
-                          message="Which files do you want to create? (Select with space)",
-                          choices=[OutputOptions.High_Stimulus.value, OutputOptions.Normalized_Data.value],
-                          ),
-    ]
-    chosen_output_answer = inquirer.prompt(output_options)
     chosen_output = []
-    for output in chosen_output_answer['output_options']:
-        chosen_output.append(output)
+
+    print('1. High Stimulus')
+    print('2. Normalized Data')
+    choose = input('Which files do you want to create? (Type each Number separated by comma)\n')
+    chosen_output_answer = choose.split(',')
+    for choose in chosen_output_answer:
+        if choose.isdigit():
+            if int(choose) == 1:
+                chosen_output.append(OutputOptions.High_Stimulus.value)
+            if int(choose) == 2:
+                chosen_output.append(OutputOptions.Normalized_Data.value)
 
     return chosen_output
+
 
 '''
 Which Files should be processed
 '''
+
+
 def ask_files_to_process(working_dir):
     all_files = os.listdir(os.path.normpath(working_dir))
     temp_files = []
@@ -112,39 +117,40 @@ def ask_files_to_process(working_dir):
             if Config.OUTPUT_FILE_NAME_HIGH_STIMULUS not in file and Config.OUTPUT_FILE_NAME_NORMALIZED_DATA not in file:
                 temp_files.append(file)
 
-    files = [
-        inquirer.Checkbox('file_names',
-                          message="Choose files to calculate?",
-                          choices=temp_files,
-                          ),
-    ]
-    chosen_files_answer = inquirer.prompt(files)
+    print('Files available: ')
+    print()
+    i = 0
+    for file in temp_files:
+        print('{0}: {1}'.format(i, file))
+        i += 1
+
+    print()
     chosen_files = []
-    for file in chosen_files_answer['file_names']:
-        chosen_files.append(file)
+
+    choosen_number_input = input(
+        'Choose all files you want to process. (Type each number separated by comma or '
+        'just press enter to select all files)\n')
+
+    if choosen_number_input == '':
+        chosen_files = temp_files
+    else:
+        for choosen_number in choosen_number_input.split(','):
+            if choosen_number.isdigit():
+                chosen_files.append(temp_files[int(choosen_number)])
 
     return chosen_files
 
 
-def ask_stimulus_time_frame(files_to_process):
+def ask_stimulus_time_frame(selected_files):
     stimulation_time_frames = []
-    for file in files_to_process:
-        stimulation_time_frame_question = [
-            inquirer.Text('stimulation_time_frame', message="Frame of stimulation for file {0}".format(file)),
-        ]
-        stimulation_time_frame_answer = inquirer.prompt(stimulation_time_frame_question)
-        try:
+    for file in selected_files:
+        stimulus_time_frame = input('Frame of stimulation for file {0}: '.format(file))
+
+        if stimulus_time_frame.isdigit():
             stimulation_time_frames.append({'file_name': file,
-                                            'stimulation_time_frame': int(
-                                                stimulation_time_frame_answer['stimulation_time_frame'])})
-            write_message('Stimulated Time Frame: {}'.format(stimulation_time_frame_answer['stimulation_time_frame']),
-                          LogLevel.Verbose)
-        except ValueError as ex:
-            write_message(ex, LogLevel.Warn)
-            write_message('Value could not converted to a valid Integer Value', LogLevel.Warn)
-            input("Press Enter to continue...")
-            start_high_intensity_calculations()
-            return
+                                            'stimulation_time_frame': int(stimulus_time_frame)})
+        else:
+            ask_stimulus_time_frame(files_to_process)
 
     return stimulation_time_frames
 
