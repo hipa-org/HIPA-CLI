@@ -77,7 +77,8 @@ def start_up_actions():
     print(30 * '-')
     print('1. High Intensity Peak Analysis ')
     print('2. Cell Sorter')
-    print('3. Help ')
+    print('3. Help')
+    print('4. Exit')
 
     if Config.DEBUG == 1:
         print('** Debug **')
@@ -100,6 +101,9 @@ def start_up_actions():
     elif choice == 3:
         webbrowser.open_new_tab('https://exitare.github.io/High-Intensity-Peak-Analysis/')
         start_up_actions()
+    elif choice == 4:
+        clear_console()
+        sys.exit(0)
     else:
         start_up_actions()
 
