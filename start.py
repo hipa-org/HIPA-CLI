@@ -9,7 +9,7 @@ from services.logger.log import write_message, LogLevel
 from services.filemanagement.create_files import create_needed_files
 import webbrowser
 from UI.UI import clear_console
-import subprocess
+
 
 
 class Actions(Enum):

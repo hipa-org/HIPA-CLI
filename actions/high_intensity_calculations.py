@@ -6,7 +6,6 @@ from services.filemanagement.read_files import read_time_traces_file
 from services.filemanagement.write_files import write_high_stimulus_file, write_normalized_data
 from services.calculations import normalisation, mean_calculation, min_max, high_stimulous, detectDataSizes
 import os
-
 import re
 from enum import Enum
 from UI.UI import print_empty_line,  print_hic_headline, print_minus_line
@@ -36,6 +35,7 @@ def start_high_intensity_calculations():
     write_message(files_to_process, LogLevel.Debug)
     stimulation_time_frames = ask_stimulus_time_frame(files_to_process)
     write_message(stimulation_time_frames, LogLevel.Debug)
+
     for file in stimulation_time_frames:
         global cell_data
         cell_data = []
