@@ -21,10 +21,11 @@ If the Tabstop is missing, the program will fail!
 - sh run.sh
 - Done
 
+### Manual 
 
-- Optional: Create Virtual Environment. e.g. python3 -m venv ./venv
-- Optional: Activate Environment. e.g source venv/bin/activate
-- Optional: pip install -r requirements.txt
+- Create Virtual Environment. e.g. python3 -m venv ./venv
+- Activate Environment. e.g source venv/bin/activate
+- pip install -r requirements.txt
 
 
 
@@ -38,7 +39,8 @@ If the Tabstop is missing, the program will fail!
 
 Optional:
 
-- python start.py [Arguments] e.g python start.py -D 
+- python3 start.py [Arguments] 
+- e.g python start.py -D 
 
 
 *** 
