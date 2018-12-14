@@ -8,6 +8,7 @@ import os
 from services.logger.log import write_message, LogLevel
 from services.filemanagement.create_files import create_needed_files
 import webbrowser
+from UI.UI import clear_console
 
 
 class Actions(Enum):
@@ -68,8 +69,7 @@ def handle_args(arguments):
 
 
 def start_up_actions():
-    clear = lambda: os.system('cls' if os.name == 'nt' else 'clear')
-    clear()
+    clear_console()
     f = Figlet(font='slant')
     print(f.renderText('Intensity Analyzer'))
 
@@ -83,16 +83,16 @@ def start_up_actions():
         print('F. File System Test')
     question = input("Choose your action: (Type the action number)\n")
 
-    if question.isdigit():
-        if question == '1':
+    if question.strip().isdigit():
+        if question.strip() == '1':
             high_intensity_calculations.start_high_intensity_calculations()
-            input('Press to continue...')
+            input('Press key to continue...')
             start_up_actions()
-        elif question == '2':
+        elif question.strip() == '2':
             print('Not implemented yet')
-            input('Press to continue...')
+            input('Press key to continue...')
             start_up_actions()
-        elif question == '3':
+        elif question.strip() == '3':
             webbrowser.open_new_tab('https://exitare.github.io/High-Intensity-Peak-Analysis/')
             start_up_actions()
         else:

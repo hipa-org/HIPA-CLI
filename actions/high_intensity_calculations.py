@@ -6,10 +6,11 @@ from services.filemanagement.read_files import read_time_traces_file
 from services.filemanagement.write_files import write_high_stimulus_file, write_normalized_data
 from services.calculations import normalisation, mean_calculation, min_max, high_stimulous, detectDataSizes
 import os
-from pyfiglet import Figlet
+
 import re
 from enum import Enum
-from UI.UI import print_empty_line, print_minus_line
+from UI.UI import print_empty_line, clear_console, print_hic_headline
+
 
 class OutputOptions(Enum):
     High_Stimulus = 'High Stimulus'
@@ -24,28 +25,24 @@ Main Calculation Function
 
 
 def start_high_intensity_calculations():
-    clear = lambda: os.system('cls' if os.name == 'nt' else 'clear')
-    clear()
+    print_hic_headline()
     global files_to_process
     files_to_process = []
-    f = Figlet(font='slant')
-    print(f.renderText('High Intensity Peak Analysis'))
-
     user_file_output_option = ask_file_output()
     if len(user_file_output_option) == 0:
         write_message('No Output selected. Calculations will be done, but no Output will be generated', LogLevel.Warn)
-    print_minus_line()
+    print_hic_headline()
     working_dir = ask_working_dir()
-    print_minus_line()
+    print_hic_headline()
     files_to_process = ask_files_to_process(working_dir)
     if len(files_to_process) == 0:
         write_message('No Files selected.. Aborting', LogLevel.Info)
         return True
-    print_minus_line()
+
     write_message(files_to_process, LogLevel.Debug)
     stimulation_time_frames = ask_stimulus_time_frame(files_to_process)
     write_message(stimulation_time_frames, LogLevel.Debug)
-
+    print_hic_headline()
     for file in stimulation_time_frames:
         global cell_data
         cell_data = []
@@ -89,12 +86,19 @@ Asks which files should be processed
 
 def ask_file_output():
     chosen_output = []
-
+    print('Choices:\n')
     print('1. High Stimulus')
     print('2. Normalized Data')
-    choose = input('Which files do you want to create? (Type each Number separated by comma)\n')
+    print('Which files should be created as Output?')
+    print('(Type each Number separated by comma or just press enter to select all options!')
+    choose = input()
+
+    if choose == "":
+        chosen_output.append(OutputOptions.High_Stimulus.value)
+        chosen_output.append(OutputOptions.Normalized_Data.value)
+        return chosen_output
+
     chosen_output_answer = choose.split(',')
-    print(chosen_output_answer)
     for choose in chosen_output_answer:
         print(choose.strip())
         if choose.isdigit():
