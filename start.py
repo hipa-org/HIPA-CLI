@@ -9,7 +9,7 @@ from services.logger.log import write_message, LogLevel
 from services.filemanagement.create_files import create_needed_files
 import webbrowser
 from UI.UI import clear_console
-
+import subprocess
 
 class Actions(Enum):
     HIGH_INTENSITY_PEAK_ANALYSIS = 'High Intensity Peak Analysis'
@@ -108,5 +108,6 @@ if __name__ == "__main__":
         print('\n')
         try:
             sys.exit(0)
+
         except SystemExit:
             os._exit(0)
