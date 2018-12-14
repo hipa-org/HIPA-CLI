@@ -1,15 +1,15 @@
 import sys
 import argparse
 from pyfiglet import Figlet
-import inquirer
 from enum import Enum
 from actions import high_intensity_calculations
 from services.config.config import Config, read_conf, reset_config
 import os
 from services.logger.log import write_message, LogLevel
-from services.filemanagement.write_files import write_high_stimulus_file
 from services.filemanagement.create_files import create_needed_files
 import webbrowser
+from UI.UI import clear_console
+import subprocess
 
 
 class Actions(Enum):
@@ -30,7 +30,7 @@ def start():
     ap.add_argument("-H", "--highintense", required=False,
                     action='store_true',
                     help='Direct call of calculation')
-    ap.add_argument("-d", "--debug", required=False,
+    ap.add_argument("-D", "--debug", required=False,
                     action='store_true',
                     help="Starts the program in Debug Mode")
     ap.add_argument("-r", "--restore", required=False,
@@ -41,6 +41,7 @@ def start():
     create_needed_files()
     handle_args(args)
     success = read_conf()
+
     if success is not True:
         write_message('Error reading {0} from config.ini. Please check your config file'.format(success),
                       LogLevel.Error)
@@ -70,50 +71,46 @@ def handle_args(arguments):
 
 
 def start_up_actions():
-    clear = lambda: os.system('cls' if os.name == 'nt' else 'clear')
-    clear()
+    clear_console()
     f = Figlet(font='slant')
     print(f.renderText('Intensity Analyzer'))
+    print(30 * '-')
+    print('1. High Intensity Peak Analysis ')
+    print('2. Cell Sorter')
+    print('3. Help ')
+
     if Config.DEBUG == 1:
-        questions = [
-            inquirer.List('action',
-                          message="Choose Action?",
-                          choices=[Actions.HIGH_INTENSITY_PEAK_ANALYSIS.value, Actions.CELL_SORTER.value,
-                                   DebugActions.FILESYSTEM_TEST.value, Actions.HELP.value, 'Exit'],
-                          ),
-        ]
+        print('** Debug **')
+        print('F. File System Test')
+    choice = input("Choose your action: (Type the action number)\n")
+
+    if choice.strip().isdigit():
+        choice = int(choice)
     else:
-        questions = [
-            inquirer.List('action',
-                          message="Choose Action?",
-                          choices=[Actions.HIGH_INTENSITY_PEAK_ANALYSIS.value, Actions.CELL_SORTER.value,
-                                   Actions.HELP.value, 'Exit'],
-                          ),
-        ]
+        start_up_actions()
 
-    answers = inquirer.prompt(questions)
-
-    answer = answers['action']
-    if answer == Actions.HIGH_INTENSITY_PEAK_ANALYSIS.value:
+    if choice == 1:
         high_intensity_calculations.start_high_intensity_calculations()
-        input('Press to continue...')
+        input('Press key to continue...')
         start_up_actions()
-
-    elif answer == Actions.CELL_SORTER.value:
+    elif choice == 2:
         print('Not implemented yet')
+        input('Press key to continue...')
         start_up_actions()
-    elif answer == DebugActions.FILESYSTEM_TEST.value:
-        write_high_stimulus_file([], 'test')
-        start_up_actions()
-
-    elif answer == Actions.HELP.value:
+    elif choice == 3:
         webbrowser.open_new_tab('https://exitare.github.io/High-Intensity-Peak-Analysis/')
-
-    elif answer == 'Exit':
-        sys.exit(21)
-
+        start_up_actions()
     else:
         start_up_actions()
 
 
-start()
+if __name__ == "__main__":
+    try:
+        start()
+    except KeyboardInterrupt:
+        print('\n')
+        try:
+            sys.exit(0)
+
+        except SystemExit:
+            os._exit(0)

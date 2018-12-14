@@ -1,7 +1,8 @@
 # High Intensity Peak Analysis
 
-### Beta V 0.2
-[![Build Status](https://travis-ci.org/Exitare/High-Intensity-Peak-Analysis.svg?branch=master)](https://travis-ci.org/AvariusProject/AvariusCore)
+
+#### Beta
+
 
 Calculate high intensity Peaks from a given file and creates  
 different output files.  
@@ -19,16 +20,33 @@ If the Tabstop is missing, the program will fail!
 
 ## Installation
 - Install Python 3.x
-- Download Repo
-- Optional: Create Virtual Environment. e.g. python3 -m venv ./venv
-- Optional: Activate Environment. e.g source venv/bin/activate
-- pip install -r requirements.txt
+- Download/Clone Repo
+- sh run.sh
 - Done
 
+### Manual 
+
+- Create Virtual Environment. e.g. python3 -m venv ./venv
+- Activate Environment. e.g source venv/bin/activate
+- pip install -r requirements.txt
 
 
 
-*** 
+
+## Usage
+
+- sh run.sh
+
+
+---
+
+Optional:
+
+- python3 start.py [Arguments] 
+- e.g python start.py -D 
+
+
+***
 Important notice:  
 A path with multiple or a single blank is not recommended!
 High Intensity Peak Analysis will try to fix the path but this isn´t a 
@@ -38,11 +56,11 @@ High Intensity Peak Analysis will try to fix the path but this isn´t a
 
 - [-D / --debug]: Debug mode -> Logging lots of Data into Console(However, all Data is logged into the Logging Files)
 - [-V / --verbose]: Verbose mode -> Verbose output of Calculations  
-- [-H / --highintense]: Skips the Mainmenu and jumps directly to the High Intensity Peak Analyzer Tool
+- [-H / --highintense]: Skips the main menu and jumps directly to the High Intensity Peak Analyzer Tool
 - [-r / --restore]: Restores the default config.ini
 
 You can combine several argument e.g 
-python start.py -V -D. Programm will start in Debug and Verbose Mode
+python start.py -V -D. Program will start in Debug and Verbose Mode
 
 
 
@@ -52,6 +70,7 @@ python start.py -V -D. Programm will start in Debug and Verbose Mode
   [Github](https://github.com/Exitare)  
   [Website](https://exitare.de)
   
+<<<<<<< HEAD
 
 ## Sample Usage
 - General: 
@@ -60,5 +79,8 @@ python start.py -V -D. Programm will start in Debug and Verbose Mode
     3. Follow the Action steps
 
 
-- Detailed Usage:  
-    1. TBD
+
+  
+## Contributors:
+    
+

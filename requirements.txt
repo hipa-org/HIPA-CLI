@@ -6,7 +6,6 @@ clint==0.5.1
 cycler==0.10.0
 docutils==0.14
 future==0.17.1
-inquirer==2.5.1
 kiwisolver==1.0.1
 macholib==1.11
 matplotlib==3.0.2
