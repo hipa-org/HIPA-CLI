@@ -7,7 +7,9 @@ def print_empty_line():
 
 
 def print_minus_line():
-    print('-------------')
+    print()
+    print(30 * '-')
+    print()
 
 
 def clear_console():

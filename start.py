@@ -11,6 +11,7 @@ import webbrowser
 from UI.UI import clear_console
 import subprocess
 
+
 class Actions(Enum):
     HIGH_INTENSITY_PEAK_ANALYSIS = 'High Intensity Peak Analysis'
     CELL_SORTER = 'Cell Sorter'
@@ -73,7 +74,7 @@ def start_up_actions():
     f = Figlet(font='slant')
     print(f.renderText('Intensity Analyzer'))
 
-    print()
+    print(50 * '-')
     print('1. High Intensity Peak Analysis ')
     print('2. Cell Sorter')
     print('3. Help ')
@@ -81,22 +82,24 @@ def start_up_actions():
     if Config.DEBUG == 1:
         print('** Debug **')
         print('F. File System Test')
-    question = input("Choose your action: (Type the action number)\n")
+    choice = input("Choose your action: (Type the action number)\n")
 
-    if question.strip().isdigit():
-        if question.strip() == '1':
-            high_intensity_calculations.start_high_intensity_calculations()
-            input('Press key to continue...')
-            start_up_actions()
-        elif question.strip() == '2':
-            print('Not implemented yet')
-            input('Press key to continue...')
-            start_up_actions()
-        elif question.strip() == '3':
-            webbrowser.open_new_tab('https://exitare.github.io/High-Intensity-Peak-Analysis/')
-            start_up_actions()
-        else:
-            start_up_actions()
+    if choice.strip().isdigit():
+        choice = int(choice)
+    else:
+        start_up_actions()
+
+    if choice == 1:
+        high_intensity_calculations.start_high_intensity_calculations()
+        input('Press key to continue...')
+        start_up_actions()
+    elif choice == 2:
+        print('Not implemented yet')
+        input('Press key to continue...')
+        start_up_actions()
+    elif choice == 3:
+        webbrowser.open_new_tab('https://exitare.github.io/High-Intensity-Peak-Analysis/')
+        start_up_actions()
     else:
         start_up_actions()
 

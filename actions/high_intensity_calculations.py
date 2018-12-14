@@ -9,7 +9,7 @@ import os
 
 import re
 from enum import Enum
-from UI.UI import print_empty_line, clear_console, print_hic_headline
+from UI.UI import print_empty_line,  print_hic_headline, print_minus_line
 
 
 class OutputOptions(Enum):
@@ -29,20 +29,13 @@ def start_high_intensity_calculations():
     global files_to_process
     files_to_process = []
     user_file_output_option = ask_file_output()
-    if len(user_file_output_option) == 0:
-        write_message('No Output selected. Calculations will be done, but no Output will be generated', LogLevel.Warn)
-    print_hic_headline()
+    print_minus_line()
     working_dir = ask_working_dir()
-    print_hic_headline()
+    print_minus_line()
     files_to_process = ask_files_to_process(working_dir)
-    if len(files_to_process) == 0:
-        write_message('No Files selected.. Aborting', LogLevel.Info)
-        return True
-
     write_message(files_to_process, LogLevel.Debug)
     stimulation_time_frames = ask_stimulus_time_frame(files_to_process)
     write_message(stimulation_time_frames, LogLevel.Debug)
-    print_hic_headline()
     for file in stimulation_time_frames:
         global cell_data
         cell_data = []
@@ -62,7 +55,7 @@ def ask_working_dir():
     print('Custom dir example: sampleData/. This will use the sampleData folder.\n'
           'Custom Dir can be located all over your local machine')
     working_dir = input('Working Dir: ')
-    if working_dir == '':
+    if working_dir.strip() == '':
         write_message('No Working Directory given. Using default: {0}'.format(Config.WORKING_DIRECTORY),
                       LogLevel.Warn)
         working_dir = Config.WORKING_DIRECTORY
@@ -86,26 +79,28 @@ Asks which files should be processed
 
 def ask_file_output():
     chosen_output = []
-    print('Choices:\n')
+    print('Available Choices:\n')
     print('1. High Stimulus')
     print('2. Normalized Data')
     print('Which files should be created as Output?')
     print('(Type each Number separated by comma or just press enter to select all options!')
-    choose = input()
+    user_choose = input()
 
-    if choose == "":
+    if user_choose.strip() == '':
         chosen_output.append(OutputOptions.High_Stimulus.value)
         chosen_output.append(OutputOptions.Normalized_Data.value)
         return chosen_output
 
-    chosen_output_answer = choose.split(',')
-    for choose in chosen_output_answer:
-        print(choose.strip())
+    user_choose = user_choose.split(',')
+    for choose in user_choose:
         if choose.isdigit():
             if int(choose.strip()) == 1:
                 chosen_output.append(OutputOptions.High_Stimulus.value)
             if int(choose.strip()) == 2:
                 chosen_output.append(OutputOptions.Normalized_Data.value)
+
+    if len(chosen_output) == 0:
+        write_message('No Output selected. Calculations will be done, but no Output will be generated', LogLevel.Warn)
 
     return chosen_output
 
@@ -133,16 +128,16 @@ def ask_files_to_process(working_dir):
     print()
     chosen_files = []
 
-    choosen_number_input = input(
+    user_input = input(
         'Choose all files you want to process. (Type each number separated by comma or '
         'just press enter to select all files)\n')
 
-    if choosen_number_input == '':
+    if user_input.strip() == '':
         chosen_files = temp_files
     else:
-        for choosen_number in choosen_number_input.split(','):
-            if choosen_number.isdigit():
-                chosen_files.append(temp_files[int(choosen_number)])
+        for number in user_input.split(','):
+            if number.strip().isdigit():
+                chosen_files.append(temp_files[int(number)])
 
     return chosen_files
 
