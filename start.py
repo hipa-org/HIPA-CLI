@@ -6,11 +6,9 @@ from actions import high_intensity_calculations
 from services.config.config import Config, read_conf, reset_config
 import os
 from services.logger.log import write_message, LogLevel
-from services.filemanagement.write_files import write_high_stimulus_file
 from services.filemanagement.create_files import create_needed_files
 import webbrowser
-from consolemenu import *
-from consolemenu.items import *
+
 
 class Actions(Enum):
     HIGH_INTENSITY_PEAK_ANALYSIS = 'High Intensity Peak Analysis'

@@ -9,7 +9,7 @@ import os
 from pyfiglet import Figlet
 import re
 from enum import Enum
-
+from UI.UI import print_empty_line, print_minus_line
 
 class OutputOptions(Enum):
     High_Stimulus = 'High Stimulus'
@@ -34,14 +34,14 @@ def start_high_intensity_calculations():
     user_file_output_option = ask_file_output()
     if len(user_file_output_option) == 0:
         write_message('No Output selected. Calculations will be done, but no Output will be generated', LogLevel.Warn)
-    print('-------------')
+    print_minus_line()
     working_dir = ask_working_dir()
-    print('-------------')
+    print_minus_line()
     files_to_process = ask_files_to_process(working_dir)
     if len(files_to_process) == 0:
         write_message('No Files selected.. Aborting', LogLevel.Info)
         return True
-    print('-------------')
+    print_minus_line()
     write_message(files_to_process, LogLevel.Debug)
     stimulation_time_frames = ask_stimulus_time_frame(files_to_process)
     write_message(stimulation_time_frames, LogLevel.Debug)
@@ -49,7 +49,7 @@ def start_high_intensity_calculations():
     for file in stimulation_time_frames:
         global cell_data
         cell_data = []
-        print()
+        print_empty_line()
         write_message('Processing file {0}'.format(file['file_name']), LogLevel.Info)
         execute_high_intensity_calculation(file['file_name'], file['stimulation_time_frame'], user_file_output_option)
     return True
@@ -94,11 +94,13 @@ def ask_file_output():
     print('2. Normalized Data')
     choose = input('Which files do you want to create? (Type each Number separated by comma)\n')
     chosen_output_answer = choose.split(',')
+    print(chosen_output_answer)
     for choose in chosen_output_answer:
+        print(choose.strip())
         if choose.isdigit():
-            if int(choose) == 1:
+            if int(choose.strip()) == 1:
                 chosen_output.append(OutputOptions.High_Stimulus.value)
-            if int(choose) == 2:
+            if int(choose.strip()) == 2:
                 chosen_output.append(OutputOptions.Normalized_Data.value)
 
     return chosen_output
