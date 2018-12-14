@@ -41,6 +41,7 @@ def start():
     create_needed_files()
     handle_args(args)
     success = read_conf()
+
     if success is not True:
         write_message('Error reading {0} from config.ini. Please check your config file'.format(success),
                       LogLevel.Error)
@@ -73,8 +74,7 @@ def start_up_actions():
     clear_console()
     f = Figlet(font='slant')
     print(f.renderText('Intensity Analyzer'))
-
-    print(50 * '-')
+    print(30 * '-')
     print('1. High Intensity Peak Analysis ')
     print('2. Cell Sorter')
     print('3. Help ')

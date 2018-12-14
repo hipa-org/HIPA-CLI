@@ -18,7 +18,7 @@ If the Tabstop is missing, the program will fail!
 ## Installation
 - Install Python 3.x
 - Download Repo
-- sh install.sh
+- sh run.sh
 - Done
 
 
