@@ -26,7 +26,7 @@ If the Tabstop is missing, the program will fail!
 
 ### Manual 
 
-- Create Virtual Environment. e.g. python3 -m venv ./venv
+- Create Virtual Environment. e.g. python -m venv ./venv
 - Activate Environment. e.g source venv/bin/activate
 - pip install -r requirements.txt
 
@@ -70,7 +70,6 @@ python start.py -V -D. Program will start in Debug and Verbose Mode
   [Github](https://github.com/Exitare)  
   [Website](https://exitare.de)
   
-<<<<<<< HEAD
 
 ## Sample Usage
 - General: 
