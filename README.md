@@ -1,11 +1,7 @@
 # High Intensity Peak Analysis
 
 
-#### Beta
-
-
-Calculates high intensity peaks from a given text file and creates  
-different output files.  
+Calculates high intensity peaks from a given text file and creates  different output files.  
 Tested with text files provided by Fiji.  
 Sample data is provided in the sampleData folder.  
 Your data will probably work if the text file has the structure as the files in sampleData  
@@ -14,7 +10,6 @@ If the Tabstop is missing, the program will fail!
 
 This tool uses Python 3.x. It's not tested with Python < 3.x. It is using a venv (virtual environment) to prevent missleading toolinstalltions or python installations.
 
-Windows users should either install Cygwin or follow the manual installation (see Manual Installation)
 
 ## Dependencies
 
@@ -26,10 +21,12 @@ Windows users should either install Cygwin or follow the manual installation (se
 
 
 - Download/Clone Repo
-- type "sh run.sh" in your console
+- Navigate to the folder where the Repo is stored.
+- Execute start.bat (Windows) or enter sh start.sh in your Terminal/Console (Windows)
 - Done
 
-IMPORTANT: For an automatic installation you need support for sh Scripts. On Windows this can be achieved by installing Cygwin.
+IMPORTANT: Automatic Installation and Execution prevents you from using the CommandLine Arguments.
+
 
 ### Manual Installation
 
@@ -64,9 +61,9 @@ Windows:
 ### Manual usage
 
 - Navigate to cloned/downloaded Repo
-- Activate Environment. *e.g.* by typing: "source venv/bin/activate" in your console
-- python3 start.py [Arguments] 
-- e.g python start.py -D
+- Activate Environment. *e.g.* by typing: Unix/Mac: "source venv/bin/activate" / Windows: "./venv/Scripts/activate" in your console
+- python start.py [Arguments] 
+- e.g python HIPA.py -D
 ---
 
 ***
@@ -92,16 +89,6 @@ python start.py -V -D. Program will start in Debug and Verbose Mode
 
   
 
-## Sample Usage
-- General: 
-    1. python start.py [Arguments] e.g python start.py -D 
-    2. Choose your preferred Actions
-    3. Follow the Action steps
-
-
-=======
->>>>>>> master
-
 ## Contributors
-Kaya Keutler 
+  [KayaHub](https://github.com/KayaHub)  
 
