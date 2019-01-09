@@ -33,7 +33,9 @@ IMPORTANT: For an automatic installation you need support for sh Scripts. On Win
 
 ### Manual Installation
 
-- Start cygwin/console/terminal on your local machine 
+Mac/Unix:
+
+- Start console/terminal on your local machine 
 - Clone/Download Repo 
 - Navigate to cloned/downloaded Repo
 - Create Virtual Environment. *e.g.* by typing: "python -m venv ./venv" in your console
@@ -41,10 +43,23 @@ IMPORTANT: For an automatic installation you need support for sh Scripts. On Win
 - install requirements by typing: "pip install -r requirements.txt" in your console
 
 
+Windows:
+- Start Powershell on your local machine 
+- Clone/Download Repo 
+- Navigate to cloned/downloaded Repo
+- Create Virtual Environment. *e.g.* by typing: "python -m venv ./venv" in your Powershell
+- Activate Environment. *e.g.* by typing: "./venv/Scripts/activate" in your Powershell
+- install requirements by typing: "pip install -r requirements.txt" in your Powershell
+
 ## Usage
 
-### Usage with shell script
-- sh run.sh
+Mac/Unix:
+
+- sh start.sh
+
+Windows:
+
+- Run start.bat
 
 ### Manual usage
 
