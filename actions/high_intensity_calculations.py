@@ -6,9 +6,8 @@ from services.filemanagement.read_files import read_time_traces_file
 from services.filemanagement.write_files import write_high_stimulus_file, write_normalized_data
 from services.calculations import normalisation, mean_calculation, min_max, high_stimulous, detectDataSizes
 import os
-import re
 from enum import Enum
-from UI.UI import print_empty_line,  print_hic_headline, print_minus_line
+from UI.UI import print_empty_line,  print_hic_headline
 
 
 class OutputOptions(Enum):
@@ -28,13 +27,13 @@ def start_high_intensity_calculations():
     global files_to_process
     files_to_process = []
     user_file_output_option = ask_file_output()
-    working_dir = ask_working_dir()
-    files_to_process = ask_files_to_process(working_dir)
+    #working_dir = ask_working_dir()
+    files_to_process = ask_files_to_process(Config.WORKING_DIRECTORY)
     write_message(files_to_process, LogLevel.Debug)
-    stimulation_time_frames = ask_stimulus_time_frame(files_to_process)
-    write_message(stimulation_time_frames, LogLevel.Debug)
+    stimulation_time_frame_per_file = ask_stimulation_time_frame_per_file(files_to_process)
+    write_message(stimulation_time_frame_per_file, LogLevel.Debug)
 
-    for file in stimulation_time_frames:
+    for file in stimulation_time_frame_per_file:
         global cell_data
         cell_data = []
         print_empty_line()
@@ -47,7 +46,7 @@ def start_high_intensity_calculations():
 Asks the User about the working dir
 '''
 
-
+'''
 def ask_working_dir():
     print('Specify the working dir. Leave blank for config default. ')
     print('Custom dir example: sampleData/. This will use the sampleData folder.\n'
@@ -68,7 +67,7 @@ def ask_working_dir():
         write_message('Using Directory: {0}'.format(working_dir), LogLevel.Info)
 
     return working_dir
-
+'''
 
 '''
 Asks which files should be processed
@@ -140,7 +139,7 @@ def ask_files_to_process(working_dir):
     return chosen_files
 
 
-def ask_stimulus_time_frame(selected_files):
+def ask_stimulation_time_frame_per_file(selected_files):
     stimulation_time_frames = []
     for file in selected_files:
         stimulus_time_frame = input('Frame of stimulation for file {0}: '.format(file))
@@ -149,7 +148,7 @@ def ask_stimulus_time_frame(selected_files):
             stimulation_time_frames.append({'file_name': file,
                                             'stimulation_time_frame': int(stimulus_time_frame)})
         else:
-            ask_stimulus_time_frame(files_to_process)
+            ask_stimulation_time_frame_per_file(files_to_process)
 
     return stimulation_time_frames
 
@@ -309,7 +308,7 @@ Calculates high stimulus frames per cell
 
 
 def calculate_high_stimulus_per_minute(row_count):
-    write_message('Calculation High Stimulus per Minute per Cell...', LogLevel.Info)
+    write_message('Calculating High Stimulus per Minute per Cell...', LogLevel.Info)
     temp_over_under_limit = []
     for cell in cell_data:
         temp_over_under_limit.append(cell.over_under_limit)
