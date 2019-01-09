@@ -36,7 +36,7 @@ IMPORTANT: For an automatic installation you need support for sh Scripts. On Win
 - Start cygwin/console/terminal on your local machine 
 - Clone/Download Repo 
 - Navigate to cloned/downloaded Repo
-- Create Virtual Environment. *e.g.* by typing: "python3 -m venv ./venv" in your console
+- Create Virtual Environment. *e.g.* by typing: "python -m venv ./venv" in your console
 - Activate Environment. *e.g.* by typing: "source venv/bin/activate" in your console
 - install requirements by typing: "pip install -r requirements.txt" in your console
 
