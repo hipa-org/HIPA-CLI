@@ -6,7 +6,6 @@ from services.filemanagement.read_files import read_time_traces_file
 from services.filemanagement.write_files import write_high_stimulus_file, write_normalized_data
 from services.calculations import normalisation, mean_calculation, min_max, high_stimulous, detectDataSizes
 import os
-
 import re
 from enum import Enum
 from UI.UI import print_empty_line,  print_hic_headline, print_minus_line
@@ -29,13 +28,12 @@ def start_high_intensity_calculations():
     global files_to_process
     files_to_process = []
     user_file_output_option = ask_file_output()
-    print_minus_line()
     working_dir = ask_working_dir()
-    print_minus_line()
     files_to_process = ask_files_to_process(working_dir)
     write_message(files_to_process, LogLevel.Debug)
     stimulation_time_frames = ask_stimulus_time_frame(files_to_process)
     write_message(stimulation_time_frames, LogLevel.Debug)
+
     for file in stimulation_time_frames:
         global cell_data
         cell_data = []
@@ -162,7 +160,7 @@ def execute_high_intensity_calculation(file_name, stimulation_time_frame, user_f
     time_frames = create_time_frame_array(time_traces)
     data_count = calculate_provided_data(time_frames)
     baseline_mean_calculation(time_frames, stimulation_time_frame)
-    normalized_cells = normalize_cells(cell_data, time_frames)
+    normalized_cells = normalize_cells(time_frames)
     calculate_mean(normalized_cells)
     maximum_detection(normalized_cells)
     calculate_limit()
@@ -179,13 +177,19 @@ def execute_high_intensity_calculation(file_name, stimulation_time_frame, user_f
     write_message('{0} data points processed'.format(data_count[0] * data_count[1]), LogLevel.Verbose)
 
 
-def normalize_cells(cell_data_input, time_frames):
-    normalized_data_cells = normalisation.normalise_columns(cell_data_input, time_frames)
+'''
+Normalize Cells
+'''
+
+
+def normalize_cells(time_frames):
+    write_message('Starting Cell Normalization....', LogLevel.Info)
+    normalized_data_cells = normalisation.normalise_columns(cell_data, time_frames)
     index = 0
     for normalized_data in normalized_data_cells:
         cell_data[index].normalized_data = normalized_data[1:]
         index += 1
-
+    write_message('Cell Normalization Done....', LogLevel.Info)
     return normalized_data_cells
 
 
@@ -226,16 +230,16 @@ Mean of Intensities before Stimulation
 
 
 def baseline_mean_calculation(time_frames, stimulation_time_frame):
+    global cell_data
     write_message('Starting Baseline Mean Calculation....', LogLevel.Info)
     for time_frame in time_frames:
         cal_baseline_mean = mean_calculation.calculate_norm_mean(stimulation_time_frame,
                                                                  time_frame)
-
         write_message(
             'Baseline Mean Calculation of Cell {0} finished: -> Baseline Mean {1}'.format(time_frame[0],
                                                                                           cal_baseline_mean),
             LogLevel.Verbose)
-        cell_data.append(Cell.Cell(time_frame[0], cal_baseline_mean, 0, 0, 0, 0, 0, 0))
+        cell_data.append(Cell.Cell(time_frame[0], time_frame, cal_baseline_mean,  0, 0, 0, 0, 0, 0))
     write_message('Baseline Mean Calculation done', LogLevel.Info)
 
 
