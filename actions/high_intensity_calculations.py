@@ -20,6 +20,7 @@ cell_data = []
 percentage = 0.0
 selected_files_to_process = []
 selected_output_options = []
+
 '''
 Main Calculation Function
 '''
@@ -42,6 +43,11 @@ def start_high_intensity_calculations():
         write_message('Processing file {0}'.format(file.name), LogLevel.Info)
         execute_high_intensity_calculation(file.name, file.stimulation_time_frame)
     return True
+
+
+'''
+   Resets the previous Input
+'''
 
 
 def reset_previous_input():
@@ -87,7 +93,6 @@ def ask_file_output():
     if user_choose.strip() == '':
         selected_output_options.append(OutputOptions.High_Stimulus.value)
         selected_output_options.append(OutputOptions.Normalized_Data.value)
-
         return
 
     user_choose = user_choose.split(',')
@@ -96,6 +101,9 @@ def ask_file_output():
             if int(choose.strip()) == 1:
                 selected_output_options.append(OutputOptions.High_Stimulus.value)
             elif int(choose.strip()) == 2:
+                selected_output_options.append(OutputOptions.Normalized_Data.value)
+            else:
+                selected_output_options.append(OutputOptions.High_Stimulus.value)
                 selected_output_options.append(OutputOptions.Normalized_Data.value)
 
     clear_console()
@@ -190,7 +198,6 @@ def ask_percentage():
 
 
 def execute_high_intensity_calculation(file_name, stimulation_time_frame):
-
     global selected_output_options
     start_time = datetime.datetime.now()
     time_traces = read_time_traces_file(file_name)
