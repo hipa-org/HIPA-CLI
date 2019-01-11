@@ -102,7 +102,6 @@ def ask_file_output():
                 chosen_output.append(OutputOptions.High_Stimulus.value)
             elif int(choose.strip()) == 2:
                 chosen_output.append(OutputOptions.Normalized_Data.value)
-            else:
 
     if len(chosen_output) == 0:
         write_message('No Output selected. Calculations will be done, but no Output will be generated', LogLevel.Warn)
