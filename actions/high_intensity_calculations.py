@@ -8,7 +8,7 @@ from services.calculations import normalisation, mean_calculation, min_max, high
 import os
 from enum import Enum
 from UI.UI import print_empty_line, print_hic_headline
-from services.console.actions import clear_console
+from UI.UI import clear_console
 
 
 class OutputOptions(Enum):

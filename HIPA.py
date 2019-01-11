@@ -11,7 +11,6 @@ import webbrowser
 from UI.UI import clear_console
 
 
-
 class Actions(Enum):
     HIGH_INTENSITY_PEAK_ANALYSIS = 'High Intensity Peak Analysis'
     CELL_SORTER = 'Cell Sorter'
@@ -72,25 +71,27 @@ def handle_args(arguments):
 
 def start_up_actions():
     clear_console()
-    f = Figlet(font='slant')
-    print(f.renderText('Intensity Analyzer'))
-    print(30 * '-')
-    print('1. High Intensity Peak Analysis ')
-    print('2. Cell Sorter')
-    print('3. Help')
-    print('4. Cleanup Output Folder')
-    print('-1. Exit')
-
-    if Config.DEBUG == 1:
-        print('** Debug **')
-        print('F. File System Test')
-    choice = input("Choose your action: (Type the action number)\n")
 
     while True:
         try:
-            choice = input(int(choice))
+            f = Figlet(font='slant')
+            print(f.renderText('Intensity Analyzer'))
+            print(30 * '-')
+            print('1. High Intensity Peak Analysis ')
+            print('2. Cell Sorter')
+            print('3. Help')
+            print('4. Cleanup Output Folder')
+            print('-1. Exit')
+
+            if Config.DEBUG == 1:
+                print('** Debug **')
+                print('F. File System Test')
+
+            choice = int(input("Choose your action: (Type the action number)\n"))
         except ValueError:
             print("Please choose a valid option!")
+            input()
+            clear_console()
             continue
         else:
             break
@@ -106,7 +107,7 @@ def start_up_actions():
     elif choice == 3:
         webbrowser.open_new_tab('https://exitare.github.io/High-Intensity-Peak-Analysis/')
         start_up_actions()
-    elif choice == 4:
+    elif choice == -1:
         clear_console()
         sys.exit(0)
     else:

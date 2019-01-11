@@ -1,5 +1,6 @@
 import os
 from pyfiglet import Figlet
+from platform import platform
 
 
 def print_empty_line():
@@ -13,7 +14,12 @@ def print_minus_line():
 
 
 def clear_console():
-    clear = lambda: os.system('cls' if os.name == 'nt' else 'clear')
+    clear = None
+    detected_os = platform(1, 1)
+    if "Darwin" in detected_os:
+        clear = lambda: os.system('clear')
+    elif "win32" in detected_os:
+        clear = lambda: os.system('cls')
     clear()
 
 
