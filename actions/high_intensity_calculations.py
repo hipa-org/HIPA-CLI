@@ -1,4 +1,4 @@
-from classes import Cell
+from classes import Cell, File
 import datetime
 from services.logger.log import write_message, LogLevel
 from services.config.config import Config
@@ -7,8 +7,9 @@ from services.filemanagement.write_files import write_high_stimulus_file, write_
 from services.calculations import normalisation, mean_calculation, min_max, high_stimulus, detectDataSizes
 import os
 from enum import Enum
-from UI.UI import print_empty_line,  print_hic_headline
+from UI.UI import print_empty_line, print_hic_headline
 from services.console.actions import clear_console
+
 
 class OutputOptions(Enum):
     High_Stimulus = 'High Stimulus'
@@ -16,98 +17,29 @@ class OutputOptions(Enum):
 
 
 cell_data = []
-files_to_process = []
 percentage = 0.0
+selected_files_to_process = []
+selected_output_options = []
 '''
 Main Calculation Function
 '''
 
 
 def start_high_intensity_calculations():
+    global selected_files_to_process
+    global selected_output_options
     print_hic_headline()
-    global files_to_process
-    files_to_process = []
-    user_file_output_option = ask_file_output()
-    print_hic_headline()
-    files_to_process = ask_files_to_process(Config.WORKING_DIRECTORY)
-    print_hic_headline()
-    write_message(files_to_process, LogLevel.Debug)
-    print_hic_headline()
-    stimulation_time_frame_per_file = ask_stimulation_time_frame_per_file(files_to_process)
-    print_hic_headline()
+    ask_file_output()
+    ask_files_to_process()
+    ask_stimulation_time_frame_per_file()
     ask_percentage()
-    print_hic_headline()
-    write_message(stimulation_time_frame_per_file, LogLevel.Debug)
-    for file in stimulation_time_frame_per_file:
+    for file in selected_files_to_process:
         global cell_data
         cell_data = []
         print_empty_line()
         write_message('Processing file {0}'.format(file['file_name']), LogLevel.Info)
-        execute_high_intensity_calculation(file['file_name'], file['stimulation_time_frame'], user_file_output_option)
+        execute_high_intensity_calculation(file.name, file.stimulation_time_frame, selected_output_options)
     return True
-
-
-'''
-Asks the User about the percentage which should be used
-'''
-
-def ask_percentage():
-    global percentage
-
-    print("Please insert the Limit Percentage")
-    print("This percentage is calculated from the imputed maximum.")
-    print(" E.g. 0.6 is the 60%")
-    print()
-    while True:
-        try:
-            percentage = float(input("Percentage (0 - 1:"))
-        except:
-            print("Sorry but this is not a valid Float")
-            continue
-        else:
-            if percentage < 0.0 or percentage > 1.0:
-                print("Sorry this is not a valid percentage")
-                continue
-            else:
-                break
-
-    clear_console()
-
-'''
-Asks which files should be processed
-'''
-
-
-def ask_file_output():
-    chosen_output = []
-    print('Available Choices:\n')
-    print('1. High Stimulus')
-    print('2. Normalized Data')
-    print()
-    print('Which files should be created as Output?')
-    print('(Type each Number separated by comma or just press enter to select all options!)')
-    user_choose = input()
-
-    if user_choose.strip() == '':
-        chosen_output.append(OutputOptions.High_Stimulus.value)
-        chosen_output.append(OutputOptions.Normalized_Data.value)
-        clear_console()
-        return chosen_output
-
-
-    user_choose = user_choose.split(',')
-    for choose in user_choose:
-        if choose.isdigit():
-            if int(choose.strip()) == 1:
-                chosen_output.append(OutputOptions.High_Stimulus.value)
-            elif int(choose.strip()) == 2:
-                chosen_output.append(OutputOptions.Normalized_Data.value)
-
-    if len(chosen_output) == 0:
-        write_message('No Output selected. Calculations will be done, but no Output will be generated', LogLevel.Warn)
-
-    clear_console()
-    return chosen_output
 
 
 '''
@@ -115,8 +47,9 @@ Which Files should be processed
 '''
 
 
-def ask_files_to_process(working_dir):
-    all_files = os.listdir(os.path.normpath(working_dir))
+def ask_files_to_process():
+    global selected_files_to_process
+    all_files = os.listdir(os.path.normpath(Config.WORKING_DIRECTORY))
     temp_files = []
     for file in all_files:
         if Config.INPUT_FILE_NAME in file:
@@ -131,37 +64,102 @@ def ask_files_to_process(working_dir):
         i += 1
 
     print()
-    chosen_files = []
 
     user_input = input(
         'Choose all files you want to process. (Type each number separated by comma or '
         'just press enter to select all files)\n')
 
     if user_input.strip() == '':
-        chosen_files = temp_files
+        selected_files_to_process = temp_files
     else:
         for number in user_input.split(','):
             if number.strip().isdigit():
-                chosen_files.append(temp_files[int(number)])
-
-    clear_console()
-    return chosen_files
+                selected_files_to_process.append(File.File(int(number),temp_files[int(number)], 0 ,0))
 
 
-def ask_stimulation_time_frame_per_file(selected_files):
-    stimulation_time_frames = []
-    for file in selected_files:
+    return
+
+
+
+'''
+Asks the User about the percentage which should be used
+'''
+
+
+def ask_percentage():
+    global percentage
+    global selected_files_to_process
+    print("Please insert the Limit Percentage")
+    print("This percentage is calculated from the imputed maximum.")
+    print("E.g. 0.6 is the 60%")
+    print()
+    for file in selected_files_to_process:
         while True:
             try:
-               stimulus_time_frame = int(input('Frame of stimulation for file {0}: '.format(file)))
+                file.percentage = float(input('Percentage for file {0} (0 - 1): '.format(file.name)))
+            except:
+                print("Sorry but this is not a valid Float")
+                continue
+            else:
+                if percentage < 0.0 or percentage > 1.0:
+                    print("Sorry this is not a valid percentage")
+                    continue
+                else:
+                    break
+
+    clear_console()
+
+
+'''
+Asks which files should be processed
+'''
+
+
+def ask_file_output():
+    global selected_output_options
+    print('Available Choices:\n')
+    print('1. High Stimulus')
+    print('2. Normalized Data')
+    print()
+    print('Which files should be created as Output?')
+    print('(Type each Number separated by comma or just press enter to select all options!)')
+    user_choose = input()
+
+    if user_choose.strip() == '':
+        selected_output_options.append(OutputOptions.High_Stimulus.value)
+        selected_output_options.append(OutputOptions.Normalized_Data.value)
+
+        return
+
+    user_choose = user_choose.split(',')
+    for choose in user_choose:
+        if choose.isdigit():
+            if int(choose.strip()) == 1:
+                selected_output_options.append(OutputOptions.High_Stimulus.value)
+            elif int(choose.strip()) == 2:
+                selected_output_options.append(OutputOptions.Normalized_Data.value)
+
+    clear_console()
+    return
+
+
+
+
+def ask_stimulation_time_frame_per_file():
+    global selected_files_to_process
+    for file in selected_files_to_process:
+        while True:
+            try:
+                stimulus = int(input('Frame of stimulation for file {0}: '.format(file.name)))
             except ValueError:
                 print("Sorry, but this is NOT a valid Integer. Please insert a valid one")
                 continue
             else:
                 break
-        stimulation_time_frames.append({'file_name': file,
-                                        'stimulation_time_frame': int(stimulus_time_frame)})
-    return stimulation_time_frames
+        file.stimulation_time_frame = stimulus
+        ###stimulation_time_frames.append({'file_name': file,
+                                       ### 'stimulation_time_frame': int(stimulus_time_frame)})
+    return
 
 
 def execute_high_intensity_calculation(file_name, stimulation_time_frame, user_file_output):
@@ -249,7 +247,7 @@ def baseline_mean_calculation(time_frames, stimulation_time_frame):
             'Baseline Mean Calculation of Cell {0} finished: -> Baseline Mean {1}'.format(time_frame[0],
                                                                                           cal_baseline_mean),
             LogLevel.Verbose)
-        cell_data.append(Cell.Cell(time_frame[0], time_frame, cal_baseline_mean,  0, 0, 0, 0, 0, 0))
+        cell_data.append(Cell.Cell(time_frame[0], time_frame, cal_baseline_mean, 0, 0, 0, 0, 0, 0))
     write_message('Baseline Mean Calculation done', LogLevel.Info)
 
 
