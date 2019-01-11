@@ -17,6 +17,7 @@ class OutputOptions(Enum):
 
 cell_data = []
 files_to_process = []
+percentage = 0.0
 '''
 Main Calculation Function
 '''
@@ -34,6 +35,8 @@ def start_high_intensity_calculations():
     print_hic_headline()
     stimulation_time_frame_per_file = ask_stimulation_time_frame_per_file(files_to_process)
     print_hic_headline()
+    ask_percentage()
+    print_hic_headline()
     write_message(stimulation_time_frame_per_file, LogLevel.Debug)
     for file in stimulation_time_frame_per_file:
         global cell_data
@@ -45,31 +48,30 @@ def start_high_intensity_calculations():
 
 
 '''
-Asks the User about the working dir
+Asks the User about the percentage which should be used
 '''
 
-'''
-def ask_working_dir():
-    print('Specify the working dir. Leave blank for config default. ')
-    print('Custom dir example: sampleData/. This will use the sampleData folder.\n'
-          'Custom Dir can be located all over your local machine')
-    working_dir = input('Working Dir: ')
-    if working_dir.strip() == '':
-        write_message('No Working Directory given. Using default: {0}'.format(Config.WORKING_DIRECTORY),
-                      LogLevel.Warn)
-        working_dir = Config.WORKING_DIRECTORY
-    else:
-        char_index = 0
-        for char in working_dir:
-            if char_index == len(working_dir) - 1:
-                if char is not '/':
-                    line = re.sub('[ ]', '', working_dir)
-                    working_dir = '{0}{1}'.format(line, '/')
-            char_index += 1
-        write_message('Using Directory: {0}'.format(working_dir), LogLevel.Info)
+def ask_percentage():
+    global percentage
 
-    return working_dir
-'''
+    print("Please insert the Limit Percentage")
+    print("This percentage is calculated from the imputed maximum.")
+    print(" E.g. 0.6 is the 60%")
+    print()
+    while True:
+        try:
+            percentage = float(input("Percentage (0 - 1:"))
+        except:
+            print("Sorry but this is not a valid Float")
+            continue
+        else:
+            if percentage < 0.0 or percentage > 1.0:
+                print("Sorry this is not a valid percentage")
+                continue
+            else:
+                break
+
+    clear_console()
 
 '''
 Asks which files should be processed
@@ -98,8 +100,9 @@ def ask_file_output():
         if choose.isdigit():
             if int(choose.strip()) == 1:
                 chosen_output.append(OutputOptions.High_Stimulus.value)
-            if int(choose.strip()) == 2:
+            elif int(choose.strip()) == 2:
                 chosen_output.append(OutputOptions.Normalized_Data.value)
+            else:
 
     if len(chosen_output) == 0:
         write_message('No Output selected. Calculations will be done, but no Output will be generated', LogLevel.Warn)
@@ -290,7 +293,7 @@ def calculate_limit():
     write_message('Calculating Limit...', LogLevel.Info)
     index = 0
     for cell in cell_data:
-        sixty_percent_of_maximum = min_max.calculate_limit_from_maximum(cell.maximum)
+        sixty_percent_of_maximum = min_max.calculate_limit_from_maximum(cell.maximum, percentage)
         cell_data[index].limit = sixty_percent_of_maximum
         index += 1
     write_message('Calculating Limit done', LogLevel.Info)

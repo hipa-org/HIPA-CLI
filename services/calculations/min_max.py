@@ -6,8 +6,8 @@ def calculate_maximum(time_frame):
     return time_frame[detected_max]
 
 
-def calculate_limit_from_maximum(maximum):
-    return maximum * 0.6
+def calculate_limit_from_maximum(maximum, percentage):
+    return maximum * percentage
 
 
 def calculate_over_and_under(normalized_cell_data, cell_data):
