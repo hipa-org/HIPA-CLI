@@ -78,17 +78,22 @@ def start_up_actions():
     print('1. High Intensity Peak Analysis ')
     print('2. Cell Sorter')
     print('3. Help')
-    print('4. Exit')
+    print('4. Cleanup Output Folder')
+    print('-1. Exit')
 
     if Config.DEBUG == 1:
         print('** Debug **')
         print('F. File System Test')
     choice = input("Choose your action: (Type the action number)\n")
 
-    if choice.strip().isdigit():
-        choice = int(choice)
-    else:
-        start_up_actions()
+    while True:
+        try:
+            choice = input(int(choice))
+        except ValueError:
+            print("Please choose a valid option!")
+            continue
+        else:
+            break
 
     if choice == 1:
         high_intensity_calculations.start_high_intensity_calculations()

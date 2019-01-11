@@ -26,6 +26,7 @@ Main Calculation Function
 
 
 def start_high_intensity_calculations():
+    reset_previous_input()
     global selected_files_to_process
     global selected_output_options
     print_hic_headline()
@@ -33,13 +34,72 @@ def start_high_intensity_calculations():
     ask_files_to_process()
     ask_stimulation_time_frame_per_file()
     ask_percentage()
+    conclusion()
     for file in selected_files_to_process:
         global cell_data
         cell_data = []
         print_empty_line()
-        write_message('Processing file {0}'.format(file['file_name']), LogLevel.Info)
-        execute_high_intensity_calculation(file.name, file.stimulation_time_frame, selected_output_options)
+        write_message('Processing file {0}'.format(file.name), LogLevel.Info)
+        execute_high_intensity_calculation(file.name, file.stimulation_time_frame)
     return True
+
+
+def reset_previous_input():
+    global selected_files_to_process
+    global selected_output_options
+    selected_files_to_process = []
+    selected_output_options = []
+
+
+def conclusion():
+    global selected_files_to_process
+    global selected_output_options
+
+    write_message("You selected the following Output Options:\n ", LogLevel.Info)
+    for output in selected_output_options:
+        write_message(output, LogLevel.Info)
+
+    print()
+    for file in selected_files_to_process:
+        write_message(
+            'You are processing the File {0} with following Arguments: \nStimulation: {1}\nPercentage: {2}'.format(
+                file.name, file.stimulation_time_frame, file.percentage), LogLevel.Info)
+        print()
+
+    input("Press any Key to start calculations.")
+
+
+'''
+Asks which files should be processed
+'''
+
+
+def ask_file_output():
+    global selected_output_options
+    print('Which files should be created as Output?')
+    print('Available Choices:\n')
+    print('1. High Stimulus')
+    print('2. Normalized Data')
+    print()
+    print('(Type each Number separated by comma or just press enter to select all options!)')
+    user_choose = input()
+
+    if user_choose.strip() == '':
+        selected_output_options.append(OutputOptions.High_Stimulus.value)
+        selected_output_options.append(OutputOptions.Normalized_Data.value)
+
+        return
+
+    user_choose = user_choose.split(',')
+    for choose in user_choose:
+        if choose.isdigit():
+            if int(choose.strip()) == 1:
+                selected_output_options.append(OutputOptions.High_Stimulus.value)
+            elif int(choose.strip()) == 2:
+                selected_output_options.append(OutputOptions.Normalized_Data.value)
+
+    clear_console()
+    return
 
 
 '''
@@ -70,15 +130,34 @@ def ask_files_to_process():
         'just press enter to select all files)\n')
 
     if user_input.strip() == '':
-        selected_files_to_process = temp_files
+        i = 0
+        for file in temp_files:
+            selected_files_to_process.append(File.File(i, file, 0, 0))
+            i += 1
     else:
         for number in user_input.split(','):
             if number.strip().isdigit():
-                selected_files_to_process.append(File.File(int(number),temp_files[int(number)], 0 ,0))
-
-
+                selected_files_to_process.append(File.File(int(number), temp_files[int(number)], 0, 0))
     return
 
+
+def ask_stimulation_time_frame_per_file():
+    global selected_files_to_process
+
+    for file in selected_files_to_process:
+        print(file.name)
+
+    for file in selected_files_to_process:
+        while True:
+            try:
+                stimulus = int(input('Frame of stimulation for file {0}: '.format(file.name)))
+            except ValueError:
+                print("Sorry, but this is NOT a valid Integer. Please insert a valid one")
+                continue
+            else:
+                break
+        file.stimulation_time_frame = stimulus
+    return
 
 
 '''
@@ -97,7 +176,7 @@ def ask_percentage():
         while True:
             try:
                 file.percentage = float(input('Percentage for file {0} (0 - 1): '.format(file.name)))
-            except:
+            except ValueError:
                 print("Sorry but this is not a valid Float")
                 continue
             else:
@@ -110,59 +189,9 @@ def ask_percentage():
     clear_console()
 
 
-'''
-Asks which files should be processed
-'''
+def execute_high_intensity_calculation(file_name, stimulation_time_frame):
 
-
-def ask_file_output():
     global selected_output_options
-    print('Available Choices:\n')
-    print('1. High Stimulus')
-    print('2. Normalized Data')
-    print()
-    print('Which files should be created as Output?')
-    print('(Type each Number separated by comma or just press enter to select all options!)')
-    user_choose = input()
-
-    if user_choose.strip() == '':
-        selected_output_options.append(OutputOptions.High_Stimulus.value)
-        selected_output_options.append(OutputOptions.Normalized_Data.value)
-
-        return
-
-    user_choose = user_choose.split(',')
-    for choose in user_choose:
-        if choose.isdigit():
-            if int(choose.strip()) == 1:
-                selected_output_options.append(OutputOptions.High_Stimulus.value)
-            elif int(choose.strip()) == 2:
-                selected_output_options.append(OutputOptions.Normalized_Data.value)
-
-    clear_console()
-    return
-
-
-
-
-def ask_stimulation_time_frame_per_file():
-    global selected_files_to_process
-    for file in selected_files_to_process:
-        while True:
-            try:
-                stimulus = int(input('Frame of stimulation for file {0}: '.format(file.name)))
-            except ValueError:
-                print("Sorry, but this is NOT a valid Integer. Please insert a valid one")
-                continue
-            else:
-                break
-        file.stimulation_time_frame = stimulus
-        ###stimulation_time_frames.append({'file_name': file,
-                                       ### 'stimulation_time_frame': int(stimulus_time_frame)})
-    return
-
-
-def execute_high_intensity_calculation(file_name, stimulation_time_frame, user_file_output):
     start_time = datetime.datetime.now()
     time_traces = read_time_traces_file(file_name)
     time_frames = create_time_frame_array(time_traces)
@@ -171,10 +200,10 @@ def execute_high_intensity_calculation(file_name, stimulation_time_frame, user_f
     normalized_cells = normalize_cells(time_frames)
     calculate_mean(normalized_cells)
     maximum_detection(normalized_cells)
-    calculate_limit()
+    calculate_limit(file_name)
     over_under_limit(normalized_cells)
     calculate_high_stimulus_per_minute(data_count[1])
-    for output_option in user_file_output:
+    for output_option in selected_output_options:
         if output_option == OutputOptions.High_Stimulus.value:
             write_high_stimulus_file(cell_data, file_name)
         elif output_option == OutputOptions.Normalized_Data.value:
@@ -257,6 +286,7 @@ Calculate the mean. Normalised Cells will be provided
 
 
 def calculate_mean(normalised_cells):
+    global cell_data
     write_message('Starting Mean Calculation...', LogLevel.Info)
     index = 0
     for normalised_cell in normalised_cells:
@@ -272,6 +302,7 @@ Calculate the Maximum from given Data Set.
 
 
 def maximum_detection(normalised_cells):
+    global cell_data
     write_message('Detecting Maximum ....', LogLevel.Info)
     index = 0
     for normalised_cell in normalised_cells:
@@ -286,13 +317,17 @@ Calculate Limit for each Cell
 '''
 
 
-def calculate_limit():
+def calculate_limit(file_name):
+    global selected_files_to_process
+    global cell_data
     write_message('Calculating Limit...', LogLevel.Info)
-    index = 0
-    for cell in cell_data:
-        sixty_percent_of_maximum = min_max.calculate_limit_from_maximum(cell.maximum, percentage)
-        cell_data[index].limit = sixty_percent_of_maximum
-        index += 1
+
+    for file in selected_files_to_process:
+        if file.name == file_name:
+            index = 0
+            for cell in cell_data:
+                cell_data[index].limit = min_max.calculate_limit_from_maximum(cell.maximum, file.percentage)
+                index += 1
     write_message('Calculating Limit done', LogLevel.Info)
 
 
@@ -302,6 +337,7 @@ Check if a data entry of a given cell is over or under the cells limit
 
 
 def over_under_limit(normalised_cells):
+    global cell_data
     write_message('Calculating Over and Under Limit...', LogLevel.Info)
     index = 0
     over_under_limit_raw_data = min_max.calculate_over_and_under(normalised_cells, cell_data)
@@ -317,6 +353,7 @@ Calculates high stimulus frames per cell
 
 
 def calculate_high_stimulus_per_minute(row_count):
+    global cell_data
     write_message('Calculating High Stimulus per Minute per Cell...', LogLevel.Info)
     temp_over_under_limit = []
     for cell in cell_data:
