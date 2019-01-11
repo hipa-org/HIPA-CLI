@@ -8,7 +8,7 @@ from services.calculations import normalisation, mean_calculation, min_max, high
 import os
 from enum import Enum
 from UI.UI import print_empty_line,  print_hic_headline
-
+from services.console.actions import clear_console
 
 class OutputOptions(Enum):
     High_Stimulus = 'High Stimulus'
@@ -27,12 +27,14 @@ def start_high_intensity_calculations():
     global files_to_process
     files_to_process = []
     user_file_output_option = ask_file_output()
-    #working_dir = ask_working_dir()
+    print_hic_headline()
     files_to_process = ask_files_to_process(Config.WORKING_DIRECTORY)
+    print_hic_headline()
     write_message(files_to_process, LogLevel.Debug)
+    print_hic_headline()
     stimulation_time_frame_per_file = ask_stimulation_time_frame_per_file(files_to_process)
+    print_hic_headline()
     write_message(stimulation_time_frame_per_file, LogLevel.Debug)
-
     for file in stimulation_time_frame_per_file:
         global cell_data
         cell_data = []
@@ -79,6 +81,7 @@ def ask_file_output():
     print('Available Choices:\n')
     print('1. High Stimulus')
     print('2. Normalized Data')
+    print()
     print('Which files should be created as Output?')
     print('(Type each Number separated by comma or just press enter to select all options!)')
     user_choose = input()
@@ -86,7 +89,9 @@ def ask_file_output():
     if user_choose.strip() == '':
         chosen_output.append(OutputOptions.High_Stimulus.value)
         chosen_output.append(OutputOptions.Normalized_Data.value)
+        clear_console()
         return chosen_output
+
 
     user_choose = user_choose.split(',')
     for choose in user_choose:
@@ -99,6 +104,7 @@ def ask_file_output():
     if len(chosen_output) == 0:
         write_message('No Output selected. Calculations will be done, but no Output will be generated', LogLevel.Warn)
 
+    clear_console()
     return chosen_output
 
 
@@ -136,20 +142,23 @@ def ask_files_to_process(working_dir):
             if number.strip().isdigit():
                 chosen_files.append(temp_files[int(number)])
 
+    clear_console()
     return chosen_files
 
 
 def ask_stimulation_time_frame_per_file(selected_files):
     stimulation_time_frames = []
     for file in selected_files:
-        stimulus_time_frame = input('Frame of stimulation for file {0}: '.format(file))
-
-        if stimulus_time_frame.isdigit():
-            stimulation_time_frames.append({'file_name': file,
-                                            'stimulation_time_frame': int(stimulus_time_frame)})
-        else:
-            ask_stimulation_time_frame_per_file(files_to_process)
-
+        while True:
+            try:
+               stimulus_time_frame = int(input('Frame of stimulation for file {0}: '.format(file)))
+            except ValueError:
+                print("Sorry, but this is NOT a valid Integer. Please insert a valid one")
+                continue
+            else:
+                break
+        stimulation_time_frames.append({'file_name': file,
+                                        'stimulation_time_frame': int(stimulus_time_frame)})
     return stimulation_time_frames
 
 
