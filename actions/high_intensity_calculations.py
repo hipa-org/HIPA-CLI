@@ -4,7 +4,7 @@ from services.logger.log import write_message, LogLevel
 from services.config.config import Config
 from services.filemanagement.read_files import read_time_traces_file
 from services.filemanagement.write_files import write_high_stimulus_file, write_normalized_data
-from services.calculations import normalisation, mean_calculation, min_max, high_stimulous, detectDataSizes
+from services.calculations import normalisation, mean_calculation, min_max, high_stimulus, detectDataSizes
 import os
 from enum import Enum
 from UI.UI import print_empty_line,  print_hic_headline
@@ -80,7 +80,7 @@ def ask_file_output():
     print('1. High Stimulus')
     print('2. Normalized Data')
     print('Which files should be created as Output?')
-    print('(Type each Number separated by comma or just press enter to select all options!')
+    print('(Type each Number separated by comma or just press enter to select all options!)')
     user_choose = input()
 
     if user_choose.strip() == '':
@@ -313,7 +313,7 @@ def calculate_high_stimulus_per_minute(row_count):
     for cell in cell_data:
         temp_over_under_limit.append(cell.over_under_limit)
 
-    high_stimulus_per_minute = high_stimulous.calculate_high_stimulus_per_minute(
+    high_stimulus_per_minute = high_stimulus.calculate_high_stimulus_per_minute(
         temp_over_under_limit, row_count)
     index = 0
     for high_stimulus_per_cell in high_stimulus_per_minute:
