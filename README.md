@@ -8,7 +8,7 @@ Your data will probably work if the text file has the structure as the files in 
 Important: each entry is divided by a Tabstop (\t)  
 If the Tabstop is missing, the program will fail!
 
-This tool uses Python 3.x. It's not tested with Python < 3.x. It is using a venv (virtual environment) to prevent missleading toolinstalltions or python installations.
+This tool uses Python 3.x. It's not tested with Python < 3.x. It is using a venv (virtual environment) to prevent misleading toolinstalltion or python installations.
 
 
 ## Dependencies
@@ -61,8 +61,8 @@ Windows:
 ### Manual usage
 
 - Navigate to cloned/downloaded Repo
-- Activate Environment. *e.g.* by typing: Unix/Mac: "source venv/bin/activate" / Windows: "./venv/Scripts/activate" in your console
-- python start.py [Arguments] 
+- Activate Environment. *e.g.* by typing: Unix/Mac: "source venv/bin/activate" / Windows: "./venv/Scripts/activate" in your console/shell
+- python HIPA.py [Arguments] 
 - e.g python HIPA.py -D
 ---
 
@@ -71,7 +71,7 @@ Windows:
 ## Command Line Arguments:
 
 commands are only available when in manual usage!
-- [-D / --debug]: Debug mode -> Logging lots of Data into Console(However, all Data is logged into the Logging Files)
+- [-D / --debug]: Debug mode -> Logging lots of Data into Console (However, all Data is logged into the Logging Files)
 - [-V / --verbose]: Verbose mode -> Verbose output of Calculations  
 - [-H / --highintense]: Skips the main menu and jumps directly to the High Intensity Peak Analyzer Tool
 - [-r / --restore]: Restores the default config.ini

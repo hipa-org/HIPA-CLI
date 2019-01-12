@@ -73,7 +73,7 @@ def conclusion():
     print()
     for file in selected_files_to_process:
         write_message(
-            'You are processing the File {0} with following Arguments: \nStimulation Timeframe: {1}\nPercentage: {2}'.format(
+            'You are processing the File {0} with following arguments: \nStimulation Timeframe: {1}\nPercentage: {2}'.format(
                 file.name, file.stimulation_time_frame, file.percentage), LogLevel.Info)
         print()
 
@@ -166,7 +166,7 @@ def ask_stimulation_time_frame_per_file():
         time_traces = read_time_traces_file(file.name)
         time_frames = create_time_frame_array(time_traces)
         data_count = detectDataSizes.detect_row_and_column_count(time_frames)
-        print('Please insert the Stimulation Time Frame ( 0 - {0}) for the given file.'.format(data_count[1]))
+        print('Please insert the Stimulation Time Frame (0 - {0}) for the given file.'.format(data_count[1]))
 
         while True:
             try:
