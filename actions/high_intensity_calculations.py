@@ -30,7 +30,6 @@ def start_high_intensity_calculations():
     reset_previous_input()
     global selected_files_to_process
     global selected_output_options
-    print_hic_headline()
     ask_file_output()
     ask_files_to_process()
     ask_stimulation_time_frame_per_file()
@@ -46,7 +45,7 @@ def start_high_intensity_calculations():
 
 
 '''
-   Resets the previous Input
+Resets the previous Input
 '''
 
 
@@ -57,18 +56,24 @@ def reset_previous_input():
     selected_output_options = []
 
 
+'''
+Prints a conclusion before starting the calculations
+'''
+
+
 def conclusion():
+    print_hic_headline()
     global selected_files_to_process
     global selected_output_options
 
-    write_message("You selected the following Output Options:\n ", LogLevel.Info)
+    write_message("You selected the following output options:", LogLevel.Info)
     for output in selected_output_options:
         write_message(output, LogLevel.Info)
 
     print()
     for file in selected_files_to_process:
         write_message(
-            'You are processing the File {0} with following Arguments: \nStimulation: {1}\nPercentage: {2}'.format(
+            'You are processing the File {0} with following Arguments: \nStimulation Timeframe: {1}\nPercentage: {2}'.format(
                 file.name, file.stimulation_time_frame, file.percentage), LogLevel.Info)
         print()
 
@@ -81,6 +86,7 @@ Asks which files should be processed
 
 
 def ask_file_output():
+    print_hic_headline()
     global selected_output_options
     print('Which files should be created as Output?')
     print('Available Choices:\n')
@@ -93,6 +99,7 @@ def ask_file_output():
     if user_choose.strip() == '':
         selected_output_options.append(OutputOptions.High_Stimulus.value)
         selected_output_options.append(OutputOptions.Normalized_Data.value)
+        clear_console()
         return
 
     user_choose = user_choose.split(',')
@@ -116,6 +123,7 @@ Which Files should be processed
 
 
 def ask_files_to_process():
+    print_hic_headline()
     global selected_files_to_process
     all_files = os.listdir(os.path.normpath(Config.WORKING_DIRECTORY))
     temp_files = []
@@ -146,25 +154,34 @@ def ask_files_to_process():
         for number in user_input.split(','):
             if number.strip().isdigit():
                 selected_files_to_process.append(File.File(int(number), temp_files[int(number)], 0, 0))
+    clear_console()
     return
 
 
 def ask_stimulation_time_frame_per_file():
+    print_hic_headline()
     global selected_files_to_process
 
     for file in selected_files_to_process:
-        print(file.name)
+        time_traces = read_time_traces_file(file.name)
+        time_frames = create_time_frame_array(time_traces)
+        data_count = detectDataSizes.detect_row_and_column_count(time_frames)
+        print('Please insert the Stimulation Time Frame ( 0 - {0}) for the given file.'.format(data_count[1]))
 
-    for file in selected_files_to_process:
         while True:
             try:
-                stimulus = int(input('Frame of stimulation for file {0}: '.format(file.name)))
+                file.stimulation_time_frame = int(input('Frame of stimulation for file {0}: '.format(file.name)))
             except ValueError:
-                print("Sorry, but this is NOT a valid Integer. Please insert a valid one")
+                print("Sorry, but this is NOT a valid Integer. Please insert a valid one!")
                 continue
             else:
-                break
-        file.stimulation_time_frame = stimulus
+                if file.stimulation_time_frame < 0 or file.stimulation_time_frame > data_count[1]:
+                    print("Sorry, but a the stimulus is out of range! Please enter a valid one!")
+                    continue
+                else:
+                    break
+        print()
+    clear_console()
     return
 
 
@@ -174,10 +191,11 @@ Asks the User about the percentage which should be used
 
 
 def ask_percentage():
+    print_hic_headline()
     global percentage
     global selected_files_to_process
     print("Please insert the Limit Percentage")
-    print("This percentage is calculated from the imputed maximum.")
+    print("This limit is calculated from the imputed maximum.")
     print("E.g. 0.6 is the 60%")
     print()
     for file in selected_files_to_process:
@@ -188,7 +206,7 @@ def ask_percentage():
                 print("Sorry but this is not a valid Float")
                 continue
             else:
-                if percentage < 0.0 or percentage > 1.0:
+                if file.percentage < 0.0 or file.percentage > 1.0:
                     print("Sorry this is not a valid percentage")
                     continue
                 else:
