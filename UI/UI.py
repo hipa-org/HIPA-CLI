@@ -16,9 +16,10 @@ def print_minus_line():
 def clear_console():
     clear = None
     detected_os = platform(1, 1)
+    print(detected_os)
     if "Darwin" in detected_os:
         clear = lambda: os.system('clear')
-    elif "win32" in detected_os:
+    elif "Windows" in detected_os:
         clear = lambda: os.system('cls')
     clear()
 
