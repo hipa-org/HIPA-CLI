@@ -158,6 +158,11 @@ def ask_files_to_process():
     return
 
 
+'''
+Ask for the Frame Number where the first stimulatory addition took place
+'''
+
+
 def ask_stimulation_time_frame_per_file():
     print_hic_headline()
     global selected_files_to_process
@@ -176,7 +181,7 @@ def ask_stimulation_time_frame_per_file():
                 continue
             else:
                 if file.stimulation_time_frame < 0 or file.stimulation_time_frame > data_count[1]:
-                    print("Sorry, but a the stimulus is out of range! Please enter a valid one!")
+                    print("Sorry, but the stimulus is out of range! Please enter a valid one!")
                     continue
                 else:
                     break
