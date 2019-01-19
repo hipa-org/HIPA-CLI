@@ -1,8 +1,11 @@
-def detect_row_and_column_count(file_data):
+from Classes.InputFile import InputFile
+
+
+def detect_row_and_column_count(file: InputFile):
     data = []
     column_count = 0
     row_count = 0
-    for time_frame in file_data:
+    for time_frame in file:
         column_count += 1
         row_count = len(time_frame[1:])
     else:

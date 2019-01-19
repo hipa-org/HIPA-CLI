@@ -1,9 +1,10 @@
-selected_files_to_process = []
+input_files = []
 selected_output_options = []
 
 
 def init():
-    global selected_files_to_process
+    global input_files
     global selected_output_options
-    selected_files_to_process = []
+    input_files = []
     selected_output_options = []
+

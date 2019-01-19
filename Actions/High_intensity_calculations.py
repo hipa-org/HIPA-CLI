@@ -1,15 +1,13 @@
-from Classes import Cell, InputFile
+from Classes.Cell import Cell, create_cells
 import datetime
 from Services.Logger.log import write_message, LogLevel
-from Services.Config.Config import Config
 from Services.Filemanagement.read_files import read_time_traces_file
 from Services.Filemanagement.write_files import write_high_stimulus_file, write_normalized_data
 from Services.Calculations import normalisation, mean_calculation, min_max, high_stimulus, detectDataSizes
-import os
 from enum import Enum
 from UI.UI import print_empty_line, print_hic_headline
-from UI.UI import clear_console
-from GlobalData.Statics import selected_files_to_process, selected_output_options
+from UI.Questions import ask_files_to_process, ask_stimulation_time_frame, ask_file_output, ask_percentage
+from GlobalData.Statics import input_files
 
 
 class OutputOptions(Enum):
@@ -17,7 +15,6 @@ class OutputOptions(Enum):
     Normalized_Data = 'Normalized Data'
 
 
-cell_data = []
 percentage = 0.0
 
 '''
@@ -27,18 +24,37 @@ Main Calculation Function
 
 def start_high_intensity_calculations():
     reset_previous_input()
-    ask_file_output()
+
     ask_files_to_process()
-    ask_stimulation_time_frame_per_file()
-    ask_percentage()
-    conclusion()
-    for file in selected_files_to_process:
-        global cell_data
-        cell_data = []
-        print_empty_line()
-        write_message('Processing file {0}'.format(file.name), LogLevel.Info)
-        execute_high_intensity_calculation(file.name, file.stimulation_time_frame)
+    read_time_traces_file()
+    for file in input_files:
+        create_cells(file)
+
+    for file in input_files:
+        for cell in file.cells:
+            print(cell.name)
+            for timeframe in cell.timeframes:
+                print('TimeFrame {0} Including Minute: {1} Value {2}'.format(timeframe.id, timeframe.including_minute, timeframe.value))
+
     return True
+'''
+ detectDataSizes.detect_row_and_column_count(file)
+ ask_stimulation_time_frame()
+
+ time_frames = create_time_frame_array(time_traces)
+ data_count = detectDataSizes.detect_row_and_column_count(time_frames)
+
+ ask_percentage()
+ ask_file_output()
+ conclusion()
+ for file in input_files:
+     time_traces = read_time_traces_file(file.name)
+
+     cell_data = []
+     print_empty_line()
+     write_message('Processing file {0}'.format(file.name), LogLevel.Info)
+     execute_high_intensity_calculation(file.name, file.stimulation_time_frame)
+ '''
 
 
 '''
@@ -75,146 +91,6 @@ def conclusion():
         print()
 
     input("Press any Key to start Calculations.")
-
-
-'''
-Asks which files should be processed
-'''
-
-
-def ask_file_output():
-    print_hic_headline()
-    global selected_output_options
-    print('Which files should be created as Output?')
-    print('Available Choices:\n')
-    print('1. High Stimulus')
-    print('2. Normalized Data')
-    print()
-    print('(Type each Number separated by comma or just press enter to select all options!)')
-    user_choose = input()
-
-    if user_choose.strip() == '':
-        selected_output_options.append(OutputOptions.High_Stimulus.value)
-        selected_output_options.append(OutputOptions.Normalized_Data.value)
-        clear_console()
-        return
-
-    user_choose = user_choose.split(',')
-    for choose in user_choose:
-        if choose.isdigit():
-            if int(choose.strip()) == 1:
-                selected_output_options.append(OutputOptions.High_Stimulus.value)
-            elif int(choose.strip()) == 2:
-                selected_output_options.append(OutputOptions.Normalized_Data.value)
-            else:
-                selected_output_options.append(OutputOptions.High_Stimulus.value)
-                selected_output_options.append(OutputOptions.Normalized_Data.value)
-
-    clear_console()
-    return
-
-
-'''
-Which Files should be processed
-'''
-
-
-def ask_files_to_process():
-    print_hic_headline()
-    global selected_files_to_process
-    all_files = os.listdir(os.path.normpath(Config.WORKING_DIRECTORY))
-    temp_files = []
-    for file in all_files:
-        if Config.INPUT_FILE_NAME in file:
-            if Config.OUTPUT_FILE_NAME_HIGH_STIMULUS not in file and Config.OUTPUT_FILE_NAME_NORMALIZED_DATA not in file:
-                temp_files.append(file)
-
-    print('Files available: ')
-    print()
-    i = 0
-    for file in temp_files:
-        print('{0}: {1}'.format(i, file))
-        i += 1
-
-    print()
-
-    user_input = input(
-        'Choose all files you want to process. (Type each number separated by comma or '
-        'just press enter to select all files)\n')
-
-    if user_input.strip() == '':
-        i = 0
-        for file in temp_files:
-            selected_files_to_process.append(InputFile.File(i, file, 0, 0))
-            i += 1
-    else:
-        for number in user_input.split(','):
-            if number.strip().isdigit():
-                selected_files_to_process.append(InputFile.File(int(number), temp_files[int(number)], 0, 0))
-    clear_console()
-    return
-
-
-'''
-Ask for the Frame Number where the first stimulatory addition took place
-'''
-
-
-def ask_stimulation_time_frame_per_file():
-    print_hic_headline()
-    global selected_files_to_process
-
-    for file in selected_files_to_process:
-        time_traces = read_time_traces_file(file.name)
-        time_frames = create_time_frame_array(time_traces)
-        data_count = detectDataSizes.detect_row_and_column_count(time_frames)
-        print('Please insert the Stimulation Time Frame (0 - {0}) for the given file.'.format(data_count[1]))
-
-        while True:
-            try:
-                file.stimulation_time_frame = int(input('Frame of stimulation for file {0}: '.format(file.name)))
-            except ValueError:
-                print("Sorry, but this is NOT a valid Integer. Please insert a valid one!")
-                continue
-            else:
-                if file.stimulation_time_frame < 0 or file.stimulation_time_frame > data_count[1]:
-                    print("Sorry, but the stimulus is out of range! Please enter a valid one!")
-                    continue
-                else:
-                    break
-        print()
-    clear_console()
-    return
-
-
-'''
-Asks the User about the percentage which should be used
-'''
-
-
-def ask_percentage():
-    print_hic_headline()
-    global percentage
-    global selected_files_to_process
-    print("Please insert the Limit Percentage")
-    print("This limit is calculated from the imputed maximum.")
-    print("E.g. 0.6 is the 60%")
-    print()
-    for file in selected_files_to_process:
-        while True:
-            try:
-                file.percentage = float(input('Percentage for file {0} (0 - 1): '.format(file.name)))
-            except ValueError:
-                print("Sorry but this is not a valid Float")
-                continue
-            else:
-                if file.percentage < 0.0 or file.percentage > 1.0:
-                    print("Sorry this is not a valid percentage")
-                    continue
-                else:
-                    break
-
-    clear_console()
 
 
 def execute_high_intensity_calculation(file_name, stimulation_time_frame):
