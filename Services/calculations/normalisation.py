@@ -1,3 +1,5 @@
+
+
 '''
 Normalize each Datapoint in Cell
 '''

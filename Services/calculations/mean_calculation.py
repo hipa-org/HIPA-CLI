@@ -8,5 +8,3 @@ def calculate_norm_mean(max_iterations, time_frame):
     return np.mean(new_time_frame)
 
 
-def calculate_mean(time_frame):
-    return np.mean(time_frame)

@@ -1,10 +1,10 @@
-from classes import Cell, File
+from Classes import Cell, InputFile
 import datetime
-from services.logger.log import write_message, LogLevel
-from services.config.config import Config
-from services.filemanagement.read_files import read_time_traces_file
-from services.filemanagement.write_files import write_high_stimulus_file, write_normalized_data
-from services.calculations import normalisation, mean_calculation, min_max, high_stimulus, detectDataSizes
+from Services.logger.log import write_message, LogLevel
+from Services.config.config import Config
+from Services.filemanagement.read_files import read_time_traces_file
+from Services.filemanagement.write_files import write_high_stimulus_file, write_normalized_data
+from Services.calculations import normalisation, mean_calculation, min_max, high_stimulus, detectDataSizes
 import os
 from enum import Enum
 from UI.UI import print_empty_line, print_hic_headline
@@ -148,12 +148,12 @@ def ask_files_to_process():
     if user_input.strip() == '':
         i = 0
         for file in temp_files:
-            selected_files_to_process.append(File.File(i, file, 0, 0))
+            selected_files_to_process.append(InputFile.File(i, file, 0, 0))
             i += 1
     else:
         for number in user_input.split(','):
             if number.strip().isdigit():
-                selected_files_to_process.append(File.File(int(number), temp_files[int(number)], 0, 0))
+                selected_files_to_process.append(InputFile.File(int(number), temp_files[int(number)], 0, 0))
     clear_console()
     return
 
@@ -321,6 +321,7 @@ def calculate_mean(normalised_cells):
     index = 0
     for normalised_cell in normalised_cells:
         mean = mean_calculation.calculate_mean(normalised_cell[1:])
+        write_message('Calculated Mean -> {0}'.format(mean), LogLevel.Verbose)
         cell_data[index].mean = mean
         index += 1
     write_message('Mean Calculation done', LogLevel.Info)
@@ -337,7 +338,7 @@ def maximum_detection(normalised_cells):
     index = 0
     for normalised_cell in normalised_cells:
         cell_max = min_max.calculate_maximum(normalised_cell[1:])
-        write_message('Maximum -> {0}'.format(cell_max), LogLevel.Verbose)
+        write_message('Maximum of cell {0}-> {1}'.format(cell_data[index],cell_max), LogLevel.Verbose)
         cell_data[index].maximum = cell_max
         index += 1
 
@@ -352,16 +353,16 @@ Calculate Limit for each Cell
 def calculate_limit(file_name):
     global selected_files_to_process
     global cell_data
-    write_message('Calculating Limit...', LogLevel.Info)
+    write_message('Calculating Threshold...', LogLevel.Info)
 
     for file in selected_files_to_process:
         if file.name == file_name:
             index = 0
             for cell in cell_data:
                 cell_data[index].limit = min_max.calculate_limit_from_maximum(cell.maximum, file.percentage)
-                write_message('Treshold -> {0}'.format(min_max.calculate_limit_from_maximum(cell.maximum, file.percentage)), LogLevel.Verbose)
+                write_message('Threshold -> {0}'.format(min_max.calculate_limit_from_maximum(cell.maximum, file.percentage)), LogLevel.Verbose)
                 index += 1
-    write_message('Calculating Limit done', LogLevel.Info)
+    write_message('Calculating Threshold done', LogLevel.Info)
 
 
 '''
