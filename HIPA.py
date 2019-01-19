@@ -86,7 +86,7 @@ def start_up_actions():
         input('Press key to continue...')
         start_up_actions()
     elif choice == 3:
-        webbrowser.open_new_tab('https://exitare.github.io/High-Intensity-Peak-Analysis/')
+        webbrowser.open_new_tab('https://github.com/Exitare/HIPA-CLI')
         start_up_actions()
     elif choice == -1:
         clear_console()
