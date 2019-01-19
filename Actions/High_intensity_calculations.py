@@ -1,14 +1,15 @@
 from Classes import Cell, InputFile
 import datetime
-from Services.logger.log import write_message, LogLevel
-from Services.config.config import Config
-from Services.filemanagement.read_files import read_time_traces_file
-from Services.filemanagement.write_files import write_high_stimulus_file, write_normalized_data
-from Services.calculations import normalisation, mean_calculation, min_max, high_stimulus, detectDataSizes
+from Services.Logger.log import write_message, LogLevel
+from Services.Config.Config import Config
+from Services.Filemanagement.read_files import read_time_traces_file
+from Services.Filemanagement.write_files import write_high_stimulus_file, write_normalized_data
+from Services.Calculations import normalisation, mean_calculation, min_max, high_stimulus, detectDataSizes
 import os
 from enum import Enum
 from UI.UI import print_empty_line, print_hic_headline
 from UI.UI import clear_console
+from GlobalData.Statics import selected_files_to_process, selected_output_options
 
 
 class OutputOptions(Enum):
@@ -18,8 +19,6 @@ class OutputOptions(Enum):
 
 cell_data = []
 percentage = 0.0
-selected_files_to_process = []
-selected_output_options = []
 
 '''
 Main Calculation Function
@@ -28,8 +27,6 @@ Main Calculation Function
 
 def start_high_intensity_calculations():
     reset_previous_input()
-    global selected_files_to_process
-    global selected_output_options
     ask_file_output()
     ask_files_to_process()
     ask_stimulation_time_frame_per_file()
@@ -57,7 +54,7 @@ def reset_previous_input():
 
 
 '''
-Prints a conclusion before starting the calculations
+Prints a conclusion before starting the Calculations
 '''
 
 
@@ -77,7 +74,7 @@ def conclusion():
                 file.name, file.stimulation_time_frame, file.percentage), LogLevel.Info)
         print()
 
-    input("Press any Key to start calculations.")
+    input("Press any Key to start Calculations.")
 
 
 '''
@@ -338,7 +335,7 @@ def maximum_detection(normalised_cells):
     index = 0
     for normalised_cell in normalised_cells:
         cell_max = min_max.calculate_maximum(normalised_cell[1:])
-        write_message('Maximum of cell {0}-> {1}'.format(cell_data[index],cell_max), LogLevel.Verbose)
+        write_message('Maximum of cell {0}-> {1}'.format(cell_data[index], cell_max), LogLevel.Verbose)
         cell_data[index].maximum = cell_max
         index += 1
 
@@ -360,7 +357,9 @@ def calculate_limit(file_name):
             index = 0
             for cell in cell_data:
                 cell_data[index].limit = min_max.calculate_limit_from_maximum(cell.maximum, file.percentage)
-                write_message('Threshold -> {0}'.format(min_max.calculate_limit_from_maximum(cell.maximum, file.percentage)), LogLevel.Verbose)
+                write_message(
+                    'Threshold -> {0}'.format(min_max.calculate_limit_from_maximum(cell.maximum, file.percentage)),
+                    LogLevel.Verbose)
                 index += 1
     write_message('Calculating Threshold done', LogLevel.Info)
 

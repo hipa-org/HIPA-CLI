@@ -1,7 +1,7 @@
 
-from services.logger.log import write_message, LogLevel
+from Services.Logger.log import write_message, LogLevel
 import sys
-from services.config.config import Config
+from Services.Config.Config import Config
 
 
 class PlotValue:

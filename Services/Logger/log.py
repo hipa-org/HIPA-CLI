@@ -1,4 +1,4 @@
-from services.config.config import Config
+from Services.Config.Config import Config
 from enum import Enum
 import datetime
 from clint.textui import puts, colored

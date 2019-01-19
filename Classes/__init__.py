@@ -1,3 +1,3 @@
-import classes.Cell
-import classes.InputFile
-import classes.TimeFrame
+import Classes.Cell
+import Classes.InputFile
+import Classes.TimeFrame

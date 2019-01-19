@@ -2,13 +2,15 @@ import sys
 import argparse
 from pyfiglet import Figlet
 from enum import Enum
-from actions import high_intensity_calculations
-from services.config.config import Config, read_conf, reset_config
+from Actions import High_intensity_calculations
+from Services.Config.Config import Config, read_conf, reset_config
 import os
-from services.logger.log import write_message, LogLevel
-from services.filemanagement.create_files import create_needed_files
+from Services.Logger.log import write_message, LogLevel
+from Services.Filemanagement.create_files import create_needed_files
 import webbrowser
 from UI.UI import clear_console
+import GlobalData.Statics
+from Services.CommandlineArguments.CommandlineHandler import handle_args
 
 
 class Actions(Enum):
@@ -22,6 +24,7 @@ class DebugActions(Enum):
 
 
 def start():
+    GlobalData.Statics.init()
     ap = argparse.ArgumentParser()
     ap.add_argument("-V", "--verbose", required=False,
                     action='store_true',
@@ -34,7 +37,7 @@ def start():
                     help="Starts the program in Debug Mode")
     ap.add_argument("-r", "--restore", required=False,
                     action='store_true',
-                    help="Restores the default config.ini")
+                    help="Restores the default Config.ini")
 
     args = vars(ap.parse_args())
     create_needed_files()
@@ -42,31 +45,9 @@ def start():
     success = read_conf()
 
     if success is not True:
-        write_message('Error reading {0} from config.ini. Please check your config file'.format(success),
+        write_message('Error reading {0} from Config.ini. Please check your Config file'.format(success),
                       LogLevel.Error)
     start_up_actions()
-
-
-def handle_args(arguments):
-    if arguments['verbose']:
-        Config.VERBOSE = 1
-
-    if arguments['highintense']:
-        high_intensity_calculations.start_high_intensity_calculations()
-        sys.exit(21)
-
-    if arguments['debug']:
-        Config.DEBUG = 1
-        write_message('IMPORTANT NOTICE: DEBUG MODE IS ACTIVE!', LogLevel.Info)
-
-    if arguments['restore']:
-        success = reset_config()
-        if success is not True:
-            write_message(success, LogLevel.Error)
-        else:
-            write_message('Restored Config.ini', LogLevel.Info)
-
-    write_message('Arguments {0}'.format(arguments), LogLevel.Verbose)
 
 
 def start_up_actions():
@@ -97,7 +78,7 @@ def start_up_actions():
             break
 
     if choice == 1:
-        high_intensity_calculations.start_high_intensity_calculations()
+        High_intensity_calculations.start_high_intensity_calculations()
         input('Press key to continue...')
         start_up_actions()
     elif choice == 2:

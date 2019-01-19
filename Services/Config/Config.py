@@ -1,7 +1,7 @@
 import configparser
 
 
-# config.py
+# Config.py
 class Config:
     VERBOSE = 0
     DEBUG = 0
@@ -16,11 +16,11 @@ class Config:
 
 def read_conf():
     """
-    Reads the config.ini File, and stores the values into the Config Class
+    Reads the Config.ini File, and stores the values into the Config Class
     :return:
     """
     config = configparser.ConfigParser()
-    config.read('config.ini')
+    config.read('Config.ini')
     try:
         Config.OUTPUT_FILE_NAME_HIGH_STIMULUS = config['SETTINGS']['output_file_name_high_stimulus']
         Config.OUTPUT_FILE_NAME_NORMALIZED_DATA = config['SETTINGS']['output_file_name_normalized_data']
@@ -36,7 +36,7 @@ def read_conf():
 
 def reset_config():
     """
-    Resets the Config File. In fact the config.ini file will be rewritten in total.
+    Resets the Config File. In fact the Config.ini file will be rewritten in total.
     :return:
     """
     config = configparser.ConfigParser()
@@ -51,7 +51,7 @@ def reset_config():
         'error_log': 'error-log.txt',
         'default_log': 'default-log.txt'
     }
-    with open('config.ini', 'w') as configfile:
+    with open('Config.ini', 'w') as configfile:
         try:
             config.write(configfile)
             configfile.close()

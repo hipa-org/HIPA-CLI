@@ -1,6 +1,6 @@
 import numpy as np
-from services.logger.log import write_message, LogLevel
-from services.config.config import Config
+from Services.Logger.log import write_message, LogLevel
+from Services.Config.Config import Config
 import datetime
 
 

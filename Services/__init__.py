@@ -1,5 +1,5 @@
-import services.config
-import services.logger
-import services.filemanagement
-import services.calculations
-import services.plot
+import Services.Config
+import Services.Logger
+import Services.Filemanagement
+import Services.Calculations
+import Services.Plot

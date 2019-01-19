@@ -1,6 +1,0 @@
-import services.calculations.quantile
-import services.calculations.high_stimulus
-import services.calculations.min_max
-import services.calculations.detectDataSizes
-import services.calculations.normalisation
-import services.calculations.mean_calculation
