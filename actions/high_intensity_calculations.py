@@ -337,8 +337,10 @@ def maximum_detection(normalised_cells):
     index = 0
     for normalised_cell in normalised_cells:
         cell_max = min_max.calculate_maximum(normalised_cell[1:])
+        write_message('Maximum -> {0}'.format(cell_max), LogLevel.Verbose)
         cell_data[index].maximum = cell_max
         index += 1
+
     write_message('Maximum Detection done', LogLevel.Info)
 
 
@@ -357,6 +359,7 @@ def calculate_limit(file_name):
             index = 0
             for cell in cell_data:
                 cell_data[index].limit = min_max.calculate_limit_from_maximum(cell.maximum, file.percentage)
+                write_message('Treshold -> {0}'.format(min_max.calculate_limit_from_maximum(cell.maximum, file.percentage)), LogLevel.Verbose)
                 index += 1
     write_message('Calculating Limit done', LogLevel.Info)
 
