@@ -3,19 +3,15 @@ import datetime
 from Services.Logger.log import write_message, LogLevel
 from Services.Filemanagement.read_files import read_time_traces_file
 from Services.Filemanagement.write_files import write_high_stimulus_file, write_normalized_data
-from Services.Calculations import normalisation, mean_calculation, min_max, high_stimulus, detectDataSizes
-from enum import Enum
+from Services.Calculations import normalisation, mean_calculation, min_max, high_stimulus, DataSizes
+
 from UI.UI import print_empty_line, print_hic_headline
-from UI.Questions import ask_files_to_process, ask_stimulation_time_frame, ask_file_output, ask_percentage
-from GlobalData.Statics import input_files
+from UI.Questions import ask_files_to_process, ask_stimulation_time_frame, ask_file_output, ask_percentage_limit
+from GlobalData.Statics import input_files, selected_output_options, reset_input_and_output
 
 
-class OutputOptions(Enum):
-    High_Stimulus = 'High Stimulus'
-    Normalized_Data = 'Normalized Data'
 
 
-percentage = 0.0
 
 '''
 Main Calculation Function
@@ -23,18 +19,22 @@ Main Calculation Function
 
 
 def start_high_intensity_calculations():
-    reset_previous_input()
+    reset_input_and_output()
 
     ask_files_to_process()
     read_time_traces_file()
     for file in input_files:
         create_cells(file)
+        DataSizes.calculate_minutes(file)
+
+    ask_stimulation_time_frame()
+    ask_percentage_limit()
+    ask_file_output()
+    conclusion()
 
     for file in input_files:
-        for cell in file.cells:
-            print(cell.name)
-            for timeframe in cell.timeframes:
-                print('TimeFrame {0} Including Minute: {1} Value {2}'.format(timeframe.id, timeframe.including_minute, timeframe.value))
+        write_message('Processing file {0}'.format(file.name), LogLevel.Info)
+        execute_high_intensity_calculation(file)
 
     return True
 '''
@@ -62,12 +62,6 @@ Resets the previous Input
 '''
 
 
-def reset_previous_input():
-    global selected_files_to_process
-    global selected_output_options
-    selected_files_to_process = []
-    selected_output_options = []
-
 
 '''
 Prints a conclusion before starting the Calculations
@@ -76,26 +70,26 @@ Prints a conclusion before starting the Calculations
 
 def conclusion():
     print_hic_headline()
-    global selected_files_to_process
-    global selected_output_options
-
     write_message("You selected the following output options:", LogLevel.Info)
     for output in selected_output_options:
         write_message(output, LogLevel.Info)
 
     print()
-    for file in selected_files_to_process:
+    for file in input_files:
         write_message(
             'You are processing the File {0} with following arguments: \nStimulation Timeframe: {1}\nPercentage: {2}'.format(
-                file.name, file.stimulation_time_frame, file.percentage), LogLevel.Info)
+                file.name, file.stimulation_timeframe, file.percentage_limit), LogLevel.Info)
         print()
 
     input("Press any Key to start Calculations.")
 
 
-def execute_high_intensity_calculation(file_name, stimulation_time_frame):
-    global selected_output_options
-    start_time = datetime.datetime.now()
+def execute_high_intensity_calculation(file):
+
+    baseline_mean_calculation(file)
+
+
+   ''' start_time = datetime.datetime.now()
     time_traces = read_time_traces_file(file_name)
     time_frames = create_time_frame_array(time_traces)
     data_count = calculate_provided_data(time_frames)
@@ -115,6 +109,7 @@ def execute_high_intensity_calculation(file_name, stimulation_time_frame):
     end_time = datetime.datetime.now()
     write_message('Calculation done in {0} seconds.'.format(end_time - start_time), LogLevel.Verbose)
     write_message('{0} data points processed'.format(data_count[0] * data_count[1]), LogLevel.Verbose)
+    '''
 
 
 '''
@@ -156,8 +151,8 @@ Calculates some basic info for the user.
 
 
 def calculate_provided_data(time_frames):
-    data_count = detectDataSizes.detect_row_and_column_count(time_frames)
-    minutes = detectDataSizes.calculate_minutes(data_count[1])
+    data_count = DataSizes.detect_row_and_column_count(time_frames)
+    minutes = DataSizes.calculate_minutes(data_count[1])
     write_message('Detected {0} Columns including Avg and Err'.format(data_count[0]), LogLevel.Info)
     write_message('Detected {0} Rows excluding the Header Row'.format(data_count[1]), LogLevel.Info)
     write_message('Detected {0} Minutes '.format(minutes), LogLevel.Info)

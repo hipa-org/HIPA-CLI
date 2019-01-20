@@ -1,6 +1,6 @@
 from UI.UI import print_hic_headline, clear_console
 from Services.Config.Config import Config
-from GlobalData.Statics import input_files
+from GlobalData.Statics import input_files, OutputOptions, selected_output_options
 from Classes import InputFile
 import os
 
@@ -34,13 +34,13 @@ def ask_files_to_process():
     if user_input.strip() == '':
         i = 0
         for file in temp_files:
-            input_files.append(InputFile.InputFile(i, 0, 0, file, 0, list(), 0, 0, 0, list(), 0))
+            input_files.append(InputFile.InputFile(i, 0, 0, file, 0, list(), 0,  list(), 0))
             i += 1
     else:
         for number in user_input.split(','):
             if number.strip().isdigit():
                 input_files.append(
-                    InputFile.InputFile(int(number),  0, 0, temp_files[int(number)], list(), 0, 0, 0, list(), 0, 0))
+                    InputFile.InputFile(int(number),  0, 0, temp_files[int(number)], 0, list(),  0, list(), 0))
     clear_console()
     return
 
@@ -53,16 +53,16 @@ Ask for the Frame Number where the first stimulatory addition took place
 def ask_stimulation_time_frame():
     print_hic_headline()
     for file in input_files:
-        print('Please insert the Stimulation Time Frame (0 - {0}) for the given file.'.format(len(input_files.cells)))
+        print('Please insert the Stimulation Time Frame (0 - {0}) for the given file.'.format(len(file.cells[0].timeframes)))
 
         while True:
             try:
-                file.stimulation_time_frame = int(input('Frame of stimulation for file {0}: '.format(file.name)))
+                file.stimulation_timeframe = int(input('Frame of stimulation for file {0}: '.format(file.name)))
             except ValueError:
                 print("Sorry, but this is NOT a valid Integer. Please insert a valid one!")
                 continue
             else:
-                if file.stimulation_time_frame < 0 or file.stimulation_time_frame > data_count[1]:
+                if file.stimulation_timeframe < 0 or file.stimulation_timeframe > len(file.cells[0].timeframes):
                     print("Sorry, but the stimulus is out of range! Please enter a valid one!")
                     continue
                 else:
@@ -80,7 +80,6 @@ Asks which files should be processed
 
 def ask_file_output():
     print_hic_headline()
-    global selected_output_options
     print('Which files should be created as Output?')
     print('Available Choices:\n')
     print('1. High Stimulus')
@@ -115,10 +114,8 @@ Asks the User about the percentage which should be used
 '''
 
 
-def ask_percentage():
+def ask_percentage_limit():
     print_hic_headline()
-    global percentage
-    global selected_files_to_process
     print("Please insert the Limit Percentage")
     print("This limit is calculated from the imputed maximum.")
     print("E.g. 0.6 is the 60%")
@@ -126,12 +123,12 @@ def ask_percentage():
     for file in input_files:
         while True:
             try:
-                file.percentage = float(input('Percentage for file {0} (0 - 1): '.format(file.name)))
+                file.percentage_limit = float(input('Percentage for file {0} (0 - 1): '.format(file.name)))
             except ValueError:
                 print("Sorry but this is not a valid Float")
                 continue
             else:
-                if file.percentage < 0.0 or file.percentage > 1.0:
+                if file.percentage_limit < 0.0 or file.percentage_limit > 1.0:
                     print("Sorry this is not a valid percentage")
                     continue
                 else:
