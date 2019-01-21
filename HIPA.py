@@ -62,11 +62,14 @@ def start_up_actions():
             print('2. Cell Sorter')
             print('3. Help')
             print('4. Cleanup Output Folder')
+            print()
             print('-1. Exit')
 
             if Config.DEBUG == 1:
                 print('** Debug **')
                 print('F. File System Test')
+            if Config.VERBOSE == 1:
+                print('Verbose active')
 
             choice = int(input("Choose your action: (Type the action number)\n"))
         except ValueError:

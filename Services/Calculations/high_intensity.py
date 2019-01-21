@@ -1,4 +1,5 @@
 from Services.Logger.log import write_message, LogLevel
+from Classes import InputFile
 
 
 def calculate_high_stimulus_per_minute(over_under_limit_data, frame_count):
@@ -84,3 +85,12 @@ def collect_all_high_stimulus(over_under_limit_data, frame_minutes_length):
     else:
         write_message(ones_per_minute_complete, LogLevel.Debug)
         return ones_per_minute_complete
+
+
+def detect_above_below_threshold(file: InputFile):
+    for cell in file.cells:
+        for timeframe in cell.normalized_timeframes:
+            if float(timeframe) >= float(cell.threshold):
+                timeframe.above_blow_cell_threshold = True
+            else:
+                timeframe.above_blow_cell_threshold = False

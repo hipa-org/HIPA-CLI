@@ -16,7 +16,6 @@ class Cell:
 
 
 def create_cells(file: InputFile):
-    print(file.name)
     cells = list()
     for index, item in enumerate(file.content):
         cell = Cell("", list(), 0, 0, 0, 0, 0)
@@ -27,7 +26,7 @@ def create_cells(file: InputFile):
                 cell.name = element
                 identifier += 1
             else:
-                timeframes.append(Timeframe(identifier, element, math.floor(identifier * 3.9 / 60), 0))
+                timeframes.append(Timeframe(identifier, float(element), math.floor(identifier * 3.9 / 60), 0))
                 identifier += 1
 
         cell.timeframes = timeframes

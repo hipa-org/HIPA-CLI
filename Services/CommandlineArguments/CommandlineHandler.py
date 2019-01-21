@@ -4,6 +4,7 @@ from Actions import High_intensity_calculations
 
 
 def handle_args(arguments):
+
     if arguments['verbose']:
         Config.VERBOSE = 1
 
