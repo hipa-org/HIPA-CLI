@@ -1,4 +1,4 @@
-from services.logger.log import write_message, LogLevel
+from Services.Logger.log import write_message, LogLevel
 
 
 def calculate_high_stimulus_per_minute(over_under_limit_data, frame_count):

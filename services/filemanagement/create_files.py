@@ -1,5 +1,5 @@
 import os
-from services.config.config import Config
+from Services.Config.config import Config
 
 
 def create_logs_dir():

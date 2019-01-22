@@ -2,11 +2,11 @@ import sys
 import argparse
 from pyfiglet import Figlet
 from enum import Enum
-from actions import high_intensity_calculations
-from services.config.config import Config, read_conf, reset_config
+from Actions import high_intensity_calculations
+from Services.Config.config import Config, read_conf, reset_config
 import os
-from services.logger.log import write_message, LogLevel
-from services.filemanagement.create_files import create_needed_files
+from Services.Logger.log import write_message, LogLevel
+from Services.Filemanagement.create_files import create_needed_files
 import webbrowser
 from UI.UI import clear_console
 

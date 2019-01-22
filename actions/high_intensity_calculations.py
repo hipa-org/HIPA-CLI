@@ -1,10 +1,10 @@
-from classes import Cell, File
+from Classes import Cell, File
 import datetime
-from services.logger.log import write_message, LogLevel
-from services.config.config import Config
-from services.filemanagement.read_files import read_time_traces_file
-from services.filemanagement.write_files import write_high_stimulus_file, write_normalized_data
-from services.calculations import normalisation, mean_calculation, min_max, high_stimulus, detectDataSizes
+from Services.Logger.log import write_message, LogLevel
+from Services.Config.config import Config
+from Services.Filemanagement.read_files import read_time_traces_file
+from Services.Filemanagement.write_files import write_high_stimulus_file, write_normalized_data
+from Services.Calculations import normalisation, mean_calculation, min_max, high_stimulus, detectDataSizes
 import os
 from enum import Enum
 from UI.UI import print_empty_line, print_hic_headline

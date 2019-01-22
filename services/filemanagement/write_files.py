@@ -1,6 +1,6 @@
 import numpy as np
-from services.logger.log import write_message, LogLevel
-from services.config.config import Config
+from Services.Logger.log import write_message, LogLevel
+from Services.Config.config import Config
 import datetime
 
 
@@ -13,6 +13,8 @@ def write_high_stimulus_file(cells, filename):
 
     data = np.array(temp_array)
     data = data.T
+    for item in data:
+        print(item)
     try:
         filename = '{0} {1} {2}{3}'.format(Config.OUTPUT_FILE_NAME_HIGH_STIMULUS, filename,
                                            now.strftime("%Y-%m-%d %H-%M-%S"), '.txt')
