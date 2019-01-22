@@ -1,17 +1,10 @@
-from Classes.Cell import Cell, create_cells
+from Classes.Cell import create_cells
 import datetime
-from Services.Logger.log import write_message, LogLevel
-from Services.Filemanagement.read_files import read_time_traces_file
-from Services.Filemanagement.write_files import write_high_stimulus_file, write_normalized_data
-from Services.Calculations import normalisation, mean, min_max, high_intensity, DataSizes
-
-from UI.UI import print_empty_line, print_hic_headline
-from UI.Questions import ask_files_to_process, ask_stimulation_time_frame, ask_file_output, ask_percentage_limit
-from GlobalData.Statics import input_files, selected_output_options, reset_input_and_output
-
-
-
-
+from Services.Logger import Log
+from Services.Filemanagement import Read, Write
+from Services import Calculations
+from UI import Console, Questions
+from GlobalData.Statics import input_files, selected_output_options, reset_input_and_output, OutputOptions
 
 '''
 Main Calculation Function
@@ -21,22 +14,24 @@ Main Calculation Function
 def start_high_intensity_calculations():
     reset_input_and_output()
 
-    ask_files_to_process()
-    read_time_traces_file()
+    Questions.ask_files_to_process()
+    Read.read_time_traces_file()
     for file in input_files:
         create_cells(file)
-        DataSizes.calculate_minutes(file)
+        Calculations.DataSizes.calculate_minutes(file)
 
-    ask_stimulation_time_frame()
-    ask_percentage_limit()
-    ask_file_output()
+    Questions.ask_stimulation_time_frame()
+    Questions.ask_percentage_limit()
+    Questions.ask_file_output()
     conclusion()
 
     for file in input_files:
-        write_message('Processing file {0}'.format(file.name), LogLevel.Info)
+        Log.write_message('Processing file {0}'.format(file.name), Log.LogLevel.Info)
         execute_high_intensity_calculation(file)
 
     return True
+
+
 '''
  detectDataSizes.detect_row_and_column_count(file)
  ask_stimulation_time_frame()
@@ -56,12 +51,9 @@ def start_high_intensity_calculations():
      execute_high_intensity_calculation(file.name, file.stimulation_time_frame)
  '''
 
-
 '''
 Resets the previous Input
 '''
-
-
 
 '''
 Prints a conclusion before starting the Calculations
@@ -69,16 +61,16 @@ Prints a conclusion before starting the Calculations
 
 
 def conclusion():
-    print_hic_headline()
-    write_message("You selected the following output options:", LogLevel.Info)
+    Console.print_hic_headline()
+    Log.write_message("You selected the following output options:", Log.LogLevel.Info)
     for output in selected_output_options:
-        write_message(output, LogLevel.Info)
+        Log.write_message(output, Log.LogLevel.Info)
 
     print()
     for file in input_files:
-        write_message(
+        Log.write_message(
             'You are processing the File {0} with following arguments: \nStimulation Timeframe: {1}\nPercentage: {2}'.format(
-                file.name, file.stimulation_timeframe, file.percentage_limit), LogLevel.Info)
+                file.name, file.stimulation_timeframe, file.percentage_limit), Log.LogLevel.Info)
         print()
 
     input("Press any Key to start Calculations.")
@@ -86,15 +78,22 @@ def conclusion():
 
 def execute_high_intensity_calculation(file):
     start_time = datetime.datetime.now()
-    mean.calculate_baseline_mean(file)
-    normalisation.normalise_timeframes(file)
-    min_max.calculate_timeframe_maximum(file)
-    min_max.calculate_threshold(file)
-    high_intensity.detect_above_below_threshold(file)
-    high_intensity.collect_all_high_stimulus(file)
+    Calculations.Mean.calculate_baseline_mean(file)
+    Calculations.Normalization.normalize_timeframes(file)
+    Calculations.Min_max.calculate_timeframe_maximum(file)
+    Calculations.Min_max.calculate_threshold(file)
+    Calculations.HighIntensity.detect_above_threshold(file)
+    Calculations.HighIntensity.count_high_intensity_peaks_per_minute(file)
+    for output_option in selected_output_options:
+        if output_option == OutputOptions.High_Stimulus.value:
+            Write.high_stimulus_file(file)
+       # elif output_option == OutputOptions.Normalized_Data.value:
+           # Write.write_normalized_data(cell_data, file_name)
     end_time = datetime.datetime.now()
-    write_message('Calculation done in {0} seconds.'.format(end_time - start_time), LogLevel.Verbose)
-    write_message('{0} data points processed'.format(len(file.cells) * len(file.cells[0].timeframes)), LogLevel.Verbose)
+    Log.write_message('Calculation done in {0} seconds.'.format(end_time - start_time), Log.LogLevel.Verbose)
+    Log.write_message('{0} Timeframes processed'.format(len(file.cells) * len(file.cells[0].timeframes)),
+                      Log.LogLevel.Verbose)
+
 
 ''' 
     time_traces = read_time_traces_file(file_name)
@@ -114,8 +113,3 @@ def execute_high_intensity_calculation(file):
             write_normalized_data(cell_data, file_name)
 
 '''
-
-
-
-
-

@@ -5,10 +5,10 @@ from enum import Enum
 from Actions import High_intensity_calculations
 from Services.Config.Config import Config, read_conf, reset_config
 import os
-from Services.Logger.log import write_message, LogLevel
-from Services.Filemanagement.create_files import create_needed_files
+from Services.Logger.Log import write_message, LogLevel
+from Services.Filemanagement.Create import create_needed_files
 import webbrowser
-from UI.UI import clear_console
+from UI.Console import clear_console
 import GlobalData.Statics
 from Services.CommandlineArguments.CommandlineHandler import handle_args
 

@@ -1,4 +1,4 @@
-from Services.Logger.log import write_message, LogLevel
+from Services.Logger.Log import write_message, LogLevel
 import sys
 from Services.Config.Config import Config
 from GlobalData.Statics import input_files

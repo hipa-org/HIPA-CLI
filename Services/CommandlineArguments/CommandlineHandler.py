@@ -1,5 +1,5 @@
 from Services.Config.Config import Config, read_conf, reset_config
-from Services.Logger.log import write_message, LogLevel
+from Services.Logger.Log import write_message, LogLevel
 from Actions import High_intensity_calculations
 
 

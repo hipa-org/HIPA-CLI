@@ -1,3 +1,3 @@
-import Services.Filemanagement.write_files
-import Services.Filemanagement.create_files
-import Services.Filemanagement.read_files
+import Services.Filemanagement.Write
+import Services.Filemanagement.Create
+import Services.Filemanagement.Read

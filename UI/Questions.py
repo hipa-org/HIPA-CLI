@@ -1,4 +1,4 @@
-from UI.UI import print_hic_headline, clear_console
+from UI.Console import print_hic_headline, clear_console
 from Services.Config.Config import Config
 from GlobalData.Statics import input_files, OutputOptions, selected_output_options
 from Classes import InputFile

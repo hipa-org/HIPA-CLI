@@ -1,6 +1,6 @@
 class InputFile:
-    def __init__(self, identifier, path, folder, name, percentage_limit, cells, total_detected_minutes,
-                 content, stimulation_timeframe):
+    def __init__(self, identifier: int, path: str, folder: str, name: str, percentage_limit: float, cells: list, total_detected_minutes: int,
+                 content , stimulation_timeframe: int):
         self.id = identifier
         self.path = path
         self.folder = folder
