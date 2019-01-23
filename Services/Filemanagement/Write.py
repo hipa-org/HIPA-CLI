@@ -9,6 +9,7 @@ def high_stimulus_file(file: InputFile):
     now = datetime.datetime.now()
     temp_array = []
     for cell in file.cells:
+        
         print(cell.name)
 
         temp_array.append(cell.name)
