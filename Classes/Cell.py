@@ -25,7 +25,8 @@ def create_cells(file: InputFile):
                 cell.name = element
                 identifier += 1
             else:
-                timeframes.append(TimeFrame.Timeframe(identifier, float(element), math.floor(identifier * 3.9 / 60), False))
+                timeframes.append(
+                    TimeFrame.Timeframe(identifier, float(element), math.floor(identifier * 3.9 / 60), False))
                 identifier += 1
 
         cell.timeframes = timeframes

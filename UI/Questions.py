@@ -1,6 +1,6 @@
 from UI.Console import print_hic_headline, clear_console
 from Services.Config.Config import Config
-from GlobalData.Statics import input_files, OutputOptions, selected_output_options
+from GlobalData import Statics
 from Classes import InputFile
 import os
 from Services.Logger import Log
@@ -36,14 +36,15 @@ def ask_files_to_process():
     if user_input.strip() == '':
         i = 0
         for file in temp_files:
-            input_files.append(InputFile.InputFile(i, 0, 0, file, 0, list(), 0, list(), 0))
+            print("Selected File {0}".format(file))
+            Statics.input_files.append(InputFile.InputFile(i, 0, 0, file, 0, list(), 0, list(), 0))
             i += 1
     else:
         for number in user_input.split(','):
             if number == 'r':
                 ask_files_to_process()
-            elif number.strip().isdigit() and int(number) < i:
-                input_files.append(
+            elif number.strip().isdigit() and int(number) < len(temp_files):
+                Statics.input_files.append(
                     InputFile.InputFile(int(number), 0, 0, temp_files[int(number)], 0, list(), 0, list(), 0))
             else:
                 print('Sorry but this file does not exist! Please try again!')
@@ -60,7 +61,8 @@ Ask for the Frame Number where the first stimulatory addition took place
 
 def ask_stimulation_time_frame():
     print_hic_headline()
-    for file in input_files:
+    for file in Statics.input_files:
+        print(file.name)
         print('Please insert the Stimulation Time Frame (0 - {0}) for the given file.'.format(
             len(file.cells[0].timeframes)))
 
@@ -98,8 +100,8 @@ def ask_file_output():
     user_choose = input()
 
     if user_choose.strip() == '':
-        selected_output_options.append(OutputOptions.High_Stimulus.value)
-        selected_output_options.append(OutputOptions.Normalized_Data.value)
+        Statics.selected_output_options.append(Statics.OutputOptions.High_Stimulus.value)
+        Statics.selected_output_options.append(Statics.OutputOptions.Normalized_Data.value)
         clear_console()
         return
 
@@ -107,12 +109,12 @@ def ask_file_output():
     for choose in user_choose:
         if choose.isdigit():
             if int(choose.strip()) == 1:
-                selected_output_options.append(OutputOptions.High_Stimulus.value)
+                Statics.selected_output_options.append(Statics.OutputOptions.High_Stimulus.value)
             elif int(choose.strip()) == 2:
-                selected_output_options.append(OutputOptions.Normalized_Data.value)
+                Statics.selected_output_options.append(Statics.OutputOptions.Normalized_Data.value)
             else:
-                selected_output_options.append(OutputOptions.High_Stimulus.value)
-                selected_output_options.append(OutputOptions.Normalized_Data.value)
+                Statics.selected_output_options.append(Statics.OutputOptions.High_Stimulus.value)
+                Statics.selected_output_options.append(Statics.OutputOptions.Normalized_Data.value)
 
     clear_console()
     return
@@ -129,7 +131,7 @@ def ask_percentage_limit():
     print("This limit is calculated from the imputed maximum.")
     print("E.g. 0.6 is the 60%")
     print()
-    for file in input_files:
+    for file in Statics.input_files:
         while True:
             try:
                 file.percentage_limit = float(input('Percentage for file {0} (0 - 1): '.format(file.name)))
@@ -155,11 +157,11 @@ Prints a conclusion before starting the Calculations
 def conclusion():
     print_hic_headline()
     Log.write_message("You selected the following output options:", Log.LogLevel.Info)
-    for output in selected_output_options:
+    for output in Statics.selected_output_options:
         Log.write_message(output, Log.LogLevel.Info)
 
     print()
-    for file in input_files:
+    for file in Statics.input_files:
         Log.write_message(
             'You are processing the File {0} with following arguments: \nStimulation Timeframe: {1}\nPercentage: {2}'.format(
                 file.name, file.stimulation_timeframe, file.percentage_limit), Log.LogLevel.Info)

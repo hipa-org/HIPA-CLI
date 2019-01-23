@@ -13,7 +13,6 @@ Main Calculation Function
 
 def start_high_intensity_calculations():
     Statics.reset_input_and_output()
-
     Questions.ask_files_to_process()
     Read.read_time_traces_file()
     for file in Statics.input_files:
@@ -26,6 +25,7 @@ def start_high_intensity_calculations():
     Questions.conclusion()
 
     for file in Statics.input_files:
+        print()
         Log.write_message('Processing file {0}'.format(file.name), Log.LogLevel.Info)
         execute_high_intensity_calculation(file)
 
