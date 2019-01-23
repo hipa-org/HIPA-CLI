@@ -7,20 +7,22 @@ import datetime
 
 def high_stimulus_file(file: InputFile):
     now = datetime.datetime.now()
-    temp_array = []
-    for cell in file.cells:
-        
-        print(cell.name)
 
+
+    file_data = []
+
+    for cell in file.cells:
+        temp_array = []
         temp_array.append(cell.name)
+
         for key, value in cell.high_intensity_counts.items():
             temp_array.append(value)
 
-        data = np.array(temp_array)
+        file_data.append(temp_array)
 
-        for item in data:
-            print(item)
-        # data = data.T
+
+    data = np.array(file_data)
+    data = data.T
 
     try:
         filename = '{0} {1} {2}{3}'.format(Config.OUTPUT_FILE_NAME_HIGH_STIMULUS, file.name,
