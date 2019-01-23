@@ -20,7 +20,8 @@ def ask_files_to_process():
 
     print(
         'Choose all files you want to process.\n'
-        '(Type each number separated by comma or just press enter to select all files)\n')
+        '(Type each number separated by comma or just press enter to select all files)\n'
+        'If you want to reload this windows to update the files type "r" and press enter!')
     print()
     i = 0
     for file in temp_files:
@@ -38,9 +39,15 @@ def ask_files_to_process():
             i += 1
     else:
         for number in user_input.split(','):
-            if number.strip().isdigit():
+            if number == 'r':
+                ask_files_to_process()
+            elif number.strip().isdigit() and int(number) < i:
                 input_files.append(
                     InputFile.InputFile(int(number), 0, 0, temp_files[int(number)], 0, list(), 0, list(), 0))
+            else:
+                print('Sorry but this file does not exist! Please try again!')
+                input()
+                ask_files_to_process()
     clear_console()
     return
 
