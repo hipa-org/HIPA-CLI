@@ -5,11 +5,14 @@ from Classes import InputFile
 def detect_above_threshold(file: InputFile):
     Log.write_message('Detecting Timeframe is above or below Threshold...', Log.LogLevel.Info)
     for cell in file.cells:
+        #print('Threshold: {0}'.format(cell.threshold))
         for timeframe in cell.normalized_timeframes:
             if float(timeframe.value) >= float(cell.threshold):
                 timeframe.above_threshold = True
+
             else:
                 timeframe.above_threshold = False
+
 
     Log.write_message('Detecting done.', Log.LogLevel.Info)
 

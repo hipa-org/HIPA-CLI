@@ -3,6 +3,7 @@ from Services.Config.Config import Config
 from GlobalData.Statics import input_files, OutputOptions, selected_output_options
 from Classes import InputFile
 import os
+from Services.Logger import Log
 
 '''
 Which Files should be processed
@@ -143,3 +144,25 @@ def ask_percentage_limit():
                     break
 
     clear_console()
+
+
+
+'''
+Prints a conclusion before starting the Calculations
+'''
+
+
+def conclusion():
+    print_hic_headline()
+    Log.write_message("You selected the following output options:", Log.LogLevel.Info)
+    for output in selected_output_options:
+        Log.write_message(output, Log.LogLevel.Info)
+
+    print()
+    for file in input_files:
+        Log.write_message(
+            'You are processing the File {0} with following arguments: \nStimulation Timeframe: {1}\nPercentage: {2}'.format(
+                file.name, file.stimulation_timeframe, file.percentage_limit), Log.LogLevel.Info)
+        print()
+
+    input("Press any Key to start Calculations.")
