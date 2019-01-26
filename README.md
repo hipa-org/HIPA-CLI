@@ -50,6 +50,14 @@ Windows:
 
 ## Usage
 
+There are 2 different normalization methods. You can change the normalization Method in the config.ini file.
+- Baseline
+- ToOne
+
+If you want to change the normalization method to "Baseline" , change your "normalization_method" setting to "Baseline", and for ToOne to "ToOne".
+You need to restart the Tool for updating the Settings.
+
+
 Mac/Unix:
 
 - sh start.sh
@@ -64,9 +72,8 @@ Windows:
 - Activate Environment. *e.g.* by typing: Unix/Mac: "source venv/bin/activate" / Windows: "./venv/Scripts/activate" in your console/shell
 - python HIPA.py [Arguments] 
 - e.g python HIPA.py -D
----
 
-***
+
 
 ## Command Line Arguments:
 
