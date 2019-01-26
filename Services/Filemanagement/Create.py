@@ -1,5 +1,6 @@
 import os
-from Services.Config.config import Config
+
+from Services.Config.Config import Config
 
 
 def create_logs_dir():
@@ -20,7 +21,6 @@ def create_error_log_file():
 
 def create_needed_files():
     dir_exist = os.path.exists(Config.LOG_DIRECTORY)
-    print(dir_exist)
     if dir_exist is not True:
         create_logs_dir()
 

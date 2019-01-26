@@ -1,4 +1,4 @@
-from Services.Config.config import Config
+from Services.Config.Config import Config
 from enum import Enum
 import datetime
 from clint.textui import puts, colored
@@ -36,6 +36,7 @@ def write_message(message, log_level):
     elif Config.VERBOSE == 1 and Config.DEBUG == 0:
         if log_level == LogLevel.Verbose:
             puts(colored.cyan('Verbose: {0}'.format(message)))
+
         elif log_level == LogLevel.Info:
             puts(colored.green('Info: {0}'.format(message)))
         elif log_level == LogLevel.Warn:
