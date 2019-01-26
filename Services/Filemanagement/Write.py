@@ -5,7 +5,7 @@ from Classes import InputFile
 import datetime
 
 
-def high_stimulus_counts(file: InputFile):
+def high_intensity_counts(file: InputFile):
     now = datetime.datetime.now()
     file_data = []
     for cell in file.cells:
@@ -16,7 +16,6 @@ def high_stimulus_counts(file: InputFile):
             temp_array.append(value)
 
         file_data.append(temp_array)
-
 
     data = np.array(file_data)
     data = data.T

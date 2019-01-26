@@ -9,6 +9,11 @@ class OutputOptions(Enum):
     Normalized_Data = 'Normalized Data'
 
 
+class NormalizationMethods(Enum):
+    Baseline = "Baseline"
+    To_One = "ToOne"
+
+
 def init():
     global input_files
     global selected_output_options

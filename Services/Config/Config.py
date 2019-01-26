@@ -12,6 +12,7 @@ class Config:
     ERROR_LOG = 'error-log.txt'
     DEFAULT_LOG = 'default-log.txt'
     LOG_DIRECTORY = 'Logs/'
+    NORMALIZATION_METHOD = 'Baseline'
 
 
 def read_conf():
@@ -29,6 +30,7 @@ def read_conf():
         Config.DEFAULT_LOG = config['LOGS']['default_log']
         Config.ERROR_LOG = config['LOGS']['error_log']
         Config.LOG_DIRECTORY = config['LOGS']['logs_path']
+        Config.NORMALIZATION_METHOD = config['SETTINGS']['normalization_method']
         return True
     except KeyError as ex:
         return ex
@@ -44,7 +46,8 @@ def reset_config():
         'input_file_name': 'time_traces',
         'working_directory': 'Data/',
         'output_file_name_high_stimulus': 'High-Stimulus',
-        'output_file_name_normalized_data': 'Normalized-Data'
+        'output_file_name_normalized_data': 'Normalized-Data',
+        'normalization_method': 'Baseline'
     }
     config['LOGS'] = {
         'logs_path': 'Logs/',

@@ -11,6 +11,7 @@ def calculate_baseline_mean(file):
                 temp_timeframes.append(timeframe.value)
         else:
             cell.baseline_mean = np.average(temp_timeframes)
-            Log.write_message('Baseline Mean for Cell {0} -> {1}'.format(cell.name, cell.baseline_mean), Log.LogLevel.Verbose)
+            Log.write_message('Baseline Mean for Cell {0} -> {1}'.format(cell.name, cell.baseline_mean),
+                              Log.LogLevel.Verbose)
 
     Log.write_message('Baseline Mean Calculation done.', Log.LogLevel.Info)

@@ -5,6 +5,7 @@ from Services.Filemanagement import Read, Write
 from Services import Calculations
 from UI import Console, Questions
 from GlobalData import Statics
+from Services.Config import Config
 
 '''
 Main Calculation Function
@@ -35,14 +36,17 @@ def start_high_intensity_calculations():
 def execute_high_intensity_calculation(file):
     start_time = datetime.datetime.now()
     Calculations.Mean.calculate_baseline_mean(file)
-    Calculations.Normalization.normalize_timeframes(file)
+    if Config.Config.NORMALIZATION_METHOD == Statics.NormalizationMethods.Baseline:
+        Calculations.Normalization.normalize_timeframes_with_baseline(file)
+    else:
+        Calculations.Normalization.normalize_timeframes_with_to_ones(file)
     Calculations.Min_max.calculate_timeframe_maximum(file)
     Calculations.Min_max.calculate_threshold(file)
     Calculations.HighIntensity.detect_above_threshold(file)
     Calculations.HighIntensity.count_high_intensity_peaks_per_minute(file)
     for output_option in Statics.selected_output_options:
         if output_option == Statics.OutputOptions.High_Stimulus.value:
-            Write.high_stimulus_counts(file)
+            Write.high_intensity_counts(file)
         elif output_option == Statics.OutputOptions.Normalized_Data.value:
             Write.normalized_timeframes(file)
     end_time = datetime.datetime.now()
