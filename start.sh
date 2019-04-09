@@ -1,13 +1,24 @@
 #!/bin/bash
 
+echo "Checking Python version..."
+
 if command -v python3 &>/dev/null; then
-    python3 -m venv ./venv
+    echo "Found Python 3"
+    python -m venv ./venv
+
+
+    if [ $? -eq 0 ]; then
+        echo OK
+        source venv/bin/activate
+        pip install -r requirements.txt
+        python HIPA.py
+    else
+        echo "Could not execute python -m venv ./venv"
+        echo "Edit the script. Change the 'python' command to the one calling python3."
+    fi
+
 else
-    echo Python 3 is not installed.
-    echo Aborting
-    return
+    echo "Python 3 is not installed."
+    echo "Aborting"
 fi
 
-source venv/bin/activate
-pip install -r requirements.txt
-python HIPA.py
