@@ -12,24 +12,3 @@ class Cell:
         self.normalized_timeframes = normalized_timeframes
         self.threshold = threshold
         self.high_intensity_counts = high_intensity_counts
-
-
-def create_cells(file: InputFile):
-    cells = list()
-    for index, item in enumerate(file.content):
-        cell = Cell("", list(), 0, 0, list(), 0, {})
-        timeframes = list()
-        identifier = 0
-        for element in item:
-            if identifier == 0:
-                cell.name = element
-                identifier += 1
-            else:
-                timeframes.append(
-                    TimeFrame.Timeframe(identifier, float(element), math.floor(identifier * 3.9 / 60), False))
-                identifier += 1
-
-        cell.timeframes = timeframes
-        cells.append(cell)
-        file.cells = cells
-    return

@@ -4,7 +4,7 @@ from GlobalData import Statics
 from Classes import InputFile
 import os
 from Services.Logger import Log
-
+from pathlib import Path
 '''
 Which Files should be processed
 '''
@@ -12,12 +12,12 @@ Which Files should be processed
 
 def ask_files_to_process():
     print_hic_headline()
-    all_files = os.listdir(os.path.normpath(Config.WORKING_DIRECTORY))
+    all_files = list(Path(Config.WORKING_DIRECTORY).rglob("*.[tT][xX][tT]"))
     temp_files = []
     for file in all_files:
-        if Config.INPUT_FILE_NAME in file:
-            if Config.OUTPUT_FILE_NAME_HIGH_STIMULUS not in file and Config.OUTPUT_FILE_NAME_NORMALIZED_DATA not in file:
-                temp_files.append(file)
+        if Config.INPUT_FILE_NAME in str(file):
+            if Config.OUTPUT_FILE_NAME_HIGH_STIMULUS not in str(file) and Config.OUTPUT_FILE_NAME_NORMALIZED_DATA not in str(file):
+                temp_files.append(str(file))
 
     print(
         'Choose all files you want to process.\n'
@@ -37,15 +37,15 @@ def ask_files_to_process():
         i = 0
         for file in temp_files:
             print("Selected File {0}".format(file))
-            Statics.input_files.append(InputFile.InputFile(i, 0, 0, file, 0, list(), 0, list(), 0))
+            Statics.input_files.append(InputFile.InputFile(i, str(file),"","", 0, list(), 0, list(), 0))
             i += 1
     else:
-        for number in user_input.split(','):
-            if number == 'r':
+        for selected_number in user_input.split(','):
+            if selected_number == 'r':
                 ask_files_to_process()
-            elif number.strip().isdigit() and int(number) < len(temp_files):
+            elif selected_number.strip().isdigit() and int(selected_number) < len(temp_files):
                 Statics.input_files.append(
-                    InputFile.InputFile(int(number), 0, 0, temp_files[int(number)], 0, list(), 0, list(), 0))
+                    InputFile.InputFile(int(selected_number), str(temp_files[int(selected_number)]), "","", 0, list(), 0, list(), 0))
             else:
                 print('Sorry but this file does not exist! Please try again!')
                 input()
@@ -62,7 +62,6 @@ Ask for the Frame Number where the first stimulatory addition took place
 def ask_stimulation_time_frame():
     print_hic_headline()
     for file in Statics.input_files:
-        print(file.name)
         print('Please insert the Stimulation Time Frame (0 - {0}) for the given file.'.format(
             len(file.cells[0].timeframes)))
 

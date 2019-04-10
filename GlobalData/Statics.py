@@ -1,6 +1,7 @@
 from enum import Enum
 
-input_files = []
+
+input_files  = []
 selected_output_options = []
 
 
