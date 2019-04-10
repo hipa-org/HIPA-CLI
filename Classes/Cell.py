@@ -1,5 +1,5 @@
 from Classes import InputFile, TimeFrame
-import math
+
 
 
 class Cell:
