@@ -1,6 +1,6 @@
 from Services.Config.Config import Config, read_conf, reset_config
 from Services.Logger.Log import write_message, LogLevel
-from Actions import High_intensity_calculations
+from Actions import High_Intensity_Calculations
 
 
 def handle_args(arguments):
@@ -9,7 +9,7 @@ def handle_args(arguments):
         Config.VERBOSE = 1
 
     if arguments['highintense']:
-        High_intensity_calculations.start_high_intensity_calculations()
+        High_Intensity_Calculations.start_high_intensity_calculations()
         sys.exit(21)
 
     if arguments['debug']:

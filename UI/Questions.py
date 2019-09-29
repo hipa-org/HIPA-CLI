@@ -146,8 +146,6 @@ def ask_percentage_limit():
 
     clear_console()
 
-
-
 '''
 Prints a conclusion before starting the Calculations
 '''
@@ -158,7 +156,7 @@ def conclusion():
     Log.write_message("You selected the following output options:", Log.LogLevel.Info)
     for output in Statics.selected_output_options:
         Log.write_message(output, Log.LogLevel.Info)
-
+    Log.write_message('Normalization method: {0}'.format(Config.NORMALIZATION_METHOD), Log.LogLevel.Info)
     print()
     for file in Statics.input_files:
         Log.write_message(

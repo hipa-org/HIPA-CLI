@@ -2,7 +2,7 @@ import sys
 import argparse
 from pyfiglet import Figlet
 from enum import Enum
-from Actions import High_intensity_calculations
+from Actions import High_Intensity_Calculations
 from Services.Config.Config import Config, read_conf, reset_config
 import os
 from Services.Logger.Log import write_message, LogLevel
@@ -81,7 +81,7 @@ def start_up_actions():
             break
 
     if choice == 1:
-        High_intensity_calculations.start_high_intensity_calculations()
+        High_Intensity_Calculations.start_high_intensity_calculations()
         input('Press key to continue...')
         start_up_actions()
     elif choice == 2:

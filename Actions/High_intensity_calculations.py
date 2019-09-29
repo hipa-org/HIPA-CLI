@@ -1,11 +1,8 @@
 import datetime
 from Services.Logger import Log
-from Services.Filemanagement import Read
 from UI import Console, Questions
 from GlobalData import Statics
-from Classes.InputFile import InputFile
 from Services.Config import Config
-import copy
 
 '''
 Main Calculation Function
@@ -15,8 +12,6 @@ Main Calculation Function
 def start_high_intensity_calculations():
     Statics.reset_input_and_output()
     Questions.ask_files_to_process()
-    
- 
 
     for input_file in Statics.input_files:
         input_file.get_folder()
@@ -45,7 +40,7 @@ def execute_high_intensity_calculation(file):
         file.normalize_timeframes_with_baseline()
     else:
         file.normalize_timeframes_with_to_ones()
-    
+
     file.calculate_timeframe_maximum()
     file.calculate_threshold()
     file.detect_above_threshold()

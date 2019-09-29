@@ -1,1 +1,1 @@
-import Actions.High_intensity_calculations
+import Actions.High_Intensity_Calculations
