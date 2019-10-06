@@ -208,7 +208,7 @@ class InputFile:
     def write_normalized_timeframes(self):
         """
          Write normalized timeframes to a file
-        :return: 
+        :return:
         """
         now = datetime.datetime.now()
         file_data = []

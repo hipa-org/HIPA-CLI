@@ -4,4 +4,3 @@ class Timeframe:
         self.value = value
         self.including_minute = including_minute
         self.above_threshold = above_threshold
-
