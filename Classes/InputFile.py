@@ -10,7 +10,7 @@ from Services.Config import Config
 class InputFile:
     def __init__(self, identifier: int, path: str, folder: str, name: str, percentage_limit: float, cells: list,
                  total_detected_minutes: int,
-                 content, stimulation_timeframe: int):
+                 content, stimulation_timeframes: list):
         self.id = identifier
         self.path = path
         self.folder = folder
@@ -19,7 +19,7 @@ class InputFile:
         self.cells = cells
         self.total_detected_minutes = total_detected_minutes
         self.content = content
-        self.stimulation_timeframe = stimulation_timeframe
+        self.stimulation_timeframes = stimulation_timeframes
 
     def calculate_minutes(self):
         self.total_detected_minutes = len(self.cells[0].timeframes) * 3.9 / 60
@@ -56,7 +56,7 @@ class InputFile:
         temp_timeframes = []
         for cell in self.cells:
             for timeframe in cell.timeframes:
-                if timeframe.identifier <= self.stimulation_timeframe:
+                if timeframe.identifier <= self.stimulation_timeframes[0]:
                     temp_timeframes.append(timeframe.value)
             else:
                 cell.baseline_mean = np.average(temp_timeframes)
@@ -143,7 +143,7 @@ class InputFile:
         temp_tf_values = []
 
         for cell in self.cells:
-            for timeframe in cell.timeframes[:self.stimulation_timeframe]:
+            for timeframe in cell.timeframes[:self.stimulation_timeframes[0]]:
                 temp_tf_values.append(timeframe.value)
 
             mean = np.mean(temp_tf_values)

@@ -25,7 +25,7 @@ def start_high_intensity_calculations():
         input_file.create_cells()
         input_file.calculate_minutes()
 
-    Questions.ask_stimulation_time_frame()
+    Questions.ask_stimulation_time_frames()
     Questions.ask_percentage_limit()
     Questions.ask_file_output()
     Questions.conclusion()

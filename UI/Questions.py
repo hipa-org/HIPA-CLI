@@ -2,9 +2,9 @@ from UI.Console import print_hic_headline, clear_console
 from Services.Config.Config import Config
 from GlobalData import Statics
 from Classes import InputFile
-import os
 from Services.Logger import Log
 from pathlib import Path
+
 '''
 Which Files should be processed
 '''
@@ -16,7 +16,8 @@ def ask_files_to_process():
     temp_files = []
     for file in all_files:
         if Config.INPUT_FILE_NAME in str(file):
-            if Config.OUTPUT_FILE_NAME_HIGH_STIMULUS not in str(file) and Config.OUTPUT_FILE_NAME_NORMALIZED_DATA not in str(file):
+            if Config.OUTPUT_FILE_NAME_HIGH_STIMULUS not in str(
+                    file) and Config.OUTPUT_FILE_NAME_NORMALIZED_DATA not in str(file):
                 temp_files.append(str(file))
 
     print(
@@ -37,7 +38,7 @@ def ask_files_to_process():
         i = 0
         for file in temp_files:
             print("Selected File {0}".format(file))
-            Statics.input_files.append(InputFile.InputFile(i, str(file),"","", 0, list(), 0, list(), 0))
+            Statics.input_files.append(InputFile.InputFile(i, str(file), "", "", 0, list(), 0, list(), list()))
             i += 1
     else:
         for selected_number in user_input.split(','):
@@ -45,7 +46,8 @@ def ask_files_to_process():
                 ask_files_to_process()
             elif selected_number.strip().isdigit() and int(selected_number) < len(temp_files):
                 Statics.input_files.append(
-                    InputFile.InputFile(int(selected_number), str(temp_files[int(selected_number)]), "","", 0, list(), 0, list(), 0))
+                    InputFile.InputFile(int(selected_number), str(temp_files[int(selected_number)]), "", "", 0, list(),
+                                        0, list(), list()))
             else:
                 print('Sorry but this file does not exist! Please try again!')
                 input()
@@ -59,25 +61,34 @@ Ask for the Frame Number where the first stimulatory addition took place
 '''
 
 
-def ask_stimulation_time_frame():
+def ask_stimulation_time_frames():
     print_hic_headline()
     for file in Statics.input_files:
         print('Please insert the Stimulation Time Frame (0 - {0}) for the given file.'.format(
             len(file.cells[0].timeframes)))
 
         while True:
-            try:
-                file.stimulation_timeframe = int(input('Frame of stimulation for file {0}: '.format(file.name)))
-            except ValueError:
-                print("Sorry, but this is NOT a valid Integer. Please insert a valid one!")
-                continue
-            else:
-                if file.stimulation_timeframe < 0 or file.stimulation_timeframe > len(file.cells[0].timeframes):
-                    print("Sorry, but the stimulus is out of range! Please enter a valid one!")
+            frames: str = input('Frames of stimulation for file {0}: '.format(file.name))
+            frames: list = frames.split(',')
+            for frame in frames:
+                try:
+                    frame = int(frame)
+                    print(frame)
+                    if frame < 0 or frame > len(file.cells[0].timeframes):
+                        print("Sorry, but the stimulus is out of range! Ignoring it")
+                        continue
+
+                    file.stimulation_timeframes.append(int(frame))
+                except ValueError:
+                    print("Sorry, but this is NOT a valid Integer. Ignoring it!")
                     continue
-                else:
-                    break
+
+            else:
+                break
+
         print()
+        print(file.stimulation_timeframes)
+        input()
 
     clear_console()
     return
@@ -147,7 +158,6 @@ def ask_percentage_limit():
     clear_console()
 
 
-
 '''
 Prints a conclusion before starting the Calculations
 '''
@@ -162,8 +172,8 @@ def conclusion():
     print()
     for file in Statics.input_files:
         Log.write_message(
-            'You are processing the File {0} with following arguments: \nStimulation Timeframe: {1}\nPercentage: {2}'.format(
-                file.name, file.stimulation_timeframe, file.percentage_limit), Log.LogLevel.Info)
+            'You are processing the File {0} with following arguments: \nStimulation Timeframes: {1}\nPercentage: {2}'.format(
+                file.name, file.stimulation_timeframes, file.percentage_limit), Log.LogLevel.Info)
         print()
 
     input("Press any Key to start Calculations.")
