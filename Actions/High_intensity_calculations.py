@@ -1,11 +1,8 @@
 import datetime
 from Services.Logger import Log
-from Services.Filemanagement import Read
-from UI import Console, Questions
+from UI import Questions
 from GlobalData import Statics
-from Classes.InputFile import InputFile
 from Services.Config import Config
-import copy
 
 '''
 Main Calculation Function
@@ -13,10 +10,13 @@ Main Calculation Function
 
 
 def start_high_intensity_calculations():
+    """
+    High Intensity Calculations done here.
+    :return:
+    """
+
     Statics.reset_input_and_output()
     Questions.ask_files_to_process()
-    
- 
 
     for input_file in Statics.input_files:
         input_file.get_folder()
