@@ -269,3 +269,15 @@ class InputFile:
                 file_folder = file_folder + path_fragment + "/"
 
         self.folder = file_folder
+
+
+    def calculate_spikes_per_min_per_cell(self):
+        """
+        TODO: Iterate over every cell, count spikes (high intensity) for every minute per cell. So for 92 minutes, one get 92 sums.
+        :return:
+        """
+        print(len(self.cells[0].high_intensity_counts))
+        counts: int = self.total_detected_minutes
+        spikes_per_min: list[range[counts, counts + 1]]
+        for cell in self.cells:
+            for key, value in cell.high_intensity_counts.items():

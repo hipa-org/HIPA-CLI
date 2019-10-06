@@ -50,7 +50,7 @@ def execute_high_intensity_calculation(file):
     file.calculate_threshold()
     file.detect_above_threshold()
     file.count_high_intensity_peaks_per_minute()
-  
+    file.calculate_spikes_per_min_per_cell()
     for output_option in Statics.selected_output_options:
         if output_option == Statics.OutputOptions.High_Stimulus.value:
             file.write_high_intensity_counts()
