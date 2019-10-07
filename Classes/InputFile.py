@@ -10,7 +10,8 @@ from Services.Config import Config
 class InputFile:
     def __init__(self, identifier: int, path: str, folder: str, name: str, percentage_limit: float, cells: list,
                  total_detected_minutes: int,
-                 content, stimulation_timeframes: list):
+                 content, stimulation_timeframes: list,
+                 spikes_per_minute: list):
         self.id = identifier
         self.path = path
         self.folder = folder
@@ -20,6 +21,7 @@ class InputFile:
         self.total_detected_minutes = total_detected_minutes
         self.content = content
         self.stimulation_timeframes = stimulation_timeframes
+        self.spikes_per_minute = spikes_per_minute
 
     def calculate_minutes(self):
         self.total_detected_minutes = len(self.cells[0].timeframes) * 3.9 / 60
@@ -270,14 +272,18 @@ class InputFile:
 
         self.folder = file_folder
 
-
     def calculate_spikes_per_min_per_cell(self):
         """
         TODO: Iterate over every cell, count spikes (high intensity) for every minute per cell. So for 92 minutes, one get 92 sums.
         :return:
         """
-        print(len(self.cells[0].high_intensity_counts))
-        counts: int = self.total_detected_minutes
-        spikes_per_min: list[range[counts, counts + 1]]
+        spikes_per_min: list = [0] * int(self.total_detected_minutes + 1)
         for cell in self.cells:
-            for key, value in cell.high_intensity_counts.items():
+            if cell.name == "Average" or cell.name == "Err":
+                continue
+            for timeframe in cell.normalized_timeframes:
+                print(timeframe.above_threshold)
+                if timeframe.above_threshold:
+                    spikes_per_min[timeframe.including_minute] = spikes_per_min[timeframe.including_minute] + 1
+
+        self.spikes_per_minute = spikes_per_min
