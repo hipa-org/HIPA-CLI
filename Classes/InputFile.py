@@ -242,6 +242,8 @@ class InputFile:
         now = datetime.datetime.now()
         file_data = []
 
+        # TODO: Change calculation according to new algorithm below.
+        # Iterate over each cell and summarize it. Then only only colum output is expected
         for cell in self.cells:
             temp_array = []
             temp_array.append(cell.name)
@@ -301,7 +303,7 @@ class InputFile:
 
     def calculate_spikes_per_min_per_cell(self):
         """
-        TODO: Iterate over every cell, count spikes (high intensity) for every minute per cell. So for 92 minutes, one get 92 sums.
+        TODO: Calculate spikes per cell. Reset for each cell.
         :return:
         """
         spikes_per_min: list = [0] * int(self.total_detected_minutes + 1)
