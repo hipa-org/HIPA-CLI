@@ -3,6 +3,8 @@ from Services.Logger import Log
 from UI import Questions
 from GlobalData import Statics
 from Services.Config import Config
+from Services.Filemanagement import Write
+from Classes.InputFile import InputFile
 
 '''
 Main Calculation Function
@@ -38,7 +40,7 @@ def start_high_intensity_calculations():
     return True
 
 
-def execute_high_intensity_calculation(file):
+def execute_high_intensity_calculation(file: InputFile):
     start_time = datetime.datetime.now()
     file.calculate_baseline_mean()
     if Config.Config.NORMALIZATION_METHOD == Statics.NormalizationMethods.Baseline:
@@ -51,13 +53,15 @@ def execute_high_intensity_calculation(file):
     file.detect_above_threshold()
     file.count_high_intensity_peaks_per_minute()
     file.summarize_high_intensity_peaks()
+
     for output_option in Statics.selected_output_options:
         if output_option == Statics.OutputOptions.High_Stimulus.value:
-            file.write_high_intensity_counts()
+            Write.write_high_intensity_counts(file)
         elif output_option == Statics.OutputOptions.Normalized_Data.value:
-            file.write_normalized_timeframes()
+            Write.write_normalized_timeframes(file)
         elif output_option == Statics.OutputOptions.Spikes_Per_Minute.value:
-            file.write_total_high_intensity_peaks_per_minute()
+            Write.write_total_high_intensity_peaks_per_minute(file)
+
     end_time = datetime.datetime.now()
     Log.write_message('Calculation done in {0} seconds.'.format(end_time - start_time), Log.LogLevel.Verbose)
     Log.write_message('{0} Timeframes processed'.format(len(file.cells) * len(file.cells[0].timeframes)),

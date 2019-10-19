@@ -175,94 +175,6 @@ class InputFile:
 
         write_message('Normalization done.', LogLevel.Info)
 
-    def write_high_intensity_counts(self):
-        """
-        Write high intensity counts to a file
-        :return:
-        """
-        now = datetime.datetime.now()
-        file_data = []
-        for cell in self.cells:
-            temp_array = []
-            temp_array.append(cell.name)
-
-            for key, value in cell.high_intensity_counts.items():
-                temp_array.append(value)
-
-            file_data.append(temp_array)
-
-        data = np.array(file_data)
-        data = data.T
-
-        try:
-            filename = '{0}_{1}{2}'.format(Config.Config.OUTPUT_FILE_NAME_HIGH_STIMULUS,
-                                           now.strftime("%Y-%m-%d %H-%M-%S"), '.txt')
-            np.savetxt(
-                '{0}/{1}'.format(self.folder, filename), data, fmt='%s', delimiter='\t')
-            write_message(
-                'Created File {0} in {1}'.format(filename, self.folder), LogLevel.Info)
-        except FileNotFoundError as ex:
-            write_message('Error creating File!', LogLevel.Error)
-            write_message(ex, LogLevel.Error)
-
-    def write_normalized_timeframes(self):
-        """
-         Write normalized timeframes to a file
-        :return:
-        """
-        now = datetime.datetime.now()
-        file_data = []
-        for cell in self.cells:
-            temp_array = []
-            temp_array.append(cell.name)
-
-            for timeframe in cell.normalized_timeframes:
-                temp_array.append(timeframe.value)
-
-            file_data.append(temp_array)
-
-        data = np.array(file_data)
-        data = data.T
-        try:
-            filename = '{0}_{1}{2}'.format(Config.Config.OUTPUT_FILE_NAME_NORMALIZED_DATA,
-                                           now.strftime("%Y-%m-%d %H-%M-%S"), '.txt')
-            np.savetxt(
-                '{0}/{1}'.format(self.folder, filename), data, fmt='%s', delimiter='\t')
-            write_message(
-                'Created File {0} in {1}'.format(filename, self.folder), LogLevel.Info)
-        except FileNotFoundError as ex:
-            write_message('Error creating File!', LogLevel.Error)
-            write_message(ex, LogLevel.Error)
-
-    def write_total_high_intensity_peaks_per_minute(self):
-        """
-         Write spikes per minutes to a file
-        :return:
-        """
-        now = datetime.datetime.now()
-        file_data = []
-
-        # TODO: Change calculation according to new algorithm below.
-        # Iterate over each cell and summarize it. Then only only colum output is expected
-
-        minute: int = 0
-        for spikes_per_minute in self.total_spikes_per_minutes:
-            file_data.append(f"{minute} : {spikes_per_minute}")
-            minute += 1
-
-        data = np.array(file_data)
-        data = data.T
-        try:
-            filename = '{0}_{1}{2}'.format(Config.Config.OUTPUT_FILE_NAME_SPIKES_PER_MINUTE,
-                                           now.strftime("%Y-%m-%d %H-%M-%S"), '.txt')
-            np.savetxt(
-                '{0}/{1}'.format(self.folder, filename), data, fmt='%s', delimiter='\t')
-            write_message(
-                'Created File {0} in {1}'.format(filename, self.folder), LogLevel.Info)
-        except FileNotFoundError as ex:
-            write_message('Error creating File!', LogLevel.Error)
-            write_message(ex, LogLevel.Error)
-
     def read_time_traces_file(self):
         try:
             file_content = open('{0}'.format(str(self.path)), "r")
@@ -278,6 +190,10 @@ class InputFile:
             sys.exit(21)
 
     def get_file_name(self):
+        """
+        Evaluates the file name
+        :return:
+        """
         path_split = self.path.split(".")
         path_split = path_split[:-1]
         path_split = path_split[0].split("/")
