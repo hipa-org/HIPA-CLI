@@ -69,12 +69,10 @@ def write_normalized_timeframes(file: InputFile):
 
 def write_total_high_intensity_peaks_per_minute(file: InputFile):
     """
-     Write spikes per minutes to a file
+    Write spikes per minutes to a file
     :return:
     """
     now = datetime.datetime.now()
-
-    # TODO: Implement pandas and numpy array
 
     minutes = np.arange(int(file.total_detected_minutes) + 1)
 
@@ -82,7 +80,7 @@ def write_total_high_intensity_peaks_per_minute(file: InputFile):
                  " Mean spikes": file.total_spikes_per_minute_mean}
 
     data_matrix = pd.DataFrame(temp_dict)
-    print(data_matrix)
+
     try:
         filename = '{0}_{1}{2}'.format(Config.Config.OUTPUT_FILE_NAME_SPIKES_PER_MINUTE,
                                        now.strftime("%Y-%m-%d %H-%M-%S"), '.txt')
