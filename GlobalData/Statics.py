@@ -8,6 +8,7 @@ selected_output_options = []
 class OutputOptions(Enum):
     High_Stimulus = 'High Stimulus'
     Normalized_Data = 'Normalized Data'
+    Spikes_Per_Minute = 'Spikes_Per_Minute'
 
 
 class NormalizationMethods(Enum):

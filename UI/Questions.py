@@ -2,21 +2,23 @@ from UI.Console import print_hic_headline, clear_console
 from Services.Config.Config import Config
 from GlobalData import Statics
 from Classes import InputFile
-import os
 from Services.Logger import Log
 from pathlib import Path
-'''
-Which Files should be processed
-'''
 
 
 def ask_files_to_process():
+    """
+    Which Files should be processed.
+    File selection is from the working directory specific in the config file
+    """
+
     print_hic_headline()
     all_files = list(Path(Config.WORKING_DIRECTORY).rglob("*.[tT][xX][tT]"))
     temp_files = []
     for file in all_files:
         if Config.INPUT_FILE_NAME in str(file):
-            if Config.OUTPUT_FILE_NAME_HIGH_STIMULUS not in str(file) and Config.OUTPUT_FILE_NAME_NORMALIZED_DATA not in str(file):
+            if Config.OUTPUT_FILE_NAME_HIGH_STIMULUS not in str(
+                    file) and Config.OUTPUT_FILE_NAME_NORMALIZED_DATA not in str(file):
                 temp_files.append(str(file))
 
     print(
@@ -31,105 +33,124 @@ def ask_files_to_process():
 
     print()
 
-    user_input = input('Select Files: ')
+    user_selected_files = input('Select Files: ')
 
-    if user_input.strip() == '':
+    if user_selected_files.strip() == '':
         i = 0
         for file in temp_files:
             print("Selected File {0}".format(file))
-            Statics.input_files.append(InputFile.InputFile(i, str(file),"","", 0, list(), 0, list(), 0))
+            Statics.input_files.append(InputFile.InputFile(i, str(file), "", "", 0, list(), 0, list(), list(), list()))
             i += 1
     else:
-        for selected_number in user_input.split(','):
+        for selected_number in user_selected_files.split(','):
             if selected_number == 'r':
                 ask_files_to_process()
             elif selected_number.strip().isdigit() and int(selected_number) < len(temp_files):
                 Statics.input_files.append(
-                    InputFile.InputFile(int(selected_number), str(temp_files[int(selected_number)]), "","", 0, list(), 0, list(), 0))
+                    InputFile.InputFile(int(selected_number), str(temp_files[int(selected_number)]), "", "", 0, list(),
+                                        0, list(), list(), list()))
             else:
                 print('Sorry but this file does not exist! Please try again!')
                 input()
                 ask_files_to_process()
+
     clear_console()
     return
 
 
-'''
-Ask for the Frame Number where the first stimulatory addition took place
-'''
-
-
-def ask_stimulation_time_frame():
+def ask_stimulation_time_frames():
+    """
+    Ask for the Frame Number where the first stimulatory addition took place
+    """
     print_hic_headline()
     for file in Statics.input_files:
         print('Please insert the Stimulation Time Frame (0 - {0}) for the given file.'.format(
             len(file.cells[0].timeframes)))
 
         while True:
-            try:
-                file.stimulation_timeframe = int(input('Frame of stimulation for file {0}: '.format(file.name)))
-            except ValueError:
-                print("Sorry, but this is NOT a valid Integer. Please insert a valid one!")
-                continue
-            else:
-                if file.stimulation_timeframe < 0 or file.stimulation_timeframe > len(file.cells[0].timeframes):
-                    print("Sorry, but the stimulus is out of range! Please enter a valid one!")
+            frames: str = input('Frames of stimulation for file {0}: '.format(file.name))
+            frames: list = frames.split(',')
+            for frame in frames:
+                try:
+                    frame = int(frame)
+                    print(frame)
+                    if frame < 0 or frame > len(file.cells[0].timeframes):
+                        print("Sorry, but the stimulus is out of range! Ignoring it")
+                        continue
+
+                    file.stimulation_timeframes.append(int(frame))
+                except ValueError:
+                    print("Sorry, but this is NOT a valid Integer. Ignoring it!")
                     continue
-                else:
-                    break
-        print()
+
+            else:
+                if len(file.stimulation_timeframes) == 0:
+                    ask_stimulation_time_frames()
+                break
 
     clear_console()
     return
 
 
-'''
-Asks which files should be processed
-'''
-
-
 def ask_file_output():
+    """
+    Asks which files should be processed
+    """
     print_hic_headline()
     print('Which files should be created as Output?')
     print('Available Choices:\n')
-    print('1. High Stimulus')
-    print('2. Normalized Data')
+    print(f"1. {Statics.OutputOptions.High_Stimulus.value}")
+    print(f"2. {Statics.OutputOptions.Normalized_Data.value}")
+    print(f"3. {Statics.OutputOptions.Spikes_Per_Minute.value}")
     print()
     print('(Type each Number separated by comma or just press enter to select all options!)')
     user_choose = input()
 
+    # Clear global selected output values
+    Statics.selected_output_options.clear()
+
+    # User input was empty
     if user_choose.strip() == '':
         Statics.selected_output_options.append(Statics.OutputOptions.High_Stimulus.value)
         Statics.selected_output_options.append(Statics.OutputOptions.Normalized_Data.value)
+        Statics.selected_output_options.append(Statics.OutputOptions.Spikes_Per_Minute.value)
         clear_console()
         return
 
+    # User input was not empty
     user_choose = user_choose.split(',')
     for choose in user_choose:
+        input()
         if choose.isdigit():
             if int(choose.strip()) == 1:
                 Statics.selected_output_options.append(Statics.OutputOptions.High_Stimulus.value)
             elif int(choose.strip()) == 2:
                 Statics.selected_output_options.append(Statics.OutputOptions.Normalized_Data.value)
-            else:
-                Statics.selected_output_options.append(Statics.OutputOptions.High_Stimulus.value)
-                Statics.selected_output_options.append(Statics.OutputOptions.Normalized_Data.value)
+            elif int(choose.strip()) == 3:
+                Statics.selected_output_options.append(Statics.OutputOptions.Spikes_Per_Minute.value)
+        else:
+            print(f"Your input {choose} was invalid. Ignoring value!")
+            print(f"Would you like to re enter your selection or continue?")
+            print(f"Please you y or n")
+            user_continue = input()
+            if user_continue == "n" or user_continue == "N":
+                ask_file_output()
 
     clear_console()
     return
 
 
-'''
-Asks the User about the percentage which should be used
-'''
-
-
 def ask_percentage_limit():
+    """
+    Asks the User about the percentage which should be used
+    """
     print_hic_headline()
     print("Please insert the Limit Percentage")
     print("This limit is calculated from the imputed maximum.")
     print("E.g. 0.6 is the 60%")
     print()
+
+    # Iterating through given files
     for file in Statics.input_files:
         while True:
             try:
@@ -146,12 +167,12 @@ def ask_percentage_limit():
 
     clear_console()
 
-'''
-Prints a conclusion before starting the Calculations
-'''
-
 
 def conclusion():
+    """
+    Prints a conclusion before starting the Calculations
+    """
+
     print_hic_headline()
     Log.write_message("You selected the following output options:", Log.LogLevel.Info)
     for output in Statics.selected_output_options:
@@ -160,8 +181,8 @@ def conclusion():
     print()
     for file in Statics.input_files:
         Log.write_message(
-            'You are processing the File {0} with following arguments: \nStimulation Timeframe: {1}\nPercentage: {2}'.format(
-                file.name, file.stimulation_timeframe, file.percentage_limit), Log.LogLevel.Info)
+            'You are processing the File {0} with following arguments: \nStimulation Timeframes: {1}\nPercentage: {2}'.format(
+                file.name, file.stimulation_timeframes, file.percentage_limit), Log.LogLevel.Info)
         print()
 
     input("Press any Key to start Calculations.")

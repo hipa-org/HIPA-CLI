@@ -9,6 +9,7 @@ if command -v python3 &>/dev/null; then
 
     if [ $? -eq 0 ]; then
         echo OK
+	echo Starting virtual environment
         source venv/bin/activate
         pip install -r requirements.txt
         python3 HIPA.py

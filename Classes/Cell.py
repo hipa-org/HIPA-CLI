@@ -1,5 +1,3 @@
-from Classes import InputFile, TimeFrame
-
 
 class Cell:
     def __init__(self, name: str, timeframes: list, threshold: float, baseline_mean: float, normalized_timeframes: list,

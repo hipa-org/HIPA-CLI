@@ -52,7 +52,7 @@ def start():
 
 def start_up_actions():
     clear_console()
-
+    choice: int = 0
     while True:
         try:
             f = Figlet(font='slant')

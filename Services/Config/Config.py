@@ -9,6 +9,7 @@ class Config:
     INPUT_FILE_NAME = 'time_traces'
     OUTPUT_FILE_NAME_HIGH_STIMULUS = 'High-Stimulus'
     OUTPUT_FILE_NAME_NORMALIZED_DATA = 'Normalized-Data'
+    OUTPUT_FILE_NAME_SPIKES_PER_MINUTE = 'Spikes_Per_Minute'
     ERROR_LOG = 'error-log.txt'
     DEFAULT_LOG = 'default-log.txt'
     LOG_DIRECTORY = 'Logs/'

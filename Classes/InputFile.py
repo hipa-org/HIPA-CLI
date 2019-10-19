@@ -10,7 +10,8 @@ from Services.Config import Config
 class InputFile:
     def __init__(self, identifier: int, path: str, folder: str, name: str, percentage_limit: float, cells: list,
                  total_detected_minutes: int,
-                 content, stimulation_timeframe: int):
+                 content, stimulation_timeframes: list,
+                 spikes_per_minute: list):
         self.id = identifier
         self.path = path
         self.folder = folder
@@ -19,16 +20,16 @@ class InputFile:
         self.cells = cells
         self.total_detected_minutes = total_detected_minutes
         self.content = content
-        self.stimulation_timeframe = stimulation_timeframe
+        self.stimulation_timeframes = stimulation_timeframes
+        self.spikes_per_minute = spikes_per_minute
 
     def calculate_minutes(self):
         self.total_detected_minutes = len(self.cells[0].timeframes) * 3.9 / 60
 
-    '''
-    Creates cells given by the file
-    '''
-
     def create_cells(self):
+        """
+            Creates cells given by the file
+        """
         cells = list()
         for index, item in enumerate(self.content):
             cell = Cell.Cell("", list(), 0, 0, list(), 0, {})
@@ -48,16 +49,15 @@ class InputFile:
             self.cells = cells
         return
 
-    '''
-    Calculates the baseline mean
-    '''
-
     def calculate_baseline_mean(self):
+        """
+         Calculates the baseline mean
+        """
         write_message('Calculation Baseline Mean....', LogLevel.Info)
         temp_timeframes = []
         for cell in self.cells:
             for timeframe in cell.timeframes:
-                if timeframe.identifier <= self.stimulation_timeframe:
+                if timeframe.identifier <= self.stimulation_timeframes[0]:
                     temp_timeframes.append(timeframe.value)
             else:
                 cell.baseline_mean = np.average(temp_timeframes)
@@ -66,11 +66,11 @@ class InputFile:
 
         write_message('Baseline Mean Calculation done.', LogLevel.Info)
 
-    '''
-    Calculates the timeframe maximum
-    '''
-
     def calculate_timeframe_maximum(self):
+        """
+        Calculates the timeframe maximum
+        :return:
+        """
         write_message('Detecting Timeframe maximum....', LogLevel.Info)
         for cell in self.cells:
             temp_tf_values = []
@@ -85,11 +85,11 @@ class InputFile:
         write_message(
             'Detecting Timeframe maximum done.', LogLevel.Info)
 
-    '''
-    Calculates the Threshold
-    '''
-
     def calculate_threshold(self):
+        """
+          Calculates the Threshold
+        :return:
+        """
         write_message('Calculation Threshold...', LogLevel.Info)
         for cell in self.cells:
             cell.threshold = cell.timeframe_maximum * self.percentage_limit
@@ -98,28 +98,27 @@ class InputFile:
 
         write_message('Threshold calculation done.', LogLevel.Info)
 
-    '''
-    Detects if a timeframe is above or below threshold
-    '''
-
     def detect_above_threshold(self):
+        """
+         Detects if a timeframe is above or below threshold
+        :return:
+        """
         write_message(
             'Detecting Timeframe is above or below Threshold...', LogLevel.Info)
         for cell in self.cells:
             for timeframe in cell.normalized_timeframes:
                 if float(timeframe.value) >= float(cell.threshold):
                     timeframe.above_threshold = True
-
                 else:
                     timeframe.above_threshold = False
 
         write_message('Detecting done.', LogLevel.Info)
 
-    '''
-    Counts high intensity peaks per minute
-    '''
-
     def count_high_intensity_peaks_per_minute(self):
+        """
+         Counts high intensity peaks per minute
+        :return:
+        """
         write_message('Counting High Intensity Peaks...', LogLevel.Info)
         for cell in self.cells:
             for timeframe in cell.normalized_timeframes:
@@ -135,16 +134,16 @@ class InputFile:
                                                                                      timeframe.including_minute] + 1
         write_message('Counting High Intensity Peaks done.', LogLevel.Info)
 
-    '''
-    Normalize each Timeframe in Cell
-    '''
-
     def normalize_timeframes_with_baseline(self):
+        """
+         Normalize each Timeframe in Cell
+        :return:
+        """
         write_message('Normalize Timeframes with Baseline Mean...', LogLevel.Info)
         temp_tf_values = []
 
         for cell in self.cells:
-            for timeframe in cell.timeframes[:self.stimulation_timeframe]:
+            for timeframe in cell.timeframes[:self.stimulation_timeframes[0]]:
                 temp_tf_values.append(timeframe.value)
 
             mean = np.mean(temp_tf_values)
@@ -156,11 +155,11 @@ class InputFile:
 
         write_message('Normalization done.', LogLevel.Info)
 
-    '''
-    Normalize each Timeframe in Cell with to One Algorithm
-    '''
-
     def normalize_timeframes_with_to_ones(self):
+        """
+        Normalize each Timeframe in Cell with to One Algorithm
+        :return:
+        """
         write_message('Normalize Timeframes with To One Method...', LogLevel.Info)
 
         for cell in self.cells:
@@ -176,11 +175,11 @@ class InputFile:
 
         write_message('Normalization done.', LogLevel.Info)
 
-    '''
-    Write high intensity counts to a file
-    '''
-
     def write_high_intensity_counts(self):
+        """
+        Write high intensity counts to a file
+        :return:
+        """
         now = datetime.datetime.now()
         file_data = []
         for cell in self.cells:
@@ -206,11 +205,11 @@ class InputFile:
             write_message('Error creating File!', LogLevel.Error)
             write_message(ex, LogLevel.Error)
 
-    '''
-    Write normalized timeframes to a file
-    '''
-
     def write_normalized_timeframes(self):
+        """
+         Write normalized timeframes to a file
+        :return:
+        """
         now = datetime.datetime.now()
         file_data = []
         for cell in self.cells:
@@ -226,6 +225,36 @@ class InputFile:
         data = data.T
         try:
             filename = '{0}_{1}{2}'.format(Config.Config.OUTPUT_FILE_NAME_NORMALIZED_DATA,
+                                           now.strftime("%Y-%m-%d %H-%M-%S"), '.txt')
+            np.savetxt(
+                '{0}/{1}'.format(self.folder, filename), data, fmt='%s', delimiter='\t')
+            write_message(
+                'Created File {0} in {1}'.format(filename, self.folder), LogLevel.Info)
+        except FileNotFoundError as ex:
+            write_message('Error creating File!', LogLevel.Error)
+            write_message(ex, LogLevel.Error)
+
+    def write_spikes_per_minute(self):
+        """
+         Write spikes per minutes to a file
+        :return:
+        """
+        now = datetime.datetime.now()
+        file_data = []
+
+        for cell in self.cells:
+            temp_array = []
+            temp_array.append(cell.name)
+
+            for spikes_per_minute in self.spikes_per_minute:
+                temp_array.append(spikes_per_minute)
+
+            file_data.append(temp_array)
+
+        data = np.array(file_data)
+        data = data.T
+        try:
+            filename = '{0}_{1}{2}'.format(Config.Config.OUTPUT_FILE_NAME_SPIKES_PER_MINUTE,
                                            now.strftime("%Y-%m-%d %H-%M-%S"), '.txt')
             np.savetxt(
                 '{0}/{1}'.format(self.folder, filename), data, fmt='%s', delimiter='\t')
@@ -255,7 +284,6 @@ class InputFile:
         path_split = path_split[0].split("/")
         file_name = path_split[-1]
         self.name = file_name
-        print(self.name)
 
     def get_folder(self):
         path_split = self.path.split(".")
@@ -270,3 +298,19 @@ class InputFile:
                 file_folder = file_folder + path_fragment + "/"
 
         self.folder = file_folder
+
+    def calculate_spikes_per_min_per_cell(self):
+        """
+        TODO: Iterate over every cell, count spikes (high intensity) for every minute per cell. So for 92 minutes, one get 92 sums.
+        :return:
+        """
+        spikes_per_min: list = [0] * int(self.total_detected_minutes + 1)
+        for cell in self.cells:
+            if cell.name == "Average" or cell.name == "Err":
+                continue
+            for timeframe in cell.normalized_timeframes:
+                if timeframe.above_threshold:
+                    spikes_per_min[timeframe.including_minute] = spikes_per_min[timeframe.including_minute] + 1
+
+        self.spikes_per_minute = spikes_per_min
+
