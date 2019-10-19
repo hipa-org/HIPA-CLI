@@ -3,6 +3,7 @@ import datetime
 from Services.Config import Config
 from Services.Logger import Log
 from Classes import InputFile
+import pandas as pd
 
 
 def write_high_intensity_counts(file: InputFile):
@@ -72,23 +73,21 @@ def write_total_high_intensity_peaks_per_minute(file: InputFile):
     :return:
     """
     now = datetime.datetime.now()
-    file_data = []
 
-    # TODO: Change calculation according to new algorithm below.
-    # Iterate over each cell and summarize it. Then only only colum output is expected
+    # TODO: Implement pandas and numpy array
 
-    minute: int = 0
-    for spikes_per_minute in file.total_spikes_per_minutes:
-        file_data.append(f"{minute} : {spikes_per_minute}")
-        minute += 1
+    minutes = np.arange(int(file.total_detected_minutes) + 1)
 
-    data = np.array(file_data)
-    data = data.T
+    temp_dict = {"Minutes": minutes, "Total spikes": file.total_spikes_per_minutes,
+                 " Mean spikes": file.total_spikes_per_minute_mean}
+
+    data_matrix = pd.DataFrame(temp_dict)
+    print(data_matrix)
     try:
         filename = '{0}_{1}{2}'.format(Config.Config.OUTPUT_FILE_NAME_SPIKES_PER_MINUTE,
                                        now.strftime("%Y-%m-%d %H-%M-%S"), '.txt')
         np.savetxt(
-            '{0}/{1}'.format(file.folder, filename), data, fmt='%s', delimiter='\t')
+            '{0}/{1}'.format(file.folder, filename), data_matrix, fmt='%s', delimiter='\t')
         Log.write_message(
             'Created File {0} in {1}'.format(filename, file.folder), Log.LogLevel.Info)
     except FileNotFoundError as ex:

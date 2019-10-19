@@ -47,7 +47,8 @@ def ask_files_to_process():
         i = 0
         for file in temp_files:
             print("Selected File {0}".format(file))
-            Statics.input_files.append(InputFile.InputFile(i, str(file), "", "", 0, list(), 0, list(), list(), list()))
+            Statics.input_files.append(
+                InputFile.InputFile(i, str(file), "", "", 0, list(), 0, list(), list(), list(), list()))
             i += 1
     else:
         for selected_number in user_selected_files.split(','):
@@ -56,7 +57,7 @@ def ask_files_to_process():
             elif selected_number.strip().isdigit() and int(selected_number) < len(temp_files):
                 Statics.input_files.append(
                     InputFile.InputFile(int(selected_number), str(temp_files[int(selected_number)]), "", "", 0, list(),
-                                        0, list(), list(), list()))
+                                        0, list(), list(), list(), list()))
             else:
                 print('Sorry but this file does not exist! Please try again!')
                 input()

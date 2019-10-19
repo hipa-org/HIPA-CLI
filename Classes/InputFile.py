@@ -2,16 +2,14 @@ from Classes import Cell, TimeFrame
 import math
 from Services.Logger import Log
 import numpy as np
-import datetime
 import sys
-from Services.Config import Config
 
 
 class InputFile:
     def __init__(self, identifier: int, path: str, folder: str, name: str, percentage_limit: float, cells: list,
                  total_detected_minutes: int,
                  content, stimulation_timeframes: list,
-                 total_spikes_per_minute: list):
+                 total_spikes_per_minute: list, total_spikes_per_minute_mean: list):
         self.id = identifier
         self.path = path
         self.folder = folder
@@ -22,6 +20,7 @@ class InputFile:
         self.content = content
         self.stimulation_timeframes = stimulation_timeframes
         self.total_spikes_per_minutes = total_spikes_per_minute
+        self.total_spikes_per_minute_mean = total_spikes_per_minute_mean
 
     def calculate_minutes(self):
         self.total_detected_minutes = len(self.cells[0].timeframes) * 3.9 / 60
@@ -139,7 +138,7 @@ class InputFile:
          Normalize each Timeframe in Cell
         :return:
         """
-        Log.write_message('Normalize Timeframes with Baseline Mean...', LogLevel.Info)
+        Log.write_message('Normalize Timeframes with Baseline Mean...', Log.LogLevel.Info)
         temp_tf_values = []
 
         for cell in self.cells:
@@ -228,3 +227,6 @@ class InputFile:
                     spikes_per_min[timeframe.including_minute] = spikes_per_min[timeframe.including_minute] + 1
 
         self.total_spikes_per_minutes = spikes_per_min
+
+        for spikes_per_minute in self.total_spikes_per_minutes:
+            self.total_spikes_per_minute_mean.append(spikes_per_minute / len(self.cells))
