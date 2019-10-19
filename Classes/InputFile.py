@@ -30,7 +30,6 @@ class InputFile:
         """
             Creates cells given by the file
         """
-
         cells = list()
         for index, item in enumerate(self.content):
             cell = Cell.Cell("", list(), 0, 0, list(), 0, {})
@@ -110,7 +109,6 @@ class InputFile:
             for timeframe in cell.normalized_timeframes:
                 if float(timeframe.value) >= float(cell.threshold):
                     timeframe.above_threshold = True
-
                 else:
                     timeframe.above_threshold = False
 
@@ -236,6 +234,36 @@ class InputFile:
             write_message('Error creating File!', LogLevel.Error)
             write_message(ex, LogLevel.Error)
 
+    def write_spikes_per_minute(self):
+        """
+         Write spikes per minutes to a file
+        :return:
+        """
+        now = datetime.datetime.now()
+        file_data = []
+
+        for cell in self.cells:
+            temp_array = []
+            temp_array.append(cell.name)
+
+            for spikes_per_minute in self.spikes_per_minute:
+                temp_array.append(spikes_per_minute)
+
+            file_data.append(temp_array)
+
+        data = np.array(file_data)
+        data = data.T
+        try:
+            filename = '{0}_{1}{2}'.format(Config.Config.OUTPUT_FILE_NAME_SPIKES_PER_MINUTE,
+                                           now.strftime("%Y-%m-%d %H-%M-%S"), '.txt')
+            np.savetxt(
+                '{0}/{1}'.format(self.folder, filename), data, fmt='%s', delimiter='\t')
+            write_message(
+                'Created File {0} in {1}'.format(filename, self.folder), LogLevel.Info)
+        except FileNotFoundError as ex:
+            write_message('Error creating File!', LogLevel.Error)
+            write_message(ex, LogLevel.Error)
+
     def read_time_traces_file(self):
         try:
             file_content = open('{0}'.format(str(self.path)), "r")
@@ -256,7 +284,6 @@ class InputFile:
         path_split = path_split[0].split("/")
         file_name = path_split[-1]
         self.name = file_name
-        print(self.name)
 
     def get_folder(self):
         path_split = self.path.split(".")
@@ -282,8 +309,8 @@ class InputFile:
             if cell.name == "Average" or cell.name == "Err":
                 continue
             for timeframe in cell.normalized_timeframes:
-                print(timeframe.above_threshold)
                 if timeframe.above_threshold:
                     spikes_per_min[timeframe.including_minute] = spikes_per_min[timeframe.including_minute] + 1
 
         self.spikes_per_minute = spikes_per_min
+

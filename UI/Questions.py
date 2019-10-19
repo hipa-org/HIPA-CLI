@@ -101,28 +101,42 @@ def ask_file_output():
     print_hic_headline()
     print('Which files should be created as Output?')
     print('Available Choices:\n')
-    print('1. High Stimulus')
-    print('2. Normalized Data')
+    print(f"1. {Statics.OutputOptions.High_Stimulus.value}")
+    print(f"2. {Statics.OutputOptions.Normalized_Data.value}")
+    print(f"3. {Statics.OutputOptions.Spikes_Per_Minute.value}")
     print()
     print('(Type each Number separated by comma or just press enter to select all options!)')
     user_choose = input()
 
+    # Clear global selected output values
+    Statics.selected_output_options.clear()
+
+    # User input was empty
     if user_choose.strip() == '':
         Statics.selected_output_options.append(Statics.OutputOptions.High_Stimulus.value)
         Statics.selected_output_options.append(Statics.OutputOptions.Normalized_Data.value)
+        Statics.selected_output_options.append(Statics.OutputOptions.Spikes_Per_Minute.value)
         clear_console()
         return
 
+    # User input was not empty
     user_choose = user_choose.split(',')
     for choose in user_choose:
+        input()
         if choose.isdigit():
             if int(choose.strip()) == 1:
                 Statics.selected_output_options.append(Statics.OutputOptions.High_Stimulus.value)
             elif int(choose.strip()) == 2:
                 Statics.selected_output_options.append(Statics.OutputOptions.Normalized_Data.value)
-            else:
-                Statics.selected_output_options.append(Statics.OutputOptions.High_Stimulus.value)
-                Statics.selected_output_options.append(Statics.OutputOptions.Normalized_Data.value)
+            elif int(choose.strip()) == 3:
+                Statics.selected_output_options.append(Statics.OutputOptions.Spikes_Per_Minute.value)
+        else:
+            print(f"Your input {choose} was invalid. Ignoring value!")
+            print(f"Would you like to re enter your selection or continue?")
+            print(f"Please you y or n")
+            user_continue = input()
+            if user_continue == "n" or user_continue == "N":
+                ask_file_output()
 
     clear_console()
     return

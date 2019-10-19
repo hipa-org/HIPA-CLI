@@ -56,6 +56,8 @@ def execute_high_intensity_calculation(file):
             file.write_high_intensity_counts()
         elif output_option == Statics.OutputOptions.Normalized_Data.value:
             file.write_normalized_timeframes()
+        elif output_option == Statics.OutputOptions.Spikes_Per_Minute.value:
+            file.write_spikes_per_minute()
     end_time = datetime.datetime.now()
     Log.write_message('Calculation done in {0} seconds.'.format(end_time - start_time), Log.LogLevel.Verbose)
     Log.write_message('{0} Timeframes processed'.format(len(file.cells) * len(file.cells[0].timeframes)),
