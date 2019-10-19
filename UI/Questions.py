@@ -27,6 +27,14 @@ def ask_files_to_process():
         'If you want to reload this windows to update the files type "r" and press enter!')
     print()
     i = 0
+
+    if len(temp_files) == 0:
+        print(f"Sorry, no files detected! Please add files to your working directory.")
+        print(f"Your working directory: {Config.WORKING_DIRECTORY}")
+        print(f"Place files in your working directory, then press enter!")
+        input()
+        ask_files_to_process()
+
     for file in temp_files:
         print('{0}: {1}'.format(i, file))
         i += 1

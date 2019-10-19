@@ -1,6 +1,6 @@
 from Classes import Cell, TimeFrame
 import math
-from Services.Logger.Log import write_message, LogLevel
+from Services.Logger import Log
 import numpy as np
 import datetime
 import sys
@@ -53,7 +53,7 @@ class InputFile:
         """
          Calculates the baseline mean
         """
-        write_message('Calculation Baseline Mean....', LogLevel.Info)
+        Log.write_message('Calculation Baseline Mean....', Log.LogLevel.Info)
         temp_timeframes = []
         for cell in self.cells:
             for timeframe in cell.timeframes:
@@ -61,50 +61,50 @@ class InputFile:
                     temp_timeframes.append(timeframe.value)
             else:
                 cell.baseline_mean = np.average(temp_timeframes)
-                write_message('Baseline Mean for Cell {0} -> {1}'.format(cell.name, cell.baseline_mean),
-                              LogLevel.Verbose)
+                Log.write_message('Baseline Mean for Cell {0} -> {1}'.format(cell.name, cell.baseline_mean),
+                                  Log.LogLevel.Verbose)
 
-        write_message('Baseline Mean Calculation done.', LogLevel.Info)
+        Log.write_message('Baseline Mean Calculation done.', Log.LogLevel.Info)
 
     def calculate_timeframe_maximum(self):
         """
         Calculates the timeframe maximum
         :return:
         """
-        write_message('Detecting Timeframe maximum....', LogLevel.Info)
+        Log.write_message('Detecting Timeframe maximum....', Log.LogLevel.Info)
         for cell in self.cells:
             temp_tf_values = []
             for timeframe in cell.normalized_timeframes:
                 temp_tf_values.append(timeframe.value)
 
             else:
-                write_message('Maximum for Cell {0} -> {1}'.format(cell.name, np.max(temp_tf_values)),
-                              LogLevel.Verbose)
+                Log.write_message('Maximum for Cell {0} -> {1}'.format(cell.name, np.max(temp_tf_values)),
+                                  Log.LogLevel.Verbose)
                 cell.timeframe_maximum = np.max(temp_tf_values)
 
-        write_message(
-            'Detecting Timeframe maximum done.', LogLevel.Info)
+        Log.write_message(
+            'Detecting Timeframe maximum done.', Log.LogLevel.Info)
 
     def calculate_threshold(self):
         """
           Calculates the Threshold
         :return:
         """
-        write_message('Calculation Threshold...', LogLevel.Info)
+        Log.write_message('Calculation Threshold...', Log.LogLevel.Info)
         for cell in self.cells:
             cell.threshold = cell.timeframe_maximum * self.percentage_limit
-            write_message(
-                'Threshold for Cell {0} -> {1}'.format(cell.name, cell.threshold), LogLevel.Verbose)
+            Log.write_message(
+                'Threshold for Cell {0} -> {1}'.format(cell.name, cell.threshold), Log.LogLevel.Verbose)
 
-        write_message('Threshold calculation done.', LogLevel.Info)
+        Log.write_message('Threshold calculation done.', Log.LogLevel.Info)
 
     def detect_above_threshold(self):
         """
          Detects if a timeframe is above or below threshold
         :return:
         """
-        write_message(
-            'Detecting Timeframe is above or below Threshold...', LogLevel.Info)
+        Log.write_message(
+            'Detecting Timeframe is above or below Threshold...', Log.LogLevel.Info)
         for cell in self.cells:
             for timeframe in cell.normalized_timeframes:
                 if float(timeframe.value) >= float(cell.threshold):
@@ -112,14 +112,14 @@ class InputFile:
                 else:
                     timeframe.above_threshold = False
 
-        write_message('Detecting done.', LogLevel.Info)
+        Log.write_message('Detecting done.', Log.LogLevel.Info)
 
     def count_high_intensity_peaks_per_minute(self):
         """
          Counts high intensity peaks per minute
         :return:
         """
-        write_message('Counting High Intensity Peaks...', LogLevel.Info)
+        Log.write_message('Counting High Intensity Peaks...', Log.LogLevel.Info)
         for cell in self.cells:
             for timeframe in cell.normalized_timeframes:
                 if timeframe.including_minute not in cell.high_intensity_counts:
@@ -132,14 +132,14 @@ class InputFile:
                     if timeframe.above_threshold:
                         cell.high_intensity_counts[timeframe.including_minute] = cell.high_intensity_counts[
                                                                                      timeframe.including_minute] + 1
-        write_message('Counting High Intensity Peaks done.', LogLevel.Info)
+        Log.write_message('Counting High Intensity Peaks done.', Log.LogLevel.Info)
 
     def normalize_timeframes_with_baseline(self):
         """
          Normalize each Timeframe in Cell
         :return:
         """
-        write_message('Normalize Timeframes with Baseline Mean...', LogLevel.Info)
+        Log.write_message('Normalize Timeframes with Baseline Mean...', LogLevel.Info)
         temp_tf_values = []
 
         for cell in self.cells:
@@ -153,14 +153,14 @@ class InputFile:
                     TimeFrame.Timeframe(timeframe.identifier, timeframe.value / mean, timeframe.including_minute,
                                         timeframe.above_threshold))
 
-        write_message('Normalization done.', LogLevel.Info)
+        Log.write_message('Normalization done.', Log.LogLevel.Info)
 
     def normalize_timeframes_with_to_ones(self):
         """
         Normalize each Timeframe in Cell with to One Algorithm
         :return:
         """
-        write_message('Normalize Timeframes with To One Method...', LogLevel.Info)
+        Log.write_message('Normalize Timeframes with To One Method...', Log.LogLevel.Info)
 
         for cell in self.cells:
             max = 0
@@ -173,7 +173,7 @@ class InputFile:
                     TimeFrame.Timeframe(timeframe.identifier, timeframe.value / max, timeframe.including_minute,
                                         timeframe.above_threshold))
 
-        write_message('Normalization done.', LogLevel.Info)
+        Log.write_message('Normalization done.', Log.LogLevel.Info)
 
     def read_time_traces_file(self):
         try:
@@ -183,9 +183,9 @@ class InputFile:
             self.content = content
             file_content.close()
         except FileNotFoundError as ex:
-            write_message('Could not locate File {0}'.format(self.path),
-                          LogLevel.Error)
-            write_message(ex, LogLevel.Verbose)
+            Log.write_message('Could not locate File {0}'.format(self.path),
+                          Log.LogLevel.Error)
+            Log.write_message(ex,Log.LogLevel.Verbose)
             input()
             sys.exit(21)
 
