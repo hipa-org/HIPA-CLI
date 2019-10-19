@@ -16,6 +16,12 @@ class LogLevel(Enum):
 
 
 def write_message(message, log_level):
+    """
+    Writes a log message. Logger behaves on specific cli arguments like debug or verbose mode
+    :param message:
+    :param log_level:
+    :return:
+    """
     if log_level == LogLevel.Error or log_level == LogLevel.Warn:
         write_error_log(message)
     else:
@@ -64,7 +70,11 @@ def write_message(message, log_level):
 
 
 def write_default_log(message):
-
+    """
+    Writes a default log message when no cli argument is given
+    :param message:
+    :return:
+    """
     now = datetime.datetime.now()
     fh = open('{0}{1}'.format(Config.LOG_DIRECTORY, Config.DEFAULT_LOG), "a")
     fh.write('{0}: {1}\n'.format(str(now), message))
@@ -72,6 +82,11 @@ def write_default_log(message):
 
 
 def write_error_log(message):
+    """
+    Writes an error message
+    :param message:
+    :return:
+    """
     now = datetime.datetime.now()
     fh = open('{0}{1}'.format(Config.LOG_DIRECTORY, Config.ERROR_LOG), "a")
     fh.write('{0}: {1}\n'.format(str(now), message))

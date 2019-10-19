@@ -5,12 +5,13 @@ from Classes import InputFile
 from Services.Logger import Log
 from pathlib import Path
 
-'''
-Which Files should be processed
-'''
-
 
 def ask_files_to_process():
+    """
+    Which Files should be processed.
+    File selection is from the working directory specific in the config file
+    """
+
     print_hic_headline()
     all_files = list(Path(Config.WORKING_DIRECTORY).rglob("*.[tT][xX][tT]"))
     temp_files = []
@@ -32,16 +33,16 @@ def ask_files_to_process():
 
     print()
 
-    user_input = input('Select Files: ')
+    user_selected_files = input('Select Files: ')
 
-    if user_input.strip() == '':
+    if user_selected_files.strip() == '':
         i = 0
         for file in temp_files:
             print("Selected File {0}".format(file))
             Statics.input_files.append(InputFile.InputFile(i, str(file), "", "", 0, list(), 0, list(), list(), list()))
             i += 1
     else:
-        for selected_number in user_input.split(','):
+        for selected_number in user_selected_files.split(','):
             if selected_number == 'r':
                 ask_files_to_process()
             elif selected_number.strip().isdigit() and int(selected_number) < len(temp_files):
@@ -52,16 +53,15 @@ def ask_files_to_process():
                 print('Sorry but this file does not exist! Please try again!')
                 input()
                 ask_files_to_process()
+
     clear_console()
     return
 
 
-'''
-Ask for the Frame Number where the first stimulatory addition took place
-'''
-
-
 def ask_stimulation_time_frames():
+    """
+    Ask for the Frame Number where the first stimulatory addition took place
+    """
     print_hic_headline()
     for file in Statics.input_files:
         print('Please insert the Stimulation Time Frame (0 - {0}) for the given file.'.format(
@@ -92,12 +92,10 @@ def ask_stimulation_time_frames():
     return
 
 
-'''
-Asks which files should be processed
-'''
-
-
 def ask_file_output():
+    """
+    Asks which files should be processed
+    """
     print_hic_headline()
     print('Which files should be created as Output?')
     print('Available Choices:\n')
@@ -142,17 +140,17 @@ def ask_file_output():
     return
 
 
-'''
-Asks the User about the percentage which should be used
-'''
-
-
 def ask_percentage_limit():
+    """
+    Asks the User about the percentage which should be used
+    """
     print_hic_headline()
     print("Please insert the Limit Percentage")
     print("This limit is calculated from the imputed maximum.")
     print("E.g. 0.6 is the 60%")
     print()
+
+    # Iterating through given files
     for file in Statics.input_files:
         while True:
             try:
@@ -170,12 +168,11 @@ def ask_percentage_limit():
     clear_console()
 
 
-'''
-Prints a conclusion before starting the Calculations
-'''
-
-
 def conclusion():
+    """
+    Prints a conclusion before starting the Calculations
+    """
+
     print_hic_headline()
     Log.write_message("You selected the following output options:", Log.LogLevel.Info)
     for output in Statics.selected_output_options:
