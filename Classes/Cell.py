@@ -1,4 +1,3 @@
-
 class Cell:
     def __init__(self, name: str, timeframes: list, threshold: float, baseline_mean: float, normalized_timeframes: list,
                  timeframe_maximum: float, high_intensity_counts: dict):

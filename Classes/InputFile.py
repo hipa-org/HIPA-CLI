@@ -11,7 +11,7 @@ class InputFile:
     def __init__(self, identifier: int, path: str, folder: str, name: str, percentage_limit: float, cells: list,
                  total_detected_minutes: int,
                  content, stimulation_timeframes: list,
-                 spikes_per_minute: list):
+                 total_spikes_per_minute: list):
         self.id = identifier
         self.path = path
         self.folder = folder
@@ -21,7 +21,7 @@ class InputFile:
         self.total_detected_minutes = total_detected_minutes
         self.content = content
         self.stimulation_timeframes = stimulation_timeframes
-        self.spikes_per_minute = spikes_per_minute
+        self.total_spikes_per_minutes = total_spikes_per_minute
 
     def calculate_minutes(self):
         self.total_detected_minutes = len(self.cells[0].timeframes) * 3.9 / 60
@@ -234,7 +234,7 @@ class InputFile:
             write_message('Error creating File!', LogLevel.Error)
             write_message(ex, LogLevel.Error)
 
-    def write_spikes_per_minute(self):
+    def write_total_high_intensity_peaks_per_minute(self):
         """
          Write spikes per minutes to a file
         :return:
@@ -244,14 +244,11 @@ class InputFile:
 
         # TODO: Change calculation according to new algorithm below.
         # Iterate over each cell and summarize it. Then only only colum output is expected
-        for cell in self.cells:
-            temp_array = []
-            temp_array.append(cell.name)
 
-            for spikes_per_minute in self.spikes_per_minute:
-                temp_array.append(spikes_per_minute)
-
-            file_data.append(temp_array)
+        minute: int = 0
+        for spikes_per_minute in self.total_spikes_per_minutes:
+            file_data.append(f"{minute} : {spikes_per_minute}")
+            minute += 1
 
         data = np.array(file_data)
         data = data.T
@@ -301,9 +298,9 @@ class InputFile:
 
         self.folder = file_folder
 
-    def calculate_spikes_per_min_per_cell(self):
+    def summarize_high_intensity_peaks(self):
         """
-        TODO: Calculate spikes per cell. Reset for each cell.
+        Summarize all high intensity peaks for all cells for every minute. row wise
         :return:
         """
         spikes_per_min: list = [0] * int(self.total_detected_minutes + 1)
@@ -314,5 +311,4 @@ class InputFile:
                 if timeframe.above_threshold:
                     spikes_per_min[timeframe.including_minute] = spikes_per_min[timeframe.including_minute] + 1
 
-        self.spikes_per_minute = spikes_per_min
-
+        self.total_spikes_per_minutes = spikes_per_min
