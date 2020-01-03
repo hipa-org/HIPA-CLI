@@ -22,7 +22,7 @@ This tool uses Python 3.x. It's not tested with Python < 3.x. It is using a venv
 
 - Download/Clone Repo
 - Navigate to the folder where the Repo is stored.
-- Execute start.bat (Windows) or enter sh start.sh in your Terminal/Console (Windows)
+- Execute ```start.bat``` (Windows) or enter  ```./start.sh``` in your Terminal/Console (Mac)
 - Done
 
 IMPORTANT: Automatic Installation and Execution prevents you from using the CommandLine Arguments.
