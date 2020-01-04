@@ -5,6 +5,7 @@ from Services.Logger import Log
 import numpy as np
 import pandas as pd
 import sys
+from GlobalData.Statics import TimeFrameColumns
 
 
 class InputFile:
@@ -45,19 +46,22 @@ class InputFile:
 
         cells = list()
         for i in self.content.columns:
+            if i == "Err" or i == "Average":
+                continue
+
             cell = Cell(i, list(), 0, 0, list(), 0, {})
             # Create time frames
-            data = {'Value': self.content[i]}
+            data = {TimeFrameColumns.VALUE.value: self.content[i]}
             df = pd.DataFrame(data)
-            df['Value'] = pd.to_numeric(df['Value'])
+            df[TimeFrameColumns.VALUE.value] = pd.to_numeric(df[TimeFrameColumns.VALUE.value])
 
             # Create including minute column
-            df['IncludingMinute'] = np.floor(df['Value'].index.values * 3.9 / 60)
-            df['AboveThreshold'] = False
+            df[TimeFrameColumns.INCLUDING_MINUTE.value] = np.floor(
+                df[TimeFrameColumns.VALUE.value].index.values * 3.9 / 60)
+            df[TimeFrameColumns.ABOVE_THRESHOLD.value] = False
 
             # Add df to member
             cell.timeframes = df
-
             # Add cell to list
             cells.append(cell)
             self.cells = cells
@@ -75,7 +79,7 @@ class InputFile:
         """
         Log.write_message('Calculation Baseline Mean....', Log.LogLevel.Info)
         for cell in self.cells:
-            cell.baseline_mean = np.average(cell.timeframes['Value'])
+            cell.baseline_mean = np.average(cell.timeframes[TimeFrameColumns.VALUE.value])
             Log.write_message('Baseline Mean for Cell {0} -> {1}'.format(cell.name, cell.baseline_mean),
                               Log.LogLevel.Debug)
 
@@ -110,16 +114,16 @@ class InputFile:
         Log.write_message('Normalize Timeframes with To One Method...', Log.LogLevel.Info)
 
         for cell in self.cells:
-            values = cell.timeframes['Value']
-            maxValue = cell.timeframes['Value'].max()
+            values = cell.timeframes[TimeFrameColumns.VALUE.value]
+            maxValue = cell.timeframes[TimeFrameColumns.VALUE.value].max()
 
-            data = {'Value': cell.timeframes['Value'] / maxValue}
+            data = {TimeFrameColumns.VALUE.value: cell.timeframes[TimeFrameColumns.VALUE.value] / maxValue}
             df = pd.DataFrame(data)
-            df['Value'] = pd.to_numeric(df['Value'])
+            df[TimeFrameColumns.VALUE.value] = pd.to_numeric(df[TimeFrameColumns.VALUE.value])
 
             # Create including minute column
-            df['IncludingMinute'] = cell.timeframes['IncludingMinute']
-            df['AboveThreshold'] = cell.timeframes['AboveThreshold']
+            df[TimeFrameColumns.INCLUDING_MINUTE.value] = cell.timeframes[TimeFrameColumns.INCLUDING_MINUTE.value]
+            df[TimeFrameColumns.ABOVE_THRESHOLD.value] = cell.timeframes[TimeFrameColumns.ABOVE_THRESHOLD.value]
 
             cell.normalized_timeframes = df
 
@@ -132,7 +136,7 @@ class InputFile:
         """
         Log.write_message('Detecting Timeframe maximum....', Log.LogLevel.Info)
         for cell in self.cells:
-            cell.timeframe_maximum = cell.normalized_timeframes['Value'].max()
+            cell.timeframe_maximum = cell.normalized_timeframes[TimeFrameColumns.VALUE.value].max()
             Log.write_message('Maximum for Cell {0} -> {1}'.format(cell.name, cell.timeframe_maximum),
                               Log.LogLevel.Verbose)
 
@@ -161,9 +165,11 @@ class InputFile:
             'Detecting Timeframe is above or below Threshold...', Log.LogLevel.Info)
         for cell in self.cells:
             cell.normalized_timeframes.loc[
-                cell.normalized_timeframes['Value'] < float(cell.threshold), 'AboveThreshold'] = 'False'
+                cell.normalized_timeframes['Value'] < float(
+                    cell.threshold), TimeFrameColumns.ABOVE_THRESHOLD.value] = False
             cell.normalized_timeframes.loc[
-                cell.normalized_timeframes['Value'] >= float(cell.threshold), 'AboveThreshold'] = 'True'
+                cell.normalized_timeframes['Value'] >= float(
+                    cell.threshold), TimeFrameColumns.ABOVE_THRESHOLD.value] = True
         Log.write_message('Detecting done.', Log.LogLevel.Info)
 
     def count_high_intensity_peaks_per_minute(self):
@@ -173,58 +179,53 @@ class InputFile:
         """
         Log.write_message('Counting High Intensity Peaks...', Log.LogLevel.Info)
         for cell in self.cells:
-            for timeframe in cell.normalized_timeframes:
-                if timeframe.including_minute not in cell.high_intensity_counts:
-                    if timeframe.above_threshold:
-                        cell.high_intensity_counts[timeframe.including_minute] = 1
-                    else:
-                        cell.high_intensity_counts[timeframe.including_minute] = 0
+            df = cell.normalized_timeframes.groupby(TimeFrameColumns.INCLUDING_MINUTE.value)[
+                TimeFrameColumns.ABOVE_THRESHOLD.value].apply(
+                lambda x: (x == True).sum()).reset_index()
 
-                else:
-                    if timeframe.above_threshold:
-                        cell.high_intensity_counts[timeframe.including_minute] = cell.high_intensity_counts[
-                                                                                     timeframe.including_minute] + 1
+            del df[TimeFrameColumns.INCLUDING_MINUTE.value]
+            df.columns = ['Count']
+            cell.high_intensity_counts = df
+
         Log.write_message('Counting High Intensity Peaks done.', Log.LogLevel.Info)
 
-    def get_file_name(self):
-        """
-        Evaluates the file name
-        :return:
-        """
-        path_split = self.path.split(".")
-        path_split = path_split[:-1]
-        path_split = path_split[0].split("/")
-        file_name = path_split[-1]
-        self.name = file_name
-
-    def get_folder(self):
-        path_split = self.path.split(".")
-        path_split = path_split[:-1]
-        path_split = path_split[0].split("/")
-        path_split = path_split[:-1]
-        file_folder = ""
-        for path_fragment in path_split:
-            if file_folder == "":
-                file_folder = path_fragment + "/"
-            else:
-                file_folder = file_folder + path_fragment + "/"
-
-        self.folder = file_folder
-
     def summarize_high_intensity_peaks(self):
+        # TODO: Implement summarizing
         """
         Summarize all high intensity peaks for all cells for every minute. row wise
         :return:
         """
-        spikes_per_min: list = [0] * int(self.total_detected_minutes + 1)
+        Log.write_message('Summarizing High Intensity Peaks...', Log.LogLevel.Info)
+        data_frames = []
         for cell in self.cells:
-            if cell.name == "Average" or cell.name == "Err":
-                continue
-            for timeframe in cell.normalized_timeframes:
-                if timeframe.above_threshold:
-                    spikes_per_min[timeframe.including_minute] = spikes_per_min[timeframe.including_minute] + 1
+            data_frames.append(cell.high_intensity_counts)
 
-        self.total_spikes_per_minutes = spikes_per_min
+        print(data_frames)
+        Log.write_message('Summarizing High Intensity Peaks done.', Log.LogLevel.Info)
 
-        for spikes_per_minute in self.total_spikes_per_minutes:
-            self.total_spikes_per_minute_mean.append(spikes_per_minute / len(self.cells))
+
+def get_file_name(self):
+    """
+    Evaluates the file name
+    :return:
+    """
+    path_split = self.path.split(".")
+    path_split = path_split[:-1]
+    path_split = path_split[0].split("/")
+    file_name = path_split[-1]
+    self.name = file_name
+
+
+def get_folder(self):
+    path_split = self.path.split(".")
+    path_split = path_split[:-1]
+    path_split = path_split[0].split("/")
+    path_split = path_split[:-1]
+    file_folder = ""
+    for path_fragment in path_split:
+        if file_folder == "":
+            file_folder = path_fragment + "/"
+        else:
+            file_folder = file_folder + path_fragment + "/"
+
+    self.folder = file_folder

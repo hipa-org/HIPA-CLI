@@ -1,7 +1,6 @@
 from enum import Enum
 
-
-input_files  = []
+input_files = []
 selected_output_options = []
 
 
@@ -28,3 +27,9 @@ def reset_input_and_output():
     global selected_output_options
     input_files = []
     selected_output_options = []
+
+
+class TimeFrameColumns(Enum):
+    VALUE = "Value"
+    INCLUDING_MINUTE = "Including Minute"
+    ABOVE_THRESHOLD = "Above Threshold"
