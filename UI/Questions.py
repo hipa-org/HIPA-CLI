@@ -74,7 +74,7 @@ def ask_stimulation_time_frames():
     print_hic_headline()
     for file in Statics.input_files:
         print('Please insert the Stimulation Time Frame (0 - {0}) for the given file.'.format(
-            len(file.cells[0].timeframes)))
+            len(file.cells[0].time_frames)))
 
         while True:
             frames: str = input('Frames of stimulation for file {0}: '.format(file.name))
@@ -83,17 +83,17 @@ def ask_stimulation_time_frames():
                 try:
                     frame = int(frame)
                     print(frame)
-                    if frame < 0 or frame > len(file.cells[0].timeframes):
+                    if frame < 0 or frame > len(file.cells[0].time_frames):
                         print("Sorry, but the stimulus is out of range! Ignoring it")
                         continue
 
-                    file.stimulation_timeframes.append(int(frame))
+                    file.stimulation_time_frames.append(int(frame))
                 except ValueError:
                     print("Sorry, but this is NOT a valid Integer. Ignoring it!")
                     continue
 
             else:
-                if len(file.stimulation_timeframes) == 0:
+                if len(file.stimulation_time_frames) == 0:
                     ask_stimulation_time_frames()
                 break
 
@@ -191,7 +191,7 @@ def conclusion():
     for file in Statics.input_files:
         Log.write_message(
             'You are processing the File {0} with following arguments: \nStimulation Timeframes: {1}\nPercentage: {2}'.format(
-                file.name, file.stimulation_timeframes, file.percentage_limit), Log.LogLevel.Info)
+                file.name, file.stimulation_time_frames, file.percentage_limit), Log.LogLevel.Info)
         print()
 
     input("Press any Key to start Calculations.")

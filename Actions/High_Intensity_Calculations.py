@@ -44,15 +44,17 @@ def execute_high_intensity_calculation(file: InputFile):
     start_time = datetime.datetime.now()
     file.calculate_baseline_mean()
     if Config.Config.NORMALIZATION_METHOD == Statics.NormalizationMethods.Baseline:
-        file.normalize_timeframes_with_baseline()
+        file.normalize_time_frames_with_baseline()
     else:
-        file.normalize_timeframes_with_to_ones()
+        file.normalize_time_frames_with_to_ones()
 
-    file.calculate_timeframe_maximum()
+    file.calculate_time_frame_maximum()
     file.calculate_threshold()
     file.detect_above_threshold()
     file.count_high_intensity_peaks_per_minute()
     file.summarize_high_intensity_peaks()
+    file.split_cells()
+    file.interval_comparison()
 
     for output_option in Statics.selected_output_options:
         if output_option == Statics.OutputOptions.High_Stimulus.value:

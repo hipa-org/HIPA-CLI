@@ -21,21 +21,28 @@ class HIPANormalizeToOneTest(unittest.TestCase):
                                2194129.325722143, 898577.7755135715, 64155.768782142855]
 
         self.counts_per_minute_to_one = [2, 1, 0, 0, 1, 2]
+        self.spikes_per_minute_per_cell_to_one = [405, 342, 331, 281]
+        self.spikes_per_minute_per_cell_to_one_mean = [9.878048780487806, 8.341463414634147, 8.073170731707316,
+                                                       6.853658536585366]
+        self.interval_high_counts_to_one = [269, 324, 323, 118]
 
         self.data = InputFile(1, "sampleData/time_traces.txt", "", "", 0, list(), 0, list(), list(), list(),
                               list())
-        self.data.stimulation_timeframes = [372]
+        self.data.stimulation_time_frames = [372, 696, 1019]
         self.data.percentage_limit = 0.6
+
         self.data.read_time_traces_file()
         self.data.create_cells()
         self.data.calculate_minutes()
         self.data.calculate_baseline_mean()
-        self.data.normalize_timeframes_with_to_ones()
-        self.data.calculate_timeframe_maximum()
+        self.data.normalize_time_frames_with_to_ones()
+        self.data.calculate_time_frame_maximum()
         self.data.calculate_threshold()
         self.data.detect_above_threshold()
         self.data.count_high_intensity_peaks_per_minute()
         self.data.summarize_high_intensity_peaks()
+        self.data.split_cells()
+        self.data.calculate_high_stimulus_count_per_interval()
 
     def test_rows_and_column_count(self):
         self.assertEqual(len(self.data.content.columns), 43)
@@ -49,16 +56,16 @@ class HIPANormalizeToOneTest(unittest.TestCase):
         self.assertEqual(len(self.data.cells), 41)
         for cell in self.data.cells:
             # Test column count
-            self.assertEqual(len(cell.timeframes.columns), 3)
+            self.assertEqual(len(cell.time_frames.columns), 3)
             # Test rows count
             for i in self.data.content.columns:
                 self.assertEqual(len(self.data.content[i]), 1400)
 
-            self.assertEqual(cell.timeframes[TimeFrameColumns.VALUE.value].dtype, float)
+            self.assertEqual(cell.time_frames[TimeFrameColumns.VALUE.value].dtype, float)
             # Check maximum minutes
-            self.assertEqual(cell.timeframes[TimeFrameColumns.INCLUDING_MINUTE.value].max(), 90)
-            self.assertEqual(cell.timeframes[TimeFrameColumns.INCLUDING_MINUTE.value][15], 0.0)
-            self.assertEqual(cell.timeframes[TimeFrameColumns.INCLUDING_MINUTE.value][16], 1.0)
+            self.assertEqual(cell.time_frames[TimeFrameColumns.INCLUDING_MINUTE.value].max(), 90)
+            self.assertEqual(cell.time_frames[TimeFrameColumns.INCLUDING_MINUTE.value][15], 0.0)
+            self.assertEqual(cell.time_frames[TimeFrameColumns.INCLUDING_MINUTE.value][16], 1.0)
 
     def test_calculate_minutes(self):
         self.assertEqual(self.data.total_detected_minutes, 91)
@@ -77,7 +84,9 @@ class HIPANormalizeToOneTest(unittest.TestCase):
         Tests that the greatest value is 1
         """
         for cell in self.data.cells:
-            self.assertEqual(cell.normalized_timeframes[TimeFrameColumns.VALUE.value].max(), 1)
+            self.assertEqual(cell.normalized_time_frames[TimeFrameColumns.VALUE.value].max(), 1)
+            for index, row in cell.normalized_time_frames.iterrows():
+                self.assertLessEqual(int(row[TimeFrameColumns.VALUE.value]), 1)
 
     def test_cell_threshold_calculation(self):
         """
@@ -91,7 +100,7 @@ class HIPANormalizeToOneTest(unittest.TestCase):
         Checks if the threshold detection is working
         """
         for cell in self.data.cells:
-            for index, row in cell.normalized_timeframes.iterrows():
+            for index, row in cell.normalized_time_frames.iterrows():
                 if row[TimeFrameColumns.VALUE.value] < 0.6:
                     self.assertEqual(row[TimeFrameColumns.ABOVE_THRESHOLD.value], False)
                 else:
@@ -107,7 +116,20 @@ class HIPANormalizeToOneTest(unittest.TestCase):
             self.assertEqual(cell_counts['Count'][x], self.counts_per_minute_to_one[x])
 
     def test_summarize_high_intensity_count(self):
-        pass
+        """
+        Tests the high intensity count per cell calculations
+        """
+        for x in range(4):
+            self.assertEqual(self.spikes_per_minute_per_cell_to_one[x], self.data.total_spikes_per_minutes[x])
+            self.assertEqual(self.spikes_per_minute_per_cell_to_one_mean[x], self.data.total_spikes_per_minute_mean[x])
+
+    def test_interval_comparison(self):
+        """
+        Tests how often high counts are occurring in each interval
+        """
+        cell: Cell = self.data.cells[0]
+        for x in range(4):
+            self.assertEqual(cell.interval_high_intensity_counts[x], self.interval_high_counts_to_one[x])
 
 
 class HIPANormalizeBaselineTest(unittest.TestCase):
@@ -133,8 +155,8 @@ class HIPANormalizeBaselineTest(unittest.TestCase):
         self.data.create_cells()
         self.data.calculate_minutes()
         self.data.calculate_baseline_mean()
-        self.data.normalize_timeframes_with_to_ones()
-        self.data.calculate_timeframe_maximum()
+        self.data.normalize_time_frames_with_to_ones()
+        self.data.calculate_time_frame_maximum()
         self.data.calculate_threshold()
         self.data.detect_above_threshold()
         # self.data.
