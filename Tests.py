@@ -2,6 +2,7 @@ import unittest
 from Classes.InputFile import InputFile, Cell, Timeframe
 from GlobalData.Statics import TimeFrameColumns
 from UI import Console
+from Services.Filemanagement import Write
 
 
 class HIPANormalizeToOneTest(unittest.TestCase):
@@ -30,8 +31,9 @@ class HIPANormalizeToOneTest(unittest.TestCase):
                               list())
         self.data.stimulation_time_frames = [372, 696, 1019]
         self.data.percentage_limit = 0.6
-
         self.data.read_time_traces_file()
+        self.data.get_file_name()
+        self.data.get_folder()
         self.data.create_cells()
         self.data.calculate_minutes()
         self.data.calculate_baseline_mean()
@@ -130,6 +132,9 @@ class HIPANormalizeToOneTest(unittest.TestCase):
         cell: Cell = self.data.cells[0]
         for x in range(4):
             self.assertEqual(cell.interval_high_intensity_counts[x], self.interval_high_counts_to_one[x])
+
+    def test_file_output(self):
+        Write.write_high_intensity_counts(self.data)
 
 
 class HIPANormalizeBaselineTest(unittest.TestCase):

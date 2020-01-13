@@ -129,7 +129,6 @@ def ask_file_output():
     # User input was not empty
     user_choose = user_choose.split(',')
     for choose in user_choose:
-        input()
         if choose.isdigit():
             if int(choose.strip()) == 1:
                 Statics.selected_output_options.append(Statics.OutputOptions.High_Stimulus.value)

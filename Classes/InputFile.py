@@ -224,6 +224,9 @@ class InputFile:
             cell.calculate_high_stimulus_count_per_interval()
         Log.write_message('Interval comparison done.', Log.LogLevel.Info)
 
+    def interval_comparison(self):
+        pass
+
     def get_file_name(self):
         """
         Evaluates the file name

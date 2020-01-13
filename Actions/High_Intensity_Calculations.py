@@ -54,6 +54,7 @@ def execute_high_intensity_calculation(file: InputFile):
     file.count_high_intensity_peaks_per_minute()
     file.summarize_high_intensity_peaks()
     file.split_cells()
+    file.calculate_high_stimulus_count_per_interval()
     file.interval_comparison()
 
     for output_option in Statics.selected_output_options:
@@ -66,5 +67,5 @@ def execute_high_intensity_calculation(file: InputFile):
 
     end_time = datetime.datetime.now()
     Log.write_message('Calculation done in {0} seconds.'.format(end_time - start_time), Log.LogLevel.Verbose)
-    Log.write_message('{0} Timeframes processed'.format(len(file.cells) * len(file.cells[0].timeframes)),
+    Log.write_message('{0} Time frames processed'.format(len(file.cells) * len(file.cells[0].time_frames)),
                       Log.LogLevel.Verbose)
