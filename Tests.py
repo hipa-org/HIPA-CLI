@@ -2,6 +2,7 @@ import unittest
 from Classes.InputFile import InputFile, Cell, Timeframe
 from GlobalData.Statics import TimeFrameColumns
 from UI import Console
+from Services.Filemanagement import Write
 
 
 class HIPANormalizeToOneTest(unittest.TestCase):
@@ -130,6 +131,9 @@ class HIPANormalizeToOneTest(unittest.TestCase):
         cell: Cell = self.data.cells[0]
         for x in range(4):
             self.assertEqual(cell.interval_high_intensity_counts[x], self.interval_high_counts_to_one[x])
+
+    def test_file_writing(self):
+        Write.write_total_high_intensity_peaks_per_minute(self.data)
 
 
 class HIPANormalizeBaselineTest(unittest.TestCase):

@@ -37,9 +37,9 @@ def write_high_intensity_counts(file: InputFile):
         Log.write_message(ex, Log.LogLevel.Error)
 
 
-def write_normalized_timeframes(file: InputFile):
+def write_normalized_time_frames(file: InputFile):
     """
-     Write normalized timeframes to a file
+     Write normalized time frames to a file
     :return:
     """
     now = datetime.datetime.now()
