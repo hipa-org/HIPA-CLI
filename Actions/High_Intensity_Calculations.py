@@ -59,11 +59,11 @@ def execute_high_intensity_calculation(file: InputFile):
 
     for output_option in Statics.selected_output_options:
         if output_option == Statics.OutputOptions.High_Stimulus.value:
-            Write.write_high_intensity_counts(file)
+            Write.high_stimulus_counts_per_minute(file)
         elif output_option == Statics.OutputOptions.Normalized_Data.value:
-            Write.write_normalized_timeframes(file)
+            Write.normalized_time_frames(file)
         elif output_option == Statics.OutputOptions.Spikes_Per_Minute.value:
-            Write.write_total_high_intensity_peaks_per_minute(file)
+            Write.total_high_intensity_peaks(file)
 
     end_time = datetime.datetime.now()
     Log.write_message('Calculation done in {0} seconds.'.format(end_time - start_time), Log.LogLevel.Verbose)
