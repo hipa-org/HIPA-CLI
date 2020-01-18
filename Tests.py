@@ -31,8 +31,9 @@ class HIPANormalizeToOneTest(unittest.TestCase):
                               list())
         self.data.stimulation_time_frames = [372, 696, 1019]
         self.data.percentage_limit = 0.6
-
         self.data.read_time_traces_file()
+        self.data.get_file_name()
+        self.data.get_folder()
         self.data.create_cells()
         self.data.calculate_minutes()
         self.data.calculate_baseline_mean()
@@ -132,8 +133,8 @@ class HIPANormalizeToOneTest(unittest.TestCase):
         for x in range(4):
             self.assertEqual(cell.interval_high_intensity_counts[x], self.interval_high_counts_to_one[x])
 
-    def test_file_writing(self):
-        Write.write_total_high_intensity_peaks_per_minute(self.data)
+    def test_file_output(self):
+        Write.high_stimulus_counts(self.data)
 
 
 class HIPANormalizeBaselineTest(unittest.TestCase):
