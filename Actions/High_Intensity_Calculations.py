@@ -63,7 +63,7 @@ def execute_high_intensity_calculation(file: InputFile):
         elif output_option == Statics.OutputOptions.Normalized_Data.value:
             Write.normalized_time_frames(file)
         elif output_option == Statics.OutputOptions.Spikes_Per_Minute.value:
-            Write.total_high_intensity_peaks(file)
+            Write.write_total_high_intensity_peaks_per_minute_per_cell(file)
 
     end_time = datetime.datetime.now()
     Log.write_message('Calculation done in {0} seconds.'.format(end_time - start_time), Log.LogLevel.Verbose)
