@@ -26,13 +26,13 @@ class DebugActions(Enum):
 def start():
     GlobalData.Statics.init()
     ap = argparse.ArgumentParser()
-    ap.add_argument("-V", "--verbose", required=False,
+    ap.add_argument("-v", "--verbose", required=False,
                     action='store_true',
                     help="Activate verbose Output")
-    ap.add_argument("-H", "--highintense", required=False,
+    ap.add_argument("-h", "--highintense", required=False,
                     action='store_true',
                     help='Direct call of calculation')
-    ap.add_argument("-D", "--debug", required=False,
+    ap.add_argument("-d", "--debug", required=False,
                     action='store_true',
                     help="Starts the program in Debug Mode")
     ap.add_argument("-r", "--restore", required=False,
