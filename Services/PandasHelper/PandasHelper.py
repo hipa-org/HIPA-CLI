@@ -42,6 +42,3 @@ def get_high_stimulus_counts(file: InputFile):
     df = df.T
     df.columns = columns
     return df
-
-
-def get_
