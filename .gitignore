@@ -8,3 +8,6 @@ __pycache__/
 Log/
 Data/*.txt
 Logs/
+*.txt
+!requirements.txt
+!sampleData/*.txt
