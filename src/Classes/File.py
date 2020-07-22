@@ -10,6 +10,7 @@ from pathlib import Path
 import os
 from sklearn.preprocessing import MinMaxScaler
 from RuntimeConstants import Runtime_Folders
+from Services.FileManagement import Folder_Management
 
 
 class File:
@@ -17,6 +18,9 @@ class File:
         self.full_name = full_name
         self.path = self.path = Path(Config.DATA_RAW_DIRECTORY, full_name)
         self.name = os.path.splitext(full_name)[0]
+        # The folder where all results are stored in
+        self.folder = Folder_Management.create_directory(
+            Path(f"{Runtime_Folders.EVALUATION_DIRECTORY}/{self.name}"))
         self.data = self.__load_data()
         self.cells = self.__populate_cells()
         self.total_detected_minutes = self.__get_minutes()
@@ -250,34 +254,29 @@ class File:
         self.__write_high_stimulus_counts_per_minute()
         self.__write_normalized_time_frames()
         self.__write_total_high_intensity_peaks_per_minute_per_cell()
+        logging.info("All reports generated")
 
     def __write_high_stimulus_counts_per_minute(self):
         """
         Write high stimulus counts per minute
         """
-        now = datetime.datetime.now()
 
-        filename = f"{Runtime_Folders.EVALUATION_DIRECTORY}/{Config.OUTPUT_FILE_NAME_HIGH_STIMULUS}.txt"
-
-        self.__get_high_stimulus_counts().to_csv(filename, index=None, sep='\t', mode='a')
-        logging.info(f'Created File {filename} in {self.path}')
+        self.__get_high_stimulus_counts().to_csv(
+            os.path.join(self.folder, f"{Config.OUTPUT_FILE_NAME_HIGH_STIMULUS}.csv"), index=None, sep='\t', mode='a')
 
     def __write_normalized_time_frames(self):
         """
          Write normalized time frames to a file
         :return:
         """
-        now = datetime.datetime.now()
-        filename = f"{Runtime_Folders.EVALUATION_DIRECTORY}/{Config.OUTPUT_FILE_NAME_NORMALIZED_DATA}.txt"
-        self.__get_normalized_time_frames().to_csv(filename, index=None, sep='\t', mode='a')
-        logging.info(f'Created File {filename} in {self.path}')
+        self.__get_normalized_time_frames().to_csv(
+            os.path.join(self.folder, f"{Config.OUTPUT_FILE_NAME_NORMALIZED_DATA}.csv"), index=None, sep='\t', mode='a')
 
     def __write_total_high_intensity_peaks_per_minute_per_cell(self):
         """
         Write spikes per minutes to a file
         :return:
         """
-        now = datetime.datetime.now()
 
         minutes = np.arange(int(self.total_detected_minutes) + 1)
 
@@ -285,9 +284,8 @@ class File:
                      " Mean spikes": self.total_spikes_per_minute_mean}
 
         data_matrix = pd.DataFrame(temp_dict)
-        filename = f"{Runtime_Folders.EVALUATION_DIRECTORY}/{Config.OUTPUT_FILE_NAME_SPIKES_PER_MINUTE}.txt"
-        data_matrix.to_csv(filename, index=None, sep='\t', mode='a')
-        logging.info('Created File {0} in {1}'.format(filename, self.path))
+        data_matrix.to_csv(os.path.join(self.folder, f"{Config.OUTPUT_FILE_NAME_SPIKES_PER_MINUTE}.csv"), index=None,
+                           sep='\t', mode='a')
 
     def __get_normalized_time_frames(self):
         data = []
@@ -297,7 +295,7 @@ class File:
             columns.append(cell.name)
 
         for cell in self.cells:
-            data.append(cell.normalized_time_frames['Value'].to_string(index=False))
+            data.append(cell.normalized_time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value].to_string(index=False))
 
         data = [i.split('\n') for i in data]
 
