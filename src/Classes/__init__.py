@@ -1,7 +1,2 @@
-__all__ = ['Cell', 'InputFile', 'TimeFrame']
+__all__ = ['Cell', 'File']
 
-
-# Legacy Support
-import Classes.Cell
-import Classes.InputFile
-import Classes.TimeFrame

@@ -1,106 +1,42 @@
 import sys
-import argparse
-from pyfiglet import Figlet
-from enum import Enum
-from Actions import High_Intensity_Calculations
-from Services.Config.Config import Config, read_conf, reset_config
+from UI import Console
+from Actions import Action_Handler
+from Services.Config.Configuration import Config
 import os
-from Services.Logger.Log import write_message, LogLevel
-from Services.Filemanagement.Create import create_needed_files
-import webbrowser
-from UI.Console import clear_console
-import GlobalData.Statics
-from Services.CommandlineArguments.CommandlineHandler import handle_args
+from Services.Config import Configuration, ArgumentParser
+from Services.FileManagement import Folder_Management
+import logging
+from RuntimeConstants import Runtime_Datasets
 
-
-class Actions(Enum):
-    HIGH_INTENSITY_PEAK_ANALYSIS = 'High Intensity Peak Analysis'
-    CELL_SORTER = 'Cell Sorter'
-    HELP = 'Help'
-
-
-class DebugActions(Enum):
-    FILESYSTEM_TEST = 'File System Test'
-
-
-def start():
-    GlobalData.Statics.init()
-    ap = argparse.ArgumentParser()
-    ap.add_argument("-v", "--verbose", required=False,
-                    action='store_true',
-                    help="Activate verbose Output")
-    ap.add_argument("-h", "--highintense", required=False,
-                    action='store_true',
-                    help='Direct call of calculation')
-    ap.add_argument("-d", "--debug", required=False,
-                    action='store_true',
-                    help="Starts the program in Debug Mode")
-    ap.add_argument("-r", "--restore", required=False,
-                    action='store_true',
-                    help="Restores the default Config.ini")
-
-    args = vars(ap.parse_args())
-    create_needed_files()
-    handle_args(args)
-    success = read_conf()
-
-    if success is not True:
-        write_message('Error reading {0} from Config.ini. Please check your Config file'.format(success),
-                      LogLevel.Error)
-    start_up_actions()
-
-
-def start_up_actions():
-    clear_console()
-    choice: int = 0
-    while True:
-        try:
-            f = Figlet(font='slant')
-            print(f.renderText('Intensity Analyzer'))
-            print(30 * '-')
-            print('1. High Intensity Peak Analysis ')
-            print('2. Cell Sorter')
-            print('3. Help')
-            print('4. Cleanup Output Folder')
-            print()
-            print('-1. Exit')
-
-            if Config.DEBUG == 1:
-                print('** Debug **')
-                print('F. File System Test')
-            if Config.VERBOSE == 1:
-                print('Verbose active')
-
-            choice = int(input("Choose your action: (Type the action number)\n"))
-        except ValueError:
-            print("Please choose a valid option!")
-            input()
-            clear_console()
-            continue
-        else:
-            break
-
-    if choice == 1:
-        High_Intensity_Calculations.start_high_intensity_calculations()
-        input('Press key to continue...')
-        start_up_actions()
-    elif choice == 2:
-        print('Not implemented yet')
-        input('Press key to continue...')
-        start_up_actions()
-    elif choice == 3:
-        webbrowser.open_new_tab('https://github.com/Exitare/HIPA-CLI')
-        start_up_actions()
-    elif choice == -1:
-        clear_console()
-        sys.exit(0)
-    else:
-        start_up_actions()
-
+logging.basicConfig(filename='log.log', level=logging.DEBUG)
+logging.getLogger().setLevel(logging.DEBUG)
+handler = logging.StreamHandler(sys.stdout)
+root = logging.getLogger()
+root.setLevel(logging.DEBUG)
+root.addHandler(handler)
 
 if __name__ == "__main__":
     try:
-        start()
+        Configuration.read_conf()
+        ArgumentParser.handle_args()
+
+        if Folder_Management.create_required_folders():
+            logging.info("All required folders generated.")
+            logging.info("Please copy your files into the new folders and restart the application.")
+            exit(0)
+        else:
+            logging.info("All folder checks passed.")
+            logging.info("Creating evaluation folder.")
+            Folder_Management.create_evaluation_folder()
+
+        if Config.START_HIGH_INTENSITY_CALCULATION:
+            Runtime_Datasets.Choice = 1
+            Action_Handler.handle_choice()
+        else:
+            while True:
+                Console.show_welcome_ui()
+                Action_Handler.handle_choice()
+
     except KeyboardInterrupt:
         print('\n')
         try:

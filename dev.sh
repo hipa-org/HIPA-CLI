@@ -12,10 +12,9 @@ if command -v python3 &>/dev/null; then
 	echo Starting virtual environment
         source venv/bin/activate
         pip install --upgrade pip
-        pip install -r requirements.txt
-        python3 Tests.py
+        pip install -r ./src/requirements.txt
+        python3 ./src/Tests.py
         read
-        python3 HIPA.py
     else
         echo "Could not execute python -m venv ./venv"
         echo "Edit the script. Change the 'python' command to the one calling python3."

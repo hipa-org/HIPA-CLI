@@ -1,0 +1,1844 @@
+ERROR:root:Error occurred while reading config.ini.
+ERROR:root:Key: 'SETTINGS' not found!
+ERROR:root:Make sure the file config.ini exists in your src directory!
+ERROR:root:Error occurred while reading config.ini.
+ERROR:root:Key: 'SETTINGS' not found!
+ERROR:root:Make sure the file config.ini exists in your src directory!
+ERROR:root:Error occurred while reading config.ini.
+ERROR:root:Key: 'SETTINGS' not found!
+ERROR:root:Make sure the file config.ini exists in your src directory!
+ERROR:root:Error occurred while reading config.ini.
+ERROR:root:Key: 'FILES' not found!
+ERROR:root:Make sure the file config.ini exists in your src directory!
+ERROR:root:Error occurred while reading config.ini.
+ERROR:root:Key: 'FILES' not found!
+ERROR:root:Make sure the file config.ini exists in your src directory!
+ERROR:root:Error occurred while reading config.ini.
+ERROR:root:Key: 'FILES' not found!
+ERROR:root:Make sure the file config.ini exists in your src directory!
+INFO:root:Checking data folder integrity...
+INFO:root:Raw data directory not found. Creating...
+INFO:root:Results data directory not found. Creating...
+INFO:root:All required folders generated.
+INFO:root:Please copy your files into the new folders and restart the application.
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:Invalid choice detected. Stopping.
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Normalization method: ToOne
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:No files detected!
+INFO:root:No files detected!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:No files detected!
+WARNING:root:'PosixPath' object has no attribute 'split'
+WARNING:root:'PosixPath' object has no attribute 'split'
+INFO:root:No files detected!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:
+WARNING:root:
+INFO:root:No files detected!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:
+WARNING:root:
+INFO:root:No files detected!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Normalization method: ToOne
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:
+WARNING:root:
+INFO:root:No files detected!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:__init__() takes 2 positional arguments but 3 were given
+WARNING:root:__init__() takes 2 positional arguments but 3 were given
+INFO:root:No files detected!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:'PosixPath' object has no attribute 'split'
+WARNING:root:'PosixPath' object has no attribute 'split'
+INFO:root:No files detected!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:'PosixPath' object has no attribute 'split'
+WARNING:root:'PosixPath' object has no attribute 'split'
+INFO:root:No files detected!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:'PosixPath' object has no attribute 'split'
+WARNING:root:'PosixPath' object has no attribute 'split'
+INFO:root:No files detected!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:
+WARNING:root:
+INFO:root:No files detected!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:
+INFO:root:Detected 1 files!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:
+WARNING:root:
+INFO:root:No files detected!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:
+WARNING:root:
+INFO:root:No files detected!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:'Value'
+WARNING:root:'Value'
+INFO:root:No files detected!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:module 'RuntimeConstants.Runtime_Datasets' has no attribute 'files'
+WARNING:root:module 'RuntimeConstants.Runtime_Datasets' has no attribute 'files'
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:Invalid choice detected. Stopping.
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:module 'RuntimeConstants.Runtime_Datasets' has no attribute 'files'
+WARNING:root:module 'RuntimeConstants.Runtime_Datasets' has no attribute 'files'
+INFO:root:No files detected!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:VALUE
+WARNING:root:VALUE
+INFO:root:No files detected!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:VALUE
+WARNING:root:VALUE
+INFO:root:No files detected!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:VALUE
+WARNING:root:VALUE
+INFO:root:No files detected!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:
+WARNING:root:
+INFO:root:No files detected!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:
+WARNING:root:
+INFO:root:No files detected!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+WARNING:root:
+WARNING:root:
+INFO:root:No files detected!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 2 files!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 2 files!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 2 files!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 2 files!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 2 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces - Copy with following arguments: 
+Stimulation Timeframes: [453]
+Percentage: 0.6
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [345]
+Percentage: 0.6
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 2 files!
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 2 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces - Copy with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces - Copy
+INFO:root:Calculation Baseline Mean....
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 2 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces - Copy with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces - Copy
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Detecting Timeframe maximum....
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 2 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces - Copy with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces - Copy
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Detecting Timeframe maximum....
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 2 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces - Copy with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces - Copy
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Detecting Timeframe maximum....
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 2 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces - Copy with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces - Copy
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Normalize Timeframes with To One Method...
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 2 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces - Copy with following arguments: 
+Stimulation Timeframes: [1]
+Percentage: 0.6
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces - Copy
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Normalize Timeframes with To One Method...
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 2 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces - Copy with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces - Copy
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Normalize Timeframes with To One Method...
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 2 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces - Copy with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces - Copy
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Normalize Timeframes with To One Method...
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 1 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Normalize Timeframes with To One Method...
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 1 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Normalize Timeframes with To One Method...
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 1 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.7
+INFO:root:Processing file time_traces
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Normalize Timeframes with To One Method...
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 1 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Normalize Timeframes with To One Method...
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 1 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Normalize Timeframes with To One Method...
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 1 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Normalize Timeframes with To One Method...
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 1 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Normalize Timeframes with To One Method...
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 1 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Normalize Timeframes with To One Method...
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 1 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Normalize Timeframes with To One Method...
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 1 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Normalize Timeframes with To One Method...
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 1 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Normalize Timeframes with To One Method...
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 1 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Normalize Timeframes with To One Method...
+INFO:root:Normalization done.
+INFO:root:Detecting Timeframe maximum....
+INFO:root:Maximum for Cell 0352-0189 -> 1.0
+INFO:root:Maximum for Cell 0337-0171 -> 1.0
+INFO:root:Maximum for Cell 0286-0282 -> 1.0
+INFO:root:Maximum for Cell 0191-0179 -> 1.0
+INFO:root:Maximum for Cell 0333-0052 -> 1.0
+INFO:root:Maximum for Cell 0238-0025 -> 1.0
+INFO:root:Maximum for Cell 0092-0194 -> 1.0
+INFO:root:Maximum for Cell 0108-0187 -> 1.0
+INFO:root:Maximum for Cell 0150-0210 -> 1.0
+INFO:root:Maximum for Cell 0385-0257 -> 1.0
+INFO:root:Maximum for Cell 0467-0211 -> 1.0
+INFO:root:Maximum for Cell 0424-0101 -> 1.0
+INFO:root:Maximum for Cell 0394-0028 -> 1.0
+INFO:root:Maximum for Cell 0303-0091 -> 1.0
+INFO:root:Maximum for Cell 0236-0141 -> 1.0
+INFO:root:Maximum for Cell 0241-0121 -> 1.0
+INFO:root:Maximum for Cell 0265-0080 -> 1.0
+INFO:root:Maximum for Cell 0249-0282 -> 1.0
+INFO:root:Maximum for Cell 0215-0224 -> 1.0
+INFO:root:Maximum for Cell 0150-0114 -> 1.0
+INFO:root:Maximum for Cell 0113-0055 -> 1.0
+INFO:root:Maximum for Cell 0056-0089 -> 1.0
+INFO:root:Maximum for Cell 0480-0313 -> 1.0
+INFO:root:Maximum for Cell 0428-0179 -> 1.0
+INFO:root:Maximum for Cell 0362-0184 -> 1.0
+INFO:root:Maximum for Cell 0040-0395 -> 1.0
+INFO:root:Maximum for Cell 0483-0444 -> 1.0
+INFO:root:Maximum for Cell 0473-0431 -> 1.0
+INFO:root:Maximum for Cell 0453-0320 -> 1.0
+INFO:root:Maximum for Cell 0500-0178 -> 1.0
+INFO:root:Maximum for Cell 0457-0132 -> 1.0
+INFO:root:Maximum for Cell 0359-0116 -> 1.0
+INFO:root:Maximum for Cell 0309-0174 -> 1.0
+INFO:root:Maximum for Cell 0242-0205 -> 1.0
+INFO:root:Maximum for Cell 0207-0185 -> 1.0
+INFO:root:Maximum for Cell 0139-0068 -> 1.0
+INFO:root:Maximum for Cell 0257-0011 -> 1.0
+INFO:root:Maximum for Cell 0216-0085 -> 1.0
+INFO:root:Maximum for Cell 0171-0179 -> 1.0
+INFO:root:Maximum for Cell 0389-0271 -> 1.0
+INFO:root:Maximum for Cell 0359-0343 -> 1.0
+INFO:root:Detecting Timeframe maximum done.
+INFO:root:Calculation Threshold...
+INFO:root:Threshold for Cell 0352-0189 -> 0.0
+INFO:root:Threshold for Cell 0337-0171 -> 0.0
+INFO:root:Threshold for Cell 0286-0282 -> 0.0
+INFO:root:Threshold for Cell 0191-0179 -> 0.0
+INFO:root:Threshold for Cell 0333-0052 -> 0.0
+INFO:root:Threshold for Cell 0238-0025 -> 0.0
+INFO:root:Threshold for Cell 0092-0194 -> 0.0
+INFO:root:Threshold for Cell 0108-0187 -> 0.0
+INFO:root:Threshold for Cell 0150-0210 -> 0.0
+INFO:root:Threshold for Cell 0385-0257 -> 0.0
+INFO:root:Threshold for Cell 0467-0211 -> 0.0
+INFO:root:Threshold for Cell 0424-0101 -> 0.0
+INFO:root:Threshold for Cell 0394-0028 -> 0.0
+INFO:root:Threshold for Cell 0303-0091 -> 0.0
+INFO:root:Threshold for Cell 0236-0141 -> 0.0
+INFO:root:Threshold for Cell 0241-0121 -> 0.0
+INFO:root:Threshold for Cell 0265-0080 -> 0.0
+INFO:root:Threshold for Cell 0249-0282 -> 0.0
+INFO:root:Threshold for Cell 0215-0224 -> 0.0
+INFO:root:Threshold for Cell 0150-0114 -> 0.0
+INFO:root:Threshold for Cell 0113-0055 -> 0.0
+INFO:root:Threshold for Cell 0056-0089 -> 0.0
+INFO:root:Threshold for Cell 0480-0313 -> 0.0
+INFO:root:Threshold for Cell 0428-0179 -> 0.0
+INFO:root:Threshold for Cell 0362-0184 -> 0.0
+INFO:root:Threshold for Cell 0040-0395 -> 0.0
+INFO:root:Threshold for Cell 0483-0444 -> 0.0
+INFO:root:Threshold for Cell 0473-0431 -> 0.0
+INFO:root:Threshold for Cell 0453-0320 -> 0.0
+INFO:root:Threshold for Cell 0500-0178 -> 0.0
+INFO:root:Threshold for Cell 0457-0132 -> 0.0
+INFO:root:Threshold for Cell 0359-0116 -> 0.0
+INFO:root:Threshold for Cell 0309-0174 -> 0.0
+INFO:root:Threshold for Cell 0242-0205 -> 0.0
+INFO:root:Threshold for Cell 0207-0185 -> 0.0
+INFO:root:Threshold for Cell 0139-0068 -> 0.0
+INFO:root:Threshold for Cell 0257-0011 -> 0.0
+INFO:root:Threshold for Cell 0216-0085 -> 0.0
+INFO:root:Threshold for Cell 0171-0179 -> 0.0
+INFO:root:Threshold for Cell 0389-0271 -> 0.0
+INFO:root:Threshold for Cell 0359-0343 -> 0.0
+INFO:root:Threshold calculation done.
+INFO:root:Detecting Timeframe is above or below Threshold...
+INFO:root:Detecting done.
+INFO:root:Counting High Intensity Peaks...
+INFO:root:Counting High Intensity Peaks done.
+INFO:root:Summarizing High Intensity Peaks...
+INFO:root:Summarizing High Intensity Peaks done.
+INFO:root:Splitting Cells...
+INFO:root:Splitting done.
+INFO:root:Comparing intervals...
+INFO:root:Interval comparison done.
+INFO:root:Calculation done in 0:00:05.425397 seconds.
+INFO:root:57400 Time frames processed
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 1 files!
+INFO:root:Normalization method: ToOne
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 1 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Normalize Timeframes with To One Method...
+INFO:root:Normalization done.
+INFO:root:Detecting Timeframe maximum....
+INFO:root:Maximum for Cell 0352-0189 -> 1.0
+INFO:root:Maximum for Cell 0337-0171 -> 1.0
+INFO:root:Maximum for Cell 0286-0282 -> 1.0
+INFO:root:Maximum for Cell 0191-0179 -> 1.0
+INFO:root:Maximum for Cell 0333-0052 -> 1.0
+INFO:root:Maximum for Cell 0238-0025 -> 1.0
+INFO:root:Maximum for Cell 0092-0194 -> 1.0
+INFO:root:Maximum for Cell 0108-0187 -> 1.0
+INFO:root:Maximum for Cell 0150-0210 -> 1.0
+INFO:root:Maximum for Cell 0385-0257 -> 1.0
+INFO:root:Maximum for Cell 0467-0211 -> 1.0
+INFO:root:Maximum for Cell 0424-0101 -> 1.0
+INFO:root:Maximum for Cell 0394-0028 -> 1.0
+INFO:root:Maximum for Cell 0303-0091 -> 1.0
+INFO:root:Maximum for Cell 0236-0141 -> 1.0
+INFO:root:Maximum for Cell 0241-0121 -> 1.0
+INFO:root:Maximum for Cell 0265-0080 -> 1.0
+INFO:root:Maximum for Cell 0249-0282 -> 1.0
+INFO:root:Maximum for Cell 0215-0224 -> 1.0
+INFO:root:Maximum for Cell 0150-0114 -> 1.0
+INFO:root:Maximum for Cell 0113-0055 -> 1.0
+INFO:root:Maximum for Cell 0056-0089 -> 1.0
+INFO:root:Maximum for Cell 0480-0313 -> 1.0
+INFO:root:Maximum for Cell 0428-0179 -> 1.0
+INFO:root:Maximum for Cell 0362-0184 -> 1.0
+INFO:root:Maximum for Cell 0040-0395 -> 1.0
+INFO:root:Maximum for Cell 0483-0444 -> 1.0
+INFO:root:Maximum for Cell 0473-0431 -> 1.0
+INFO:root:Maximum for Cell 0453-0320 -> 1.0
+INFO:root:Maximum for Cell 0500-0178 -> 1.0
+INFO:root:Maximum for Cell 0457-0132 -> 1.0
+INFO:root:Maximum for Cell 0359-0116 -> 1.0
+INFO:root:Maximum for Cell 0309-0174 -> 1.0
+INFO:root:Maximum for Cell 0242-0205 -> 1.0
+INFO:root:Maximum for Cell 0207-0185 -> 1.0
+INFO:root:Maximum for Cell 0139-0068 -> 1.0
+INFO:root:Maximum for Cell 0257-0011 -> 1.0
+INFO:root:Maximum for Cell 0216-0085 -> 1.0
+INFO:root:Maximum for Cell 0171-0179 -> 1.0
+INFO:root:Maximum for Cell 0389-0271 -> 1.0
+INFO:root:Maximum for Cell 0359-0343 -> 1.0
+INFO:root:Detecting Timeframe maximum done.
+INFO:root:Calculation Threshold...
+INFO:root:Threshold for Cell 0352-0189 -> 0.6
+INFO:root:Threshold for Cell 0337-0171 -> 0.6
+INFO:root:Threshold for Cell 0286-0282 -> 0.6
+INFO:root:Threshold for Cell 0191-0179 -> 0.6
+INFO:root:Threshold for Cell 0333-0052 -> 0.6
+INFO:root:Threshold for Cell 0238-0025 -> 0.6
+INFO:root:Threshold for Cell 0092-0194 -> 0.6
+INFO:root:Threshold for Cell 0108-0187 -> 0.6
+INFO:root:Threshold for Cell 0150-0210 -> 0.6
+INFO:root:Threshold for Cell 0385-0257 -> 0.6
+INFO:root:Threshold for Cell 0467-0211 -> 0.6
+INFO:root:Threshold for Cell 0424-0101 -> 0.6
+INFO:root:Threshold for Cell 0394-0028 -> 0.6
+INFO:root:Threshold for Cell 0303-0091 -> 0.6
+INFO:root:Threshold for Cell 0236-0141 -> 0.6
+INFO:root:Threshold for Cell 0241-0121 -> 0.6
+INFO:root:Threshold for Cell 0265-0080 -> 0.6
+INFO:root:Threshold for Cell 0249-0282 -> 0.6
+INFO:root:Threshold for Cell 0215-0224 -> 0.6
+INFO:root:Threshold for Cell 0150-0114 -> 0.6
+INFO:root:Threshold for Cell 0113-0055 -> 0.6
+INFO:root:Threshold for Cell 0056-0089 -> 0.6
+INFO:root:Threshold for Cell 0480-0313 -> 0.6
+INFO:root:Threshold for Cell 0428-0179 -> 0.6
+INFO:root:Threshold for Cell 0362-0184 -> 0.6
+INFO:root:Threshold for Cell 0040-0395 -> 0.6
+INFO:root:Threshold for Cell 0483-0444 -> 0.6
+INFO:root:Threshold for Cell 0473-0431 -> 0.6
+INFO:root:Threshold for Cell 0453-0320 -> 0.6
+INFO:root:Threshold for Cell 0500-0178 -> 0.6
+INFO:root:Threshold for Cell 0457-0132 -> 0.6
+INFO:root:Threshold for Cell 0359-0116 -> 0.6
+INFO:root:Threshold for Cell 0309-0174 -> 0.6
+INFO:root:Threshold for Cell 0242-0205 -> 0.6
+INFO:root:Threshold for Cell 0207-0185 -> 0.6
+INFO:root:Threshold for Cell 0139-0068 -> 0.6
+INFO:root:Threshold for Cell 0257-0011 -> 0.6
+INFO:root:Threshold for Cell 0216-0085 -> 0.6
+INFO:root:Threshold for Cell 0171-0179 -> 0.6
+INFO:root:Threshold for Cell 0389-0271 -> 0.6
+INFO:root:Threshold for Cell 0359-0343 -> 0.6
+INFO:root:Threshold calculation done.
+INFO:root:Detecting Timeframe is above or below Threshold...
+INFO:root:Detecting done.
+INFO:root:Counting High Intensity Peaks...
+INFO:root:Counting High Intensity Peaks done.
+INFO:root:Summarizing High Intensity Peaks...
+INFO:root:Summarizing High Intensity Peaks done.
+INFO:root:Splitting Cells...
+INFO:root:Splitting done.
+INFO:root:Comparing intervals...
+INFO:root:Interval comparison done.
+INFO:root:Calculation done in 0:00:04.587438 seconds.
+INFO:root:57400 Time frames processed
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 1 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Normalize Timeframes with To One Method...
+INFO:root:Normalization done.
+INFO:root:Detecting Timeframe maximum....
+INFO:root:Maximum for Cell 0352-0189 -> 1.0
+INFO:root:Maximum for Cell 0337-0171 -> 1.0
+INFO:root:Maximum for Cell 0286-0282 -> 1.0
+INFO:root:Maximum for Cell 0191-0179 -> 1.0
+INFO:root:Maximum for Cell 0333-0052 -> 1.0
+INFO:root:Maximum for Cell 0238-0025 -> 1.0
+INFO:root:Maximum for Cell 0092-0194 -> 1.0
+INFO:root:Maximum for Cell 0108-0187 -> 1.0
+INFO:root:Maximum for Cell 0150-0210 -> 1.0
+INFO:root:Maximum for Cell 0385-0257 -> 1.0
+INFO:root:Maximum for Cell 0467-0211 -> 1.0
+INFO:root:Maximum for Cell 0424-0101 -> 1.0
+INFO:root:Maximum for Cell 0394-0028 -> 1.0
+INFO:root:Maximum for Cell 0303-0091 -> 1.0
+INFO:root:Maximum for Cell 0236-0141 -> 1.0
+INFO:root:Maximum for Cell 0241-0121 -> 1.0
+INFO:root:Maximum for Cell 0265-0080 -> 1.0
+INFO:root:Maximum for Cell 0249-0282 -> 1.0
+INFO:root:Maximum for Cell 0215-0224 -> 1.0
+INFO:root:Maximum for Cell 0150-0114 -> 1.0
+INFO:root:Maximum for Cell 0113-0055 -> 1.0
+INFO:root:Maximum for Cell 0056-0089 -> 1.0
+INFO:root:Maximum for Cell 0480-0313 -> 1.0
+INFO:root:Maximum for Cell 0428-0179 -> 1.0
+INFO:root:Maximum for Cell 0362-0184 -> 1.0
+INFO:root:Maximum for Cell 0040-0395 -> 1.0
+INFO:root:Maximum for Cell 0483-0444 -> 1.0
+INFO:root:Maximum for Cell 0473-0431 -> 1.0
+INFO:root:Maximum for Cell 0453-0320 -> 1.0
+INFO:root:Maximum for Cell 0500-0178 -> 1.0
+INFO:root:Maximum for Cell 0457-0132 -> 1.0
+INFO:root:Maximum for Cell 0359-0116 -> 1.0
+INFO:root:Maximum for Cell 0309-0174 -> 1.0
+INFO:root:Maximum for Cell 0242-0205 -> 1.0
+INFO:root:Maximum for Cell 0207-0185 -> 1.0
+INFO:root:Maximum for Cell 0139-0068 -> 1.0
+INFO:root:Maximum for Cell 0257-0011 -> 1.0
+INFO:root:Maximum for Cell 0216-0085 -> 1.0
+INFO:root:Maximum for Cell 0171-0179 -> 1.0
+INFO:root:Maximum for Cell 0389-0271 -> 1.0
+INFO:root:Maximum for Cell 0359-0343 -> 1.0
+INFO:root:Detecting Timeframe maximum done.
+INFO:root:Calculation Threshold...
+INFO:root:Threshold for Cell 0352-0189 -> 0.6
+INFO:root:Threshold for Cell 0337-0171 -> 0.6
+INFO:root:Threshold for Cell 0286-0282 -> 0.6
+INFO:root:Threshold for Cell 0191-0179 -> 0.6
+INFO:root:Threshold for Cell 0333-0052 -> 0.6
+INFO:root:Threshold for Cell 0238-0025 -> 0.6
+INFO:root:Threshold for Cell 0092-0194 -> 0.6
+INFO:root:Threshold for Cell 0108-0187 -> 0.6
+INFO:root:Threshold for Cell 0150-0210 -> 0.6
+INFO:root:Threshold for Cell 0385-0257 -> 0.6
+INFO:root:Threshold for Cell 0467-0211 -> 0.6
+INFO:root:Threshold for Cell 0424-0101 -> 0.6
+INFO:root:Threshold for Cell 0394-0028 -> 0.6
+INFO:root:Threshold for Cell 0303-0091 -> 0.6
+INFO:root:Threshold for Cell 0236-0141 -> 0.6
+INFO:root:Threshold for Cell 0241-0121 -> 0.6
+INFO:root:Threshold for Cell 0265-0080 -> 0.6
+INFO:root:Threshold for Cell 0249-0282 -> 0.6
+INFO:root:Threshold for Cell 0215-0224 -> 0.6
+INFO:root:Threshold for Cell 0150-0114 -> 0.6
+INFO:root:Threshold for Cell 0113-0055 -> 0.6
+INFO:root:Threshold for Cell 0056-0089 -> 0.6
+INFO:root:Threshold for Cell 0480-0313 -> 0.6
+INFO:root:Threshold for Cell 0428-0179 -> 0.6
+INFO:root:Threshold for Cell 0362-0184 -> 0.6
+INFO:root:Threshold for Cell 0040-0395 -> 0.6
+INFO:root:Threshold for Cell 0483-0444 -> 0.6
+INFO:root:Threshold for Cell 0473-0431 -> 0.6
+INFO:root:Threshold for Cell 0453-0320 -> 0.6
+INFO:root:Threshold for Cell 0500-0178 -> 0.6
+INFO:root:Threshold for Cell 0457-0132 -> 0.6
+INFO:root:Threshold for Cell 0359-0116 -> 0.6
+INFO:root:Threshold for Cell 0309-0174 -> 0.6
+INFO:root:Threshold for Cell 0242-0205 -> 0.6
+INFO:root:Threshold for Cell 0207-0185 -> 0.6
+INFO:root:Threshold for Cell 0139-0068 -> 0.6
+INFO:root:Threshold for Cell 0257-0011 -> 0.6
+INFO:root:Threshold for Cell 0216-0085 -> 0.6
+INFO:root:Threshold for Cell 0171-0179 -> 0.6
+INFO:root:Threshold for Cell 0389-0271 -> 0.6
+INFO:root:Threshold for Cell 0359-0343 -> 0.6
+INFO:root:Threshold calculation done.
+INFO:root:Detecting Timeframe is above or below Threshold...
+INFO:root:Detecting done.
+INFO:root:Counting High Intensity Peaks...
+INFO:root:Counting High Intensity Peaks done.
+INFO:root:Summarizing High Intensity Peaks...
+INFO:root:Summarizing High Intensity Peaks done.
+INFO:root:Splitting Cells...
+INFO:root:Splitting done.
+INFO:root:Comparing intervals...
+INFO:root:Interval comparison done.
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Detected 1 files!
+INFO:root:Normalization method: ToOne
+INFO:root:You are processing the File time_traces with following arguments: 
+Stimulation Timeframes: [372]
+Percentage: 0.6
+INFO:root:Processing file time_traces
+INFO:root:Calculation Baseline Mean....
+INFO:root:Baseline Mean for Cell 0352-0189 -> 1487081.8921335714
+INFO:root:Baseline Mean for Cell 0337-0171 -> 767143.2721442856
+INFO:root:Baseline Mean for Cell 0286-0282 -> 1302190.2019421428
+INFO:root:Baseline Mean for Cell 0191-0179 -> 1113130.6746035714
+INFO:root:Baseline Mean for Cell 0333-0052 -> 730617.289225
+INFO:root:Baseline Mean for Cell 0238-0025 -> 727189.5820014286
+INFO:root:Baseline Mean for Cell 0092-0194 -> 936338.2629921428
+INFO:root:Baseline Mean for Cell 0108-0187 -> 836700.6484707142
+INFO:root:Baseline Mean for Cell 0150-0210 -> 858294.0763600001
+INFO:root:Baseline Mean for Cell 0385-0257 -> 574486.6794642857
+INFO:root:Baseline Mean for Cell 0467-0211 -> 600562.2055735714
+INFO:root:Baseline Mean for Cell 0424-0101 -> 537954.3985042857
+INFO:root:Baseline Mean for Cell 0394-0028 -> 1172866.5845135713
+INFO:root:Baseline Mean for Cell 0303-0091 -> 1485344.8824335714
+INFO:root:Baseline Mean for Cell 0236-0141 -> 622592.5966892857
+INFO:root:Baseline Mean for Cell 0241-0121 -> 322743.4487364285
+INFO:root:Baseline Mean for Cell 0265-0080 -> 1320165.877627857
+INFO:root:Baseline Mean for Cell 0249-0282 -> 373303.8651064286
+INFO:root:Baseline Mean for Cell 0215-0224 -> 867237.4988342858
+INFO:root:Baseline Mean for Cell 0150-0114 -> 954028.9279242856
+INFO:root:Baseline Mean for Cell 0113-0055 -> 1092703.4592564288
+INFO:root:Baseline Mean for Cell 0056-0089 -> 487314.5808435714
+INFO:root:Baseline Mean for Cell 0480-0313 -> 1171332.1299921428
+INFO:root:Baseline Mean for Cell 0428-0179 -> 521986.17593857145
+INFO:root:Baseline Mean for Cell 0362-0184 -> 872894.6925192857
+INFO:root:Baseline Mean for Cell 0040-0395 -> 1177744.4341307143
+INFO:root:Baseline Mean for Cell 0483-0444 -> 733837.2835971429
+INFO:root:Baseline Mean for Cell 0473-0431 -> 649010.5102799999
+INFO:root:Baseline Mean for Cell 0453-0320 -> 659096.1782657143
+INFO:root:Baseline Mean for Cell 0500-0178 -> 1615544.4767764283
+INFO:root:Baseline Mean for Cell 0457-0132 -> 736935.1047107143
+INFO:root:Baseline Mean for Cell 0359-0116 -> 630746.2065414286
+INFO:root:Baseline Mean for Cell 0309-0174 -> 771146.2786028573
+INFO:root:Baseline Mean for Cell 0242-0205 -> 551325.5801535713
+INFO:root:Baseline Mean for Cell 0207-0185 -> 828896.3158521428
+INFO:root:Baseline Mean for Cell 0139-0068 -> 824434.8758892856
+INFO:root:Baseline Mean for Cell 0257-0011 -> 1342635.6592607142
+INFO:root:Baseline Mean for Cell 0216-0085 -> 846031.2291607143
+INFO:root:Baseline Mean for Cell 0171-0179 -> 839358.5765878572
+INFO:root:Baseline Mean for Cell 0389-0271 -> 704612.856605
+INFO:root:Baseline Mean for Cell 0359-0343 -> 2194129.325722143
+INFO:root:Baseline Mean Calculation done.
+INFO:root:Normalize Timeframes with To One Method...
+INFO:root:Normalization done.
+INFO:root:Detecting Timeframe maximum....
+INFO:root:Maximum for Cell 0352-0189 -> 1.0
+INFO:root:Maximum for Cell 0337-0171 -> 1.0
+INFO:root:Maximum for Cell 0286-0282 -> 1.0
+INFO:root:Maximum for Cell 0191-0179 -> 1.0
+INFO:root:Maximum for Cell 0333-0052 -> 1.0
+INFO:root:Maximum for Cell 0238-0025 -> 1.0
+INFO:root:Maximum for Cell 0092-0194 -> 1.0
+INFO:root:Maximum for Cell 0108-0187 -> 1.0
+INFO:root:Maximum for Cell 0150-0210 -> 1.0
+INFO:root:Maximum for Cell 0385-0257 -> 1.0
+INFO:root:Maximum for Cell 0467-0211 -> 1.0
+INFO:root:Maximum for Cell 0424-0101 -> 1.0
+INFO:root:Maximum for Cell 0394-0028 -> 1.0
+INFO:root:Maximum for Cell 0303-0091 -> 1.0
+INFO:root:Maximum for Cell 0236-0141 -> 1.0
+INFO:root:Maximum for Cell 0241-0121 -> 1.0
+INFO:root:Maximum for Cell 0265-0080 -> 1.0
+INFO:root:Maximum for Cell 0249-0282 -> 1.0
+INFO:root:Maximum for Cell 0215-0224 -> 1.0
+INFO:root:Maximum for Cell 0150-0114 -> 1.0
+INFO:root:Maximum for Cell 0113-0055 -> 1.0
+INFO:root:Maximum for Cell 0056-0089 -> 1.0
+INFO:root:Maximum for Cell 0480-0313 -> 1.0
+INFO:root:Maximum for Cell 0428-0179 -> 1.0
+INFO:root:Maximum for Cell 0362-0184 -> 1.0
+INFO:root:Maximum for Cell 0040-0395 -> 1.0
+INFO:root:Maximum for Cell 0483-0444 -> 1.0
+INFO:root:Maximum for Cell 0473-0431 -> 1.0
+INFO:root:Maximum for Cell 0453-0320 -> 1.0
+INFO:root:Maximum for Cell 0500-0178 -> 1.0
+INFO:root:Maximum for Cell 0457-0132 -> 1.0
+INFO:root:Maximum for Cell 0359-0116 -> 1.0
+INFO:root:Maximum for Cell 0309-0174 -> 1.0
+INFO:root:Maximum for Cell 0242-0205 -> 1.0
+INFO:root:Maximum for Cell 0207-0185 -> 1.0
+INFO:root:Maximum for Cell 0139-0068 -> 1.0
+INFO:root:Maximum for Cell 0257-0011 -> 1.0
+INFO:root:Maximum for Cell 0216-0085 -> 1.0
+INFO:root:Maximum for Cell 0171-0179 -> 1.0
+INFO:root:Maximum for Cell 0389-0271 -> 1.0
+INFO:root:Maximum for Cell 0359-0343 -> 1.0
+INFO:root:Detecting Timeframe maximum done.
+INFO:root:Calculation Threshold...
+INFO:root:Threshold for Cell 0352-0189 -> 0.6
+INFO:root:Threshold for Cell 0337-0171 -> 0.6
+INFO:root:Threshold for Cell 0286-0282 -> 0.6
+INFO:root:Threshold for Cell 0191-0179 -> 0.6
+INFO:root:Threshold for Cell 0333-0052 -> 0.6
+INFO:root:Threshold for Cell 0238-0025 -> 0.6
+INFO:root:Threshold for Cell 0092-0194 -> 0.6
+INFO:root:Threshold for Cell 0108-0187 -> 0.6
+INFO:root:Threshold for Cell 0150-0210 -> 0.6
+INFO:root:Threshold for Cell 0385-0257 -> 0.6
+INFO:root:Threshold for Cell 0467-0211 -> 0.6
+INFO:root:Threshold for Cell 0424-0101 -> 0.6
+INFO:root:Threshold for Cell 0394-0028 -> 0.6
+INFO:root:Threshold for Cell 0303-0091 -> 0.6
+INFO:root:Threshold for Cell 0236-0141 -> 0.6
+INFO:root:Threshold for Cell 0241-0121 -> 0.6
+INFO:root:Threshold for Cell 0265-0080 -> 0.6
+INFO:root:Threshold for Cell 0249-0282 -> 0.6
+INFO:root:Threshold for Cell 0215-0224 -> 0.6
+INFO:root:Threshold for Cell 0150-0114 -> 0.6
+INFO:root:Threshold for Cell 0113-0055 -> 0.6
+INFO:root:Threshold for Cell 0056-0089 -> 0.6
+INFO:root:Threshold for Cell 0480-0313 -> 0.6
+INFO:root:Threshold for Cell 0428-0179 -> 0.6
+INFO:root:Threshold for Cell 0362-0184 -> 0.6
+INFO:root:Threshold for Cell 0040-0395 -> 0.6
+INFO:root:Threshold for Cell 0483-0444 -> 0.6
+INFO:root:Threshold for Cell 0473-0431 -> 0.6
+INFO:root:Threshold for Cell 0453-0320 -> 0.6
+INFO:root:Threshold for Cell 0500-0178 -> 0.6
+INFO:root:Threshold for Cell 0457-0132 -> 0.6
+INFO:root:Threshold for Cell 0359-0116 -> 0.6
+INFO:root:Threshold for Cell 0309-0174 -> 0.6
+INFO:root:Threshold for Cell 0242-0205 -> 0.6
+INFO:root:Threshold for Cell 0207-0185 -> 0.6
+INFO:root:Threshold for Cell 0139-0068 -> 0.6
+INFO:root:Threshold for Cell 0257-0011 -> 0.6
+INFO:root:Threshold for Cell 0216-0085 -> 0.6
+INFO:root:Threshold for Cell 0171-0179 -> 0.6
+INFO:root:Threshold for Cell 0389-0271 -> 0.6
+INFO:root:Threshold for Cell 0359-0343 -> 0.6
+INFO:root:Threshold calculation done.
+INFO:root:Detecting Timeframe is above or below Threshold...
+INFO:root:Detecting done.
+INFO:root:Counting High Intensity Peaks...
+INFO:root:Counting High Intensity Peaks done.
+INFO:root:Summarizing High Intensity Peaks...
+INFO:root:Summarizing High Intensity Peaks done.
+INFO:root:Splitting Cells...
+INFO:root:Splitting done.
+INFO:root:Comparing intervals...
+INFO:root:Interval comparison done.
+INFO:root:Created File Data/Results/2020-07-21-18-41-27/High-Stimulus-2020-07-21 18-41-34.txt in Data/Raw/time_traces.txt
+INFO:root:Created File Data/Results/2020-07-21-18-41-27/Normalized-Data-2020-07-21 18-41-34.txt in Data/Raw/time_traces.txt
+INFO:root:Created File Data/Results/2020-07-21-18-41-27/Spikes_Per_Minute-2020-07-21 18-41-34.txt in Data/Raw/time_traces.txt
+INFO:root:Calculation done in 0:00:05.074348 seconds.
+INFO:root:57400 Time frames processed
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.
+INFO:root:Checking data folder integrity...
+INFO:root:All folder checks passed.
+INFO:root:Creating evaluation folder.

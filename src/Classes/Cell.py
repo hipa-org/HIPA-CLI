@@ -1,20 +1,18 @@
-from GlobalData.Statics import TimeFrameColumns
+from RuntimeConstants.Runtime_Datasets import TimeFrameColumns
+import pandas as pd
 
 
 class Cell:
-    def __init__(self, name: str, time_frames: list, threshold: float, baseline_mean: float,
-                 normalized_time_frames: list,
-                 time_frame_maximum: float, high_intensity_counts: list, intervals: list,
-                 interval_high_intensity_counts):
+    def __init__(self, name: str):
         self.name = name
-        self.time_frames = time_frames
-        self.baseline_mean = baseline_mean
-        self.time_frame_maximum = time_frame_maximum
-        self.normalized_time_frames = normalized_time_frames
-        self.threshold = threshold
-        self.high_intensity_counts = high_intensity_counts
-        self.intervals = intervals
-        self.interval_high_intensity_counts = interval_high_intensity_counts
+        self.time_frames = pd.DataFrame()
+        self.baseline_mean = 0
+        self.time_frame_maximum = 0
+        self.normalized_time_frames = pd.DataFrame()
+        self.threshold = 0
+        self.high_intensity_counts = pd.DataFrame()
+        self.intervals = pd.DataFrame()
+        self.interval_high_intensity_counts = pd.DataFrame()
 
     def split_cells(self, stimulation_time_frames):
         frames = []

@@ -1,19 +1,26 @@
 import configparser
+import sys
+import logging
+from pathlib import Path
 
 
-# Config.py
+# Configuration.py
 class Config:
-    VERBOSE = 0
-    DEBUG = 0
+    VERBOSE = False
+    DEBUG = False
     WORKING_DIRECTORY = 'Data/'
     INPUT_FILE_NAME = 'time_traces'
     OUTPUT_FILE_NAME_HIGH_STIMULUS = 'High-Stimulus'
     OUTPUT_FILE_NAME_NORMALIZED_DATA = 'Normalized-Data'
     OUTPUT_FILE_NAME_SPIKES_PER_MINUTE = 'Spikes_Per_Minute'
-    ERROR_LOG = 'error-log.txt'
-    DEFAULT_LOG = 'default-log.txt'
-    LOG_DIRECTORY = 'Logs/'
     NORMALIZATION_METHOD = 'Baseline'
+
+    START_HIGH_INTENSITY_CALCULATION = False
+
+    # Data
+    DATA_ROOT_DIRECTORY = Path()
+    DATA_RAW_DIRECTORY = Path()
+    DATA_RESULTS_DIRECTORY = Path()
 
 
 def read_conf():
@@ -22,19 +29,22 @@ def read_conf():
     :return:
     """
     config = configparser.ConfigParser()
-    config.read('Config.ini')
+    config.read('src/config.ini')
     try:
-        Config.OUTPUT_FILE_NAME_HIGH_STIMULUS = config['SETTINGS']['output_file_name_high_stimulus']
-        Config.OUTPUT_FILE_NAME_NORMALIZED_DATA = config['SETTINGS']['output_file_name_normalized_data']
-        Config.INPUT_FILE_NAME = config['SETTINGS']['input_file_name']
-        Config.WORKING_DIRECTORY = config['SETTINGS']['working_directory']
-        Config.DEFAULT_LOG = config['LOGS']['default_log']
-        Config.ERROR_LOG = config['LOGS']['error_log']
-        Config.LOG_DIRECTORY = config['LOGS']['logs_path']
-        Config.NORMALIZATION_METHOD = config['SETTINGS']['normalization_method']
-        return True
+        Config.OUTPUT_FILE_NAME_HIGH_STIMULUS = config['FILES']['output_file_name_high_stimulus']
+        Config.OUTPUT_FILE_NAME_NORMALIZED_DATA = config['FILES']['output_file_name_normalized_data']
+        Config.NORMALIZATION_METHOD = config['FILES']['normalization_method']
+
+        # Data
+        Config.DATA_ROOT_DIRECTORY = Path(config['DATA']['root_directory'])
+        Config.DATA_RAW_DIRECTORY = Path(Config.DATA_ROOT_DIRECTORY, config['DATA']['raw_directory'])
+        Config.DATA_RESULTS_DIRECTORY = Path(Config.DATA_ROOT_DIRECTORY, config['DATA']['results_directory'])
+        return
     except KeyError as ex:
-        return ex
+        logging.error(f"Error occurred while reading config.ini.")
+        logging.error(f"Key: {ex} not found!")
+        logging.error(f"Make sure the file config.ini exists in your src directory!")
+        sys.exit()
 
 
 def reset_config():
