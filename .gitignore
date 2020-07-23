@@ -6,8 +6,9 @@ dist/
 build/
 __pycache__/
 Log/
-Data/*.txt
+Data/
 Logs/
 *.txt
 !requirements.txt
 !sampleData/*.txt
+*.log
