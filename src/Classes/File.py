@@ -115,15 +115,13 @@ class File:
         Normalize each Timeframe in Cell with to One Algorithm
         :return:
         """
-        logging.info('Normalize Timeframes with To One Method...')
-
-        scaler = MinMaxScaler()
+        logging.info('Normalize time frames with To One Method...')
 
         for cell in self.cells:
-            maxValue = cell.time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value].max()
+            max_value = cell.time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value].max()
 
             data = {TimeFrameColumns.TIME_FRAME_VALUE.value: cell.time_frames[
-                                                                 TimeFrameColumns.TIME_FRAME_VALUE.value] / maxValue}
+                                                                 TimeFrameColumns.TIME_FRAME_VALUE.value] / max_value}
             df = pd.DataFrame(data)
             df[TimeFrameColumns.TIME_FRAME_VALUE.value] = pd.to_numeric(df[TimeFrameColumns.TIME_FRAME_VALUE.value])
 
