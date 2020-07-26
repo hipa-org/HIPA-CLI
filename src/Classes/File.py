@@ -138,13 +138,13 @@ class File:
         Calculates the timeframe maximum
         :return:
         """
-        logging.info('Detecting Timeframe maximum....')
+        logging.info('Detecting time frame maximum....')
         for cell in self.cells:
             cell.time_frame_maximum = cell.normalized_time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value].max()
             if Config.VERBOSE:
                 logging.info(f'Maximum for Cell {cell.name} -> {cell.time_frame_maximum}')
 
-        logging.info('Detecting Timeframe maximum done.')
+        logging.info('Detecting time frame maximum done.')
 
     def calculate_threshold(self):
         """
@@ -161,17 +161,17 @@ class File:
 
     def detect_above_threshold(self):
         """
-         Detects if a timeframe is above or below threshold
+         Detects if a time frame is above or below threshold
         :return:
         """
         logging.info(
-            'Detecting Timeframe is above or below Threshold...')
+            'Detecting time frame is above or below Threshold...')
         for cell in self.cells:
             cell.normalized_time_frames.loc[
-                cell.normalized_time_frames['Value'] < float(
+                cell.normalized_time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value] < float(
                     cell.threshold), TimeFrameColumns.ABOVE_THRESHOLD.value] = False
             cell.normalized_time_frames.loc[
-                cell.normalized_time_frames['Value'] >= float(
+                cell.normalized_time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value] >= float(
                     cell.threshold), TimeFrameColumns.ABOVE_THRESHOLD.value] = True
         logging.info('Detecting done.')
 
@@ -213,8 +213,11 @@ class File:
         logging.info('Summarizing High Intensity Peaks done.')
 
     def split_cells(self):
-        """Splitting the cells into intervals using the given time frames"""
-        logging.info('Splitting Cells...')
+        """
+        Splitting the cells into intervals using the given time frames
+        """
+
+        logging.info('Splitting cells...')
         for cell in self.cells:
             cell.split_cells(self.stimulation_time_frames)
         logging.info('Splitting done.')
