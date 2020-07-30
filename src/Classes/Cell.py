@@ -39,4 +39,3 @@ class Cell:
             interval_counts.append(df['Count'].sum())
         self.interval_high_intensity_counts = interval_counts
 
-        # print(df)

@@ -21,15 +21,20 @@ class File:
         # The folder where all results are stored in
         self.folder = Folder_Management.create_directory(
             Path(f"{Runtime_Folders.EVALUATION_DIRECTORY}/{self.name}"))
+
+        # Loads the data of the file
         self.data = self.__load_data()
+
+        # Populates the cells
         self.cells = self.__populate_cells()
+        # the total detected minutes
         self.total_detected_minutes = self.__get_minutes()
 
         self.threshold = 0
         # Stimulation time frames. eg. 250 , 450, 640
-        self.stimulation_time_frames = list()
-        self.total_spikes_per_minutes = list()
-        self.total_spikes_per_minute_mean = list()
+        self.stimulation_time_frames = []
+        self.total_spikes_per_minutes = []
+        self.total_spikes_per_minute_mean = []
 
     def __load_data(self):
         """
@@ -90,7 +95,7 @@ class File:
 
     def normalize_time_frames_with_baseline(self):
         """
-         Normalize each Timeframe in Cell
+         Normalize each Time frame in Cell
         :return:
         """
 
@@ -135,7 +140,7 @@ class File:
 
     def calculate_time_frame_maximum(self):
         """
-        Calculates the timeframe maximum
+        Calculates the time frame maximum
         :return:
         """
         logging.info('Detecting time frame maximum....')
@@ -154,8 +159,9 @@ class File:
         logging.info('Calculation Threshold...')
         for cell in self.cells:
             cell.threshold = cell.time_frame_maximum * self.threshold
-            logging.info(
-                'Threshold for Cell {0} -> {1}'.format(cell.name, cell.threshold))
+
+            if Config.VERBOSE:
+                logging.info(f"Threshold for Cell {cell.name} -> {cell.threshold}")
 
         logging.info('Threshold calculation done.')
 
@@ -232,21 +238,30 @@ class File:
         logging.info('Interval comparison done.')
 
     def interval_comparison(self):
+        """
+        Compare the different intervals and check if there is an activation or deactivation between them
+        """
+        # print(self.total_spikes_per_minutes)
+        # print(self.total_spikes_per_minute_mean)
+        # input()
         pass
 
-    def get_folder(self):
-        path_split = self.path.split(".")
-        path_split = path_split[:-1]
-        path_split = path_split[0].split("/")
-        path_split = path_split[:-1]
-        file_folder = ""
-        for path_fragment in path_split:
-            if file_folder == "":
-                file_folder = path_fragment + "/"
-            else:
-                file_folder = file_folder + path_fragment + "/"
+    def get_folder(self) -> str:
+        return os.path.basename(self.path)
 
-        return file_folder
+        # path_split = self.path.split(".")
+        # path_split = path_split[:-1]
+        # path_split = path_split[0].split("/")
+        # path_split = path_split[:-1]
+        # file_folder = ""
+        # for path_fragment in path_split:
+
+        #   if file_folder == "":
+        #      file_folder = path_fragment + "/"
+        # else:
+        #    file_folder = file_folder + path_fragment + "/"
+
+        # return file_folder
 
     def generate_report(self):
         """
@@ -282,13 +297,14 @@ class File:
         minutes = np.arange(int(self.total_detected_minutes) + 1)
 
         temp_dict = {"Minutes": minutes, "Total spikes": self.total_spikes_per_minutes,
-                     " Mean spikes": self.total_spikes_per_minute_mean}
+                     "Mean spikes": self.total_spikes_per_minute_mean}
 
         data_matrix = pd.DataFrame(temp_dict)
         data_matrix.to_csv(os.path.join(self.folder, f"{Config.OUTPUT_FILE_NAME_SPIKES_PER_MINUTE}.csv"), index=None,
                            sep='\t', mode='a')
 
     def __get_normalized_time_frames(self):
+
         data = []
         columns = []
 
@@ -298,8 +314,11 @@ class File:
         for cell in self.cells:
             data.append(cell.normalized_time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value].to_string(index=False))
 
+        print(data)
+        input()
         data = [i.split('\n') for i in data]
 
+        # TODO: Check what this is doing
         for li in data:
             li = [float(i) for i in li]
 
@@ -309,8 +328,18 @@ class File:
         return df
 
     def __get_high_stimulus_counts(self):
+        """
+        Counts the high stimulus counts
+        """
         data = []
         columns = []
+
+        print([cell.high_intensity_counts['Count'].to_string(index=False) for cell in self.cells])
+        input()
+        df = pd.DataFrame([cell.high_intensity_counts['Count'][0] for cell in self.cells],
+                          columns=[cell.name for cell in self.cells])
+        print(df)
+        input()
 
         for cell in self.cells:
             columns.append(cell.name)
@@ -320,10 +349,15 @@ class File:
 
         data = [i.split('\n') for i in data]
 
+        # TODO: Check what this is doing
         for li in data:
             li = [int(i) for i in li]
 
         df = pd.DataFrame(data)
         df = df.T
         df.columns = columns
+
+        print(df)
+        input()
+
         return df

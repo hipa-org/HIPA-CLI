@@ -55,7 +55,7 @@ def show_welcome_ui():
             if Config.VERBOSE:
                 print('Verbose active')
 
-            Runtime_Datasets.choice = int(input("Choose your action: (Type the action number)\n"))
+            Runtime_Datasets.Choice = int(input("Choose your action: (Type the action number)\n"))
         except ValueError:
             print("Please choose a valid option!")
             input()

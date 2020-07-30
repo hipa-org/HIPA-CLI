@@ -1,10 +1,8 @@
 import datetime
 from UI import Questions
 from RuntimeConstants import Runtime_Datasets
-from Services.Config import Configuration
 from Classes.File import File
 import logging
-from Services.DataLoader import Data_Loader
 
 '''
 Main Calculation Function
@@ -33,11 +31,6 @@ def execute_high_intensity_calculation(file: File):
     start_time = datetime.datetime.now()
     file.calculate_baseline_mean()
     file.normalize_time_frames_with_to_ones()
-    # if Configuration.Config.NORMALIZATION_METHOD == Runtime_Datasets.NormalizationMethods.Baseline:
-    #    file.normalize_time_frames_with_baseline()
-    # else:
-    #    file.normalize_time_frames_with_to_ones()
-
     file.calculate_time_frame_maximum()
     file.calculate_threshold()
     file.detect_above_threshold()
@@ -51,3 +44,4 @@ def execute_high_intensity_calculation(file: File):
     end_time = datetime.datetime.now()
     logging.info(f'Calculation done in {end_time - start_time} seconds.')
     logging.info(f'{len(file.cells) * len(file.cells[0].time_frames)} Time frames processed')
+    input()
