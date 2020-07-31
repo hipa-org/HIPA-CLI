@@ -1,6 +1,6 @@
 from RuntimeConstants import Runtime_Datasets
 from Enums import Actions
-from Actions import High_Intensity_Calculations
+from Actions import High_Intensity_Calculations, Clean_Folders
 import webbrowser
 import sys
 import logging
@@ -28,7 +28,8 @@ def handle_choice():
     elif Runtime_Datasets.Choice == Actions.Choices.HELP.value:
         webbrowser.open_new_tab('https://github.com/Exitare/HIPA-CLI')
     elif Runtime_Datasets.Choice == Actions.Choices.CLEAN_FOLDER.value:
-        pass
+        Clean_Folders.clean_folders()
+        input()
 
     elif Runtime_Datasets.Choice == -1:
         sys.exit(0)

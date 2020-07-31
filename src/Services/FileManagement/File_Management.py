@@ -1,10 +1,7 @@
 from pathlib import Path
 import ntpath
-import os
-import sys
 from Services.Configuration.Config import Config
 import pandas as pd
-from collections import defaultdict
 
 
 def get_file_name(path):
@@ -40,5 +37,5 @@ def create_csv_file(df, folder, name):
     :return:
     """
     if folder != "" and not df.empty:
-        path = os.path.join(folder, f"{name}.csv")
+        path = Path.joinpath(folder, f"{name}.csv")
         df.to_csv(path, index=True)
