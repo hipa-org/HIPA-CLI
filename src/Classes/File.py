@@ -57,19 +57,25 @@ class File:
             if column == "Err" or column == "Average":
                 continue
 
+            # Create cell
             cell = Cell(column)
-            # Create time frames
-            data = {TimeFrameColumns.TIME_FRAME_VALUE.value: self.data[column]}
-            df = pd.DataFrame(data)
-            df[TimeFrameColumns.TIME_FRAME_VALUE.value] = pd.to_numeric(df[TimeFrameColumns.TIME_FRAME_VALUE.value])
+
+            # Create initial time frames
+            time_frames = pd.DataFrame(
+                columns=[f'{TimeFrameColumns.TIME_FRAME_VALUE.value}', f'{TimeFrameColumns.INCLUDING_MINUTE.value}',
+                         f'{TimeFrameColumns.ABOVE_THRESHOLD.value}'],
+                data={TimeFrameColumns.TIME_FRAME_VALUE.value: self.data[column]})
+
+            # Convert data to numeric
+            time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value] = pd.to_numeric(
+                time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value])
             # Create including minute column
-            df[TimeFrameColumns.INCLUDING_MINUTE.value] = np.floor(
-                df[TimeFrameColumns.TIME_FRAME_VALUE.value].index.values * 3.9 / 60)
-            df[TimeFrameColumns.ABOVE_THRESHOLD.value] = False
+            time_frames[TimeFrameColumns.INCLUDING_MINUTE.value] = np.floor(
+                time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value].index.values * 3.9 / 60)
+            time_frames[TimeFrameColumns.ABOVE_THRESHOLD.value] = False
 
             # Add df to member
-            cell.time_frames = df
-
+            cell.time_frames = time_frames
             # Add cell to df
             cells.append(cell)
 
@@ -117,7 +123,7 @@ class File:
 
     def normalize_time_frames_with_to_ones(self):
         """
-        Normalize each Timeframe in Cell with to One Algorithm
+        Normalize each time frame in Cell with to One Algorithm
         :return:
         """
         logging.info('Normalize time frames with To One Method...')
@@ -125,16 +131,23 @@ class File:
         for cell in self.cells:
             max_value = cell.time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value].max()
 
-            data = {TimeFrameColumns.TIME_FRAME_VALUE.value: cell.time_frames[
-                                                                 TimeFrameColumns.TIME_FRAME_VALUE.value] / max_value}
-            df = pd.DataFrame(data)
-            df[TimeFrameColumns.TIME_FRAME_VALUE.value] = pd.to_numeric(df[TimeFrameColumns.TIME_FRAME_VALUE.value])
+            # Create normalized time frames
+            time_frames = pd.DataFrame(
+                columns=[f'{TimeFrameColumns.TIME_FRAME_VALUE.value}', f'{TimeFrameColumns.INCLUDING_MINUTE.value}',
+                         f'{TimeFrameColumns.ABOVE_THRESHOLD.value}'],
+                data={TimeFrameColumns.TIME_FRAME_VALUE.value: cell.time_frames[
+                                                                   TimeFrameColumns.TIME_FRAME_VALUE.value] / max_value})
+
+            time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value] = pd.to_numeric(
+                time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value])
 
             # Create including minute column
-            df[TimeFrameColumns.INCLUDING_MINUTE.value] = cell.time_frames[TimeFrameColumns.INCLUDING_MINUTE.value]
-            df[TimeFrameColumns.ABOVE_THRESHOLD.value] = cell.time_frames[TimeFrameColumns.ABOVE_THRESHOLD.value]
+            time_frames[TimeFrameColumns.INCLUDING_MINUTE.value] = cell.time_frames[
+                TimeFrameColumns.INCLUDING_MINUTE.value]
+            time_frames[TimeFrameColumns.ABOVE_THRESHOLD.value] = cell.time_frames[
+                TimeFrameColumns.ABOVE_THRESHOLD.value]
 
-            cell.normalized_time_frames = df
+            cell.normalized_time_frames = time_frames
 
         logging.info('Normalization done.')
 
@@ -147,7 +160,7 @@ class File:
         for cell in self.cells:
             cell.time_frame_maximum = cell.normalized_time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value].max()
             if Config.VERBOSE:
-                logging.info(f'Maximum for Cell {cell.name} -> {cell.time_frame_maximum}')
+                logging.info(f'Maximum for cell {cell.name} -> {cell.time_frame_maximum}')
 
         logging.info('Detecting time frame maximum done.')
 
@@ -156,12 +169,12 @@ class File:
           Calculates the Threshold
         :return:
         """
-        logging.info('Calculation Threshold...')
+        logging.info('Calculation threshold...')
         for cell in self.cells:
             cell.threshold = cell.time_frame_maximum * self.threshold
 
             if Config.VERBOSE:
-                logging.info(f"Threshold for Cell {cell.name} -> {cell.threshold}")
+                logging.info(f"Threshold for cell {cell.name} -> {cell.threshold}")
 
         logging.info('Threshold calculation done.')
 
@@ -171,7 +184,7 @@ class File:
         :return:
         """
         logging.info(
-            'Detecting time frame is above or below Threshold...')
+            'Detecting time frame is above or below threshold...')
         for cell in self.cells:
             cell.normalized_time_frames.loc[
                 cell.normalized_time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value] < float(
@@ -225,7 +238,7 @@ class File:
 
         logging.info('Splitting cells...')
         for cell in self.cells:
-            cell.split_cells(self.stimulation_time_frames)
+            cell.create_intervals(self.stimulation_time_frames)
         logging.info('Splitting done.')
 
     def calculate_high_stimulus_count_per_interval(self):
@@ -237,31 +250,11 @@ class File:
             cell.calculate_high_stimulus_count_per_interval()
         logging.info('Interval comparison done.')
 
-    def interval_comparison(self):
-        """
-        Compare the different intervals and check if there is an activation or deactivation between them
-        """
-        # print(self.total_spikes_per_minutes)
-        # print(self.total_spikes_per_minute_mean)
-        # input()
-        pass
-
     def get_folder(self) -> str:
+        """
+        Returns the base path of the file
+        """
         return os.path.basename(self.path)
-
-        # path_split = self.path.split(".")
-        # path_split = path_split[:-1]
-        # path_split = path_split[0].split("/")
-        # path_split = path_split[:-1]
-        # file_folder = ""
-        # for path_fragment in path_split:
-
-        #   if file_folder == "":
-        #      file_folder = path_fragment + "/"
-        # else:
-        #    file_folder = file_folder + path_fragment + "/"
-
-        # return file_folder
 
     def generate_report(self):
         """
@@ -270,7 +263,18 @@ class File:
         self.__write_high_stimulus_counts_per_minute()
         self.__write_normalized_time_frames()
         self.__write_total_high_intensity_peaks_per_minute_per_cell()
+        self.__generate_cell_interval_activation_report()
         logging.info("All reports generated")
+
+    def __generate_cell_interval_activation_report(self):
+        """
+        Generates the cell interval activation report
+        """
+        df = pd.DataFrame()
+        for cell in self.cells:
+            df[cell.name] = cell.interval_high_intensity_counts['Activation']
+
+        df.to_csv(Path.joinpath(self.folder, "interval_activation.csv"))
 
     def __write_high_stimulus_counts_per_minute(self):
         """
@@ -314,8 +318,6 @@ class File:
         for cell in self.cells:
             data.append(cell.normalized_time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value].to_string(index=False))
 
-        print(data)
-        input()
         data = [i.split('\n') for i in data]
 
         # TODO: Check what this is doing
@@ -334,13 +336,6 @@ class File:
         data = []
         columns = []
 
-        print([cell.high_intensity_counts['Count'].to_string(index=False) for cell in self.cells])
-        input()
-        df = pd.DataFrame([cell.high_intensity_counts['Count'][0] for cell in self.cells],
-                          columns=[cell.name for cell in self.cells])
-        print(df)
-        input()
-
         for cell in self.cells:
             columns.append(cell.name)
 
@@ -349,15 +344,10 @@ class File:
 
         data = [i.split('\n') for i in data]
 
-        # TODO: Check what this is doing
         for li in data:
             li = [int(i) for i in li]
 
         df = pd.DataFrame(data)
         df = df.T
         df.columns = columns
-
-        print(df)
-        input()
-
         return df

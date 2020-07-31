@@ -141,13 +141,18 @@ class HIPANormalizeBaselineTest(unittest.TestCase):
                                2194129.325722143, 898577.7755135715, 64155.768782142855]
 
         self.file = File("ExampleData/time_traces.txt")
-        self.file.stimulation_time_frames = [372]
+        self.file.stimulation_time_frames = [372, 969, 1019]
         self.file.threshold = 0.6
         self.file.calculate_baseline_mean()
+        # Switch this back to baseline normalization if needed
         self.file.normalize_time_frames_with_to_ones()
         self.file.calculate_time_frame_maximum()
         self.file.calculate_threshold()
         self.file.detect_above_threshold()
+        self.file.count_high_intensity_peaks_per_minute()
+        self.file.summarize_high_intensity_peaks()
+        self.file.split_cells()
+        self.file.calculate_high_stimulus_count_per_interval()
 
 
 if __name__ == '__main__':
