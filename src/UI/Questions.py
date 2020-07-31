@@ -11,6 +11,8 @@ def ask_stimulation_time_frames():
     print_hic_headline()
     for file in Runtime_Datasets.Files:
         print(f'Please specify the Stimulation Time Frame (0 - {len(file.cells[0].time_frames)}) for the given file.')
+        print(f'You can add as many time frames as you like. Just separate them by comma.')
+        print(f'Example: 372,696,1091')
 
         while True:
             frames: str = input(f'Frame of stimulation for file {file.name}: ')
@@ -43,9 +45,9 @@ def ask_threshold():
     Asks the User about the percentage which should be used
     """
     print_hic_headline()
-    print("Please insert the threshold")
-    print("This limit is calculated from the imputed maximum.")
-    print("E.g. 0.6 is the 60%")
+    print("Please insert the threshold.")
+    print("The threshold is defined as the value as of which a peak is going to be considered a high intensity peak.")
+    print("E.g. 0.6 is 60% of the maximum intensity detected in your data.")
     print()
 
     # Iterating through given files
@@ -76,7 +78,7 @@ def conclusion():
     print()
     for file in Runtime_Datasets.Files:
         logging.info(
-            f'You are processing the File {file.name} with following arguments: \nStimulation Timeframes:'
+            f'You are processing the file {file.name} with following arguments: \nStimulation Time frames:'
             f' {file.stimulation_time_frames}\nPercentage: {file.threshold}')
         print()
 
