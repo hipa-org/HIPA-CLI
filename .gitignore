@@ -10,5 +10,5 @@ Data/
 Logs/
 *.txt
 !requirements.txt
-!sampleData/*.txt
+!EampleData/*.txt
 *.log

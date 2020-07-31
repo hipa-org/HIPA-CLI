@@ -118,7 +118,7 @@ class HIPANormalizeToOneTest(unittest.TestCase):
         """
         cell: Cell = self.file.cells[0]
         for x in range(4):
-            self.assertEqual(cell.interval_high_intensity_counts[x], self.interval_high_counts_to_one[x])
+            self.assertEqual(cell.interval_high_intensity_counts['Count'][x], self.interval_high_counts_to_one[x])
 
     def test_file_output(self):
         pass

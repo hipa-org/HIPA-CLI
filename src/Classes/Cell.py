@@ -36,7 +36,7 @@ class Cell:
         """
         Counts the amount of high intense stimuli for each interval and compares it to the previous one
         """
-        interval_counts = pd.DataFrame(columns=['Counts', 'Activation'])
+        interval_counts = pd.DataFrame(columns=['Count', 'Activation'])
 
         # Counter for loop
         i = 0
@@ -46,15 +46,15 @@ class Cell:
 
             # Initial interval
             if i == 0:
-                interval_counts = interval_counts.append({'Counts': high_intensity_count, 'Activation': False},
+                interval_counts = interval_counts.append({'Count': high_intensity_count, 'Activation': False},
                                                          ignore_index=True)
             # All following intervals
             else:
                 if high_intensity_count > previous_high_intensity_counts:
-                    interval_counts = interval_counts.append({'Counts': high_intensity_count, 'Activation': True},
+                    interval_counts = interval_counts.append({'Count': high_intensity_count, 'Activation': True},
                                                              ignore_index=True)
                 else:
-                    interval_counts = interval_counts.append({'Counts': high_intensity_count, 'Activation': False},
+                    interval_counts = interval_counts.append({'Count': high_intensity_count, 'Activation': False},
                                                              ignore_index=True)
 
             previous_high_intensity_counts = high_intensity_count
