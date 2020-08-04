@@ -11,6 +11,10 @@ import os
 from sklearn.preprocessing import MinMaxScaler
 from RuntimeConstants import Runtime_Folders
 from Services.FileManagement import Folder_Management
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+sns.set()
 
 
 class File:
@@ -256,7 +260,7 @@ class File:
         """
         return os.path.basename(self.path)
 
-    def generate_report(self):
+    def generate_reports(self):
         """
         Generate all report files
         """
@@ -266,6 +270,10 @@ class File:
         self.__generate_cell_interval_activation_report()
         logging.info("All reports generated")
 
+    def generate_plots(self):
+        """Generate all plots"""
+        pass
+
     def __generate_cell_interval_activation_report(self):
         """
         Generates the cell interval activation report
@@ -274,6 +282,19 @@ class File:
         for cell in self.cells:
             df[cell.name] = cell.interval_high_intensity_counts['Activation']
 
+        df = df.T
+        activations = []
+        for column in df.columns:
+            column = pd.Series(df[column].values)
+            counts = column.value_counts()
+            try:
+                activations.append(counts[1])
+            except KeyError:
+                activations.append(0)
+
+        df = df.T
+        df['Activations'] = activations
+        # df['Activations'] = df[]
         df.to_csv(Path.joinpath(self.folder, "interval_activation.csv"))
 
     def __write_high_stimulus_counts_per_minute(self):

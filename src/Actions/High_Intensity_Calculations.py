@@ -38,7 +38,8 @@ def execute_high_intensity_calculation(file: File):
     file.summarize_high_intensity_peaks()
     file.split_cells()
     file.calculate_high_stimulus_count_per_interval()
-    file.generate_report()
+    file.generate_reports()
+    file.generate_plots()
 
     end_time = datetime.datetime.now()
     logging.info(f'Evaluation of file {file.name} done.')
