@@ -1,4 +1,4 @@
-from Shared.Services.Config import Config, reset_config
+from Shared.Services.Config.Configuration import Config, reset_config
 import argparse
 import logging
 

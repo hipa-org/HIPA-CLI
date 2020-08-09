@@ -1,6 +1,6 @@
 import datetime
 from pathlib import Path
-from Shared.Services.Config import Config
+from Shared.Services.Config.Configuration import Config
 from Shared.RuntimeConstants import Runtime_Folders
 import sys
 import shutil

@@ -1,5 +1,5 @@
 import os
-from Shared.Services.Config import Config
+from Shared.Services.Config.Configuration import Config
 from Shared.RuntimeConstants import Runtime_Datasets
 import logging
 from Shared.Classes.File import File

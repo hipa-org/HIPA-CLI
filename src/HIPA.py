@@ -1,7 +1,7 @@
 import sys
 from CLI.UI import Console
 from CLI.Actions import Action_Handler
-from Shared.Services.Config import Config, Configuration, ArgumentParser
+from Shared.Services.Config import Configuration, ArgumentParser
 import os
 from Shared.Services.FileManagement import Folder_Management
 import logging
@@ -33,7 +33,7 @@ def start_tool():
         logging.info("Creating evaluation folder.")
         Folder_Management.create_evaluation_folder()
 
-    if Config.START_HIGH_INTENSITY_CALCULATION:
+    if Configuration.Config.START_HIGH_INTENSITY_CALCULATION:
         Runtime_Datasets.Choice = 1
         Action_Handler.handle_choice()
     else:
@@ -54,7 +54,7 @@ if __name__ == "__main__":
         Configuration.read_conf()
         ArgumentParser.handle_args()
 
-        if Config.START_WEB_SERVER:
+        if Configuration.Config.START_WEB_SERVER:
             start_web_server()
         else:
             start_tool()

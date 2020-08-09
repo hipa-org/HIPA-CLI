@@ -4,7 +4,7 @@ import pandas as pd
 import sys
 from Shared.RuntimeConstants.Runtime_Datasets import TimeFrameColumns
 import logging
-from Shared.Services.Config import Config
+from Shared.Services.Config.Configuration import Config
 from pathlib import Path
 import os
 from Shared.RuntimeConstants import Runtime_Folders

@@ -1,4 +1,4 @@
-from Shared.Services.Config import Config
+from Shared.Services.Config.Configuration import Config
 import os
 import logging
 from pathlib import Path
