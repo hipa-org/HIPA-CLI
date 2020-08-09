@@ -8,8 +8,12 @@ import logging
 from Shared.RuntimeConstants import Runtime_Datasets
 from flask import Flask
 from flask_restful import Resource, Api
+from waitress import serve
+from Web.Controller.HomeController import HomeController
+from Web.Controller.UploadController import UploadController
+from Web.Controller.ToolController import ToolController
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="./Web/Static/Templates")
 api = Api(app)
 
 logging.basicConfig(filename='log.log', level=logging.DEBUG)
@@ -44,9 +48,18 @@ def start_tool():
 
 def start_web_server():
     """
-    Starts the webserver
+    Starts the web server
     """
-    pass
+    logging.info("Starting the HIPA tool in web server mode...")
+    load_api()
+    serve(app, host='0.0.0.0', port=15000, threads=16)
+
+
+def load_api():
+    logging.info("Loading api controllers...")
+    api.add_resource(HomeController, '/')
+    api.add_resource(UploadController, '/upload')
+    api.add_resource(ToolController, '/tool')
 
 
 if __name__ == "__main__":
