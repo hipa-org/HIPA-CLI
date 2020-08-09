@@ -1,6 +1,4 @@
-from Services.Config.Configuration import Config, read_conf, reset_config
-from Actions import High_Intensity_Calculations
-import sys
+from Shared.Services.Config import Config, reset_config
 import argparse
 import logging
 
@@ -22,13 +20,18 @@ def handle_args():
     parser.add_argument("-r", "--restore", required=False,
                         action='store_true',
                         help="Restores the default Config.ini")
+    parser.add_argument("-w", "--web", required=False, action='store_true',
+                        help="Starts the webserver version of the tool")
 
     args = parser.parse_args()
+
+    if args.web:
+        Config.START_WEB_SERVER = True
 
     if args.verbose:
         Config.VERBOSE = True
 
-    if args.highintensity:
+    if args.highintensity and not Config.START_WEB_SERVER:
         Config.START_HIGH_INTENSITY_CALCULATION = True
 
     if args.debug:

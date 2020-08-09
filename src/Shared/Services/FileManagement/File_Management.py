@@ -1,6 +1,6 @@
 from pathlib import Path
 import ntpath
-from Services.Configuration.Config import Config
+from Shared.Services import Config
 import pandas as pd
 
 

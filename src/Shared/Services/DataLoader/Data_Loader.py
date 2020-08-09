@@ -1,8 +1,8 @@
 import os
-from Services.Config.Configuration import Config
-from RuntimeConstants import Runtime_Datasets
+from Shared.Services.Config import Config
+from Shared.RuntimeConstants import Runtime_Datasets
 import logging
-from Classes.File import File
+from Shared.Classes.File import File
 
 
 def load_raw_files():

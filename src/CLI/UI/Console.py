@@ -1,8 +1,8 @@
 import os
 from pyfiglet import Figlet
 from platform import platform
-from Services.Config.Configuration import Config
-from RuntimeConstants import Runtime_Datasets
+from Shared.Services.Config import Config
+from Shared.RuntimeConstants import Runtime_Datasets
 
 
 def print_empty_line():

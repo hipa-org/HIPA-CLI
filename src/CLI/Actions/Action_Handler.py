@@ -1,10 +1,10 @@
-from RuntimeConstants import Runtime_Datasets
-from Enums import Actions
-from Actions import High_Intensity_Calculations, Clean_Folders
+from Shared.RuntimeConstants import Runtime_Datasets
+from Shared.Enums import Actions
+from CLI.Actions import High_Intensity_Calculations, Clean_Folders
 import webbrowser
 import sys
 import logging
-from Services.DataLoader import Data_Loader
+from Shared.Services.DataLoader import Data_Loader
 
 
 def handle_choice():

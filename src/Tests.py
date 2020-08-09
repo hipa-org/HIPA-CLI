@@ -1,7 +1,7 @@
 import unittest
-from Classes.File import File, Cell
-from RuntimeConstants.Runtime_Datasets import TimeFrameColumns
-from UI import Console
+from Shared.Classes.File import File, Cell
+from Shared.RuntimeConstants.Runtime_Datasets import TimeFrameColumns
+from CLI.UI import Console
 
 
 class HIPANormalizeToOneTest(unittest.TestCase):

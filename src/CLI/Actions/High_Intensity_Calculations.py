@@ -1,7 +1,7 @@
 import datetime
-from UI import Questions
-from RuntimeConstants import Runtime_Datasets
-from Classes.File import File
+from CLI.UI import Questions
+from Shared.RuntimeConstants import Runtime_Datasets
+from Shared.Classes.File import File
 import logging
 
 '''

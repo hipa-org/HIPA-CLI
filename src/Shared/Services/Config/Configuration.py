@@ -8,8 +8,14 @@ from pathlib import Path
 class Config:
     VERBOSE = False
     DEBUG = False
+
+    # Web Server
+    START_WEB_SERVER = False
+
+    # Folder
     WORKING_DIRECTORY = 'Data/'
-    INPUT_FILE_NAME = 'time_traces'
+
+    # File names
     OUTPUT_FILE_NAME_HIGH_STIMULUS = 'High-Stimulus'
     OUTPUT_FILE_NAME_NORMALIZED_DATA = 'Normalized-Data'
     OUTPUT_FILE_NAME_SPIKES_PER_MINUTE = 'Spikes_Per_Minute'
