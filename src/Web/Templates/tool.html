@@ -17,13 +17,18 @@
     <title>HIPA On the GO</title>
 </head>
 <body>
+<script src="/static/script.js" type="text/javascript">
+
+</script>
+
+<div w3-include-html="/components/navbar"></div>
 <div class="jumbotron">
     <h1 class="text-center">HIPA on the GO</h1>
 </div>
 
 <br>
 <div>
-    <form action="/upload/" enctype="multipart/form-data" method="post">
+    <form action="/upload" enctype="multipart/form-data" method="post">
         <p>Separator:
             <select id="new_data" name="new_data">
                 <option value="tab">Tab</option>
@@ -35,6 +40,11 @@
         <br>
         <input type="submit" value="Upload"/>
     </form>
-</div>ﬂ
+</div>
 </body>
 </html>
+
+<script>
+includeHTML();
+
+</script>
