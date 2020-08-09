@@ -12,8 +12,10 @@ from waitress import serve
 from Web.Controller.HomeController import HomeController
 from Web.Controller.UploadController import UploadController
 from Web.Controller.ToolController import ToolController
+from Web.Controller.ComponentsController import ComponentsController
 
-app = Flask(__name__, template_folder="./Web/Static/Templates")
+
+app = Flask(__name__, template_folder="./Web/Templates")
 api = Api(app)
 
 logging.basicConfig(filename='log.log', level=logging.DEBUG)
@@ -60,6 +62,7 @@ def load_api():
     api.add_resource(HomeController, '/')
     api.add_resource(UploadController, '/upload')
     api.add_resource(ToolController, '/tool')
+    api.add_resource(ComponentsController, '/components/<component>')
 
 
 if __name__ == "__main__":
