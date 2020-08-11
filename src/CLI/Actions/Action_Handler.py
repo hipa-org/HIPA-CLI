@@ -1,5 +1,5 @@
-from Shared.RuntimeConstants import Runtime_Datasets
-from Shared.Enums import Actions
+from CLI.RuntimeConstants import Runtime_Datasets
+from CLI.Enums import Actions
 from CLI.Actions import High_Intensity_Calculations, Clean_Folders
 import webbrowser
 import sys
@@ -12,7 +12,7 @@ def handle_choice():
 
     """
     if Runtime_Datasets.Choice == Actions.Choices.HIGH_INTENSITY.value:
-        Data_Loader.load_raw_files()
+        Data_Loader.load_cli_raw_files()
 
         if len(Runtime_Datasets.Files) == 0:
             logging.info("No files detected!")

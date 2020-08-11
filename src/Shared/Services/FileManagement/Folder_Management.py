@@ -1,7 +1,7 @@
 import datetime
 from pathlib import Path
 from Shared.Services.Config.Configuration import Config
-from Shared.RuntimeConstants import Runtime_Folders
+from CLI.RuntimeConstants import Runtime_Folders
 import sys
 import shutil
 import logging
@@ -10,9 +10,9 @@ folder_management = logging.getLogger()
 folder_management.setLevel(logging.DEBUG)
 
 
-def create_evaluation_folder():
+def create_cli_evaluation_directory():
     """
-    Creates the evaluation folder aka the root folder for each run of the application
+    Creates the evaluation folder aka the root folder for each run of the application.
     :return:
     """
     now = datetime.datetime.now()

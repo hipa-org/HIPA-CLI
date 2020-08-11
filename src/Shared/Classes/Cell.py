@@ -1,4 +1,4 @@
-from Shared.RuntimeConstants.Runtime_Datasets import TimeFrameColumns
+from CLI.RuntimeConstants.Runtime_Datasets import TimeFrameColumns
 import pandas as pd
 
 

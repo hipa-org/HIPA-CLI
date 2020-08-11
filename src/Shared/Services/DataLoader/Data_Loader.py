@@ -1,11 +1,14 @@
 import os
 from Shared.Services.Config.Configuration import Config
-from Shared.RuntimeConstants import Runtime_Datasets
+from CLI.RuntimeConstants import Runtime_Datasets
 import logging
 from Shared.Classes.File import File
 
 
-def load_raw_files():
+def load_cli_raw_files():
+    """
+    Loads all raw data sets from the given raw directory
+    """
     for file in os.listdir(Config.DATA_RAW_DIRECTORY):
         file_name = os.fsdecode(file)
         try:
@@ -17,3 +20,6 @@ def load_raw_files():
         except BaseException as ex:
             logging.warning(ex)
 
+
+def load_raw_files():
+    pass

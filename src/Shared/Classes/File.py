@@ -2,12 +2,12 @@ from Shared.Classes.Cell import Cell
 import numpy as np
 import pandas as pd
 import sys
-from Shared.RuntimeConstants.Runtime_Datasets import TimeFrameColumns
+from CLI.RuntimeConstants.Runtime_Datasets import TimeFrameColumns
 import logging
 from Shared.Services.Config.Configuration import Config
 from pathlib import Path
 import os
-from Shared.RuntimeConstants import Runtime_Folders
+from CLI.RuntimeConstants import Runtime_Folders
 from Shared.Services.FileManagement import Folder_Management
 import seaborn as sns
 
