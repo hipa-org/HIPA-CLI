@@ -13,7 +13,6 @@ numpy==1.15.4
 pandas==0.23.4
 pefile==2018.8.8
 pyfiglet==0.7.6
-PyInstaller==3.4
 pyparsing==2.3.0
 python-dateutil==2.7.5
 pytz==2018.7
