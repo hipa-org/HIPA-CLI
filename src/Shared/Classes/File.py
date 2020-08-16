@@ -100,28 +100,6 @@ class File:
 
         logging.info('Baseline Mean Calculation done.')
 
-    def normalize_time_frames_with_baseline(self):
-        """
-         Normalize each Time frame in Cell
-        :return:
-        """
-
-    # logging.log('Normalize Timeframes with Baseline Mean...')
-    # temp_tf_values = []
-
-    # for cell in self.cells:
-    #  for timeframe in cell.time_frames[:self.stimulation_time_frames[0]]:
-    #       temp_tf_values.append(timeframe.value)
-
-    # mean = np.mean(temp_tf_values)
-
-    # for timeframe in cell.time_frames:
-    #   cell.normalized_time_frames.append(
-    #      Timeframe(timeframe.identifier, timeframe.value / mean, timeframe.including_minute,
-    #                            timeframe.above_threshold))
-    #
-    #       logging.info('Normalization done.')
-
     def normalize_time_frames_with_to_ones(self):
         """
         Normalize each time frame in Cell with to One Algorithm
