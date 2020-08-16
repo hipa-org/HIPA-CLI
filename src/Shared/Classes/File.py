@@ -249,6 +249,7 @@ class File:
         logging.info('Comparing intervals...')
         for cell in self.cells:
             cell.calculate_high_stimulus_count_per_interval()
+            cell.calculate_high_stimulus_count_per_interval_to_baseline_interval()
         logging.info('Interval comparison done.')
 
     def get_folder(self) -> str:
@@ -264,20 +265,22 @@ class File:
         self.__write_high_stimulus_counts_per_minute()
         self.__write_normalized_time_frames()
         self.__write_total_high_intensity_peaks_per_minute_per_cell()
-        self.__generate_cell_interval_activation_report()
+        self.__generate_cell_interval_activation_previous_interval_report()
+        self.__generate_cell_interval_activation_to_baseline_report()
         logging.info("All reports generated")
 
     def generate_plots(self):
         """Generate all plots"""
         pass
 
-    def __generate_cell_interval_activation_report(self):
+    def __generate_cell_interval_activation_to_baseline_report(self):
         """
-        Generates the cell interval activation report
+        Generates the cell interval activation report where activations are
+        compared to the base interval
         """
         df = pd.DataFrame()
         for cell in self.cells:
-            df[cell.name] = cell.interval_high_intensity_counts['Activation']
+            df[cell.name] = cell.interval_high_intensity_counts_compared_to_baseline['Activation']
 
         df = df.T
         activations = []
@@ -292,7 +295,31 @@ class File:
         df = df.T
         df['Activations'] = activations
         # df['Activations'] = df[]
-        df.to_csv(Path.joinpath(self.folder, "interval_activation.csv"))
+        df.to_csv(Path.joinpath(self.folder, "interval_activation_compared_to_baseline_interval.csv"))
+
+    def __generate_cell_interval_activation_previous_interval_report(self):
+        """
+        Generates the cell interval activation report where activations are
+        compared to the previous interval
+        """
+        df = pd.DataFrame()
+        for cell in self.cells:
+            df[cell.name] = cell.interval_high_intensity_counts_previous_interval['Activation']
+
+        df = df.T
+        activations = []
+        for column in df.columns:
+            column = pd.Series(df[column].values)
+            counts = column.value_counts()
+            try:
+                activations.append(counts[1])
+            except KeyError:
+                activations.append(0)
+
+        df = df.T
+        df['Activations'] = activations
+        # df['Activations'] = df[]
+        df.to_csv(Path.joinpath(self.folder, "interval_activation_compared_to_previous_interval.csv"))
 
     def __write_high_stimulus_counts_per_minute(self):
         """

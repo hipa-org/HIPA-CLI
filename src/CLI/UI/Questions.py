@@ -20,7 +20,6 @@ def ask_stimulation_time_frames():
             for frame in frames:
                 try:
                     frame = int(frame)
-                    print(frame)
                     if frame < 0 or frame > len(file.cells[0].time_frames):
                         print(
                             "Sorry, but the stimulation appears to be out of range! Ignoring time frame!")
