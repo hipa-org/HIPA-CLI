@@ -248,8 +248,8 @@ class File:
         """
         logging.info('Comparing intervals...')
         for cell in self.cells:
-            cell.calculate_high_stimulus_count_per_interval()
-            cell.calculate_high_stimulus_count_per_interval_to_baseline_interval()
+            cell.calculate_high_stimulus_count(False)
+            cell.calculate_high_stimulus_count(True)
         logging.info('Interval comparison done.')
 
     def get_folder(self) -> str:

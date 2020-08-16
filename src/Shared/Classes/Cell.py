@@ -21,27 +21,32 @@ class Cell:
         """
         frames = []
         last_time_frame: int = 0
-        for time_frame in stimulation_time_frames:
+        for selected_time_frame in stimulation_time_frames:
             if last_time_frame == 0:
-                last_time_frame = time_frame
-                frames.append(self.normalized_time_frames[:time_frame])
+                last_time_frame = selected_time_frame
+                frames.append(self.normalized_time_frames[:selected_time_frame])
             else:
-                frames.append(self.normalized_time_frames[last_time_frame:time_frame])
-                last_time_frame = time_frame
+                frames.append(self.normalized_time_frames[last_time_frame:selected_time_frame])
+                last_time_frame = selected_time_frame
         else:
             frames.append(self.normalized_time_frames[last_time_frame:])
 
         self.intervals = frames
 
-    def calculate_high_stimulus_count_per_interval(self):
+    def calculate_high_stimulus_count(self, baseline: bool):
         """
-        Counts the amount of high intense stimuli for each interval and compares it to the previous one
+        Counts the amount of high intense stimuli compared to the previous interval or compared to the baseline interval
         """
         interval_counts = pd.DataFrame(columns=['Count', 'Activation'])
 
         # Counter for loop
         i = 0
-        previous_high_intensity_counts = 0
+
+        if baseline:
+            compare_high_intensity_counts = len(
+                self.intervals[0].loc[self.intervals[0][TimeFrameColumns.ABOVE_THRESHOLD.value] == True].index)
+        else:
+            compare_high_intensity_counts = 0
         for interval in self.intervals:
             high_intensity_count = len(interval.loc[interval[TimeFrameColumns.ABOVE_THRESHOLD.value] == True].index)
 
@@ -51,49 +56,18 @@ class Cell:
                                                          ignore_index=True)
             # All following intervals
             else:
-                if high_intensity_count > previous_high_intensity_counts:
+                if high_intensity_count > compare_high_intensity_counts:
                     interval_counts = interval_counts.append({'Count': high_intensity_count, 'Activation': True},
                                                              ignore_index=True)
                 else:
                     interval_counts = interval_counts.append({'Count': high_intensity_count, 'Activation': False},
                                                              ignore_index=True)
 
-            previous_high_intensity_counts = high_intensity_count
+            if not baseline:
+                compare_high_intensity_counts = high_intensity_count
             i += 1
 
-        self.interval_high_intensity_counts_previous_interval = interval_counts
-
-    def calculate_high_stimulus_count_per_interval_to_baseline_interval(self):
-        """
-         Counts the amount of high intense stimuli for each interval and compares it to the first (baseline) one
-        """
-        interval_counts = pd.DataFrame(columns=['Count', 'Activation'])
-
-        # Counter for loop
-        i = 0
-        baseline_high_intensity_counts = len(
-            self.intervals[0].loc[self.intervals[0][TimeFrameColumns.ABOVE_THRESHOLD.value] == True].index)
-
-        for interval in self.intervals:
-            high_intensity_count_per_interval = len(
-                interval.loc[interval[TimeFrameColumns.ABOVE_THRESHOLD.value] == True].index)
-
-            # Initial interval
-            if i == 0:
-                interval_counts = interval_counts.append(
-                    {'Count': high_intensity_count_per_interval, 'Activation': False},
-                    ignore_index=True)
-            # All following intervals
-            else:
-                if high_intensity_count_per_interval > baseline_high_intensity_counts:
-                    interval_counts = interval_counts.append(
-                        {'Count': high_intensity_count_per_interval, 'Activation': True},
-                        ignore_index=True)
-                else:
-                    interval_counts = interval_counts.append(
-                        {'Count': high_intensity_count_per_interval, 'Activation': False},
-                        ignore_index=True)
-
-            i += 1
-
-        self.interval_high_intensity_counts_compared_to_baseline = interval_counts
+        if baseline:
+            self.interval_high_intensity_counts_compared_to_baseline = interval_counts
+        else:
+            self.interval_high_intensity_counts_previous_interval = interval_counts
