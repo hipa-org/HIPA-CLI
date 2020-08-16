@@ -9,7 +9,7 @@ from Shared.Services.DataLoader import Data_Loader
 
 def handle_choice():
     """
-
+    Handles the choice a user types into console
     """
     if Runtime_Datasets.Choice == Actions.Choices.HIGH_INTENSITY.value:
         Data_Loader.load_cli_raw_files()
