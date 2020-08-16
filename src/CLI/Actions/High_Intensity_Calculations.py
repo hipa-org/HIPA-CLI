@@ -45,4 +45,3 @@ def execute_high_intensity_calculation(file: File):
     logging.info(f'Evaluation of file {file.name} done.')
     logging.info(f'Calculation done in {end_time - start_time} seconds.')
     logging.info(f'{len(file.cells) * len(file.cells[0].time_frames)} time frames processed')
-    input()

@@ -19,7 +19,7 @@ def ask_stimulation_time_frames():
             print(
                 f'Please specify the Stimulation Time Frame (0 - {len(file.cells[0].time_frames)}) '
                 f'for the file {file.name}:')
-           
+
             frames: str = input(f'Frame of stimulation for file {file.name}: ')
             frames: list = frames.split(',')
             for frame in frames:
