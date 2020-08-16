@@ -9,12 +9,17 @@ def ask_stimulation_time_frames():
     Ask for the Frame Number where the first stimulatory addition took place
     """
     print_hic_headline()
+    print(f'Please specify the Stimulation Time Frame(s) for each file.')
+    print(f'You can add as many time frames as you like. Just separate them by comma.')
+    print(f'Example: 372,696,1091')
+    print()
     for file in Runtime_Datasets.Files:
-        print(f'Please specify the Stimulation Time Frame (0 - {len(file.cells[0].time_frames)}) for the given file.')
-        print(f'You can add as many time frames as you like. Just separate them by comma.')
-        print(f'Example: 372,696,1091')
-
         while True:
+            print()
+            print(
+                f'Please specify the Stimulation Time Frame (0 - {len(file.cells[0].time_frames)}) '
+                f'for the file {file.name}:')
+           
             frames: str = input(f'Frame of stimulation for file {file.name}: ')
             frames: list = frames.split(',')
             for frame in frames:
