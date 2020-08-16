@@ -4,6 +4,5 @@ from flask import Flask, escape, request, jsonify, request, render_template, mak
 
 class HomeController(Resource):
     def get(self):
-        args = request.args
         headers = {'Content-Type': 'text/html'}
         return make_response(render_template('home.html'), 200, headers)
