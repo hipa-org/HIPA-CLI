@@ -1,0 +1,12 @@
+version: 2
+updates:
+  # Enable version updates for python
+  - package-ecosystem: "python"
+    directory: "/"
+    # Check the npm registry for updates every day (weekdays)
+    schedule:
+      interval: "daily"
+    target-branch: "dev"
+    default_labels:
+      - "dependencies"
+
