@@ -262,9 +262,9 @@ class File:
         """
         Generate all report files
         """
-        self.__write_high_stimulus_counts_per_minute()
-        self.__write_normalized_time_frames()
-        self.__write_total_high_intensity_peaks_per_minute_per_cell()
+        self.__generate_high_stimulus_counts_per_minute_report()
+        self.__generate_normalized_time_frames_report()
+        self.__generate_total_high_intensity_peaks_per_minute_per_cell_report()
         self.__generate_cell_interval_activation_previous_interval_report()
         self.__generate_cell_interval_activation_to_baseline_report()
         logging.info("All reports generated")
@@ -321,23 +321,52 @@ class File:
         # df['Activations'] = df[]
         df.to_csv(Path.joinpath(self.folder, "interval_activation_compared_to_previous_interval.csv"))
 
-    def __write_high_stimulus_counts_per_minute(self):
+    def __generate_high_stimulus_counts_per_minute_report(self):
         """
         Write high stimulus counts per minute
         """
 
-        self.__get_high_stimulus_counts().to_csv(
+        data = []
+        columns = []
+
+        for cell in self.cells:
+            columns.append(cell.name)
+
+        for cell in self.cells:
+            data.append(cell.high_intensity_counts['Count'].values)
+
+        df = pd.DataFrame(data)
+        df = df.T
+        df.columns = columns
+
+        # Export to csv
+        df.to_csv(
             os.path.join(self.folder, f"{Config.OUTPUT_FILE_NAME_HIGH_STIMULUS}.csv"), index=None, sep='\t', mode='a')
 
-    def __write_normalized_time_frames(self):
+    def __generate_normalized_time_frames_report(self):
         """
          Write normalized time frames to a file
         :return:
         """
-        self.__get_normalized_time_frames().to_csv(
+
+        data = []
+        columns = []
+
+        for cell in self.cells:
+            columns.append(cell.name)
+
+        for cell in self.cells:
+            data.append(cell.normalized_time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value].values)
+
+        df = pd.DataFrame(data)
+        df = df.T
+        df.columns = columns
+
+        # Export to csv
+        df.to_csv(
             os.path.join(self.folder, f"{Config.OUTPUT_FILE_NAME_NORMALIZED_DATA}.csv"), index=None, sep='\t', mode='a')
 
-    def __write_total_high_intensity_peaks_per_minute_per_cell(self):
+    def __generate_total_high_intensity_peaks_per_minute_per_cell_report(self):
         """
         Write spikes per minutes to a file
         :return:
@@ -351,48 +380,3 @@ class File:
         data_matrix = pd.DataFrame(temp_dict)
         data_matrix.to_csv(os.path.join(self.folder, f"{Config.OUTPUT_FILE_NAME_SPIKES_PER_MINUTE}.csv"), index=None,
                            sep='\t', mode='a')
-
-    def __get_normalized_time_frames(self):
-
-        data = []
-        columns = []
-
-        for cell in self.cells:
-            columns.append(cell.name)
-
-        for cell in self.cells:
-            data.append(cell.normalized_time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value].to_string(index=False))
-
-        data = [i.split('\n') for i in data]
-
-        # TODO: Check what this is doing
-        for li in data:
-            li = [float(i) for i in li]
-
-        df = pd.DataFrame(data)
-        df = df.T
-        df.columns = columns
-        return df
-
-    def __get_high_stimulus_counts(self):
-        """
-        Counts the high stimulus counts
-        """
-        data = []
-        columns = []
-
-        for cell in self.cells:
-            columns.append(cell.name)
-
-        for cell in self.cells:
-            data.append(cell.high_intensity_counts['Count'].to_string(index=False))
-
-        data = [i.split('\n') for i in data]
-
-        for li in data:
-            li = [int(i) for i in li]
-
-        df = pd.DataFrame(data)
-        df = df.T
-        df.columns = columns
-        return df
