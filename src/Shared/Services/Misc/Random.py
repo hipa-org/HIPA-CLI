@@ -7,5 +7,5 @@ def get_random_string(length):
     Generates a random string
     """
     letters = string.ascii_lowercase
-    result_str = ''.join(random.choice(letters) for i in range(length))
-    return result_str
+    rnd_string = ''.join(random.choice(letters) for i in range(length))
+    return rnd_string

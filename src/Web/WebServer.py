@@ -7,7 +7,7 @@ from Web.Controller.UploadController import UploadController
 from Web.Controller.ToolController import ToolController
 from Web.Controller.ComponentsController import ComponentsController
 
-app = Flask(__name__, template_folder="./Web/Templates")
+app = Flask(__name__, template_folder="../Web/templates")
 api = Api(app)
 
 
