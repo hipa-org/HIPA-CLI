@@ -6,6 +6,7 @@ from Web.Controller.HomeController import HomeController
 from Web.Controller.UploadController import UploadController
 from Web.Controller.ToolController import ToolController
 from Web.Controller.ComponentsController import ComponentsController
+from Web.Controller.ToolDetailController import ToolDetailController
 
 app = Flask(__name__, template_folder="../Web/templates")
 api = Api(app)
@@ -28,4 +29,5 @@ def load_api():
     api.add_resource(HomeController, '/')
     api.add_resource(UploadController, '/upload')
     api.add_resource(ToolController, '/tool')
+    api.add_resource(ToolDetailController, '/tool/detail/<evaluation_folder>')
     api.add_resource(ComponentsController, '/components/<component>')

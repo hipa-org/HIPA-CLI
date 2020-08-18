@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse
-from flask import Flask, escape, request, jsonify, request, render_template, make_response
+from flask import Flask, escape, request, jsonify, request, render_template, make_response, redirect
 from werkzeug.utils import secure_filename
 from pathlib import Path
 from Shared.Services.Config.Configuration import Config
@@ -40,6 +40,8 @@ class UploadController(Resource):
 
             # Add the folder to the global exposed array
             Folders.folders.append(evaluation_folder)
+
+            return redirect(f'/tool/detail/{evaluation_folder.name}', code=302)
 
         except PermissionError as ex:
             logging.warning(ex)

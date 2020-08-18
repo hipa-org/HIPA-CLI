@@ -3,6 +3,8 @@ from Shared.Services.Config.Configuration import Config
 from CLI.RuntimeConstants import Runtime_Datasets
 import logging
 from Shared.Classes.File import File
+from Shared.Classes.Folder import Folder
+from Web.RuntimeConstants import Folders
 
 
 def load_cli_raw_files():
@@ -21,5 +23,12 @@ def load_cli_raw_files():
             logging.warning(ex)
 
 
-def load_raw_files():
-    pass
+def find_evaluation_folder(evaluation_folder_name: str) -> Folder:
+    """
+    Finds the folder associated to the name
+    """
+    for folder in Folders.folders:
+        if folder.name == evaluation_folder_name:
+            return folder
+
+    return None
