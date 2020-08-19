@@ -30,6 +30,26 @@
                 </div>
             </li>
         </ul>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item" >
+                <a class="nav-link" href="/login"><span class="fas fa-sign-in-alt "></span> Sign In</a>
+            </li>
+
+            <li class="nav-item dropdown userProfil" *ngIf="isUserLoggedIn">
+                <a class="nav-link dropdown-toggle" href="#" id="users" data-toggle="dropdown">
+                    Account
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <p class="loginUser">Signed in: </p>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/accountSettings"><span class="fa fa-wrench"></span>
+                         Settings </a>
+                    <a class="dropdown-item logout" (click)="logout()"><span class="fa fa-sign-out-alt fa-lg"></span>
+                       Sign out
+                    </a>
+                </div>
+        </ul>
     </div>
 </nav>
 
