@@ -24,11 +24,21 @@
 <body>
 <div w3-include-html="/components/navbar"></div>
 
+<div class="container-fluid">
+
+</div>
 <h1> {{folder.name}}</h1>
+
+{% for result in folder.files %}
+<tr>
+    <td>{{ result.name }}</td>
+</tr>
+{% endfor %}
 
 </body>
 </html>
 
 <script>
 includeHTML();
+
 </script>
