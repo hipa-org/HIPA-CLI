@@ -11,7 +11,6 @@ class ToolDetailController(Resource):
             folder: Folder = Data_Loader.find_evaluation_folder(evaluation_folder)
 
             if folder is None:
-                print("no folder found!")
                 headers = {'Content-Type': 'text/html'}
                 return make_response(render_template('home.html'), 200, headers)
 
