@@ -16,8 +16,9 @@ sns.set()
 
 class File:
     def __init__(self, full_name: str):
+        # TODO: Remove preload for web application
         self.full_name = full_name
-        self.path = self.path = Path(Config.DATA_RAW_DIRECTORY, full_name)
+        self.path = Path(Config.DATA_RAW_DIRECTORY, full_name)
         self.name = os.path.splitext(full_name)[0]
         # The folder where all results are stored in
         self.folder = Folder_Management.create_directory(
