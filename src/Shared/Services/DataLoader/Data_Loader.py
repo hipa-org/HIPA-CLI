@@ -5,6 +5,7 @@ import logging
 from Shared.Classes.File import File
 from Shared.Classes.Folder import Folder
 from Web.RuntimeConstants import Folders
+from pathlib import Path
 
 
 def load_cli_raw_files():
@@ -32,3 +33,23 @@ def find_evaluation_folder(evaluation_folder_name: str) -> Folder:
             return folder
 
     return None
+
+
+def load_folders():
+    """
+    Loads all raw folders for the web application
+    """
+    try:
+        print("Loading folders...")
+        for root, dirs, files in os.walk(Config.DATA_RAW_DIRECTORY):
+            for dir in dirs:
+                files = []
+                for file in os.listdir(Path.joinpath(Config.DATA_RAW_DIRECTORY, dir)):
+                    file_name = os.fsdecode(file)
+                    new_file: File = File(file_name)
+                    files.append(new_file)
+
+                Folders.folders.append(Folder(dir, files))
+
+    except BaseException as ex:
+        logging.error(ex)
