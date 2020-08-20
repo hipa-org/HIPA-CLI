@@ -1,0 +1,12 @@
+
+
+
+[FILES]
+output_file_name_high_stimulus = High-Stimulus
+output_file_name_normalized_data = Normalized-Data
+normalization_method = ToOne
+
+[DATA]
+root_directory = Data
+raw_directory = Raw
+results_directory = Results

@@ -35,7 +35,7 @@ def read_conf():
     :return:
     """
     config = configparser.ConfigParser()
-    config.read('src/config.ini')
+    config.read('Config/config.ini')
     try:
         Config.OUTPUT_FILE_NAME_HIGH_STIMULUS = config['FILES']['output_file_name_high_stimulus']
         Config.OUTPUT_FILE_NAME_NORMALIZED_DATA = config['FILES']['output_file_name_normalized_data']
