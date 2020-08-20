@@ -12,4 +12,4 @@ Logs/
 !requirements.txt
 !ExampleData/*.txt
 *.log
-config.ini
+Config/config.ini
