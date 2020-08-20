@@ -3,7 +3,7 @@ from pyfiglet import Figlet
 from platform import platform
 from Shared.Services.Config.Configuration import Config
 from CLI.RuntimeConstants import Runtime_Datasets
-
+import logging
 
 def print_empty_line():
     print()
@@ -18,12 +18,18 @@ def print_minus_line():
 def clear_console():
     clear = None
     detected_os = platform(1, 1)
-    print(detected_os)
-    if "Darwin" in detected_os:
+
+    if Config.DEBUG:
+        logging.debug(detected_os)
+    if "macOS" in detected_os:
+        clear = lambda: os.system('clear')
+    elif "Darwin" in detected_os:
         clear = lambda: os.system('clear')
     elif "Windows" in detected_os:
         clear = lambda: os.system('cls')
-    clear()
+
+    if clear is not None:
+        clear()
 
 
 def print_hic_headline():
@@ -63,4 +69,3 @@ def show_welcome_ui():
             show_welcome_ui()
         else:
             break
-
