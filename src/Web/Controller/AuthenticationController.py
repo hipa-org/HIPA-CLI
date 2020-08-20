@@ -2,7 +2,7 @@ from flask_restful import Resource
 from flask import Flask, escape, request, jsonify, request, render_template, make_response, redirect
 
 
-class ComponentsController(Resource):
+class AuthenticationController(Resource):
     def get(self, sub_route: str):
 
         if sub_route == 'signup':
