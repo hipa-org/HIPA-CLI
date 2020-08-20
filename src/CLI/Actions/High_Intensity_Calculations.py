@@ -23,7 +23,7 @@ def start_high_intensity_calculations():
         print()
         logging.info(f'Processing file {input_file.name}')
         execute_high_intensity_calculation(input_file)
-
+    input()
     return True
 
 

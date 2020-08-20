@@ -12,6 +12,8 @@ def load_cli_raw_files():
     """
     Loads all raw data sets from the given raw directory
     """
+    # Clear array for each run
+    Runtime_Datasets.Files = []
     for file in os.listdir(Config.DATA_RAW_DIRECTORY):
         file_name = os.fsdecode(file)
         try:
