@@ -14,8 +14,9 @@ root.addHandler(handler)
 
 if __name__ == "__main__":
     try:
-        Configuration.read_conf()
-        ArgumentParser.handle_args()
+        ArgumentParser.load_args()
+        Configuration.load_configuration()
+        # ArgumentParser.handle_args()
 
         if Configuration.Config.START_WEB_SERVER:
             WebServer.start()

@@ -1,12 +1,15 @@
-from Shared.Services.Config.Configuration import Config, reset_config
 import argparse
 import logging
 
 
-def handle_args():
-    """
-    Handles the parsed arguments and overrides default behaviour
-    """
+class CLIArguments:
+    high = None
+    debug = None
+    restore_settings = None
+    start_web_server = None
+
+
+def load_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("-v", "--verbose", required=False,
                         action='store_true',
@@ -24,21 +27,31 @@ def handle_args():
                         help="Starts the webserver version of the tool")
 
     args = parser.parse_args()
+    CLIArguments.debug = args.debug
+    CLIArguments.high = args.highintensity
+    CLIArguments.restore_settings = args.restore
+    CLIArguments.start_web_server = args.web
 
-    if args.web:
+
+def handle_args():
+    """
+    Handles the parsed arguments and overrides default behaviour
+    """
+
+    if cli_args.web:
         Config.START_WEB_SERVER = True
 
-    if args.verbose:
+    if cli_args.verbose:
         Config.VERBOSE = True
 
-    if args.highintensity and not Config.START_WEB_SERVER:
+    if cli_args.highintensity and not Config.START_WEB_SERVER:
         Config.START_HIGH_INTENSITY_CALCULATION = True
 
-    if args.debug:
+    if cli_args.debug:
         Config.DEBUG = True
         logging.debug('IMPORTANT NOTICE: DEBUG MODE IS ACTIVE!')
 
-    if args.restore:
+    if cli_args.restore:
         success = reset_config()
         if success is not True:
             logging.error("Could not reset config!")

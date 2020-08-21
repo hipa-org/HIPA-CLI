@@ -13,3 +13,4 @@ Logs/
 !ExampleData/*.txt
 *.log
 Config/config.ini
+Config/web-config.ini

@@ -2,7 +2,8 @@ import configparser
 import sys
 import logging
 from pathlib import Path
-
+from Shared.Services.Config.ArgumentParser import CLIArguments
+from Shared.Database import Database_Configuration
 
 # Configuration.py
 class Config:
@@ -29,14 +30,29 @@ class Config:
     DATA_RESULTS_DIRECTORY = Path()
 
 
-def read_conf():
+class HTTPServerConfig:
+    pass
+
+
+def load_configuration():
     """
-    Reads the Config.ini File, and stores the values into the Config Class
+    Loads the Config.ini File, and stores the values into the Config Class
     :return:
     """
     config = configparser.ConfigParser()
-    config.read('Config/config.ini')
+
+    # Load the web server config, otherwise load cli config
+    if CLIArguments.start_web_server is not None:
+        config.read('Config/web-config.ini')
+
+    else:
+        config.read('Config/config.ini')
+
+
+
     try:
+        print(config['mysql'])
+        Database_Configuration.load_database_config(config['mysql'])
         Config.OUTPUT_FILE_NAME_HIGH_STIMULUS = config['FILES']['output_file_name_high_stimulus']
         Config.OUTPUT_FILE_NAME_NORMALIZED_DATA = config['FILES']['output_file_name_normalized_data']
         Config.NORMALIZATION_METHOD = config['FILES']['normalization_method']
@@ -51,6 +67,8 @@ def read_conf():
         logging.error(f"Key: {ex} not found!")
         logging.error(f"Make sure the file config.ini exists in your src directory!")
         sys.exit()
+
+
 
 
 def reset_config():
