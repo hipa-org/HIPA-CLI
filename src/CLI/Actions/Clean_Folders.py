@@ -1,4 +1,4 @@
-from Shared.Services.Config.Configuration import Config
+from Shared.Services.Configuration import Configuration_Service
 import os
 import logging
 from pathlib import Path
@@ -6,6 +6,7 @@ import shutil
 
 
 def clean_folders():
+    Config = Configuration_Service.get_config()
     logging.info("Cleaning data folders...")
 
     for file in os.listdir(Config.DATA_RAW_DIRECTORY):

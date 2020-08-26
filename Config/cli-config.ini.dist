@@ -1,0 +1,13 @@
+[general]
+DEBUG_MODE = 1
+
+
+[data]
+ROOT_DIRECTORY = Data
+RAW_DIRECTORY = Raw
+RESULTS_DIRECTORY = Results
+
+OUTPUT_FILE_NAME_HIGH_STIMULUS = High-Stimulus
+OUTPUT_FILE_NAME_NORMALIZED_DATA = Normalized-Data
+
+

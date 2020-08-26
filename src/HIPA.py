@@ -1,9 +1,10 @@
 import sys
-from Shared.Services.Config import Configuration, ArgumentParser
+from Shared.Services.Configuration.Parser import Configuration_Parser, Argument_Parser
 import os
 import logging
 from CLI import CLI
 from Web import WebServer
+import traceback
 
 logging.basicConfig(filename='log.log', level=logging.DEBUG)
 logging.getLogger().setLevel(logging.DEBUG)
@@ -14,11 +15,10 @@ root.addHandler(handler)
 
 if __name__ == "__main__":
     try:
-        ArgumentParser.load_args()
-        Configuration.load_configuration()
-        # ArgumentParser.handle_args()
+        Argument_Parser.load_args()
+        Configuration_Parser.load_configuration()
 
-        if Configuration.Config.START_WEB_SERVER:
+        if Argument_Parser.CLIArguments.start_web_server:
             WebServer.start()
         else:
             CLI.start_cli_tool()
@@ -31,3 +31,5 @@ if __name__ == "__main__":
 
         except SystemExit:
             os._exit(0)
+            track = traceback.format_exc()
+            logging.error(track)

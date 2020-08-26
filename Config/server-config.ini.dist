@@ -1,0 +1,27 @@
+#############################################
+
+[general]
+DB_SYSTEM = 0
+DEBUG_MODE = 1
+
+[http-server]
+HOST = 0.0.0.0
+PORT = 15000
+THREADS = 16
+
+[mysql]
+HOST = 0.0.0.0
+PORT = 3306
+USER = root
+PASSWORD = root
+DATABASE = hipa
+
+
+[data]
+ROOT_DIRECTORY = Data
+RAW_DIRECTORY = Raw
+RESULTS_DIRECTORY = Results
+
+OUTPUT_FILE_NAME_HIGH_STIMULUS = High-Stimulus
+OUTPUT_FILE_NAME_NORMALIZED_DATA = Normalized-Data
+

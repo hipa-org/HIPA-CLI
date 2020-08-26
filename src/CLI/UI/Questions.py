@@ -1,5 +1,5 @@
 from CLI.UI.Console import print_hic_headline, clear_console
-from Shared.Services.Config.Configuration import Config
+from Shared.Services.Configuration import Configuration_Service
 from CLI.RuntimeConstants import Runtime_Datasets
 import logging
 
@@ -76,9 +76,9 @@ def conclusion():
     """
     Prints a conclusion before starting the Calculations
     """
-
+    config = Configuration_Service.get_config()
     print_hic_headline()
-    logging.info('Normalization method: {0}'.format(Config.NORMALIZATION_METHOD))
+    logging.info(f'Normalization method: ToOne')
     print()
     for file in Runtime_Datasets.Files:
         logging.info(

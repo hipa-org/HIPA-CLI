@@ -1,6 +1,6 @@
 from Shared.Services.FileManagement import Folder_Management
 import logging
-from Shared.Services.Config import Configuration
+from Shared.Services.Configuration.CLI_Configuration import CliConfiguration
 from CLI.RuntimeConstants import Runtime_Datasets
 from CLI.Actions import Action_Handler
 from CLI.UI import Console
@@ -19,7 +19,7 @@ def start_cli_tool():
         logging.info("Creating evaluation folder.")
         Folder_Management.create_cli_evaluation_directory()
 
-    if Configuration.Config.START_HIGH_INTENSITY_CALCULATION:
+    if CliConfiguration.GeneralConfig.START_HIGH_INTENSITY_CALCULATION:
         Runtime_Datasets.Choice = 1
         Action_Handler.handle_choice()
     else:

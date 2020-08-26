@@ -2,7 +2,7 @@ from flask_restful import Resource, reqparse
 from flask import Flask, escape, request, jsonify, request, render_template, make_response, redirect
 from werkzeug.utils import secure_filename
 from pathlib import Path
-from Shared.Services.Config.Configuration import Config
+from Shared.Services.Configuration import Configuration_Service
 from Shared.Services.FileManagement import Folder_Management
 import logging
 from Shared.Classes.Folder import Folder
@@ -19,6 +19,7 @@ def allowed_file(filename):
 
 class UploadController(Resource):
     def post(self):
+        Config = Configuration_Service.get_config()
         uploaded_files = request.files.getlist("files")
 
         if Config.DEBUG:

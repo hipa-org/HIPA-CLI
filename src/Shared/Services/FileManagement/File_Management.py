@@ -1,6 +1,6 @@
 from pathlib import Path
 import ntpath
-from Shared.Services.Config.Configuration import Config
+from Shared.Services.Configuration import Configuration_Service
 import pandas as pd
 
 
@@ -20,10 +20,13 @@ def read_file(path: str):
     :param path:
     :return:
     """
+
+    config = Configuration_Service.get_config()
+
     try:
-        return pd.read_csv(f"{Config.DATA_RAW_DIRECTORY}/{path}")
+        return pd.read_csv(f"{config.DATA_RAW_DIRECTORY}/{path}")
     except OSError as ex:
-        if Config.VERBOSE:
+        if config.VERBOSE:
             print(ex)
         return None
 

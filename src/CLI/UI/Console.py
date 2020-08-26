@@ -1,9 +1,10 @@
 import os
 from pyfiglet import Figlet
 from platform import platform
-from Shared.Services.Config.Configuration import Config
+from Shared.Services.Configuration import Configuration_Service
 from CLI.RuntimeConstants import Runtime_Datasets
 import logging
+
 
 def print_empty_line():
     print()
@@ -18,8 +19,9 @@ def print_minus_line():
 def clear_console():
     clear = None
     detected_os = platform(1, 1)
+    config = Configuration_Service.get_config()
 
-    if Config.DEBUG:
+    if config.GeneralConfig.DEBUG:
         logging.debug(detected_os)
     if "macOS" in detected_os:
         clear = lambda: os.system('clear')
@@ -43,6 +45,7 @@ def show_welcome_ui():
     Displays the welcome ui
     """
     clear_console()
+    config = Configuration_Service.get_config()
     while True:
         try:
             f = Figlet(font='slant')
@@ -55,11 +58,9 @@ def show_welcome_ui():
             print()
             print('-1. Exit')
 
-            if Config.DEBUG:
+            if config.GeneralConfig.DEBUG:
                 print('** Debug **')
                 print('F. File System Test')
-            if Config.VERBOSE:
-                print('Verbose active')
 
             Runtime_Datasets.Choice = int(input("Choose your action: (Type the action number)\n"))
         except ValueError:

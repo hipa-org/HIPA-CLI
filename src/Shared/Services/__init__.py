@@ -1,1 +1,1 @@
-__all__ = ['FileManagement', 'Config']
+__all__ = ['FileManagement', 'Configuration']

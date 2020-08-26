@@ -1,12 +1,22 @@
 import unittest
 from Shared.Classes.File import File, Cell
-from Shared.RuntimeConstants.Runtime_Datasets import TimeFrameColumns
+from CLI.RuntimeConstants.Runtime_Datasets import TimeFrameColumns
 from CLI.UI import Console
+import configparser
+from Shared.Services.Configuration import CLI_Configuration
+from pathlib import Path
 
 
 class HIPANormalizeToOneTest(unittest.TestCase):
 
     def setUp(self):
+
+        config = configparser.ConfigParser()
+
+        # Load the cli config
+        config.read('Config/cli-config.ini')
+        CLI_Configuration.load_cli_config(config)
+
         Console.clear_console()
         self.baseline_means = [1487081.8921335714, 767143.2721442856, 1302190.2019421428, 1113130.6746035714,
                                730617.289225, 727189.5820014286, 936338.2629921428, 836700.6484707142,
@@ -26,7 +36,7 @@ class HIPANormalizeToOneTest(unittest.TestCase):
                                                        6.853658536585366]
         self.interval_high_counts_to_one = [269, 324, 323, 118]
 
-        self.file = File("ExampleData/time_traces.txt")
+        self.file = File(Path("ExampleData/time_traces.txt"))
         self.file.stimulation_time_frames = [372, 696, 1019]
         self.file.threshold = 0.6
         self.file.calculate_baseline_mean()
@@ -118,7 +128,8 @@ class HIPANormalizeToOneTest(unittest.TestCase):
         """
         cell: Cell = self.file.cells[0]
         for x in range(4):
-            self.assertEqual(cell.interval_high_intensity_counts['Count'][x], self.interval_high_counts_to_one[x])
+            self.assertEqual(cell.interval_high_intensity_counts_previous_interval['Count'][x],
+                             self.interval_high_counts_to_one[x])
 
     def test_file_output(self):
         pass
@@ -140,7 +151,7 @@ class HIPANormalizeBaselineTest(unittest.TestCase):
                                1342635.6592607142, 846031.2291607143, 839358.5765878572, 704612.856605,
                                2194129.325722143, 898577.7755135715, 64155.768782142855]
 
-        self.file = File("ExampleData/time_traces.txt")
+        self.file = File(Path("ExampleData/time_traces.txt"))
         self.file.stimulation_time_frames = [372, 969, 1019]
         self.file.threshold = 0.6
         self.file.calculate_baseline_mean()
