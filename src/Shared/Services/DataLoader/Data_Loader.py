@@ -59,11 +59,18 @@ def load_folders():
             for dir in dirs:
                 files = []
                 for file in os.listdir(Path.joinpath(config.DataConfig.DATA_RAW_DIRECTORY, dir)):
-                    file_name = os.fsdecode(file)
-                    new_file: File = File(file_name)
-                    files.append(new_file)
+                    if file.endswith("txt"):
+                        new_file: File = File(Path(config.DataConfig.DATA_RAW_DIRECTORY, dir, file))
+                        print(new_file.path)
+                        files.append(new_file)
 
                 Folders.folders.append(Folder(dir, files))
+
+        for folder in Folders:
+            for file in folder.files:
+                print(file.name)
+                print(file.path)
+
 
     except BaseException as ex:
         logging.exception(ex)

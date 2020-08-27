@@ -1,4 +1,4 @@
-from Services.DB import DatabaseLoader, Database
+from Shared.Database import Database_Loader
 import os
 from Shared.Database.PreparedStatement import PreparedStatement
 from Shared.Database.Implementation import Queries
@@ -13,21 +13,21 @@ def update_db():
     """
     logging.info("Updating database....")
     for filename in os.listdir("statistics-server/SQL/Updates"):
-        if filename.endswith(".sql") and not update_already_applied(filename):
-            execute_file(filename)
+        if filename.endswith(".sql") and not __update_already_applied(filename):
+            __execute_file(filename)
         else:
             continue
     logging.info("Database up to date!")
 
 
-def execute_file(filename: str):
+def __execute_file(filename: str):
     """
     Reads the file and execute its queries
     :param filename:
     :return:
     """
     # Open and read the file as a single buffer
-    fd = open(f"statistics-server/SQL/Updates/{filename}", 'r')
+    fd = open(f"HIPA-CLI/SQL/Updates/{filename}", 'r')
     sql_content = fd.read()
     fd.close()
 
@@ -35,7 +35,7 @@ def execute_file(filename: str):
     sql_commands = sql_content.split(';')
 
     # create db cursor
-    connection = DatabaseLoader.databasePool.get_connection()
+    connection = Database_Loader.databasePool.get_connection()
     cursor = connection.cursor(prepared=False)
     error_count: int = 0
     # Execute every command from the input file
@@ -51,10 +51,10 @@ def execute_file(filename: str):
 
     connection.commit()
     if error_count == 0:
-        update_successful_applied(filename)
+        __update_successful_applied(filename)
 
 
-def update_already_applied(filename):
+def __update_already_applied(filename):
     statement = PreparedStatement(Queries.DB_SEL_UPDATE)
     statement.add_param(0, filename)
     data = Database.select(statement)
@@ -64,7 +64,7 @@ def update_already_applied(filename):
         return False
 
 
-def update_successful_applied(filename: str):
+def __update_successful_applied(filename: str):
     """
     Adds an successful update file to the updates table
     :param filename:

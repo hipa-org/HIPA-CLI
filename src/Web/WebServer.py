@@ -2,7 +2,7 @@ import logging
 from flask import Flask
 from flask_restful import Resource, Api
 from waitress import serve
-from Shared.Database import Database_Loader
+from Shared.Database import Database_Loader, Database_Updater
 from Shared.Services.DataLoader import Data_Loader
 from Web.Controller.HomeController import HomeController
 from Web.Controller.UploadController import UploadController
@@ -21,6 +21,7 @@ def start():
     """
     logging.info("Starting the HIPA tool in web server mode...")
     Database_Loader.connect_db()
+    Database_Updater.update_db()
     Data_Loader.load_folders()
     load_api()
     serve(app, host='0.0.0.0', port=15000, threads=16)

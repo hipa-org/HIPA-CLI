@@ -54,6 +54,7 @@ def create_directory(path: str):
     """
     try:
         Path(path).mkdir(parents=True, exist_ok=True)
+        print("Created directory")
         return path
     except OSError as ex:
         folder_management.critical(ex)

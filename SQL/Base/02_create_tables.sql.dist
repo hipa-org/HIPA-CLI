@@ -1,0 +1,85 @@
+USE `accounts`;
+
+DROP TABLE IF EXISTS `Accounts`;
+CREATE TABLE `Accounts` (
+  `id` INT UNSIGNED NOT NULL auto_increment,
+  `first_name` VARCHAR(60) NOT NULL DEFAULT "",
+  `last_name` VARCHAR(60) NOT NULL DEFAULT "",
+  `password` VARCHAR(200) NOT NULL, 
+  `reg_mail` VARCHAR(200) NOT NULL,
+  `email` VARCHAR(200) NOT NULL,
+  `language` INT NOT NULL DEFAULT 1,
+  `last_login` BIGINT UNSIGNED NULL DEFAULT NULL,
+  `deleted` INT NOT NULL DEFAULT 0,
+  `deleted_at` BIGINT UNSIGNED NULL DEFAULT NULL,
+  `locked` INT NOT NULL DEFAULT 0,
+  `lockedUntil` INT NOT NULL DEFAULT 0,
+  `display_name` VARCHAR(60) NOT NULL DEFAULT "",
+  `access` BIGINT NOT NULL DEFAULT 0,
+  `activation_code` VARCHAR(38) NOT NULL DEFAULT "",
+  `activation_code_valid_until` BIGINT NOT NULL DEFAULT 0,
+  `email_verified` INT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC));
+  
+DROP TABLE IF EXISTS `AccountSettings`;
+CREATE TABLE `AccountSettings` (
+  `account_id` INT UNSIGNED NOT NULL,
+  `email_sign_in` INT NOT NULL DEFAULT 1,
+  `email_news` INT NOT NULL DEFAULT 0,
+  `email_events` INT NOT NULL DEFAULT 0,
+  `email_purchases` INT NOT NULL DEFAULT 1,
+  `email_tickets` INT NOT NULL DEFAULT 0,
+  `email_newsletter` INT NOT NULL DEFAULT 0,
+  `discord_sign_in` INT NOT NULL DEFAULT 0,
+  `discord_news` INT NOT NULL DEFAULT 0,
+  `discord_events` INT NOT NULL DEFAULT 0,
+  `discord_purchases` INT NOT NULL DEFAULT 0,
+  `discord_tickets` INT NOT NULL DEFAULT 0,
+  `discord_newsletter` INT NOT NULL DEFAULT 0,
+  `twofactor` INT NOT NULL DEFAULT 0,
+ 
+  PRIMARY KEY (`account_id`),
+  UNIQUE INDEX `account_id_UNIQUE` (`account_id` ASC));
+
+DROP TABLE IF EXISTS `account_api_token`;
+CREATE TABLE `account_api_token` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `account_id` INT UNSIGNED NOT NULL,
+  `token` VARCHAR(200) NOT NULL DEFAULT "",
+  `assigned_at` BIGINT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `account_api_token_UNIQUE` (`account_id` ASC));
+
+
+DROP TABLE IF EXISTS `account_token`;
+CREATE TABLE `account_token` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `account_id` INT UNSIGNED NOT NULL,
+  `token` VARCHAR(200) NOT NULL DEFAULT "",
+  `assigned_at` BIGINT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `account_token_UNIQUE` (`account_id` ASC));
+
+
+DROP TABLE IF EXISTS `account_discord_id`;
+CREATE TABLE `account_discord_id` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `account_id` INT UNSIGNED NOT NULL,
+  `discord_id` BIGINT NOT NULL DEFAULT 0,
+  `assigned_at` BIGINT NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `account_id_discord_id_UNIQUE` (`account_id` ASC));
+
+  
+DROP TABLE IF EXISTS `updates`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `updates` (
+  `name` varchar(200) NOT NULL COMMENT 'filename with extension of the update.',
+  `hash` char(40) DEFAULT '' COMMENT 'sha1 hash of the sql file.',
+  `state` enum('RELEASED','ARCHIVED') NOT NULL DEFAULT 'RELEASED' COMMENT 'defines if an update is released or archived.',
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'timestamp when the query was applied.',
+  `speed` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'time the query takes to apply in ms.',
+  PRIMARY KEY (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='List of all applied updates in this database.';
