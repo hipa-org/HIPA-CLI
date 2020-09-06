@@ -1,9 +1,32 @@
 from Shared.Database import Database_Loader
 import os
 from Shared.Database.PreparedStatement import PreparedStatement
+from Shared.Database import Database
 from Shared.Database.Implementation import Queries
 import datetime
 import logging
+import sys
+from pathlib import Path
+
+
+def create_db():
+    """
+    Creates all schemas and tables required to operate the server
+    Returns
+    -------
+
+    """
+
+    try:
+        base_path: Path = Path("./SQL/Base")
+        logging.info("Creating database schema if necessary")
+        for filename in os.listdir(base_path):
+            if filename.endswith(".sql"):
+                __execute_file(Path(base_path, filename))
+
+    except BaseException as ex:
+        logging.exception(ex)
+        sys.exit()
 
 
 def update_db():
@@ -12,22 +35,23 @@ def update_db():
     :return:
     """
     logging.info("Updating database....")
-    for filename in os.listdir("statistics-server/SQL/Updates"):
+    update_path: Path = Path("./SQL/Updates")
+    for filename in os.listdir(update_path):
         if filename.endswith(".sql") and not __update_already_applied(filename):
-            __execute_file(filename)
+            __execute_file(Path(update_path, filename))
         else:
             continue
     logging.info("Database up to date!")
 
 
-def __execute_file(filename: str):
+def __execute_file(file_path: Path):
     """
     Reads the file and execute its queries
-    :param filename:
+    :param file_path:
     :return:
     """
     # Open and read the file as a single buffer
-    fd = open(f"HIPA-CLI/SQL/Updates/{filename}", 'r')
+    fd = open(file_path, 'r')
     sql_content = fd.read()
     fd.close()
 
@@ -51,7 +75,7 @@ def __execute_file(filename: str):
 
     connection.commit()
     if error_count == 0:
-        __update_successful_applied(filename)
+        __update_successful_applied(file_path)
 
 
 def __update_already_applied(filename):

@@ -1,30 +1,51 @@
 import mysql.connector
 import mysql.connector.pooling
+from Shared.Services.Configuration.Server_Configuration import ServerConfig
+from Shared.Database import Database_Updater
+import logging
 
 databasePool = None
 databaseConnection = None
 
 
-def connect_db(database=None):
+def start_db():
+    """
+    Handles the database start up
+    Returns
+    -------
+
+    """
+    __connect_db()
+    Database_Updater.create_db()
+    Database_Updater.update_db()
+    __connect_to_schema()
+    pass
+
+
+def __connect_db():
     try:
-        if database is None:
-            global databaseConnection
-            databaseConnection = mysql.connector.connect(pool_name="websitePool",
-                                                         pool_size=10,
-                                                         autocommit=True,
-                                                         user="root",
-                                                         password="raphaelk1",
-                                                         host="127.0.0.1",
-                                                         )
-        else:
-            global databasePool
-            databasePool = mysql.connector.pooling.MySQLConnectionPool(pool_name="websitePool",
-                                                                       pool_size=10,
-                                                                       autocommit=True,
-                                                                       user="root",
-                                                                       password="raphaelk1",
-                                                                       host="127.0.0.1",
-                                                                       database="hipacli")
-            print("Database connection established.")
-    except ConnectionError:
-        print("Oops! Error connecting to the database")
+        global databaseConnection
+        databaseConnection = mysql.connector.connect(pool_name="hipaPool",
+                                                     pool_size=ServerConfig.MySqlConfiguration.POOL_SIZE,
+                                                     autocommit=True,
+                                                     user=ServerConfig.MySqlConfiguration.USER,
+                                                     password=ServerConfig.MySqlConfiguration.PASSWORD,
+                                                     host=ServerConfig.MySqlConfiguration.HOST,
+                                                     )
+        logging.info("Database connection established.")
+    except ConnectionError as ex:
+        logging.exception(ex)
+
+
+def __connect_to_schema():
+    try:
+        global databasePool
+        databasePool = mysql.connector.pooling.MySQLConnectionPool(pool_name="hipaPool",
+                                                                   pool_size=ServerConfig.MySqlConfiguration.POOL_SIZE,
+                                                                   autocommit=True,
+                                                                   user=ServerConfig.MySqlConfiguration.USER,
+                                                                   password=ServerConfig.MySqlConfiguration.PASSWORD,
+                                                                   host=ServerConfig.MySqlConfiguration.HOST,
+                                                                   database=ServerConfig.MySqlConfiguration.DATABASE)
+    except ConnectionError as ex:
+        logging.exception(ex)

@@ -51,26 +51,6 @@ CREATE TABLE `account_api_token` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `account_api_token_UNIQUE` (`account_id` ASC));
 
-
-DROP TABLE IF EXISTS `account_token`;
-CREATE TABLE `account_token` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `account_id` INT UNSIGNED NOT NULL,
-  `token` VARCHAR(200) NOT NULL DEFAULT "",
-  `assigned_at` BIGINT NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `account_token_UNIQUE` (`account_id` ASC));
-
-
-DROP TABLE IF EXISTS `account_discord_id`;
-CREATE TABLE `account_discord_id` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `account_id` INT UNSIGNED NOT NULL,
-  `discord_id` BIGINT NOT NULL DEFAULT 0,
-  `assigned_at` BIGINT NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `account_id_discord_id_UNIQUE` (`account_id` ASC));
-
   
 DROP TABLE IF EXISTS `updates`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

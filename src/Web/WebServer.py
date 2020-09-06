@@ -20,8 +20,7 @@ def start():
     Starts the web server. Entry point of the web application
     """
     logging.info("Starting the HIPA tool in web server mode...")
-    Database_Loader.connect_db()
-    Database_Updater.update_db()
+    Database_Loader.start_db()
     Data_Loader.load_folders()
     load_api()
     serve(app, host='0.0.0.0', port=15000, threads=16)

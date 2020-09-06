@@ -1,5 +1,0 @@
-CREATE USER 'emt'@'%' IDENTIFIED BY 'emt20';
-GRANT ALL PRIVILEGES ON `accounts`.* TO 'emt'@'%';
-GRANT ALL PRIVILEGES ON `career`.* TO 'emt'@'%';
-FLUSH PRIVILEGES;
-

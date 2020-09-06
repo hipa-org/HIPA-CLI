@@ -35,6 +35,7 @@ class ServerConfig:
         USER = ''
         PASSWORD = ''
         DATABASE = ''
+        POOL_SIZE = 0
 
 
 def load_server_config(config):
@@ -49,9 +50,10 @@ def __load_database_config(config):
         if ServerConfig.GeneralConfig.DATABASE_SYSTEM == DBSystem.MYSQL.value:
             ServerConfig.MySqlConfiguration.HOST = config['mysql'].get('HOST', "127.0.0.1")
             ServerConfig.MySqlConfiguration.PORT = config['mysql'].getint('PORT', 3306)
-            ServerConfig.MySqlConfiguration.HOST = config['mysql'].get('USER', 'root')
-            ServerConfig.MySqlConfiguration.HOST = config['mysql'].get('PASSWORD', 'root')
-            ServerConfig.MySqlConfiguration.HOST = config['mysql'].get('DATABASE', "hipa")
+            ServerConfig.MySqlConfiguration.USER = config['mysql'].get('USER', 'root')
+            ServerConfig.MySqlConfiguration.PASSWORD = config['mysql'].get('PASSWORD', 'root')
+            ServerConfig.MySqlConfiguration.DATABASE = config['mysql'].get('DATABASE', "hipa")
+            ServerConfig.MySqlConfiguration.POOL_SIZE = config['mysql'].getint('POOL_SIZE', 10)
 
     except KeyError as ex:
         __key_not_found_err(ex)

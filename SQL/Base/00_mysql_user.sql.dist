@@ -1,0 +1,4 @@
+CREATE USER 'hipa'@'%' IDENTIFIED BY 'hipa20';
+GRANT ALL PRIVILEGES ON `hipa`.* TO 'hipa'@'%';
+FLUSH PRIVILEGES;
+
