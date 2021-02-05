@@ -19,7 +19,7 @@ def clear_console():
     clear = None
     detected_os = platform(1, 1)
     print(detected_os)
-    if "Darwin" in detected_os:
+    if "Darwin" or "macOS" in detected_os:
         clear = lambda: os.system('clear')
     elif "Windows" in detected_os:
         clear = lambda: os.system('cls')
