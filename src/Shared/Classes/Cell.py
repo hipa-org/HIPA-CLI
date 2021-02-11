@@ -9,6 +9,7 @@ class Cell:
         self.baseline_mean = 0
         self.time_frame_maximum = 0
         self.normalized_time_frames = pd.DataFrame()
+        self.normalized_baseline_mean = 0
         self.threshold = 0
         self.high_intensity_counts = pd.DataFrame()
         self.intervals = pd.DataFrame()

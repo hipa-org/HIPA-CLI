@@ -94,11 +94,25 @@ class File:
         """
         logging.info('Calculation Baseline Mean....')
         for cell in self.cells:
-            cell.baseline_mean = np.average(cell.time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value])
+            temp_df = cell.time_frames.iloc[:self.stimulation_time_frames[0]]
+            cell.baseline_mean = np.average(temp_df[TimeFrameColumns.TIME_FRAME_VALUE.value])
             if Config.VERBOSE:
                 logging.info(f'Baseline Mean for Cell {cell.name} -> {cell.baseline_mean}')
 
         logging.info('Baseline Mean Calculation done.')
+
+    def calculate_normalized_baseline_mean(self):
+        """
+         Calculates the baseline mean
+        """
+        logging.info('Calculating normalized baseline mean....')
+        for cell in self.cells:
+            temp_df = cell.normalized_time_frames.iloc[:self.stimulation_time_frames[0]]
+            cell.normalized_baseline_mean = np.average(temp_df[TimeFrameColumns.TIME_FRAME_VALUE.value])
+            if Config.VERBOSE:
+                logging.info(f'Normalized baseline mean for cell {cell.name} -> {cell.normalized_baseline_mean}')
+
+        logging.info('Normalized baseline mean calculation done.')
 
     def normalize_time_frames_with_baseline(self):
         """
@@ -138,7 +152,6 @@ class File:
                          f'{TimeFrameColumns.ABOVE_THRESHOLD.value}'],
                 data={TimeFrameColumns.TIME_FRAME_VALUE.value: cell.time_frames[
                                                                    TimeFrameColumns.TIME_FRAME_VALUE.value] / max_value})
-
             time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value] = pd.to_numeric(
                 time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value])
 
@@ -193,6 +206,12 @@ class File:
             cell.normalized_time_frames.loc[
                 cell.normalized_time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value] >= float(
                     cell.threshold), TimeFrameColumns.ABOVE_THRESHOLD.value] = True
+
+            if Config.VERBOSE:
+                logging.info(f"cell threshold: {cell.threshold}")
+                logging.info(f"normalized timeframes:")
+                for col_name, data in cell.normalized_time_frames.items():
+                    print("col_name:", col_name, "\ndata:", data)
         logging.info('Detecting done.')
 
     def count_high_intensity_peaks_per_minute(self):
