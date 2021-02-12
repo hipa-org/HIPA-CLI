@@ -82,10 +82,11 @@ def conclusion():
     print_hic_headline()
     logging.info('Normalization method: {0}'.format(Config.NORMALIZATION_METHOD))
     print()
+    file: File
     for file in Runtime_Datasets.Files:
         logging.info(
             f'You are processing the file {file.name} with following arguments: \nStimulation Time frames:'
-            f' {file.stimulation_time_frames}\nPercentage: {file.threshold}')
+            f' {file.stimulation_time_frames}\nPercentage: {file.high_intensity_threshold}')
         print()
 
     input("Press any Key to start Calculations.")

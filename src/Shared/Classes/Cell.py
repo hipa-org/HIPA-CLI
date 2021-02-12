@@ -45,11 +45,11 @@ class Cell:
 
         if baseline:
             compare_high_intensity_counts = len(
-                self.intervals[0].loc[self.intervals[0][TimeFrameColumns.ABOVE_THRESHOLD.value] == True].index)
+                self.intervals[0].loc[self.intervals[0][TimeFrameColumns.HIGH_INTENSITY.value] == True].index)
         else:
             compare_high_intensity_counts = 0
         for interval in self.intervals:
-            high_intensity_count = len(interval.loc[interval[TimeFrameColumns.ABOVE_THRESHOLD.value] == True].index)
+            high_intensity_count = len(interval.loc[interval[TimeFrameColumns.HIGH_INTENSITY.value] == True].index)
 
             # Initial interval
             if i == 0:

@@ -189,10 +189,7 @@ class File:
                     cell.true_signal_threshold), TimeFrameColumns.TRUE_SIGNAL.value] = True
 
             if Config.VERBOSE:
-                logging.info(f"cell true signal threshold: {cell.true_signal_threshold}")
-                logging.info(f"normalized timeframes:")
-                for col_name, data in cell.normalized_time_frames.items():
-                    print("col_name:", col_name, "\ndata:", data)
+                logging.info(f"cell {cell.name} true signal threshold: {cell.true_signal_threshold}")
 
         logging.info('Detection done.')
 
@@ -202,10 +199,14 @@ class File:
         :return:
         """
         logging.info(
-            'Detecting time frame is above or below threshold...')
+            'Detecting high intensity peaks ...')
         for cell in self.cells:
+
             high_intensity_threshold: float = cell.true_signal_threshold + (
                     cell.true_signal_threshold * self.high_intensity_threshold)
+
+            if Config.VERBOSE:
+                logging.info(f"cell {cell.name} high intensity threshold: {high_intensity_threshold}")
 
             cell.normalized_time_frames.loc[
                 cell.normalized_time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value] < float(
@@ -214,12 +215,6 @@ class File:
             cell.normalized_time_frames.loc[
                 cell.normalized_time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value] >= float(
                     high_intensity_threshold), TimeFrameColumns.HIGH_INTENSITY.value] = True
-
-            if Config.VERBOSE:
-                logging.info(f"cell spike threshold: {high_intensity_threshold}")
-                logging.info(f"normalized timeframes:")
-                for col_name, data in cell.normalized_time_frames.items():
-                    print("col_name:", col_name, "\ndata:", data)
 
         logging.info('Detection done.')
 
@@ -295,11 +290,34 @@ class File:
         self.__generate_total_high_intensity_peaks_per_minute_per_cell_report()
         self.__generate_cell_interval_activation_previous_interval_report()
         self.__generate_cell_interval_activation_to_baseline_report()
+        self.__generate_time_frame_true_signal()
         logging.info("All reports generated")
 
     def generate_plots(self):
         """Generate all plots"""
         pass
+
+    def __generate_time_frame_true_signal(self):
+        """
+
+        """
+        data = []
+        columns = []
+
+        for cell in self.cells:
+            columns.append(cell.name)
+
+        for cell in self.cells:
+            data.append(cell.normalized_time_frames[TimeFrameColumns.TRUE_SIGNAL.value].values)
+
+        df = pd.DataFrame(data)
+        df = df.T
+        df.columns = columns
+
+        # Export to csv
+        df.to_csv(
+            os.path.join(self.folder, f"true_signal_output.csv"), index=False, sep='\t',
+            mode='a')
 
     def __generate_cell_interval_activation_to_baseline_report(self):
         """
