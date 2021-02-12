@@ -6,11 +6,11 @@ class Cell:
     def __init__(self, name: str):
         self.name = name
         self.time_frames = pd.DataFrame()
-        self.baseline_mean = 0
-        self.time_frame_maximum = 0
+        self.baseline_mean: float = 0
+        self.time_frame_maximum: float = 0
         self.normalized_time_frames = pd.DataFrame()
-        self.normalized_baseline_mean = 0
-        self.threshold = 0
+        self.normalized_baseline_mean: float = 0
+        self.true_signal_threshold: float = 0
         self.high_intensity_counts = pd.DataFrame()
         self.intervals = pd.DataFrame()
         self.interval_high_intensity_counts_previous_interval = pd.DataFrame()

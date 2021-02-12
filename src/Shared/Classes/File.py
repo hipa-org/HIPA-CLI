@@ -31,7 +31,7 @@ class File:
         # the total detected minutes
         self.total_detected_minutes = self.__get_minutes()
 
-        self.threshold = 0
+        self.high_intensity_threshold: float = 0
         # Stimulation time frames. eg. 250 , 450, 640
         self.stimulation_time_frames = []
         self.total_spikes_per_minutes = []
@@ -64,7 +64,8 @@ class File:
             # Create initial time frames
             time_frames = pd.DataFrame(
                 columns=[f'{TimeFrameColumns.TIME_FRAME_VALUE.value}', f'{TimeFrameColumns.INCLUDING_MINUTE.value}',
-                         f'{TimeFrameColumns.ABOVE_THRESHOLD.value}'],
+                         f'{TimeFrameColumns.TRUE_SIGNAL}',
+                         f'{TimeFrameColumns.HIGH_INTENSITY.value}'],
                 data={TimeFrameColumns.TIME_FRAME_VALUE.value: self.data[column]})
 
             # Convert data to numeric
@@ -73,7 +74,8 @@ class File:
             # Create including minute column
             time_frames[TimeFrameColumns.INCLUDING_MINUTE.value] = np.floor(
                 time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value].index.values * 3.9 / 60)
-            time_frames[TimeFrameColumns.ABOVE_THRESHOLD.value] = False
+            time_frames[TimeFrameColumns.HIGH_INTENSITY.value] = False
+            time_frames[TimeFrameColumns.TRUE_SIGNAL.value] = False
 
             # Add df to member
             cell.time_frames = time_frames
@@ -103,7 +105,7 @@ class File:
 
     def calculate_normalized_baseline_mean(self):
         """
-         Calculates the baseline mean
+         Calculates the normalized baseline mean
         """
         logging.info('Calculating normalized baseline mean....')
         for cell in self.cells:
@@ -113,28 +115,6 @@ class File:
                 logging.info(f'Normalized baseline mean for cell {cell.name} -> {cell.normalized_baseline_mean}')
 
         logging.info('Normalized baseline mean calculation done.')
-
-    def normalize_time_frames_with_baseline(self):
-        """
-         Normalize each Time frame in Cell
-        :return:
-        """
-
-    # logging.log('Normalize Timeframes with Baseline Mean...')
-    # temp_tf_values = []
-
-    # for cell in self.cells:
-    #  for timeframe in cell.time_frames[:self.stimulation_time_frames[0]]:
-    #       temp_tf_values.append(timeframe.value)
-
-    # mean = np.mean(temp_tf_values)
-
-    # for timeframe in cell.time_frames:
-    #   cell.normalized_time_frames.append(
-    #      Timeframe(timeframe.identifier, timeframe.value / mean, timeframe.including_minute,
-    #                            timeframe.above_threshold))
-    #
-    #       logging.info('Normalization done.')
 
     def normalize_time_frames_with_to_ones(self):
         """
@@ -149,7 +129,8 @@ class File:
             # Create normalized time frames
             time_frames = pd.DataFrame(
                 columns=[f'{TimeFrameColumns.TIME_FRAME_VALUE.value}', f'{TimeFrameColumns.INCLUDING_MINUTE.value}',
-                         f'{TimeFrameColumns.ABOVE_THRESHOLD.value}'],
+                         f'{TimeFrameColumns.TRUE_SIGNAL.value}'
+                         f'{TimeFrameColumns.HIGH_INTENSITY.value}'],
                 data={TimeFrameColumns.TIME_FRAME_VALUE.value: cell.time_frames[
                                                                    TimeFrameColumns.TIME_FRAME_VALUE.value] / max_value})
             time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value] = pd.to_numeric(
@@ -158,8 +139,8 @@ class File:
             # Create including minute column
             time_frames[TimeFrameColumns.INCLUDING_MINUTE.value] = cell.time_frames[
                 TimeFrameColumns.INCLUDING_MINUTE.value]
-            time_frames[TimeFrameColumns.ABOVE_THRESHOLD.value] = cell.time_frames[
-                TimeFrameColumns.ABOVE_THRESHOLD.value]
+            time_frames[TimeFrameColumns.HIGH_INTENSITY.value] = cell.time_frames[
+                TimeFrameColumns.HIGH_INTENSITY.value]
 
             cell.normalized_time_frames = time_frames
 
@@ -178,41 +159,69 @@ class File:
 
         logging.info('Detecting time frame maximum done.')
 
-    def calculate_threshold(self):
+    def calculate_true_signal_threshold(self):
         """
           Calculates the Threshold
         :return:
         """
         logging.info('Calculation threshold...')
         for cell in self.cells:
-            cell.threshold = cell.time_frame_maximum * self.threshold
+            cell.true_signal_threshold = cell.normalized_baseline_mean + (cell.normalized_baseline_mean * 0.1)
 
             if Config.VERBOSE:
-                logging.info(f"Threshold for cell {cell.name} -> {cell.threshold}")
+                logging.info(f"True signal threshold for cell {cell.name} -> {cell.true_signal_threshold}")
 
         logging.info('Threshold calculation done.')
 
-    def detect_above_threshold(self):
+    def detect_true_signal(self):
         """
-         Detects if a time frame is above or below threshold
+         Detects if a time frame is a valid signal or not
+        :return:
+        """
+        logging.info(
+            'Detecting time frame is related to a true signal...')
+        for cell in self.cells:
+            cell.normalized_time_frames.loc[
+                cell.normalized_time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value] < float(
+                    cell.true_signal_threshold), TimeFrameColumns.TRUE_SIGNAL.value] = False
+            cell.normalized_time_frames.loc[
+                cell.normalized_time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value] >= float(
+                    cell.true_signal_threshold), TimeFrameColumns.TRUE_SIGNAL.value] = True
+
+            if Config.VERBOSE:
+                logging.info(f"cell true signal threshold: {cell.true_signal_threshold}")
+                logging.info(f"normalized timeframes:")
+                for col_name, data in cell.normalized_time_frames.items():
+                    print("col_name:", col_name, "\ndata:", data)
+
+        logging.info('Detection done.')
+
+    def detect_high_intensity_signal(self):
+        """
+        Detects if a time frame is high intensity spike
         :return:
         """
         logging.info(
             'Detecting time frame is above or below threshold...')
         for cell in self.cells:
+            high_intensity_threshold: float = cell.true_signal_threshold + (
+                    cell.true_signal_threshold * self.high_intensity_threshold)
+
             cell.normalized_time_frames.loc[
                 cell.normalized_time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value] < float(
-                    cell.threshold), TimeFrameColumns.ABOVE_THRESHOLD.value] = False
+                    high_intensity_threshold), TimeFrameColumns.HIGH_INTENSITY.value] = False
+
             cell.normalized_time_frames.loc[
                 cell.normalized_time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value] >= float(
-                    cell.threshold), TimeFrameColumns.ABOVE_THRESHOLD.value] = True
+                    high_intensity_threshold), TimeFrameColumns.HIGH_INTENSITY.value] = True
 
             if Config.VERBOSE:
-                logging.info(f"cell threshold: {cell.threshold}")
+                logging.info(f"cell spike threshold: {high_intensity_threshold}")
                 logging.info(f"normalized timeframes:")
                 for col_name, data in cell.normalized_time_frames.items():
                     print("col_name:", col_name, "\ndata:", data)
-        logging.info('Detecting done.')
+
+        logging.info('Detection done.')
 
     def count_high_intensity_peaks_per_minute(self):
         """
@@ -222,7 +231,7 @@ class File:
         logging.info('Counting High Intensity Peaks...')
         for cell in self.cells:
             df = cell.normalized_time_frames.groupby(TimeFrameColumns.INCLUDING_MINUTE.value)[
-                TimeFrameColumns.ABOVE_THRESHOLD.value].apply(
+                TimeFrameColumns.HIGH_INTENSITY.value].apply(
                 lambda x: (x == True).sum()).reset_index()
 
             del df[TimeFrameColumns.INCLUDING_MINUTE.value]
@@ -240,7 +249,7 @@ class File:
         spikes_per_min: list = [0] * int(self.total_detected_minutes + 1)
         for cell in self.cells:
             for index, row in cell.normalized_time_frames.iterrows():
-                if row[TimeFrameColumns.ABOVE_THRESHOLD.value]:
+                if row[TimeFrameColumns.HIGH_INTENSITY.value]:
                     spikes_per_min[int(row[TimeFrameColumns.INCLUDING_MINUTE.value])] = spikes_per_min[int(
                         row[TimeFrameColumns.INCLUDING_MINUTE.value])] + 1
 
@@ -360,7 +369,7 @@ class File:
 
         # Export to csv
         df.to_csv(
-            os.path.join(self.folder, f"{Config.OUTPUT_FILE_NAME_HIGH_STIMULUS}.csv"), index=None, sep='\t', mode='a')
+            os.path.join(self.folder, f"{Config.OUTPUT_FILE_NAME_HIGH_STIMULUS}.csv"), index=False, sep='\t', mode='a')
 
     def __generate_normalized_time_frames_report(self):
         """
@@ -383,7 +392,8 @@ class File:
 
         # Export to csv
         df.to_csv(
-            os.path.join(self.folder, f"{Config.OUTPUT_FILE_NAME_NORMALIZED_DATA}.csv"), index=None, sep='\t', mode='a')
+            os.path.join(self.folder, f"{Config.OUTPUT_FILE_NAME_NORMALIZED_DATA}.csv"), index=False, sep='\t',
+            mode='a')
 
     def __generate_total_high_intensity_peaks_per_minute_per_cell_report(self):
         """
@@ -397,5 +407,5 @@ class File:
                      "Mean spikes": self.total_spikes_per_minute_mean}
 
         data_matrix = pd.DataFrame(temp_dict)
-        data_matrix.to_csv(os.path.join(self.folder, f"{Config.OUTPUT_FILE_NAME_SPIKES_PER_MINUTE}.csv"), index=None,
+        data_matrix.to_csv(os.path.join(self.folder, f"{Config.OUTPUT_FILE_NAME_SPIKES_PER_MINUTE}.csv"), index=False,
                            sep='\t', mode='a')

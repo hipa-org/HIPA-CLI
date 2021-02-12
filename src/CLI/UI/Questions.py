@@ -2,6 +2,7 @@ from CLI.UI.Console import print_hic_headline, clear_console
 from Shared.Services.Config.Configuration import Config
 from CLI.RuntimeConstants import Runtime_Datasets
 import logging
+from Shared.Classes import File
 
 
 def ask_stimulation_time_frames():
@@ -55,15 +56,16 @@ def ask_threshold():
     print()
 
     # Iterating through given files
+    file: File
     for file in Runtime_Datasets.Files:
         while True:
             try:
-                file.threshold = float(input(f'Percentage for file {file.name} (0 - 1): '))
+                file.high_intensity_threshold = float(input(f'Spike threshold for file {file.name} (0 - 1): '))
             except ValueError:
                 print("Sorry but this is not a valid percentage.")
                 continue
             else:
-                if file.threshold < 0.0 or file.threshold > 1.0:
+                if file.high_intensity_threshold < 0.0 or file.high_intensity_threshold > 1.0:
                     print("Sorry this is not a valid percentage")
                     continue
                 else:

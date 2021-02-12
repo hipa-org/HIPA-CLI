@@ -11,4 +11,5 @@ Choice = 0
 class TimeFrameColumns(Enum):
     TIME_FRAME_VALUE = "Value"
     INCLUDING_MINUTE = "Including Minute"
-    ABOVE_THRESHOLD = "Above Threshold"
+    TRUE_SIGNAL = "True Signal"
+    HIGH_INTENSITY = "Spike"
