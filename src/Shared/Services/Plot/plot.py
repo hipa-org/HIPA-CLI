@@ -1,20 +1,23 @@
-# import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+from pathlib import Path
 
-# def test_plotting(cells):
-# cell_plotter = plt.figure()
-# test = cell_plotter.add_subplot(111)
 
-# high_stimulus_per_minute = []
+class PlotService:
+    @staticmethod
+    def plot_peaks_per_minute(peaks_per_minutes, folder):
+        df = pd.DataFrame(columns=['peaks'])
+        df['peaks'] = pd.Series(peaks_per_minutes)
+        df.reset_index(inplace=True)
+        df = df.rename(columns={'index': 'minutes'})
+        print(df)
+        ax = sns.barplot(x="minutes", y="peaks", data=df)
+        ax.set_xticklabels(ax.get_xticklabels(), rotation=90, horizontalalignment='right')
+        fig = ax.get_figure()
+        fig.savefig(Path.joinpath(folder, "plots_per_minutes.png"), bbox_inches='tight')
 
-#  for cell in cells:
-#      high_stimulus_per_minute.append(cell.high_stimulus_per_minute)
 
-#   index = 0
-#   for count in high_stimulus_per_minute:
-#       test.plot(count, label=cells[index].name)
-#       index += 1
-
-#   plt.ylabel('High Stimulus Frames per Minute')
-#   plt.xlabel('Time in Minutes')
-#   test.legend(loc=2)
-#    plt.show()
+    @staticmethod
+    def plot_peaks_per_minute_per_cell(peaks_per_minutes_per_cell, folder):
+        df = pd.DataFrame(columns=['peaks'])
+        print(peaks_per_minutes_per_cell)

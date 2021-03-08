@@ -10,6 +10,7 @@ import os
 from CLI.RuntimeConstants import Runtime_Folders
 from Shared.Services.FileManagement import Folder_Management
 import seaborn as sns
+from Shared.Services.Plot.plot import PlotService
 
 sns.set()
 
@@ -295,7 +296,7 @@ class File:
 
     def generate_plots(self):
         """Generate all plots"""
-        pass
+        PlotService.plot_peaks_per_minute(self.total_spikes_per_minutes, self.folder)
 
     def __generate_time_frame_true_signal(self):
         """
