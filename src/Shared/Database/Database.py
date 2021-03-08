@@ -14,9 +14,11 @@ def insert(prepared_statement: PreparedStatement):
     -------
 
     """
+
+    connection = Database_Loader.database_pool.get_connection()
+    cursor = connection.cursor(prepared=True)
+
     try:
-        connection = Database_Loader.databasePool.get_connection()
-        cursor = connection.cursor(prepared=True)
         cursor.execute(prepared_statement.query, prepared_statement.parameters)
         connection.commit()
 
@@ -40,9 +42,12 @@ def select(prepared_statement: PreparedStatement):
     -------
 
     """
+
+    connection = Database_Loader.database_pool.get_connection()
+    cursor = connection.cursor(prepared=True)
+
     try:
-        connection = Database_Loader.databasePool.get_connection()
-        cursor = connection.cursor(prepared=True)
+
         cursor.execute(prepared_statement.query, prepared_statement.parameters)
         return cursor.fetchall()
 
@@ -67,9 +72,11 @@ def update(prepared_statement: PreparedStatement):
     -------
 
     """
+
+    connection = Database_Loader.database_pool.get_connection()
+    cursor = connection.cursor(prepared=True)
     try:
-        connection = Database_Loader.databasePool.get_connection()
-        cursor = connection.cursor(prepared=True)
+
         cursor.execute(prepared_statement.query, prepared_statement.parameters)
         connection.commit()
 

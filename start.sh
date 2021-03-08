@@ -1,5 +1,4 @@
-#!/bin/bash
-
+ç
 echo "Checking Python version..."
 
 if command -v python3 &>/dev/null; then

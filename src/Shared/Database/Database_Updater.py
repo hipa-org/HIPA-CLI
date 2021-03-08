@@ -7,6 +7,7 @@ import datetime
 import logging
 import sys
 from pathlib import Path
+import ntpath
 
 
 def create_db():
@@ -14,15 +15,14 @@ def create_db():
     Creates all schemas and tables required to operate the server
     Returns
     -------
-
     """
 
     try:
         base_path: Path = Path("./SQL/Base")
         logging.info("Creating database schema if necessary")
         for filename in os.listdir(base_path):
-            if filename.endswith(".sql"):
-                __execute_file(Path(base_path, filename))
+            if filename.endswith(".sql") and 'mysql_user' not in filename:
+                __execute_file(Path(base_path, filename), False, False)
 
     except BaseException as ex:
         logging.exception(ex)
@@ -44,7 +44,7 @@ def update_db():
     logging.info("Database up to date!")
 
 
-def __execute_file(file_path: Path):
+def __execute_file(file_path: Path, pool=True, update=True):
     """
     Reads the file and execute its queries
     :param file_path:
@@ -59,7 +59,15 @@ def __execute_file(file_path: Path):
     sql_commands = sql_content.split(';')
 
     # create db cursor
-    connection = Database_Loader.databasePool.get_connection()
+    if pool:
+        connection = Database_Loader.database_pool.get_connection()
+    else:
+        connection = Database_Loader.database_connection
+
+    if connection is None:
+        logging.warning("No database connection could be detected!")
+        return
+
     cursor = connection.cursor(prepared=False)
     error_count: int = 0
     # Execute every command from the input file
@@ -74,7 +82,7 @@ def __execute_file(file_path: Path):
             error_count += 1
 
     connection.commit()
-    if error_count == 0:
+    if error_count == 0 and update:
         __update_successful_applied(file_path)
 
 
@@ -88,16 +96,24 @@ def __update_already_applied(filename):
         return False
 
 
-def __update_successful_applied(filename: str):
+def __update_successful_applied(file_path: Path):
     """
     Adds an successful update file to the updates table
-    :param filename:
+    :param file_path:
     :return:
     """
+
+    file_name = path_leaf(file_path)
+
     statement = PreparedStatement(Queries.DB_INS_UPDATE)
-    statement.add_param(0, filename)
+    statement.add_param(0, file_name)
     statement.add_param(1, 0)
     statement.add_param(2, "RELEASED")
     statement.add_param(3, datetime.datetime.utcnow())
     statement.add_param(4, 0)
     Database.insert(statement)
+
+
+def path_leaf(path):
+    head, tail = ntpath.split(path)
+    return tail or ntpath.basename(head)
