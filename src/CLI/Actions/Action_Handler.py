@@ -4,7 +4,7 @@ from CLI.Actions import High_Intensity_Calculations, Clean_Folders
 import webbrowser
 import sys
 import logging
-from Shared.Services.DataLoader import Data_Loader
+from Shared.Services.DataHandler.Data_Loader import DataLoader
 
 
 def handle_choice():
@@ -12,7 +12,7 @@ def handle_choice():
     Handles the choice a user types into console
     """
     if Runtime_Datasets.Choice == Actions.Choices.HIGH_INTENSITY.value:
-        Data_Loader.load_cli_raw_files()
+        DataLoader.load_cli_raw_files()
 
         if len(Runtime_Datasets.Files) == 0:
             logging.info("No files detected!")

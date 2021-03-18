@@ -3,6 +3,7 @@ from CLI.UI import Questions
 from CLI.RuntimeConstants import Runtime_Datasets
 from Shared.Classes.File import File
 import logging
+from Shared.Services.DataHandler.Data_Handler import DataHandler
 
 '''
 Main Calculation Function
@@ -41,10 +42,9 @@ def execute_high_intensity_calculation(file: File):
     file.split_cells()
     file.calculate_high_stimulus_count_per_interval()
     file.generate_reports()
-    file.generate_plots()
+    file.plot_graphs()
 
     end_time = datetime.datetime.now()
     logging.info(f'Evaluation of file {file.name} done.')
     logging.info(f'Calculation done in {end_time - start_time} seconds.')
     logging.info(f'{len(file.cells) * len(file.cells[0].time_frames)} time frames processed')
-    input()

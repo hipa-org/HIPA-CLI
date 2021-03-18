@@ -10,7 +10,7 @@ import os
 from CLI.RuntimeConstants import Runtime_Folders
 from Shared.Services.FileManagement import Folder_Management
 import seaborn as sns
-from Shared.Services.Plot.plot import PlotService
+from Shared.Services.Plot.Plot_Service import PlotService
 
 sns.set()
 
@@ -64,8 +64,9 @@ class File:
 
             # Create initial time frames
             time_frames = pd.DataFrame(
-                columns=[f'{TimeFrameColumns.TIME_FRAME_VALUE.value}', f'{TimeFrameColumns.INCLUDING_MINUTE.value}',
-                         f'{TimeFrameColumns.TRUE_SIGNAL}',
+                columns=[f'{TimeFrameColumns.TIME_FRAME_VALUE.value}',
+                         f'{TimeFrameColumns.INCLUDING_MINUTE.value}',
+                         f'{TimeFrameColumns.TRUE_SIGNAL.value}',
                          f'{TimeFrameColumns.HIGH_INTENSITY.value}'],
                 data={TimeFrameColumns.TIME_FRAME_VALUE.value: self.data[column]})
 
@@ -126,23 +127,21 @@ class File:
 
         for cell in self.cells:
             max_value = cell.time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value].max()
-
             # Create normalized time frames
             time_frames = pd.DataFrame(
-                columns=[f'{TimeFrameColumns.TIME_FRAME_VALUE.value}', f'{TimeFrameColumns.INCLUDING_MINUTE.value}',
-                         f'{TimeFrameColumns.TRUE_SIGNAL.value}'
+                columns=[f'{TimeFrameColumns.TIME_FRAME_VALUE.value}',
+                         f'{TimeFrameColumns.INCLUDING_MINUTE.value}',
+                         f'{TimeFrameColumns.TRUE_SIGNAL.value}',
                          f'{TimeFrameColumns.HIGH_INTENSITY.value}'],
-                data={TimeFrameColumns.TIME_FRAME_VALUE.value: cell.time_frames[
-                                                                   TimeFrameColumns.TIME_FRAME_VALUE.value] / max_value})
-            time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value] = pd.to_numeric(
-                time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value])
-
-            # Create including minute column
-            time_frames[TimeFrameColumns.INCLUDING_MINUTE.value] = cell.time_frames[
-                TimeFrameColumns.INCLUDING_MINUTE.value]
-            time_frames[TimeFrameColumns.HIGH_INTENSITY.value] = cell.time_frames[
-                TimeFrameColumns.HIGH_INTENSITY.value]
-
+                data={
+                    TimeFrameColumns.TIME_FRAME_VALUE.value: cell.time_frames[
+                                                                 TimeFrameColumns.TIME_FRAME_VALUE.value] / max_value,
+                    TimeFrameColumns.INCLUDING_MINUTE.value: cell.time_frames[
+                        TimeFrameColumns.INCLUDING_MINUTE.value],
+                    TimeFrameColumns.HIGH_INTENSITY.value: cell.time_frames[
+                        TimeFrameColumns.HIGH_INTENSITY.value],
+                    TimeFrameColumns.TRUE_SIGNAL.value: cell.time_frames[TimeFrameColumns.TRUE_SIGNAL.value]
+                })
             cell.normalized_time_frames = time_frames
 
         logging.info('Normalization done.')
@@ -294,13 +293,13 @@ class File:
         self.__generate_time_frame_true_signal()
         logging.info("All reports generated")
 
-    def generate_plots(self):
-        """Generate all plots"""
-        PlotService.plot_peaks_per_minute(self.total_spikes_per_minutes, self.folder)
+    def plot_graphs(self):
+        PlotService.plot_true_signal_pie_chart(self.folder, self.name, self.cells)
+        pass
 
     def __generate_time_frame_true_signal(self):
         """
-
+        Generates the csv file which includes the true signals for each cells
         """
         data = []
         columns = []
