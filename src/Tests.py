@@ -27,13 +27,13 @@ class HIPANormalizeToOneTest(unittest.TestCase):
         self.interval_high_counts_to_one = [269, 324, 323, 118]
 
         self.file = File("ExampleData/time_traces.txt")
-        self.file.stimulation_time_frames = [372, 696, 1019]
-        self.file.threshold = 0.6
+        self.file.stimulation_time_frames = [148, 333, 608]
+        self.file.threshold = 1.1
         self.file.calculate_baseline_mean()
         self.file.normalize_time_frames_with_to_ones()
         self.file.calculate_time_frame_maximum()
-        self.file.calculate_threshold()
-        self.file.detect_above_threshold()
+        self.file.calculate_true_signal_threshold()
+        self.file.detect_true_signal()
         self.file.count_high_intensity_peaks_per_minute()
         self.file.summarize_high_intensity_peaks()
         self.file.split_cells()
@@ -52,7 +52,7 @@ class HIPANormalizeToOneTest(unittest.TestCase):
 
             self.assertEqual(cell.time_frames[TimeFrameColumns.TIME_FRAME_VALUE.value].dtype, float)
             # Check maximum minutes
-            self.assertEqual(cell.time_frames[TimeFrameColumns.INCLUDING_MINUTE.value].max(), 90)
+            self.assertEqual(cell.time_frames[TimeFrameColumns.INCLUDING_MINUTE.value].max(), 40)
             self.assertEqual(cell.time_frames[TimeFrameColumns.INCLUDING_MINUTE.value][15], 0.0)
             self.assertEqual(cell.time_frames[TimeFrameColumns.INCLUDING_MINUTE.value][16], 1.0)
 
@@ -118,45 +118,16 @@ class HIPANormalizeToOneTest(unittest.TestCase):
         """
         cell: Cell = self.file.cells[0]
         for x in range(4):
-            self.assertEqual(cell.interval_high_intensity_counts['Count'][x], self.interval_high_counts_to_one[x])
+            self.assertEqual(cell.interval_high_intensity_counts_compared_to_baseline['Count'][x],
+                             self.interval_high_counts_to_one[x])
 
     def test_file_output(self):
         pass
         # Write.high_stimulus_counts(self.data)
 
 
-class HIPANormalizeBaselineTest(unittest.TestCase):
-
-    def setUp(self):
-        self.baseline_means = [1487081.8921335714, 767143.2721442856, 1302190.2019421428, 1113130.6746035714,
-                               730617.289225, 727189.5820014286, 936338.2629921428, 836700.6484707142,
-                               858294.0763600001, 574486.6794642857, 600562.2055735714, 537954.3985042857,
-                               1172866.5845135713, 1485344.8824335714, 622592.5966892857, 322743.4487364285,
-                               1320165.877627857, 373303.8651064286, 867237.4988342858, 954028.9279242856,
-                               1092703.4592564288, 487314.5808435714, 1171332.1299921428, 521986.17593857145,
-                               872894.6925192857, 1177744.4341307143, 733837.2835971429, 649010.5102799999,
-                               659096.1782657143, 1615544.4767764283, 736935.1047107143, 630746.2065414286,
-                               771146.2786028573, 551325.5801535713, 828896.3158521428, 824434.8758892856,
-                               1342635.6592607142, 846031.2291607143, 839358.5765878572, 704612.856605,
-                               2194129.325722143, 898577.7755135715, 64155.768782142855]
-
-        self.file = File("ExampleData/time_traces.txt")
-        self.file.stimulation_time_frames = [372, 969, 1019]
-        self.file.threshold = 0.6
-        self.file.calculate_baseline_mean()
-        # Switch this back to baseline normalization if needed
-        self.file.normalize_time_frames_with_to_ones()
-        self.file.calculate_time_frame_maximum()
-        self.file.calculate_threshold()
-        self.file.detect_above_threshold()
-        self.file.count_high_intensity_peaks_per_minute()
-        self.file.summarize_high_intensity_peaks()
-        self.file.split_cells()
-        self.file.calculate_high_stimulus_count_per_interval()
-
-
 if __name__ == '__main__':
-    test_classes_to_run = [HIPANormalizeBaselineTest, HIPANormalizeToOneTest]
+    test_classes_to_run = [HIPANormalizeToOneTest]
 
     loader = unittest.TestLoader()
 

@@ -11,6 +11,7 @@ from CLI.RuntimeConstants import Runtime_Folders
 from Shared.Services.FileManagement import Folder_Management
 import seaborn as sns
 from Shared.Services.Plot.Plot_Service import PlotService
+from Shared.Services.DataHandler.Data_Loader import DataLoader
 
 sns.set()
 
@@ -25,7 +26,7 @@ class File:
             Path(f"{Runtime_Folders.EVALUATION_DIRECTORY}/{self.name}"))
 
         # Loads the data of the file
-        self.data = self.__load_data()
+        self.data = DataLoader.load_file(str(self.path))
 
         # Populates the cells
         self.cells = self.__populate_cells()
@@ -37,17 +38,6 @@ class File:
         self.stimulation_time_frames = []
         self.total_spikes_per_minutes = []
         self.total_spikes_per_minute_mean = []
-
-    def __load_data(self):
-        """
-        Reads the content of the given file into a pandas data frame
-        """
-        try:
-            return pd.read_csv(self.path, sep="\t", header=0)
-        except FileNotFoundError as ex:
-            logging.error(f'Could not locate File {self.path}')
-            logging.error(ex)
-            sys.exit(21)
 
     def __populate_cells(self):
         """
@@ -246,7 +236,7 @@ class File:
             for index, row in cell.normalized_time_frames.iterrows():
                 if row[TimeFrameColumns.HIGH_INTENSITY.value]:
                     spikes_per_min[int(row[TimeFrameColumns.INCLUDING_MINUTE.value])] = spikes_per_min[int(
-                        row[TimeFrameColumns.INCLUDING_MINUTE.value])] + 1
+                        row[TimeFrameColumns.INCLUDING_MINUTE.value] / len(self.cells))] + 1
 
         self.total_spikes_per_minutes = spikes_per_min
 

@@ -1,8 +1,6 @@
 from enum import Enum
 from pathlib import Path
 
-# All files detected in the raw data folder
-Files = []
 
 # Choice made at the start
 Choice = 0
