@@ -91,3 +91,7 @@ wcwidth==0.2.5
 webencodings==0.5.1
 widgetsnbextension==3.5.1
 zipp==3.2.0
+pyfiglet==0.8.post1
+Flask==1.1.2
+Flask-RESTful==0.3.8
+waitress==2.0.0
