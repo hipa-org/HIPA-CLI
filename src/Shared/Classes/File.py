@@ -337,6 +337,8 @@ class File:
                 activations.append(counts[1])
             except KeyError:
                 activations.append(0)
+            except IndexError:
+                activations.append(0)
 
         df = df.T
         df['Activations'] = activations
@@ -358,8 +360,10 @@ class File:
             column = pd.Series(df[column].values)
             counts = column.value_counts()
             try:
-                activations.append(counts[1])
+                activations.append(counts.iloc[1])
             except KeyError:
+                activations.append(0)
+            except IndexError:
                 activations.append(0)
 
         df = df.T

@@ -25,7 +25,7 @@ class PlotService:
         df = pd.DataFrame(columns=['Cell', 'True Signal'])
         cell: Cell
         for cell in cells:
-            df = df.append(cell.normalized_time_frames)
+            df = pd.concat([df, cell.normalized_time_frames], sort=False)
             df['Cell'].fillna(cell.name, inplace=True)
             if (cell.normalized_time_frames[f'{TimeFrameColumns.TRUE_SIGNAL.value}'].value_counts(
                     normalize=True))[1] > 0.5:

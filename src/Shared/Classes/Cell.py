@@ -53,16 +53,22 @@ class Cell:
 
             # Initial interval
             if i == 0:
-                interval_counts = interval_counts.append({'Count': high_intensity_count, 'Activation': False},
-                                                         ignore_index=True)
-            # All following intervals
+                interval_counts = pd.concat(
+                    [interval_counts, pd.DataFrame([{'Count': high_intensity_count, 'Activation': False}])],
+                    ignore_index=True
+                )
+                # All following intervals
             else:
                 if high_intensity_count > compare_high_intensity_counts:
-                    interval_counts = interval_counts.append({'Count': high_intensity_count, 'Activation': True},
-                                                             ignore_index=True)
+                    interval_counts = pd.concat(
+                        [interval_counts, pd.DataFrame([{'Count': high_intensity_count, 'Activation': True}])],
+                        ignore_index=True
+                    )
                 else:
-                    interval_counts = interval_counts.append({'Count': high_intensity_count, 'Activation': False},
-                                                             ignore_index=True)
+                    interval_counts = pd.concat(
+                        [interval_counts, pd.DataFrame([{'Count': high_intensity_count, 'Activation': False}])],
+                        ignore_index=True
+                    )
 
             if not baseline:
                 compare_high_intensity_counts = high_intensity_count

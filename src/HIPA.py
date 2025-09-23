@@ -3,7 +3,6 @@ from Shared.Services.Config import Configuration, ArgumentParser
 import os
 import logging
 from CLI import CLI
-from Web import WebServer
 
 logging.basicConfig(filename='log.log', level=logging.DEBUG)
 logging.getLogger().setLevel(logging.DEBUG)
@@ -17,10 +16,7 @@ if __name__ == "__main__":
         Configuration.read_conf()
         ArgumentParser.handle_args()
 
-        if Configuration.Config.START_WEB_SERVER:
-            WebServer.start()
-        else:
-            CLI.start_cli_tool()
+        CLI.start_cli_tool()
 
 
     except KeyboardInterrupt:
